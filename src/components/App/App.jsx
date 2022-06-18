@@ -18,6 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
+import Profile from '../Profile/Profile';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
@@ -58,6 +59,13 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/profile"
+          >
+            <Profile />
           </ProtectedRoute>
 
           <ProtectedRoute
