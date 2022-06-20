@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 function Profile() {
     useEffect(() => {
@@ -14,22 +16,39 @@ function Profile() {
         });
     }, []);
 
+    const history = useHistory();
     const dispatch = useDispatch();
-    const user = useSelector((store) => store.user);
+    const user = useSelector(store => store.user);
+    const allyApplication = useSelector(store => store.allyApplication)
 
     const allyApplicationStatus = () => {
-        // ternary that checks for allyApplication.user_id
-        // if true
-        // switch statement dependent on ally application status
-        // in the case of ally-application.is_complete && .is_approved
-        // return "Thank you for being an Ally!"
-        // case of .is_complete being true & .is_approved being false
-        // return "Your Ally application is being reviewed, thanks for applying!"
-        // case of .is_complete being false and .is_approved being false
-        // return list of null values (?)
-        // if false
-        // return "Apply to become an Ally" link
+        if (allyApplication.id === undefined) {
+            return (
+                <h3
+                onClick={() => {
+                    history.push('/allyApplication')
+                }}
+                >
+                    Apply to become an Ally
+                </h3>
+            )
+        } else if (allyApplication.is_complete === true && allyApplication.is_approved === true) {
+            return <h3>Thank you for being an Ally!</h3>
+        } else if (allyApplication.is_complete === true && allyApplication.is_approved === false) {
+            return <h3>Your Ally application is being reviewed, thanks for applying!</h3>
+        } else if (allyApplication.is_complete === false && allyApplication.is_approved === false) {
+            return (
+                <h3
+                onClick={() => {
+                    history.push('/allyApplication')
+                }}
+                >
+                    Your application requires attention.
+                </h3>
+            )
+        }
     }
+
 
     return (
         <Box>
