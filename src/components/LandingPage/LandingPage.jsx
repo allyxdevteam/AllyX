@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
 
+
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+import AllyApplication from '../AllyApplication/AllyApplication';
 
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome');
   const history = useHistory();
-
   const onLogin = (event) => {
     history.push('/login');
   };
@@ -61,6 +62,7 @@ function LandingPage() {
             </button>
           </center>
         </div>
+        <AllyApplication />
       </div>
     </div>
   );
