@@ -70,7 +70,11 @@ function Profile() {
             <h6>{user.phone_number}</h6>
             <h6>{user.email}</h6>
             <h6>{user.DOB}</h6>
-            <Button>
+            <Button
+                onClick={() => {
+                    history.push(`/profile/${user.id}`)
+                }}
+            >
                 Update Profile
             </Button>
             {allyApplicationStatus()}
