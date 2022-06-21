@@ -8,6 +8,8 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
+	"first_name" VARCHAR (255),
+	"last_name" VARCHAR (255),
     "email" VARCHAR (255) NOT NULL,
     "phone_number" BIGINT NOT NULL,
     "dob" DATE NOT NULL, 
