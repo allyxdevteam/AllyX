@@ -10,7 +10,6 @@
     "@date-io/date-fns": "^2.14.0",
     "@date-io/dayjs": "^2.14.0",
     "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
     "@mui/material": "^5.8.4",
     "@mui/x-data-grid": "^5.12.2",
     "@mui/x-date-pickers": "^5.0.0-alpha.6",
