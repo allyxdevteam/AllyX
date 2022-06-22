@@ -1,9 +1,13 @@
+//react, redux, sagas------------------------------------------------------
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+//styling, mui ----------------------------------------------------------
 import './LandingPage.css';
 
 
-// CUSTOM COMPONENTS
+// CUSTOM COMPONENTS---------------------------------------------------
 import RegisterForm from '../RegisterForm/RegisterForm';
 import AllyApplication from '../AllyApplication/AllyApplication';
 
@@ -13,6 +17,9 @@ function LandingPage() {
   const onLogin = (event) => {
     history.push('/login');
   };
+
+  const user = useSelector((store) => store.user);
+console.log('this is the user:',user);
 
   return (
     <div className="container">
