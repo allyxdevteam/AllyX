@@ -111,36 +111,44 @@ function RegisterForm() {
   const phonenumber = (inputtxt) => {
 
 
-    let phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})\d/;
-    let desirable = /\d|\s|\-$/;
-    let undesirable = /\W$/
+    let phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    let desirable = /[\d|\s|\-]$/;
 
     //IF the inputtext is a recognized  phone number we'll set the phone number as it and change phoneDone to true
-    if (phoneno.test(inputtxt) === true) {
+    if ((phoneno.test(inputtxt) === true) && (phoneDone === false)) {
 
-      console.log('WE ARE SENDING THIS AS OUR NUMBER', )
       let reducedPhone = inputtxt.toString().replace(/-|\s|\.|\^$/g, "");
+      console.log('WE ARE SENDING THIS AS OUR NUMBER', reducedPhone)
 
       setPhone(Number(reducedPhone))
       setPhoneDone(true)
       return;
     }
+
+
     //IF input is desirable(digit, space, hyphen) update setPhone with inputtxt
-    else if ((desirable.test(inputtxt)=== true ) ) {
-      console.log('Input is desirable')
-      setPhone(inputtxt);      
+    else if ((desirable.test(inputtxt)=== true) && (phoneDone === false)) {
+      console.log('Input is desirable', inputtxt)
+      setPhone(inputtxt);
+      return;      
     }
-    else if (undesirable.test(inputtxt) === true){
-      alert('undesirable')
-    }
-    // Allows empty string to trigger setPhone
+    
+    //Failsafe allows empty string to trigger setPhone
     else if(inputtxt === ''){
       setPhone(inputtxt);
       setPhoneDone(false)
+      return;
     }
     
-    setPhoneDone(false);      
-    
+    //
+    else if (inputtxt === ''){
+
+    }
+   
+    //Anything that has not triggered desirable or undesirable will be ignored and setPhoneDone is set to false. This causes issues  when backspacing on a completed number. Solution pending
+    console.log(inputtxt, ':has triggered the setting setPhoneDone to false')
+
+    setPhoneDone(false);    
     
 
   }
