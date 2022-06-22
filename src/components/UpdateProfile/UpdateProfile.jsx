@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,7 +13,6 @@ function UpdateProfile() {
         });
     }, []);
 
-    let [profileUpdate, setProfileUpdate] = useState();
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector(store => store.user)
@@ -112,6 +111,7 @@ function UpdateProfile() {
                 }}
             >
             </TextField>
+            <Button>Submit</Button>
         </form>
     )
 }
