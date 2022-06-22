@@ -5,6 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 //styling, mui ----------------------------------------------------------
 import './LandingPage.css';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import {
+  DatePicker
+} from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { TextField } from '@mui/material';
 
 
 // CUSTOM COMPONENTS---------------------------------------------------
@@ -17,7 +23,7 @@ function LandingPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  //variables that evaluate to something----------------------------------
+  //variables that evaluate to something specific----------------------------------
   const user = useSelector((store) => store.user);
   console.log('this is the user:', user);
 
@@ -36,10 +42,14 @@ function LandingPage() {
 
   function handleRequestCall() {
     console.log('in handleRequestCall');
-    dispatch({
-      type: "POST_REQUESTED_CALL",
-      payload: {dateTime, user}
-  })
+    user.id ? 
+      dispatch({
+        type: "POST_REQUESTED_CALL",
+        payload: { dateTime, user }
+      })
+    
+    :
+    history.push('/login')
 
   }
 
@@ -57,16 +67,15 @@ function LandingPage() {
 
 
 
-      <div className="grid-col grid-col_4">
-        <RegisterForm />
+      
 
         <center>
           <h4>Already a Member?</h4>
-          <button className="btn btn_sizeSm" onClick={onLogin}>
+          <button onClick={onLogin}>
             Login
           </button>
         </center>
-      </div>
+      
       <AllyApplication />
     </div>
 
