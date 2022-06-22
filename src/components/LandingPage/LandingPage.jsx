@@ -38,7 +38,7 @@ function LandingPage() {
     console.log('in handleRequestCall');
     dispatch({
       type: "POST_REQUESTED_CALL",
-      payload: dateTime
+      payload: {dateTime, user}
   })
 
   }
