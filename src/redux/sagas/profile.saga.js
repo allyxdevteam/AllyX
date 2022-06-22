@@ -1,19 +1,34 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* updateProfile(action) {
-    const updatedProfile = action.payload
+function* fetchProfile(action) {
+    const profileId = action.payload;
     const response = yield axios({
+        method: 'GET',
+        url: `/api/user/${profileId}`
+    })
+    yield put({
+        type: 'SET_EDIT_PROFILE',
+        payload: response.data
+    })
+}
+
+function* updateProfile(action) {
+    const updatedProfile = action.payload;
+    // const oneImage = yield axios.get(`/api/image/${imageId}`);
+    yield axios({
         method: 'PUT',
         url: `/api/user/${updatedProfile.id}`,
         data: updatedProfile
     })
     yield put({
-        type: 'FETCH_USER'
+        type: 'FETCH_USER',
+        payload: updatedProfile
     })
 }
 
 function* profileSaga() {
+    yield takeLatest('FETCH_PROFILE', fetchProfile);
     yield takeLatest('UPDATE_PROFILE', updateProfile);
 }
 

@@ -8,14 +8,14 @@ import TextField from '@mui/material/TextField';
 function UpdateProfile() {
     useEffect(() => {
         dispatch({
-            type: 'FETCH_USER',
+            type: 'FETCH_PROFILE',
             payload: user.id
-        });
-    }, []);
+        })
+    }, [])
 
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const user = useSelector(store => store.user)
+    const history = useHistory('');
+    const dispatch = useDispatch('');
+    const user = useSelector(store => store.user);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -32,6 +32,7 @@ function UpdateProfile() {
             onSubmit={handleSubmit}
         >
             <TextField
+                label="first name"
                 value={user.first_name}
                 onChange={(e) => {
                     dispatch({
@@ -42,6 +43,7 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
+                label="last name"
                 value={user.last_name}
                 onChange={(e) => {
                     dispatch({
@@ -52,6 +54,7 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
+                label="phone number"
                 value={user.phone_number}
                 onChange={(e) => {
                     dispatch({
@@ -62,6 +65,7 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
+                label="email"
                 value={user.email}
                 onChange={(e) => {
                     dispatch({
@@ -72,6 +76,7 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
+                label="city"
                 value={user.city}
                 onChange={(e) => {
                     dispatch({
@@ -82,6 +87,7 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
+                label="facebook link"
                 value={user.facebook_link}
                 onChange={(e) => {
                     dispatch({
@@ -92,6 +98,7 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
+                label="twitter link"
                 value={user.twitter_link}
                 onChange={(e) => {
                     dispatch({
@@ -102,6 +109,7 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
+                label="instagram link"
                 value={user.instagram_link}
                 onChange={(e) => {
                     dispatch({
