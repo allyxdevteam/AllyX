@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import AllyApplicationStatus from '../AllyApplicationStatus/AllyApplicationStatus';
-
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';

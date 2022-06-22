@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import {
@@ -7,34 +7,49 @@ import {
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { TextField } from '@mui/material';
 import dayjs from 'dayjs';
-import { red } from '@mui/material/colors';
 
 function RegisterForm() {
+
 
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState(0);
+  const [phone, setPhone] = useState('');
   const [dob, setDob] = useState(new Date());
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+
+  useEffect(() => {
+    doneCheck()
+  }, [email, phone, dob])
+
+
+  const [emailDone, setEmailDone] = useState(false);
+  const [phoneDone, setPhoneDone] = useState(false);
+  const [dobDone, setDobDone] = useState(false)
+
 
 
   const errors = useSelector((store) => store.errors);
 
   const dispatch = useDispatch();
 
+
+
   //
-
-
   const doneCheck = () => {
-    if (ValidateEmail(email) === true && phonenumber(phone.value) === true && validateDob(dob) === true) {
-      console.log('Hello this is good! We have everything done correctly!')
-      return true
+
+    if (emailDone === true && phoneDone === true && dobDone === true) {
+      showNext()
     }
-    else return false;
+    else {
+      hideNext()
+    }
   }
+  ///
+
 
   const [X, setX] = useState(1)
   const [showButton, setShowButton] = useState(true)
@@ -76,56 +91,95 @@ function RegisterForm() {
   //VALIDATORS
 
 
-//email
-  const ValidateEmail = (inputText) => {
+  //email
+  const ValidateEmail = (email) => {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (inputText.match(mailformat)) {
-      showNext()
-      return true
+    if (email.match(mailformat)) {
+      setEmailDone(true)
     }
     else {
-      hideNext()
-      return false;
+      setEmailDone(false)
     }
   };
 
-//number
-  const phonenumber = (inputtxt) => {
-    var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    if (inputtxt.match(phoneno)) {
-      let reducedPhone = inputtxt.replace(/-|\s/g, "")
+  //
 
-      console.log(`you did it!!!!`, Number(reducedPhone))
+
+
+
+  //NUMBER
+  const phonenumber = (inputtxt) => {
+
+
+    let phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    let desirable = /[\d|\s|\-]$/;
+
+    //IF the inputtext is a recognized  phone number we'll set the phone number as it and change phoneDone to true
+    if ((phoneno.test(inputtxt) === true) && (phoneDone === false)) {
+
+      let reducedPhone = inputtxt.toString().replace(/-|\s|\.|\^$/g, "");
+      console.log('WE ARE SENDING THIS AS OUR NUMBER', reducedPhone)
+
       setPhone(Number(reducedPhone))
-      return true;
+      setPhoneDone(true)
+      return;
     }
-    else {
-      setPhone(inputtxt)
-      return false;
+
+
+    //IF input is desirable(digit, space, hyphen) update setPhone with inputtxt
+    else if ((desirable.test(inputtxt)=== true) && (phoneDone === false)) {
+      console.log('Input is desirable', inputtxt)
+      setPhone(inputtxt);
+      return;      
     }
+    
+    //Failsafe allows empty string to trigger setPhone
+    else if(inputtxt === ''){
+      setPhone(inputtxt);
+      setPhoneDone(false)
+      return;
+    }
+    
+    //
+    else if (inputtxt === ''){
+
+    }
+   
+    //Anything that has not triggered desirable or undesirable will be ignored and setPhoneDone is set to false. This causes issues  when backspacing on a completed number. Solution pending
+    console.log(inputtxt, ':has triggered the setting setPhoneDone to false')
+
+    setPhoneDone(false);    
+    
+
   }
-//
+
+
+  //DOB 
+
   const validateDob = (e) => {
-    doneCheck()
+
+
     let now = dayjs();
- 
+
     if (now.diff(e, 'year') > 18) {
       setDob(e);
-      return true;
+
+      setDobDone(true)
     }
     else {
       setDob(e);
 
-      return false;
+      setDobDone(false)
     }
   };
+
 
   //
   return (
     <>
 
 
-      <form className="formPanel" onSubmit={(e) => { registerUser(e) }}>
+      <form className="formPanel" onSubmit={(e) => { registerUser }}>
         <h2>Register User</h2>
         {errors.registrationMessage && (
           <h3 className="alert" role="alert">
@@ -149,7 +203,7 @@ function RegisterForm() {
                 inputFormat="MM/YY"
                 views={['year', 'month',]}
 
-                onChange={(e)=>{validateDob(e)}}
+                onChange={(e) => { validateDob(e) }}
                 renderInput={(params) => {
                   return <TextField {...params} />;
                 }} />
@@ -157,6 +211,10 @@ function RegisterForm() {
 
 
             </LocalizationProvider >
+
+
+
+
             <div>
               <h1> email </h1>
             </div>
@@ -165,18 +223,9 @@ function RegisterForm() {
               <input value={email} onChange={(e) => { setEmail(e.target.value); ValidateEmail(e.target.value) }}></input>
             </div>
 
-            <div>
 
 
 
-
-
-              <div>
-                <button disabled={showButton} onClick={nextSlide}>Next</button>
-              </div>
-
-
-            </div>
             <div>
               <h1>phone number </h1>
             </div>
@@ -185,18 +234,11 @@ function RegisterForm() {
               <input value={phone} onChange={(e) => { phonenumber(e.target.value) }}></input>
             </div>
 
+
             <div>
-
-
-
-
-
-              <div>
-                <button disabled={showButton} onClick={nextSlide}>Next</button>
-              </div>
-
-
+              <button disabled={showButton} onClick={nextSlide}>Next</button>
             </div>
+
 
           </div>
 
