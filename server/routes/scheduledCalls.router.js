@@ -17,16 +17,16 @@ router.get('/', (req, res) => {
  * POST route template
  */
  router.post('/', rejectUnauthenticated, (req, res) => {
-    const dateTime = req.body.dateTime;
+    const callTime = req.body.callTime;
     const memberId = req.body.user.id;
 
     
     const sqlQuery = `INSERT INTO "requested-call" ("member_id", "time") VALUES ($1, $2);`;
-    const sqlValues = [memberId, dateTime];
+    const sqlValues = [memberId, callTime];
     pool.query (sqlQuery, sqlValues)
     .then((result) => { console.log(result); res.sendStatus(200) })
     .catch((err) => {
-      console.log('Error in POST requested call', err);
+      console.log('Error in POST scheduled call', err);
       res.sendStatus(500);})
 })
 

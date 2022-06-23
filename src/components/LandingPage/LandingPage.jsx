@@ -11,6 +11,8 @@ import {
 } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { TextField } from '@mui/material';
+import { DateTimePicker } from '@mui/x-date-pickers-pro';
+
 
 
 // CUSTOM COMPONENTS---------------------------------------------------
@@ -30,9 +32,12 @@ function LandingPage() {
   const date = new Date();
   const dateTime = date.toLocaleString();
   console.log('this is the time', dateTime);
+  console.log(new Date());
 
   //local state---------------------------------------------------------
   const [heading, setHeading] = useState('Welcome');
+  const [callTime, setCallTime] = useState(dateTime);
+
 
 
   //other functions-----------------------------------------------------------
@@ -55,7 +60,17 @@ function LandingPage() {
 
   function handleScheduleCall() {
     console.log('in handleScheduleCall');
+    console.log('this is the set date and time:', callTime.$d);
+    user.id ? 
+      dispatch({
+        type: "POST_SCHEDULED_CALL",
+        payload: { callTime, user }
+      })
+    
+    :
+    history.push('/login')
   }
+
 
   return (
     <div className="container">
@@ -63,6 +78,30 @@ function LandingPage() {
 
       <button onClick={handleRequestCall}>Request a call</button>
 
+
+
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker
+                disablePast = {true}
+                //disableIgnoringDatePartForTimeValidation = {true}
+                //minDateTime = {dateTime}
+                value={callTime}
+
+                // inputFormat="MM/YY"
+                // views={['year', 'month',]}
+
+                onChange={(e) => { 
+                  //set up a ternary here to set the call time to the current time if "e" is earlier than the current time.
+                  setCallTime(e) }}
+                renderInput={(params) => {
+                  return <TextField {...params} />;
+                }} 
+                
+                />
+
+
+
+            </LocalizationProvider >
       <button onClick={handleScheduleCall}>Schedule a call</button>
 
 
