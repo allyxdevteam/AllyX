@@ -15,15 +15,15 @@ function* fetchProfile(action) {
 
 function* updateProfile(action) {
     const updatedProfile = action.payload;
-    // const oneImage = yield axios.get(`/api/image/${imageId}`);
+    // console.log('******************************************', updatedProfile);
     yield axios({
         method: 'PUT',
         url: `/api/profile/${updatedProfile.id}`,
         data: updatedProfile
     })
     yield put({
-        type: 'FETCH_USER',
-        payload: updatedProfile
+        type: 'FETCH_USER'
+        // payload: updatedProfile
     })
 }
 

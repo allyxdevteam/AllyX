@@ -1,8 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 router.get('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
   const sqlText = `
     SELECT * FROM "user"
       WHERE id=$1
@@ -17,11 +21,14 @@ router.get('/:id', (req, res) => {
       console.log('error in GET /user/:id', dbErr);
       res.sendStatus(500);
     })
+  }
 })
 
 router.put('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+    console.log('*********************************************', req.body);
     const sqlText = `
-    UPDATE user
+    UPDATE "user"
         SET
             first_name = $1,
             last_name = $2,
@@ -52,6 +59,7 @@ router.put('/:id', (req, res) => {
       console.log('UPDATE database error', dbErr);
       res.sendStatus(500);
     });
+  }
 });
 
 module.exports = router;
