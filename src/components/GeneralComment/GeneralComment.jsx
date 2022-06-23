@@ -1,15 +1,27 @@
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
 
-import { Typography, Rating, TextField, Box } from "@mui/material";
+import { Typography, Rating, TextField, Box, Button } from "@mui/material";
 import React from "react";
 
 function GeneralComment() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
+  const dispatch = useDispatch();
 
+    // sets the comment variable with the content of the textfield
   const handleComment = (e) => {
     setComment(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    dispatch({
+        type: 'ADD_GEN_COMMENT',
+        payload: { rating, comment }
+    })
+    setRating('');
+    setComment('');
   };
 
   return (
@@ -33,6 +45,7 @@ function GeneralComment() {
         maxRows={4} 
         onChange={handleComment} 
       />
+      <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>Submit</Button>
       </Box>
    
   );
