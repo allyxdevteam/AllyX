@@ -5,7 +5,7 @@ function* fetchProfile(action) {
     const profileId = action.payload;
     const response = yield axios({
         method: 'GET',
-        url: `/api/user/${profileId}`
+        url: `/api/profile/${profileId}`
     })
     yield put({
         type: 'SET_EDIT_PROFILE',
@@ -18,7 +18,7 @@ function* updateProfile(action) {
     // const oneImage = yield axios.get(`/api/image/${imageId}`);
     yield axios({
         method: 'PUT',
-        url: `/api/user/${updatedProfile.id}`,
+        url: `/api/profile/${updatedProfile.id}`,
         data: updatedProfile
     })
     yield put({

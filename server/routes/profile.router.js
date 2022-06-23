@@ -2,6 +2,23 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+router.get('/:id', (req, res) => {
+  const sqlText = `
+    SELECT * FROM "user"
+      WHERE id=$1
+  `;
+  const sqlValues = [req.params.id];
+  pool.query(sqlText, sqlValues)
+    .then((dbRes) => {
+      const theProfile = dbRes.rows[0];
+      res.send(theProfile);
+    })
+    .catch((dbErr) => {
+      console.log('error in GET /user/:id', dbErr);
+      res.sendStatus(500);
+    })
+})
+
 router.put('/:id', (req, res) => {
     const sqlText = `
     UPDATE user
@@ -36,3 +53,5 @@ router.put('/:id', (req, res) => {
       res.sendStatus(500);
     });
 });
+
+module.exports = router;
