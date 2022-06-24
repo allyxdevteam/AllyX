@@ -9,7 +9,10 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const requestedCallsRouter = require('./routes/requestedCalls.router');
+const scheduledCallsRouter = require('./routes/scheduledCalls.router');
 const profileRouter = require('./routes/profile.router');
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -24,7 +27,10 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/requestedCalls', requestedCallsRouter);
+app.use('/api/scheduledCalls', scheduledCallsRouter);
 app.use('/api/profile', profileRouter);
+
 
 // Serve static files
 app.use(express.static('build'));
