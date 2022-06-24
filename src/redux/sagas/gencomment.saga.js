@@ -7,9 +7,10 @@ function* fetchGenComments(action){
 
 function* addGenComment(action){
     try{
+        console.log(action.payload)
         yield axios({
             method: 'POST',
-            url: '/comment',
+            url: '/api/comment',
             data: action.payload
         })
     }

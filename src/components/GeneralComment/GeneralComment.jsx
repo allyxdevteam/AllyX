@@ -20,7 +20,7 @@ function GeneralComment() {
         type: 'ADD_GEN_COMMENT',
         payload: { rating, comment }
     })
-    setRating('');
+    setRating(0);
     setComment('');
   };
 
@@ -40,6 +40,7 @@ function GeneralComment() {
       <TextField 
         type="comment"
         name="general-comment"
+        value={comment}
         fullWidth 
         multiline 
         maxRows={4} 
