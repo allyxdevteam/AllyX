@@ -1,8 +1,22 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function AllyApplicationStatus() {
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_ALLY_APPLICATION',
+            payload: user.id
+        });
+      }, []);
 
-    const allyApplication = useSelector(store => store.allyApplication)
+
+    const dispatch = useDispatch();
+    const allyApplication = useSelector(store => store.allyApplication);
+    const user = useSelector(store => store.user);
+
+    // return (
+    //     <h3>{JSON.stringify(allyApplication)}</h3>
+    // )
 
     if (allyApplication.id === undefined) {
         return (
@@ -29,6 +43,7 @@ function AllyApplicationStatus() {
             </h3>
         )
     }
-}
+    }
+
 
 export default AllyApplicationStatus;
