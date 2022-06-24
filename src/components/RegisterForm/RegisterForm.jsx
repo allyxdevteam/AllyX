@@ -66,6 +66,7 @@ function RegisterForm() {
   //The star of the show
   const registerUser = (event) => {
     event.preventDefault();
+    console.log('hey its the register button');
 
     dispatch({
       type: 'REGISTER',
@@ -397,7 +398,9 @@ function RegisterForm() {
 
 
             <div>
-              <input className="btn" type="submit" name="submit" value="Register" />
+              <Button onClick={registerUser}  >
+                register
+              </Button>
             </div>
 
 
