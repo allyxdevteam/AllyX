@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,16 +7,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 function Profile() {
-    useEffect(() => {
-        console.log( user );
-        dispatch({
-            type: 'FETCH_USER',
-            payload: user.id
-        });
-    }, []);
-
     const history = useHistory();
-    const dispatch = useDispatch();
     const user = useSelector(store => store.user);
 
     return (
@@ -27,10 +17,10 @@ function Profile() {
             :
                 <></>
             }
-            {user.profile_pic ?
+            {user.user_pic ?
                 <Avatar 
                     alt={user.username}
-                    src={user.profile_pic}
+                    src={user.user_pic}
                 />
             :
                 <AccountCircleIcon />
