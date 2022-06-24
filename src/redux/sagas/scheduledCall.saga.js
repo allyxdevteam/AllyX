@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 function* postScheduledCall(action){
-    const callTime = action.payload.callTime.$d;
+    const callTime = action.payload.callTime;
     const user = action.payload.user;
     console.log('this is the scheduled date and time!!!!!!!!!!',callTime);
     console.log('this is the user data!!!!!!!!!!!', user);
