@@ -3,6 +3,7 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import profileSaga from './profile.saga';
+import genCommentSaga from './gencomment.saga';
 import requestedCallSaga from './requestedCall.saga';
 import scheduledCallSaga from './scheduledCall.saga';
 
@@ -19,7 +20,8 @@ export default function* rootSaga() {
     registrationSaga(),
     profileSaga(),
     userSaga(),
+    genCommentSaga(),
     requestedCallSaga(),
-    scheduledCallSaga()
+    scheduledCallSaga(),
   ]);
 }

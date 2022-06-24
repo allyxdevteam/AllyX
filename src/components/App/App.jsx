@@ -20,8 +20,10 @@ import LoginPage from '../LoginPage/LoginPage';
 import Profile from '../Profile/Profile';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import UpdateProfile from '../UpdateProfile/UpdateProfile';
+import GeneralComment from '../GeneralComment/GeneralComment';
 
 import './App.css';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +61,13 @@ function App() {
             path="/profile"
           >
             <Profile />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/comment"
+          >
+            <GeneralComment />
           </ProtectedRoute>
 
           <ProtectedRoute
