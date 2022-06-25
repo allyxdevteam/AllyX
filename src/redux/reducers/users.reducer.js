@@ -3,7 +3,7 @@ const usersReducer = (state = {}, action) => {
     case 'SET_USERS':
       return action.payload;
     case 'UNSET_USERS':
-      return {};
+      return [];
     default:
       return state;
   }
