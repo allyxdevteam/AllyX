@@ -2,19 +2,21 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import './Profile.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Switch from '@mui/material/Switch';
 
 function Profile() {
-    useEffect(() => {
-        console.log( user );
-        dispatch({
-            type: 'FETCH_USER',
-            payload: user.id
-        });
-    }, []);
+    // useEffect(() => {
+    //     console.log( user );
+    //     dispatch({
+    //         type: 'FETCH_USER',
+    //         payload: user.id
+    //     });
+    // }, []);
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -48,6 +50,16 @@ function Profile() {
                 Update Profile
             </Button>
             {/* <AllyApplicationStatus /> */}
+            <br />
+            <h6 id="disable-account">Disable account?</h6>
+            <Switch 
+                onClick={() => {
+                    dispatch({
+                        type: 'DISABLE_ACCOUNT',
+                        payload: user.id
+                    });
+                }}
+            />
         </Box>
     )
 }
