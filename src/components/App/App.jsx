@@ -21,6 +21,7 @@ import Profile from '../Profile/Profile';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import UpdateProfile from '../UpdateProfile/UpdateProfile';
 import GeneralComment from '../GeneralComment/GeneralComment';
+import AllyRequestedCalls from '../AllyRequestedCalls/AllyRequestedCalls';
 
 import './App.css';
 
@@ -83,6 +84,13 @@ function App() {
             path="/profile/:id"
           >
             <UpdateProfile />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/allyRequestedCalls"
+          >
+            <AllyRequestedCalls />
           </ProtectedRoute>
 
           <Route

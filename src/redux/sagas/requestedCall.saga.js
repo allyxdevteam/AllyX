@@ -2,6 +2,18 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 import { useDispatch, useSelector } from 'react-redux';
 
+function* fetchRequestedCalls(){
+    try{
+    const requestedCalls = yield axios.get('/api/requestedCalls')
+    yield put ({
+        type: 'SET_REQUESTED_CALLS',
+        payload: requestedCalls
+    })
+    }catch{
+        console.log('fetch requested calls error');
+    }
+}
+
 
 function* postRequestedCall(action){
     const dateTime = action.payload.dateTime;
@@ -23,6 +35,7 @@ function* postRequestedCall(action){
 
 function* requestedCallSaga() {
     yield takeLatest('POST_REQUESTED_CALL', postRequestedCall);
+    yield takeLatest('FETCH_REQUESTED_CALLS', fetchRequestedCalls);
   }
 
 export default requestedCallSaga;
