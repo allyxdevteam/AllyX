@@ -20,7 +20,6 @@ function Profile() {
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
-    const allyApplication = useSelector(store => store.allyApplication);
 
     return (
         <Box>

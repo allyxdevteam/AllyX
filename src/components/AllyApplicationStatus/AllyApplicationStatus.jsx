@@ -11,13 +11,11 @@ function AllyApplicationStatus() {
 
 
     const dispatch = useDispatch();
-    const allyApplication = useSelector(store => store.allyApplication);
+    const allyApplication = useSelector(store => store.allyApplication[0]);
     const user = useSelector(store => store.user);
 
-    // return (
-    //     <h3>{JSON.stringify(allyApplication)}</h3>
-    // )
-
+    console.log('**************************************************', allyApplication);
+    
     if (allyApplication.id === undefined) {
         return (
             <h3
@@ -43,7 +41,6 @@ function AllyApplicationStatus() {
             </h3>
         )
     }
-    }
-
+}
 
 export default AllyApplicationStatus;

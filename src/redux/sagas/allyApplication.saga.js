@@ -7,7 +7,6 @@ function* fetchAllyApplication(action) {
         method: 'GET',
         url: `/api/allyApplication/${allyApplicationUserId}`
     })
-    console.log('******************************************', response.data);
     yield put({
         type: 'SET_ALLY_APPLICATION',
         payload: response.data
