@@ -62,4 +62,19 @@ router.put('/:id', (req, res) => {
   }
 });
 
+router.get('/', rejectUnauthenticated, (req, res) => {
+  const sqlText = `
+    SELECT * FROM "user"
+  `;
+  pool.query(sqlText)
+    .then((dbRes) => {
+      res.send(dbRes.rows);
+    })
+    .catch((dbErr) => {
+      console.log('error getting users', dbErr);
+      res.sendStatus(500);
+    })
+  }
+)
+
 module.exports = router;
