@@ -5,8 +5,10 @@ import {
   DatePicker
 } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { TextField } from '@mui/material';
 import dayjs from 'dayjs';
+
+import { Box, FormControl, TextField, Button } from '@mui/material';
+
 
 function RegisterForm() {
 
@@ -16,10 +18,14 @@ function RegisterForm() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [dob, setDob] = useState(new Date());
+  const [dob, setDob] = useState(null);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+
+  const [response1, setResponse1] = useState('') // Reason for becoming an ally
+  const [response2, setResponse2] = useState('') // Twitter
+  const [response3, setResponse3] = useState('') // Insta
 
   useEffect(() => {
     doneCheck()
@@ -48,14 +54,19 @@ function RegisterForm() {
       hideNext()
     }
   }
-  ///
+  //
 
 
   const [X, setX] = useState(1)
   const [showButton, setShowButton] = useState(true)
 
+
+
+
+  //The star of the show
   const registerUser = (event) => {
     event.preventDefault();
+    console.log('hey its the register button');
 
     dispatch({
       type: 'REGISTER',
@@ -67,13 +78,21 @@ function RegisterForm() {
         phone: phone,
       },
     });
-  }; // end registerUser
+
+
+
+
+  };
+
+
+
   const showNext = () => {
-    setShowButton(false)
+    setShowButton(true)
   }
 
+  //
   const hideNext = () => {
-    setShowButton(true)
+    setShowButton(false)
   }
   //
   const nextSlide = () => {
@@ -81,19 +100,15 @@ function RegisterForm() {
   }
 
 
-
-
-
-
-
-  //
-
   //VALIDATORS
 
 
   //email
   const ValidateEmail = (email) => {
+
+
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
     if (email.match(mailformat)) {
       setEmailDone(true)
     }
@@ -107,49 +122,57 @@ function RegisterForm() {
 
 
 
-  //NUMBER
+  //VALIDATE PHONE NUMBER
   const phonenumber = (inputtxt) => {
 
-
+    //phoneno filters to make sure that inputtxt beings with 3 digits 0-9 (parenthesis optional), optional dash/space, then 3 digits 0-9, optional dash/space, and finally
+    //4 digits 0-9 
     let phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    let desirable = /[\d|\s|\-]$/;
+    //Desirable is defined as as digit, space, slash, or parenthesis. 
+    let desirable = /[\d|\s|\-|\(|\)]$/;
 
     //IF the inputtext is a recognized  phone number we'll set the phone number as it and change phoneDone to true
     if ((phoneno.test(inputtxt) === true) && (phoneDone === false)) {
+      //This allows us to take all spaces,dashes, periods, or dots before converting the result to a number
+      let reducedPhone = inputtxt.toString().replace(/-|\s|\.|\(|\)|^$/g, "");
 
-      let reducedPhone = inputtxt.toString().replace(/-|\s|\.|\^$/g, "");
-      console.log('WE ARE SENDING THIS AS OUR NUMBER', reducedPhone)
 
-      setPhone(Number(reducedPhone))
       setPhoneDone(true)
+      //Setting phone triggers doneCheck to run in useEffect
+      setPhone(Number(reducedPhone))
       return;
     }
 
 
     //IF input is desirable(digit, space, hyphen) update setPhone with inputtxt
-    else if ((desirable.test(inputtxt)=== true) && (phoneDone === false)) {
-      console.log('Input is desirable', inputtxt)
+    else if ((desirable.test(inputtxt) === true) && (phoneDone === false)) {
       setPhone(inputtxt);
-      return;      
+      return;
     }
-    
+
     //Failsafe allows empty string to trigger setPhone
-    else if(inputtxt === ''){
+    else if (inputtxt === '') {
       setPhone(inputtxt);
       setPhoneDone(false)
       return;
     }
-    
-    //
-    else if (inputtxt === ''){
 
+    // Fixed backspace! You can now backspace FIRST ATTEMPT on a completed input. 
+    //But wait, there's more! By adding != I was able to make you add a superfluous digit or symbol after as well. 
+    //This is so that users can make seamless mistakes! Making great use of my time! -- Ian 
+    else if ((inputtxt.length != phone.toString().length) && (desirable.test(inputtxt) === true)) {
+      console.log('Backspace!')
+      setPhone(inputtxt);
+      setPhoneDone(false)
+      return;
     }
-   
-    //Anything that has not triggered desirable or undesirable will be ignored and setPhoneDone is set to false. This causes issues  when backspacing on a completed number. Solution pending
+
+    //Anything that has not triggered desirable or undesirable will be ignored and setPhoneDone is set to false. 
+    //This causes issues  when backspacing on a completed number. Solution pending UPDATE: SOLUTION FOUND!!! Consult above
     console.log(inputtxt, ':has triggered the setting setPhoneDone to false')
 
-    setPhoneDone(false);    
-    
+    setPhoneDone(false);
+
 
   }
 
@@ -181,6 +204,9 @@ function RegisterForm() {
 
       <form className="formPanel" onSubmit={(e) => { registerUser }}>
         <h2>Register User</h2>
+        
+
+
         {errors.registrationMessage && (
           <h3 className="alert" role="alert">
             {errors.registrationMessage}
@@ -195,49 +221,69 @@ function RegisterForm() {
         {X === 1 &&
 
           <div>
-            <h1>Date of Birth</h1>
+            <h1></h1>
+
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
+                label="Date of Birth"
                 value={dob}
-
-                inputFormat="MM/YY"
-                views={['year', 'month',]}
-
+                inputFormat="MM/DD/YY"
+                views={['year', 'month', 'day']}
+                required
                 onChange={(e) => { validateDob(e) }}
                 renderInput={(params) => {
-                  return <TextField {...params} />;
+                  return <TextField fullWidth {...params} />;
                 }} />
-
-
-
             </LocalizationProvider >
 
 
-
-
             <div>
-              <h1> email </h1>
-            </div>
-
-            <div>
-              <input value={email} onChange={(e) => { setEmail(e.target.value); ValidateEmail(e.target.value) }}></input>
-            </div>
-
-
-
-
-            <div>
-              <h1>phone number </h1>
-            </div>
-
-            <div>
-              <input value={phone} onChange={(e) => { phonenumber(e.target.value) }}></input>
+              <Box mt={2}>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-textarea"
+                    label="email"
+                    required
+                    placeholder="heyallyx@allyx.com"
+                    multiline
+                    fullwidth
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value); ValidateEmail(e.target.value) }}
+                  />
+                </FormControl>
+              </Box>
             </div>
 
 
+
             <div>
-              <button disabled={showButton} onClick={nextSlide}>Next</button>
+
+              <Box mt={2}>
+
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-textarea"
+                    label="Phone"
+                    placeholder="(905)123-5678"
+                    required
+                    multiline
+                    fullwidth
+                    value={phone}
+                    onChange={(e) => { phonenumber(e.target.value) }}
+                  />
+                </FormControl>
+              </Box>
+
             </div>
+
+
+            <div>
+
+              <Button disabled={!showButton} onClick={nextSlide}>Next</Button>
+            </div>
+
+            
+
 
 
           </div>
@@ -245,8 +291,86 @@ function RegisterForm() {
         }
 
 
+
+
         {X === 2 &&
           <div>
+
+<div className="card-graphics">
+
+<div className="card-top">
+  <h4> Social Media (optional) </h4>
+</div>
+
+<div className="card-body">
+
+
+  {/* Twitter Username */}
+  <Box mt={2}>
+    <FormControl fullWidth>
+      <TextField
+        id="outlined-textarea"
+        label="Twitter URL"
+
+        placeholder="e.x. @HeyAllyxApp"
+        multiline
+        fullwidth
+        color={(response2.length > 0) ? null : "warning"}
+        value={response2}
+        onChange={(e) => {
+          setResponse2(e.target.value);
+        }}
+      />
+    </FormControl>
+  </Box>
+
+
+
+  {/* Instagram Username */}
+  <Box mt={2}>
+    <FormControl fullWidth>
+
+      <TextField
+        id="outlined-textarea"
+        label="Instagram URL"
+        placeholder="e.x. @HeyAllyxApp"
+        multiline
+        fullwidth
+        color={(response3.length > 0) ? null : "warning"}
+        value={response3}
+        onChange={(e) => {
+          setResponse3(e.target.value);
+        }}
+      />
+
+    </FormControl>
+  </Box>
+
+
+  {/* Facebook Account */}
+  <Box mt={2}>
+    <FormControl fullWidth>
+
+      <TextField
+        id="outlined-textarea"
+        label="Facebook URL"
+        placeholder="e.x. aklsdjsadjaslkdja.com"
+        multiline
+        fullwidth
+        color={(response3.length > 0) ? null : "warning"}
+        value={response3}
+        onChange={(e) => {
+          setResponse3(e.target.value);
+        }}
+      />
+
+    </FormControl>
+  </Box>
+
+</div>
+
+</div>
+
             <div>
               <label htmlFor="username">
                 Username:
@@ -259,6 +383,7 @@ function RegisterForm() {
                 />
               </label>
             </div>
+
             <label htmlFor="password">
               Password:
               <input
@@ -269,16 +394,19 @@ function RegisterForm() {
                 onChange={(event) => setPassword(event.target.value)}
               />
             </label>
+
+
+
             <div>
-              <input className="btn" type="submit" name="submit" value="Register" />
+              <Button onClick={registerUser}  >
+                register
+              </Button>
             </div>
+
+
           </div>
         }
 
-
-        {X === 3
-
-        }
 
       </form>
     </>
