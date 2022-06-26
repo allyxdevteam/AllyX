@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
 
 function UserReport(){
 
@@ -13,7 +14,6 @@ function UserReport(){
     }, [])
 
     const users = useSelector(store=>store.users);
-    console.log('the users yo', users);
 
         // DataGrid config
     const columns = [
@@ -51,6 +51,7 @@ function UserReport(){
           {
             field: 'dob',
             headerName: 'Birthday',
+            type: 'dateTime',
             width: 150,
             editable: false,
           },
@@ -93,60 +94,70 @@ function UserReport(){
           {
             field: 'average_stars',
             headerName: 'Rating',
+            type: 'number',
             width: 150,
             editable: false,
           },
           {
             field: 'inserted_at',
             headerName: 'Sign-up Date',
+            type: 'dateTime',
             width: 150,
             editable: false,
           },
           {
             field: 'is_ally',
             headerName: 'Ally',
+            type: 'boolean',
             width: 90,
             editable: false,
           },
           {
             field: 'is_admin',
             headerName: 'Admin',
+            type: 'boolean',
             width: 90,
             editable: false,
           },
           {
             field: 'is_reported',
             headerName: 'Reported',
+            type: 'boolean',
             width: 90,
             editable: false,
           },
           {
             field: 'is_active',
             headerName: 'Active',
+            type: 'boolean',
             width: 90,
             editable: false,
           },
           {
             field: 'is_blocked',
             headerName: 'Blocked',
+            type: 'boolean',
             width: 90,
             editable: false,
           },
           {
             field: 'delete_requested',
             headerName: 'Delete',
+            type: 'boolean',
             width: 90,
             editable: false,
           },
     ];
 
     return(
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box sx={{ height: 600, width: '98%', margin: 'auto' }}>
+        <Typography variant="h5">Users</Typography>
         <DataGrid
           rows={users}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={10}
+          density='compact'
+          rowsPerPageOptions={[10]}
           checkboxSelection
           disableSelectionOnClick
         />
