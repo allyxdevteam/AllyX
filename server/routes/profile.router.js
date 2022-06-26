@@ -62,4 +62,23 @@ router.put('/:id', (req, res) => {
   }
 });
 
+//// NOTE: is rejectUnauthenticated enough here? do we want to make sure the user 
+// running the query has admin level privileges? 
+router.get('/', rejectUnauthenticated, (req, res) => {
+  if(req.user.is_admin){
+  const sqlText = `
+    SELECT * FROM "user"
+  `;
+  pool.query(sqlText)
+    .then((dbRes) => {
+      res.send(dbRes.rows);
+    })
+    .catch((dbErr) => {
+      console.log('error getting users', dbErr);
+      res.sendStatus(500);
+    })}
+    else console.warn('403, admins only :)')
+  }
+)
+
 module.exports = router;
