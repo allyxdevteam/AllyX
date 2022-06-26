@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import DisableAccount from '../DisableAccount/DisableAccount';
 import AllyApplicationStatus from '../AllyApplicationStatus/AllyApplicationStatus';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -49,6 +50,9 @@ function Profile() {
                 Update Profile
             </Button>
             <AllyApplicationStatus />
+            <br />
+            <DisableAccount />
+
         </Box>
     )
 }
