@@ -7,7 +7,7 @@ function* fetchRequestedCalls(){
     const requestedCalls = yield axios.get('/api/requestedCalls')
     yield put ({
         type: 'SET_REQUESTED_CALLS',
-        payload: requestedCalls
+        payload: requestedCalls.data
     })
     }catch{
         console.log('fetch requested calls error');

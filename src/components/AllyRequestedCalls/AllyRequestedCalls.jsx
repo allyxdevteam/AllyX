@@ -12,9 +12,21 @@ function AllyRequestedCalls(){
         })
     }, []);
 
+    const requestedCalls = useSelector(store => store.requestedCalls)
+
+
+    function handleClaimCall(){
+        console.log('in claim call');
+    }
+
     return(
         <ul>
-            <li>call</li>
+            {requestedCalls.map((call) => {
+               return(<li key={call.id}>
+                {call.time}
+               <button onClick={handleClaimCall}>Claim Call</button>
+               </li>)
+            })}
         </ul>
     )
 }
