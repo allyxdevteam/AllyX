@@ -17,11 +17,11 @@ function UserReport(){
 
         // DataGrid config
     const columns = [
-        {field: 'id', headerName: 'ID', width: 90},
+        {field: 'id', headerName: 'ID', width: 40},
         {
             field: 'username',
             headerName: 'Username',
-            width: 150,
+            width: 120,
             editable: false,
           },
           {
@@ -32,7 +32,7 @@ function UserReport(){
           },
           {
             field: 'last_name',
-            headerName: 'Last NAme',
+            headerName: 'Last Name',
             width: 150,
             editable: false,
           },
@@ -104,45 +104,53 @@ function UserReport(){
           },
           {
             field: 'is_ally',
-            headerName: 'Ally Status',
-            width: 150,
+            headerName: 'Ally',
+            width: 90,
             editable: false,
           },
           {
             field: 'is_admin',
-            headerName: 'Admin Status',
-            width: 150,
+            headerName: 'Admin',
+            width: 90,
             editable: false,
           },
           {
             field: 'is_reported',
-            headerName: 'Account Reported',
-            width: 150,
+            headerName: 'Reported',
+            width: 90,
             editable: false,
           },
           {
             field: 'is_active',
-            headerName: 'Account Active',
-            width: 150,
+            headerName: 'Active',
+            width: 90,
             editable: false,
           },
           {
             field: 'is_blocked',
-            headerName: 'Account Blocked',
-            width: 150,
+            headerName: 'Blocked',
+            width: 90,
             editable: false,
           },
           {
             field: 'delete_requested',
-            headerName: 'Has Requested Deletion',
-            width: 150,
+            headerName: 'Delete',
+            width: 90,
             editable: false,
           },
     ];
 
-
     return(
-        <h1>{JSON.stringify(users)}</h1>
+        <Box sx={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={users}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+          disableSelectionOnClick
+        />
+      </Box>
     )
 }
 export default UserReport;
