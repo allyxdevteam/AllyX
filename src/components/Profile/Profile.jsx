@@ -49,6 +49,19 @@ function Profile() {
             >
                 Update Profile
             </Button>
+
+            <br />
+            <Button
+                onClick={() => {
+                    dispatch({
+                        type: 'REQUEST_DELETE',
+                        payload: user.id
+                    })
+                }}
+            >
+                Request Delete?
+            </Button>
+
             <AllyApplicationStatus />
             <br />
             <DisableAccount />
