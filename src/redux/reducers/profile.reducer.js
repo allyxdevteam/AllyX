@@ -1,5 +1,5 @@
 const profileReducer = (state = {}, action) => {
-    if (action.type === 'SET_USER') {
+    if (action.type === 'SET_EDIT_PROFILE') {
         return action.payload;
     } else if (action.type === 'EDIT_FIRST_NAME') {
         return (

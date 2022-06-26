@@ -8,20 +8,21 @@ import TextField from '@mui/material/TextField';
 function UpdateProfile() {
     useEffect(() => {
         dispatch({
-            type: 'FETCH_USER',
+            type: 'FETCH_PROFILE',
             payload: user.id
-        });
-    }, []);
+        })
+    }, [])
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const user = useSelector(store => store.user)
+    const user = useSelector(store => store.user);
+    const profile = useSelector(store => store.profile);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch({
             type: 'UPDATE_PROFILE',
-            payload: user
+            payload: profile
         })
         history.push('/profile');
     }
@@ -32,7 +33,8 @@ function UpdateProfile() {
             onSubmit={handleSubmit}
         >
             <TextField
-                value={user.first_name}
+                label="first name"
+                value={profile.first_name}
                 onChange={(e) => {
                     dispatch({
                         type: 'EDIT_FIRST_NAME',
@@ -42,7 +44,8 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
-                value={user.last_name}
+                label="last name"
+                value={profile.last_name}
                 onChange={(e) => {
                     dispatch({
                         type: 'EDIT_LAST_NAME',
@@ -52,7 +55,8 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
-                value={user.phone_number}
+                label="phone number"
+                value={profile.phone_number}
                 onChange={(e) => {
                     dispatch({
                         type: 'EDIT_PHONE_NUMBER',
@@ -62,7 +66,8 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
-                value={user.email}
+                label="email"
+                value={profile.email}
                 onChange={(e) => {
                     dispatch({
                         type: 'EDIT_EMAIL',
@@ -72,7 +77,8 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
-                value={user.city}
+                label="city"
+                value={profile.city}
                 onChange={(e) => {
                     dispatch({
                         type: 'EDIT_CITY',
@@ -82,7 +88,8 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
-                value={user.facebook_link}
+                label="facebook link"
+                value={profile.facebook_link}
                 onChange={(e) => {
                     dispatch({
                         type: 'EDIT_FACEBOOK_LINK',
@@ -92,7 +99,8 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
-                value={user.twitter_link}
+                label="twitter link"
+                value={profile.twitter_link}
                 onChange={(e) => {
                     dispatch({
                         type: 'EDIT_TWITTER_LINK',
@@ -102,7 +110,8 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
-                value={user.instagram_link}
+                label="instagram link"
+                value={profile.instagram_link}
                 onChange={(e) => {
                     dispatch({
                         type: 'EDIT_INSTAGRAM_LINK',
@@ -111,7 +120,11 @@ function UpdateProfile() {
                 }}
             >
             </TextField>
-            <Button>Submit</Button>
+            <Button
+                type="submit"
+            >
+                Submit
+            </Button>
         </form>
     )
 }

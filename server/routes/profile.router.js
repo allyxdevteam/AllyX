@@ -1,10 +1,34 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
+
+router.get('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+  const sqlText = `
+    SELECT * FROM "user"
+      WHERE id=$1
+  `;
+  const sqlValues = [req.params.id];
+  pool.query(sqlText, sqlValues)
+    .then((dbRes) => {
+      const theProfile = dbRes.rows[0];
+      res.send(theProfile);
+    })
+    .catch((dbErr) => {
+      console.log('error in GET /user/:id', dbErr);
+      res.sendStatus(500);
+    })
+  }
+})
 
 router.put('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+    console.log('*********************************************', req.body);
     const sqlText = `
-    UPDATE user
+    UPDATE "user"
         SET
             first_name = $1,
             last_name = $2,
@@ -35,4 +59,26 @@ router.put('/:id', (req, res) => {
       console.log('UPDATE database error', dbErr);
       res.sendStatus(500);
     });
+  }
 });
+
+//// NOTE: is rejectUnauthenticated enough here? do we want to make sure the user 
+// running the query has admin level privileges? 
+router.get('/', rejectUnauthenticated, (req, res) => {
+  if(req.user.is_admin){
+  const sqlText = `
+    SELECT * FROM "user"
+  `;
+  pool.query(sqlText)
+    .then((dbRes) => {
+      res.send(dbRes.rows);
+    })
+    .catch((dbErr) => {
+      console.log('error getting users', dbErr);
+      res.sendStatus(500);
+    })}
+    else console.warn('403, admins only :)')
+  }
+)
+
+module.exports = router;
