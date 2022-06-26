@@ -1,7 +1,7 @@
 import { useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 
@@ -148,18 +148,18 @@ function UserReport(){
             editable: false,
           }, 
     ];
+  
 
     return(
         <Box sx={{ height: 600, width: '98%', margin: 'auto' }}>
-        <Typography variant="p">Click a column to see options</Typography>
         <DataGrid
           rows={users}
           columns={columns}
           pageSize={10}
           density='compact'
           rowsPerPageOptions={[10]}
-          checkboxSelection
           disableSelectionOnClick
+          components={{Toolbar: GridToolbar}}
         />
       </Box>
     )
