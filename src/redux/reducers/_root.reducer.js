@@ -4,6 +4,7 @@ import user from './user.reducer';
 import allyApplication from './allyApplication.reducer';
 import profile from './profile.reducer';
 import gencomment from './gencomment.reducer';
+import requestedCalls from './requestedCalls.reducer';
 import users from './users.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   profile,
   user, // will have an id and username if someone is logged in
   gencomment, // contains a general comment, not tied to a specific call
+  requestedCalls, //contains calls requested by members for allies to claim
   users, // will contain all users for the admin report
 });
 
