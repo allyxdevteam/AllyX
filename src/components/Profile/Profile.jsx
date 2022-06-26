@@ -8,13 +8,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 function Profile() {
-    // useEffect(() => {
-    //     console.log( user );
-    //     dispatch({
-    //         type: 'FETCH_USER',
-    //         payload: user.id
-    //     });
-    // }, []);
+    useEffect(() => {
+        console.log( user );
+        dispatch({
+            type: 'FETCH_USER',
+            payload: user.id
+        });
+    }, []);
 
     const history = useHistory();
     const dispatch = useDispatch();
