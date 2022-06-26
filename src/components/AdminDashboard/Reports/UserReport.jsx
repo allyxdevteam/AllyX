@@ -151,7 +151,6 @@ function UserReport(){
 
     return(
         <Box sx={{ height: 600, width: '98%', margin: 'auto' }}>
-        <Typography variant="h5">Users</Typography>
         <Typography variant="p">Click a column to see options</Typography>
         <DataGrid
           rows={users}
