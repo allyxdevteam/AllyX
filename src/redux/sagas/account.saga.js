@@ -8,6 +8,7 @@ function* requestDelete(action) {
         method: 'PUT',
         url: `/api/account`,
         data: userId
+    })}
 
 function* disableAccount(action) {
     const userId = action.payload
