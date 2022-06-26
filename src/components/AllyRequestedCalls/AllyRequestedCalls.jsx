@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import RequestedCallItem from '../RequestedCallItem/RequestedCallItem';
+
 function AllyRequestedCalls(){
 
     const dispatch = useDispatch();
@@ -12,20 +14,20 @@ function AllyRequestedCalls(){
         })
     }, []);
 
-    const requestedCalls = useSelector(store => store.requestedCalls)
+    const requestedCalls = useSelector(store => store.requestedCalls);
+    const user = useSelector(store => store.user);
 
 
-    function handleClaimCall(){
-        console.log('in claim call');
-    }
+    
 
     return(
         <ul>
             {requestedCalls.map((call) => {
-               return(<li key={call.id}>
-                {call.time}
-               <button onClick={handleClaimCall}>Claim Call</button>
-               </li>)
+               return(
+               
+                <RequestedCallItem key={call.id} call={call} />
+                
+                )
             })}
         </ul>
     )
