@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
 
 function UserReport(){
 
