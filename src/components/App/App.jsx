@@ -21,8 +21,10 @@ import Profile from '../Profile/Profile';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import UpdateProfile from '../UpdateProfile/UpdateProfile';
 import GeneralComment from '../GeneralComment/GeneralComment';
+import AdminDashboard from '../AdminDashboard/AdminDashboard';
 
 import './App.css';
+
 
 
 function App() {
@@ -118,6 +120,19 @@ function App() {
             path="/home"
           >
             <LandingPage />
+          </Route>
+
+          <Route
+            exact
+            path="/admin"
+          >
+            {user.is_admin ?
+              // If the user is an admin, show the admin dashboard
+              <AdminDashboard />
+              :
+              // Otherwise, show 403 
+              <h1>403</h1>
+            }
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
