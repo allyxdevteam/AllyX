@@ -56,56 +56,6 @@ function UserReport(){
             editable: false,
           },
           {
-            field: 'city',
-            headerName: 'City',
-            width: 150,
-            editable: false,
-          },
-          {
-            field: 'profile_pic',
-            headerName: 'Profile Pic Link',
-            width: 150,
-            editable: false,
-          },
-          {
-            field: 'verify_pic',
-            headerName: 'Verification Pic Link',
-            width: 150,
-            editable: false,
-          },
-          {
-            field: 'facebook_link',
-            headerName: 'Facebook Link',
-            width: 150,
-            editable: false,
-          },
-          {
-            field: 'twitter_link',
-            headerName: 'Twitter Link',
-            width: 150,
-            editable: false,
-          },
-          {
-            field: 'instagram_link',
-            headerName: 'Instagram Link',
-            width: 150,
-            editable: false,
-          },
-          {
-            field: 'average_stars',
-            headerName: 'Rating',
-            type: 'number',
-            width: 150,
-            editable: false,
-          },
-          {
-            field: 'inserted_at',
-            headerName: 'Sign-up Date',
-            type: 'dateTime',
-            width: 150,
-            editable: false,
-          },
-          {
             field: 'is_ally',
             headerName: 'Ally',
             type: 'boolean',
@@ -147,11 +97,62 @@ function UserReport(){
             width: 90,
             editable: false,
           },
+          {
+            field: 'city',
+            headerName: 'City',
+            width: 150,
+            editable: false,
+          },
+          {
+            field: 'profile_pic',
+            headerName: 'Profile Pic Link',
+            width: 150,
+            editable: false,
+          },
+          {
+            field: 'verify_pic',
+            headerName: 'Verification Pic Link',
+            width: 150,
+            editable: false,
+          },
+          {
+            field: 'facebook_link',
+            headerName: 'Facebook Link',
+            width: 150,
+            editable: false,
+          },
+          {
+            field: 'twitter_link',
+            headerName: 'Twitter Link',
+            width: 150,
+            editable: false,
+          },
+          {
+            field: 'instagram_link',
+            headerName: 'Instagram Link',
+            width: 150,
+            editable: false,
+          },
+          {
+            field: 'average_stars',
+            headerName: 'Rating',
+            type: 'number',
+            width: 80,
+            editable: false,
+          },
+          {
+            field: 'inserted_at',
+            headerName: 'Sign-up Date',
+            type: 'dateTime',
+            width: 150,
+            editable: false,
+          }, 
     ];
 
     return(
         <Box sx={{ height: 600, width: '98%', margin: 'auto' }}>
         <Typography variant="h5">Users</Typography>
+        <Typography variant="p">Click a column to see options</Typography>
         <DataGrid
           rows={users}
           columns={columns}
