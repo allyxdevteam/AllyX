@@ -27,9 +27,21 @@ function* updateProfile(action) {
     })
 }
 
+function* fetchProfiles() {
+    const response = yield axios({
+        method: 'GET',
+        url: `/api/profile/`
+    })
+    yield put({
+        type: 'SET_USERS',
+        payload: response.data
+    })
+}
+
 function* profileSaga() {
     yield takeLatest('FETCH_PROFILE', fetchProfile);
     yield takeLatest('UPDATE_PROFILE', updateProfile);
+    yield takeLatest('FETCH_PROFILES', fetchProfiles);
 }
 
 export default profileSaga;

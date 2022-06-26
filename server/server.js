@@ -9,6 +9,8 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const accountRouter = require('./routes/account.router');
+const allyApplicationRouter = require('./routes/allyApplication.router');
 const commentRouter = require('./routes/gen-comment.router');
 const requestedCallsRouter = require('./routes/requestedCalls.router');
 const scheduledCallsRouter = require('./routes/scheduledCalls.router');
@@ -28,6 +30,8 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/account', accountRouter);
+app.use('/api/allyApplication', allyApplicationRouter);
 app.use('/api/comment', commentRouter);
 app.use('/api/requestedCalls', requestedCallsRouter);
 app.use('/api/scheduledCalls', scheduledCallsRouter);
