@@ -11,8 +11,36 @@ function CommentReport() {
       dispatch({ type: "FETCH_GEN_COMMENTS" });
     }, []);
 
-    const comments = useSelector((store) => store.???);
+    const comments = useSelector((store) => store.gencomments);
 
+      // DataGrid config
+  const columns = [
+    { field: "id", headerName: "ID", width: 40 },
+    {
+      field: "user_id",
+      headerName: "User ID",
+      width: 90,
+      editable: false,
+    },
+    {
+        field: "num_stars",
+        headerName: "Rating",
+        width: 80,
+        editable: false,
+      },
+      {
+        field: "comment",
+        headerName: "Comment",
+        width: 200,
+        editable: false,
+      },
+      {
+        field: "inserted_at",
+        headerName: "Date",
+        width: 150,
+        editable: false,
+      }
+  ]
     return (
         <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
           <DataGrid

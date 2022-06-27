@@ -2,7 +2,14 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchGenComments(action){
-    // HTTP GET comments 
+    const response = yield axios({
+        method: 'GET',
+        url: `/api/comment/`
+    })
+    yield put({
+        type: 'SET_GEN_COMMENTS',
+        payload: response.data
+    })
 }
 
 function* addGenComment(action){
