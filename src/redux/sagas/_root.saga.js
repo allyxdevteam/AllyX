@@ -8,6 +8,7 @@ import profileSaga from './profile.saga';
 import genCommentSaga from './gencomment.saga';
 import requestedCallSaga from './requestedCall.saga';
 import scheduledCallSaga from './scheduledCall.saga';
+import allyAppSaga from './allyApp.saga';
 import claimedCallSaga from './claimedCall.saga';
 
 // rootSaga is the primary saga.
@@ -28,6 +29,7 @@ export default function* rootSaga() {
     genCommentSaga(),
     requestedCallSaga(),
     scheduledCallSaga(),
+    allyAppSaga(),
     claimedCallSaga(),
   ]);
 }
