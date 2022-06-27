@@ -10,7 +10,7 @@ const {
  * GET route template
  */
 router.get('/', (req, res) => {
-  const sqlQuery = 'SELECT * FROM "requested-call" ORDER BY "time" ASC;';
+  const sqlQuery = 'SELECT * FROM "requested-call" WHERE "open" = true ORDER BY "time" ASC;';
   pool.query(sqlQuery)
     .then(result => {
       res.send(result.rows);

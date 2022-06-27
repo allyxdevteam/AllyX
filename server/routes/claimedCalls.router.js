@@ -19,7 +19,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
          VALUES ($1, $2)
          RETURNING id;`;
          const sqlValues = [memberId, allyId];
-         await client.query(sqlQuery, sqlValues);
+         const insertCallResults = await client.query(sqlQuery, sqlValues);
+         const callId = insertCallResults.rows[0].id;
 
          const updateRequestedCallStatusQuery = `UPDATE "requested-call" SET "open" = false WHERE member_id = $1 AND time = $2`;
          const updateRequestedCallStatusValues = [memberId, requestedCallTime];
