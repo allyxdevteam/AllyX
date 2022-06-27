@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect} from "react";
+import { useEffect, useCallback } from "react";
 
 import { DataGrid, GridToolbar, GridCellEditCommitParams } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
@@ -66,7 +66,9 @@ function UserReport() {
       type: "boolean",
       width: 90,
       editable: true,
+    //   valueGetter: getAdminStatus,
     //   valueSetter: toggleAdminStatus,
+    //   onCellEditStop: handleEdit,
     },
     {
       field: "is_reported",
@@ -149,18 +151,33 @@ function UserReport() {
   ];
 
   const handleEdit = (params, event) => {
-    console.log('did the changes just save?', params.row.is_admin)
+    console.log('did the changes just save?', event)
   };
   
-   
+  const handleCommit = (params, event) => {
+    console.log('this is the commit', params.row.is_admin)
+  };
+
+  const getAdminStatus = (params) => {
+    return `${params.row.is_admin}`
+  }
   
     // const handleChange = async (params, event) => {
     //  onCellEditStart
     // };
 
-//   const toggleAdminStatus = () =>{
-//     console.log(!params.row.is_admin)
-//   }
+  const toggleAdminStatus = () =>{
+    console.log(params.row.is_admin)
+  }
+
+  const processRowUpdate = (newValue, oldValue) =>{
+    console.log('in process row update', newValue, oldValue)
+  }
+
+  const handleProcessRowUpdateError = (error) => {
+    console.log('something broke')
+  }
+ 
 
   return (
     <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
@@ -173,6 +190,10 @@ function UserReport() {
         disableSelectionOnClick
         components={{ Toolbar: GridToolbar }}
         experimentalFeatures={{ newEditingApi: true }}
+        processRowUpdate={processRowUpdate}
+        onProcessRowUpdateError={handleProcessRowUpdateError}
+        getRowId={(row) => row.id}
+        // onCellEditStart={handleEdit}
         // onCellEditStop={handleEdit}
       />
     </Box>
