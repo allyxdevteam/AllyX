@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import { SaveOutlined } from '@mui/icons-material';
 
 function AllyApplication() {
+    ////
     const dispatch = useDispatch();
     const history = useHistory();
     ////
@@ -17,22 +18,17 @@ function AllyApplication() {
     ////
     const [X, setX] = useState(1)
     const [showButton, setShowButton] = useState(true)
-    const [step, setStep] = useState(0);
     /////////////////////////////////////////////
     //Is the unit finished or not?
     //////////////////////////////////////////////
     const [isFinished, setIsFinished] = useState(false)
-    const [isSubmit, setIsSubmit] = useState(false)
 
     ////////////////////////////////////////////////////
     // LIST OF REQUIRED RESPONSES KEPT AS REDUX STATE WE WILL POST ON SUBMIT
     ////////////////////////////////////////////////////
-    const [response1, setResponse1] = useState('') // Reason for becoming an ally
-    const [response2, setResponse2] = useState('') // Twitter
-    const [response3, setResponse3] = useState('') // Insta
-
-
-
+    const [response1, setResponse1] = useState('') // 
+    const [response2, setResponse2] = useState('') // 
+    const [response3, setResponse3] = useState('') // 
     ///////////////////////////////////////////////
     //Check if valid input functions
     ///////////////////////////////////////////////
@@ -57,14 +53,6 @@ function AllyApplication() {
         hideNext()
     }
 
-    const handleNextStep = () => {
-        setStep(X + 1)
-    }
-
-    const prevSlide = () => {
-        setX(X - 1)
-        setStep(0)
-    }
 
 
     // Use this if the next slide has a conditional next button
@@ -81,24 +69,21 @@ function AllyApplication() {
         setShowButton(false)
     }
 
-    ////////////////////////////////////////////////////////////////////////
-    //Function to run in the slide before the last slide to see if everything has been completed.
-    //If all inputs are filled, set the state of isFinished to true
-    ///////////////////////////////////////////////////////////////////////
-    //
-    const finalSlideCheck = () => {
-        if (response1 != '') {
-            setIsFinished(true)
-        }
-        else {
-            return false;
-        }
-
-    }
+  
+    
     /////////////////////////////////////////////////
     //save and POST to server via dispatch
     /////////////////////////////////////////////////
-  
+    const postApp = ()=>{
+        dispatch({
+            type:'CREATE_ALLY_APP',
+            payload: {
+                answer1: response1,
+                answer2: response2,
+                answer3: response3,
+            }
+        })
+    }   
     /////////////////////////////////////////////////
     return (
         <>
@@ -121,7 +106,7 @@ function AllyApplication() {
                  
                    
                  
-                    <Button >   <SaveOutlined  /> Save Progress</Button> 
+                    <Button onClick={postApp}>   <SaveOutlined  /> Save Progress</Button> 
                     </Box>
                     }
                 </div>

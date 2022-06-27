@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
@@ -23,6 +22,7 @@ import UpdateProfile from '../UpdateProfile/UpdateProfile';
 import GeneralComment from '../GeneralComment/GeneralComment';
 import AllyRequestedCalls from '../AllyRequestedCalls/AllyRequestedCalls';
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
+import AllyStartCall from '../AllyStartCall/AllyStartCall';
 
 import './App.css';
 
@@ -93,6 +93,13 @@ function App() {
             path="/allyRequestedCalls"
           >
             <AllyRequestedCalls />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/allyStartCall"
+          >
+            <AllyStartCall />
           </ProtectedRoute>
 
           <Route
