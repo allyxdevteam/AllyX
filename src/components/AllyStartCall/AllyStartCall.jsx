@@ -1,5 +1,5 @@
 //react, redux, sagas------------------------------------------------------
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,15 +9,23 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function AllyStartCall(){
 
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch({
+            type: 'FETCH_CLAIMED_CALL',
+        })
+    }, []);
+
     function handleStartCall(){
-        
+
     }
    
 
     return(
         <>
         <button onClick={handleStartCall}>Start Call</button>
-        <a href="tel:9178812930">Call Me!</a>
+        <a href="tel:6123109601">Call Me!</a>
         </>
     )
 }

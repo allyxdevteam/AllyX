@@ -20,7 +20,12 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
          RETURNING id;`;
          const sqlValues = [memberId, allyId];
          const insertCallResults = await client.query(sqlQuery, sqlValues);
+         
          const callId = insertCallResults.rows[0].id;
+         console.log('this is the callId', callId);
+         const getClaimedCallIdQuery = `SELECT * FROM "call" WHERE "id" = $1;`;
+         const getClaimedCallIdValues = [callId];
+         await client.query(getClaimedCallIdQuery, getClaimedCallIdValues);
 
          const updateRequestedCallStatusQuery = `UPDATE "requested-call" SET "open" = false WHERE member_id = $1 AND time = $2`;
          const updateRequestedCallStatusValues = [memberId, requestedCallTime];
@@ -28,7 +33,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
 
          await client.query('COMMIT')
-         res.sendStatus(201);
+
+         res.status(201).send({callId});
     } catch (error) {
         await client.query('ROLLBACK')
         console.log('Error POST /api/claimedCalls', error);

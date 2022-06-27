@@ -19,7 +19,7 @@ function RequestedCallItem( {call} ){
         dispatch({
             type: 'FETCH_REQUESTED_CALLS',
         })
-        history.push('/allyStartCall')
+        history.push(`/allyStartCall`)
         }
         else{
             alert('this call has already been claimed')
