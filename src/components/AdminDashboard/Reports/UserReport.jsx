@@ -159,6 +159,7 @@ function UserReport(){
           rowsPerPageOptions={[10]}
           disableSelectionOnClick
           components={{Toolbar: GridToolbar}}
+          experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
     )
