@@ -91,7 +91,7 @@ function LandingPage() {
 
 
 
-      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+       <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker
                 disablePast = {true}
                 //disableIgnoringDatePartForTimeValidation = {true}
@@ -107,12 +107,10 @@ function LandingPage() {
                 renderInput={(params) => {
                   return <TextField {...params} />;
                 }} 
-                
                 />
 
 
-
-            </LocalizationProvider > */}
+            </LocalizationProvider > 
       <button onClick={handleScheduleCall}>Schedule a call</button>
 
 
