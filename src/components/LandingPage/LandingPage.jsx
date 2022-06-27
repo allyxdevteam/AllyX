@@ -26,7 +26,6 @@ function LandingPage() {
   console.log(date.toLocaleDateString());
 
   //local state---------------------------------------------------------
-  const [heading, setHeading] = useState('Welcome');
   const [callTime, setCallTime] = useState(dateTime);
 
 
@@ -78,7 +77,7 @@ function LandingPage() {
 
   return (
     <div className="container">
-      <h2>{heading}</h2> 
+      <h2>Welcome {user.username}</h2> 
 
       <button onClick={handleGoToAllyPage}>go to Ally Requested Calls/ become an Ally</button>
 

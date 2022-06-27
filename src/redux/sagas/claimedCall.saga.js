@@ -5,15 +5,17 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function* postClaimedCall(action){
     console.log(action.payload);
-    // try{
-    //     yield axios({
-    //         method: 'POST',
-    //         url: '/api/claimedCalls',
-    //         data: {dateTime, user}
-    //     });
-    // }catch{
-    //     console.log('problem in post requested call');
-    // }
+    const user = action.payload.user;
+    const call = action.payload.call;
+    try{
+        yield axios({
+            method: 'POST',
+            url: '/api/claimedCalls',
+            data: {user, call}
+        });
+    }catch{
+        console.log('problem in post requested call');
+    }
 }
 
 
