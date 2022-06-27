@@ -12,6 +12,7 @@ function TemplateReport() {
     }, []);
 
     const users = useSelector((store) => store.users);
+    
 
     return (
         <Box sx={{ height: 600, width: "98%", margin: "auto" }}>

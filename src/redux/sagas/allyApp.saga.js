@@ -38,6 +38,9 @@ function* updateAllyApp(action){
 
 
 }
+
+
+
 function* createAllyApp(action){
     try{
         console.log('Post App Data', action.payload)
@@ -51,9 +54,6 @@ function* createAllyApp(action){
         console.log('error in update ally app', err)
     }
 }
-
-
-
 
 
 

@@ -4,6 +4,9 @@ import user from './user.reducer';
 import profile from './profile.reducer';
 import gencomment from './gencomment.reducer';
 import gencomments from './gencomments.reducer';
+import requestedCalls from './requestedCalls.reducer';
+import allyApplication from './allyApplication.reducer';
+import users from './users.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +20,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   gencomment, // contains a general comment, not tied to a specific call
   gencomments, //contains all general comments, not tied to specific calls
+  requestedCalls, 
+  allyApplication,
+  users,
 });
-
 export default rootReducer;

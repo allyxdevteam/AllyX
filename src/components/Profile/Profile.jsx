@@ -62,7 +62,7 @@ function Profile() {
                 Request Delete?
             </Button>
 
-            <AllyApplicationStatus />
+            {/* <AllyApplicationStatus /> */}
             <br />
             <DisableAccount />
 
