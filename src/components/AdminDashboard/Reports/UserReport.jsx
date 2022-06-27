@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { DataGrid, GridToolbar, GridValueSetterParams } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
@@ -9,9 +9,11 @@ function UserReport() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_PROFILES" });
+    setUserData(users);
   }, []);
 
   const users = useSelector((store) => store.users);
+  const [userData, setUserData] = useState([]);
 
   // DataGrid config
   const columns = [
@@ -159,7 +161,7 @@ function UserReport() {
   return (
     <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
       <DataGrid
-        rows={users}
+        rows={userData}
         columns={columns}
         pageSize={10}
         density="compact"
