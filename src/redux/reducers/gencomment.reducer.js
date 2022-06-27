@@ -3,7 +3,7 @@ const genCommentReducer = (state = [], action) => {
         case 'SET_GEN_COMMENT':
           return action.payload;
         case 'UNSET_GEN_COMMENT':
-          return [];
+          return '';
         default:
           return state;
       }

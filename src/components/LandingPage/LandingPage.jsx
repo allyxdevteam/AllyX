@@ -5,19 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 //styling, mui ----------------------------------------------------------
 import './LandingPage.css';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import {
-  DatePicker
-} from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { TextField } from '@mui/material';
-import { DateTimePicker } from '@mui/x-date-pickers-pro';
-
 
 
 // CUSTOM COMPONENTS---------------------------------------------------
-import RegisterForm from '../RegisterForm/RegisterForm';
-import AllyApplication from '../AllyApplication/AllyApplication';
+
 
 function LandingPage() {
 
@@ -41,9 +32,7 @@ function LandingPage() {
 
 
   //other functions-----------------------------------------------------------
-  const onLogin = (event) => {
-    history.push('/login');
-  };
+  
 
   function handleRequestCall() {
     console.log('in handleRequestCall');
@@ -82,63 +71,29 @@ function LandingPage() {
       else{alert('no!')}
   }
 
+  function handleGoToAllyPage(){
+    history.push('/allyRequestedCalls')
+  }
+
 
   return (
     <div className="container">
       <h2>{heading}</h2> 
 
+      <button onClick={handleGoToAllyPage}>go to Ally Requested Calls/ become an Ally</button>
+
       <button onClick={handleRequestCall}>Request a call</button>
 
-
-
-       <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DateTimePicker
-                disablePast = {true}
-                //disableIgnoringDatePartForTimeValidation = {true}
-                //minDateTime = {dateTime}
-                value={callTime}
-
-                // inputFormat="MM/YY"
-                // views={['year', 'month',]}
-
-                onChange={(e) => { 
-                  //set up a ternary here to set the call time to the current time if "e" is earlier than the current time.
-                  setCallTime(e) }}
-                renderInput={(params) => {
-                  return <TextField {...params} />;
-                }} 
-                />
-
-
-            </LocalizationProvider > 
       <button onClick={handleScheduleCall}>Schedule a call</button>
 
 
       <input type="datetime-local"
         onChange={(e) => {
-          //set up a ternary here to set the call time to the current time if "e" is earlier than the current time.
           setCallTime(e.target.value)
           console.log(callTime);
         }}
-      // renderInput={(params) => {
-      //   return <TextField {...params} />;
-      // }} 
       ></input>
 
-
-
-
-
-
-
-      <center>
-        <h4>Already a Member?</h4>
-        <button onClick={onLogin}>
-          Login
-        </button>
-      </center>
-
-      <AllyApplication />
     </div>
 
   );
