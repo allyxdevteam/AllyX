@@ -66,7 +66,7 @@ function UserReport(){
             headerName: 'Admin',
             type: 'boolean',
             width: 90,
-            editable: false,
+            editable: true,
           },
           {
             field: 'is_reported',
