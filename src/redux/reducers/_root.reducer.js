@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
-import allyApplication from './allyApplication.reducer';
 import profile from './profile.reducer';
 import gencomment from './gencomment.reducer';
-import requestedCalls from './requestedCalls.reducer';
-import users from './users.reducer';
+import gencomments from './gencomments.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -15,12 +13,10 @@ import users from './users.reducer';
 // This is what we get when we use 'state' inside of 'mapStateToProps'
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
-  allyApplication,
   profile,
   user, // will have an id and username if someone is logged in
   gencomment, // contains a general comment, not tied to a specific call
-  requestedCalls, //contains calls requested by members for allies to claim
-  users, // will contain all users for the admin report
+  gencomments, //contains all general comments, not tied to specific calls
 });
 
 export default rootReducer;

@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 import UserReport from "./Reports/UserReport";
+import CommentReport from "./Reports/CommentReport";
 
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 
@@ -40,7 +41,7 @@ function a11yProps(index) {
 }
 
 function AdminDashboard() {
-    
+
   const [view, setView] = useState(0);
 
   const handleChange = (event, newView) => {
@@ -68,7 +69,7 @@ function AdminDashboard() {
         <UserReport />
       </TabPanel>
       <TabPanel value={view} index={1}>
-        Comments
+        <CommentReport />
       </TabPanel>
       <TabPanel value={view} index={2}>
         Calls

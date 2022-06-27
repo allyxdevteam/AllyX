@@ -173,7 +173,7 @@ function UserReport() {
         disableSelectionOnClick
         components={{ Toolbar: GridToolbar }}
         experimentalFeatures={{ newEditingApi: true }}
-        onCellEditStop={handleEdit}
+        // onCellEditStop={handleEdit}
       />
     </Box>
   );
