@@ -4,19 +4,19 @@ import { useEffect} from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 
-function CommentReport() {
+function TemplateReport() {
     const dispatch = useDispatch();
   
     useEffect(() => {
-      dispatch({ type: "FETCH_GEN_COMMENTS" });
+      dispatch({ type: "FETCH_PROFILES" });
     }, []);
 
-    const comments = useSelector((store) => store.???);
+    const users = useSelector((store) => store.users);
 
     return (
         <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
           <DataGrid
-            rows={comments}
+            rows={users}
             columns={columns}
             pageSize={10}
             density="compact"
@@ -29,4 +29,4 @@ function CommentReport() {
         </Box>
       );
     }
-    export default CommentReport;
+    export default TemplateReport;
