@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 
-import { DataGrid, GridToolbar, GridValueSetterParams } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, GridCellEditCommitParams } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 
 function UserReport() {
@@ -9,11 +9,9 @@ function UserReport() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_PROFILES" });
-    setUserData(users);
   }, []);
 
   const users = useSelector((store) => store.users);
-  const [userData, setUserData] = useState([]);
 
   // DataGrid config
   const columns = [
@@ -153,6 +151,12 @@ function UserReport() {
   const handleEdit = (params, event) => {
     console.log('did the changes just save?', params.row.is_admin)
   };
+  
+   
+  
+    // const handleChange = async (params, event) => {
+    //  onCellEditStart
+    // };
 
 //   const toggleAdminStatus = () =>{
 //     console.log(!params.row.is_admin)
@@ -161,7 +165,7 @@ function UserReport() {
   return (
     <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
       <DataGrid
-        rows={userData}
+        rows={users}
         columns={columns}
         pageSize={10}
         density="compact"
