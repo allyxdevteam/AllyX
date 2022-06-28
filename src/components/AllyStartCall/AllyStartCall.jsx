@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 
-function AllyStartCall(){
+function AllyStartCall() {
 
     const dispatch = useDispatch();
     const params = useParams();
@@ -17,22 +17,29 @@ function AllyStartCall(){
 
     const memberId = params.memberId
 
-    useEffect(()=>{
+    const date = new Date();
+    const dateTime = date.toLocaleString();
+
+    useEffect(() => {
         dispatch({
             type: 'FETCH_CLAIMED_CALL',
-            payload: {claimedCallId, memberId}
+            payload: { claimedCallId, memberId }
         })
     }, []);
 
-    function handleStartCall(){
+    function handleStartCall() {
         console.log('this is the claimed call member info:', claimedCallMember);
+        dispatch({
+            type: 'PUT_CALL_STARTED_TIME',
+            payload: {claimedCallId, dateTime}
+        })
     }
-   
 
-    return(
+
+    return (
         <>
-        <img src={claimedCallMember.profile_pic} alt="profile pic"></img>
-        <a href={`tel:${claimedCallMember.phone_number}`} onClick={handleStartCall}>Call {claimedCallMember.first_name}</a>
+            <img src={claimedCallMember.profile_pic} alt="profile pic"></img>
+            <a href={`tel:${claimedCallMember.phone_number}`} onClick={handleStartCall}>Call {claimedCallMember.first_name}</a>
         </>
     )
 }
