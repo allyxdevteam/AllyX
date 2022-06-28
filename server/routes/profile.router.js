@@ -95,4 +95,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   }
 )
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  if (req.user.is_admin) {
+  const sqlText = `
+    DELETE * FROM "user"
+      WHERE id=$1
+  `;
+  const sqlValues = [req.params.id];
+  pool.query(sqlText, sqlValues)
+    .then(
+      res.sendStatus(204)
+    )
+    .catch((dbErr) => {
+      console.log('error in DELETE /user/:id', dbErr);
+      res.sendStatus(500);
+    })
+  } else {
+    console.warn('only admins can delete users, sorry!')
+  }
+})
+
 module.exports = router;
