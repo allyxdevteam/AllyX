@@ -8,7 +8,7 @@ function* fetchAllyApp(action){
         console.log(action.payload)
        const getData = yield axios({
             method: 'GET',
-            url: '/api/ally-app',
+            url: '/api/allyApp',
            
         })
         yield put({
@@ -27,7 +27,7 @@ function* updateAllyApp(action){
         console.log('Update App Data', action.payload)
         yield axios({
             method:`PUT`,
-            url: '/api/ally-app',
+            url: '/api/allyApp',
             data: action.payload,
         })
     }

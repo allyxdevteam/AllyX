@@ -1,7 +1,7 @@
 import './AllyApplication.css'
 import ArrowL from './ArrowL.png';
 import ArrowR from './ArrowR.png';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Box, FormControl, LinearProgress } from '@mui/material';
@@ -10,8 +10,14 @@ import Button from '@mui/material/Button';
 import { SaveOutlined } from '@mui/icons-material';
 
 function AllyApplication() {
+
     ////
-    const dispatch = useDispatch();
+    const dispatch = useDispatch();   
+     useEffect(()=>{
+        dispatch({
+            type:'FETCH_ALLY_APP'
+        })
+    },[])
     const history = useHistory();
     ////
     const user = useSelector(store => store.user)
@@ -23,12 +29,10 @@ function AllyApplication() {
     //////////////////////////////////////////////
     const [isFinished, setIsFinished] = useState(false)
 
-    ////////////////////////////////////////////////////
-    // LIST OF REQUIRED RESPONSES KEPT AS REDUX STATE WE WILL POST ON SUBMIT
-    ////////////////////////////////////////////////////
-    const [response1, setResponse1] = useState('') // 
-    const [response2, setResponse2] = useState('') // 
-    const [response3, setResponse3] = useState('') // 
+    const res1 = useSelector((store)=> store.allyApp.answer_1) ;
+    const res2 = useSelector((store)=> store.allyApp.answer_2) ;
+    const res3 = useSelector((store)=> store.allyApp.answer_3) ;
+
     ///////////////////////////////////////////////
     //Check if valid input functions
     ///////////////////////////////////////////////
@@ -59,7 +63,6 @@ function AllyApplication() {
     const nextSlideAndHide = () => {
         setX(X + 1)
         setShowButton(false)
-        setStep(0)
     }
     //Call this function to show a conditionally rendered next button
     const showNext = () => {
@@ -74,16 +77,27 @@ function AllyApplication() {
     /////////////////////////////////////////////////
     //save and POST to server via dispatch
     /////////////////////////////////////////////////
-    const postApp = ()=>{
+     const postApp = ()=>{
         dispatch({
             type:'CREATE_ALLY_APP',
             payload: {
-                answer1: response1,
-                answer2: response2,
-                answer3: response3,
+                answer1: res1,
+                answer2: res2,
+                answer3: res3,
             }
         })
-    }   
+     }  
+    /////////////////////////////////////////////////
+    //edit and save as redux state  via dispatch
+    /////////////////////////////////////////////////
+    ()=>{
+        dispatch({
+            type:'EDIT_ALLY_APP',
+            payload: {}
+        })
+    }
+
+  
     /////////////////////////////////////////////////
     return (
         <>
@@ -100,7 +114,7 @@ function AllyApplication() {
                             value={((X-1) / 5) * 100}
                         />
                     </Box>
-                    { (X>=2) &&
+                    { (X>=0) &&
                     
                     <Box>
                  
@@ -112,7 +126,7 @@ function AllyApplication() {
                 </div>
 
 
-                {(X === 1) &&
+                {true &&
                     //This will display the initial CTA for becoming an ally. 
                     <div className="card-graphics">
                         <div className="card-top">
@@ -141,7 +155,7 @@ function AllyApplication() {
 
 
 
-                {(X === 2) &&
+                {true &&
                     <div className="card-graphics">
                         <div className="card-top">
                                                <h3>Tell us why you'd like to become an ally!</h3>
@@ -156,9 +170,12 @@ function AllyApplication() {
                                 placeholder=""
                                 multiline
                                 fullWidth
-                                value={response1}
+                                value={res1}
                                 onChange={(e) => {
-                                    setResponse1(e.target.value);
+                                    dispatch({
+                                        type: 'EDIT_ANSWER_1',
+                                        payload: e.target.value
+                                    })
                                 }}
                             />
                         </div>
@@ -169,18 +186,18 @@ function AllyApplication() {
 
                             </div>
 
-                            {(response1.length > 0) &&
+                           
                                 <div className="button-right">
                                     <Button fullWidth onClick={nextSlideAndHide}>Next</Button>
                                 </div>
-                            }
+                            
                         </div>
                     </div>
 
                 }
 
 
-                {(X === 3) &&
+                {true &&
 
                     <div className="card-graphics">
                         <div className="card-top">
@@ -194,9 +211,12 @@ function AllyApplication() {
                                 placeholder=""
                                 multiline
                                 fullWidth
-                                value={response2}
+                                value={res2}
                                 onChange={(e) => {
-                                    setResponse2(e.target.value);
+                                    dispatch({
+                                        type: 'EDIT_ANSWER_2',
+                                        payload: e.target.value
+                                    })
                                 }}
                             />
                         </div>
@@ -207,17 +227,17 @@ function AllyApplication() {
 
                             </div>
 
-                            {(response2.length > 0) &&
+                           
                                 <div className="button-right">
                                     <Button fullWidth onClick={nextSlideAndHide}>Next</Button>
                                 </div>
-                            }
+                            
                         </div>
                     </div>
             
                     
                 }
-                   {(X === 4) &&
+                   {true &&
                     <>
                     <div className="card-graphics">
                             {/* This is the top of the card */}
@@ -234,9 +254,12 @@ function AllyApplication() {
                                 placeholder=""
                                 multiline
                                 fullWidth
-                                value={response2}
+                                value={res3}
                                 onChange={(e) => {
-                                    setResponse2(e.target.value);
+                                    dispatch({
+                                        type: 'EDIT_ANSWER_3',
+                                        payload: e.target.value
+                                    })
                                 }}
                             />
                                 
@@ -257,7 +280,7 @@ function AllyApplication() {
                 }
 
 
-                {(X === 5) &&
+                {true &&
                     <>
                     <div className="card-graphics">
                             {/* This is the top of the card */}
