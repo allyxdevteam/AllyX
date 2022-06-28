@@ -11,7 +11,7 @@ function AllyApplicationStatus() {
 
 
     const dispatch = useDispatch();
-    const allyApplication = useSelector(store => store.allyApplication[0]);
+    const allyApplication = useSelector(store => store.allyApplication);
     const user = useSelector(store => store.user);
 
     console.log('**************************************************', allyApplication);
