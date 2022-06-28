@@ -72,7 +72,7 @@ function UserReport() {
       headerName: "Reported",
       type: "boolean",
       width: 90,
-      editable: false,
+      editable: true,
     },
     {
       field: "is_active",
@@ -93,7 +93,7 @@ function UserReport() {
       headerName: "Delete",
       type: "boolean",
       width: 90,
-      editable: false,
+      editable: true,
     },
     {
       field: "city",
