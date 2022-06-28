@@ -58,7 +58,7 @@ function UserReport() {
       headerName: "Ally",
       type: "boolean",
       width: 90,
-      editable: false,
+      editable: true,
     },
     {
       field: "is_admin",
@@ -79,14 +79,14 @@ function UserReport() {
       headerName: "Active",
       type: "boolean",
       width: 90,
-      editable: false,
+      editable: true,
     },
     {
       field: "is_blocked",
       headerName: "Blocked",
       type: "boolean",
       width: 90,
-      editable: false,
+      editable: true,
     },
     {
       field: "delete_requested",
