@@ -25,6 +25,7 @@ import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import AllyStartCall from '../AllyStartCall/AllyStartCall';
 
 import './App.css';
+import AllyApplication from '../AllyApplication/AllyApplication';
 
 
 
@@ -135,6 +136,12 @@ function App() {
             path="/home"
           >
             <LandingPage />
+          </Route>
+          <Route
+            exact
+            path="/ally-application"
+          >
+            <AllyApplication />
           </Route>
 
           <Route
