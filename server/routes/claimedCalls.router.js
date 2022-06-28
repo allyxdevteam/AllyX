@@ -5,6 +5,20 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
+router.get('/:memberId', (req, res) => {
+    const memberId = req.params.memberId;
+    const sqlQuery = 'SELECT "first_name", "phone_number", "profile_pic"  FROM "user" WHERE "is_active" = true AND "is_blocked" = false AND "id" = $1;';
+    const sqlValues = [memberId];
+    
+    pool.query(sqlQuery, sqlValues)
+      .then(result => {
+        res.send(result.rows[0]);
+      })
+      .catch(err => {
+        console.log('ERROR: fetch claimed call', err);
+        res.sendStatus(500)
+      })
+  });
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
@@ -13,16 +27,14 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     const requestedCallTime = req.body.call.time
     
     try {
-        console.log('this is the req dot boooooody', req.body);
          await client.query('BEGIN')
          const sqlQuery = `INSERT INTO "call" ("member_id", "ally_id")
          VALUES ($1, $2)
-         RETURNING id;`;
+         RETURNING id, member_id;`;
          const sqlValues = [memberId, allyId];
          const insertCallResults = await client.query(sqlQuery, sqlValues);
          
          const callId = insertCallResults.rows[0].id;
-         console.log('this is the callId', callId);
          const getClaimedCallIdQuery = `SELECT * FROM "call" WHERE "id" = $1;`;
          const getClaimedCallIdValues = [callId];
          await client.query(getClaimedCallIdQuery, getClaimedCallIdValues);
