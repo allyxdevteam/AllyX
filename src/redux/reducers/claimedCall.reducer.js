@@ -1,3 +1,6 @@
+import { combineReducers } from 'redux';
+
+
 const claimedCall = (state = {}, action) => {
     switch (action.type) {
         case 'SET_CLAIMED_CALL':
@@ -7,4 +10,16 @@ const claimedCall = (state = {}, action) => {
       }
     };
 
-    export default claimedCall;
+    const claimedCallMember = (state = {}, action) => {
+        switch (action.type) {
+            case 'SET_CLAIMED_CALL_MEMBER':
+              return action.payload;
+            default:
+              return state;
+          }
+        };
+
+    export default combineReducers({
+        claimedCall,
+        claimedCallMember,
+      });

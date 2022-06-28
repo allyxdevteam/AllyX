@@ -12,7 +12,9 @@ function AllyStartCall(){
     const dispatch = useDispatch();
     const params = useParams();
 
-    const claimedCallId = useSelector(store => store.claimedCall);
+    const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
+    const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);
+
     const memberId = params.memberId
 
     useEffect(()=>{
@@ -23,15 +25,14 @@ function AllyStartCall(){
     }, []);
 
     function handleStartCall(){
-        console.log('this is the call id:', claimedCallId);
-        console.log('this is member id:', memberId);
+        console.log('this is the claimed call member info:', claimedCallMember);
     }
    
 
     return(
         <>
-        <button onClick={handleStartCall}>Start Call</button>
-        <a href="tel:6123109601">Call Me!</a>
+        <img src={claimedCallMember.profile_pic} alt="profile pic"></img>
+        <a href={`tel:${claimedCallMember.phone_number}`} onClick={handleStartCall}>Call {claimedCallMember.first_name}</a>
         </>
     )
 }

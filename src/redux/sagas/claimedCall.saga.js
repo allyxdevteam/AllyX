@@ -13,11 +13,11 @@ function* fetchClaimedCall(action){
             method: 'GET',
             url: `/api/claimedCalls/${memberId}`,
         });
-        console.log('this is the response from fetchClaimedCall:', response.data);
-        // yield put({
-        //     type: 'SET_CLAIMED_CALL',
-        //     payload: callId
-        // });
+        const memberInfo = response.data
+        yield put({
+            type: 'SET_CLAIMED_CALL_MEMBER',
+            payload: memberInfo
+        });
     }catch{
         console.log('problem in post requested call');
     }
