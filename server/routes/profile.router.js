@@ -98,7 +98,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   if (req.user.is_admin) {
   const sqlText = `
-    DELETE * FROM "user"
+    DELETE FROM "user"
       WHERE id=$1
   `;
   const sqlValues = [req.params.id];

@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useCallback, useState } from "react";
+import Swal from 'sweetalert2';
 
 import {
   DataGrid,
@@ -19,6 +20,7 @@ function UserReport() {
   }, []);
 
   const users = useSelector((store) => store.users);
+  
 
   // DataGrid config
   const columns = [
@@ -184,7 +186,26 @@ function UserReport() {
 
   // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
   const handleDeleteClick = (id) => () => {
-    console.log("in handleDeleteClick", id);
+    Swal.fire({
+        title: "Are you sure you want to delete this user?",
+        text: "Once deleted, you will not be able to recover their data!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete'
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            dispatch({
+                type: 'DELETE_PROFILE',
+                payload: id
+            })
+          Swal.fire("The user has been deleted", {
+            icon: "success",
+          });
+        } else {
+          Swal.fire("Cancelled! The user data is safe.");
+        }
+      });
   };
 
   return (
