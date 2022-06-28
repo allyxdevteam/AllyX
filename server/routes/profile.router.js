@@ -37,8 +37,15 @@ router.put('/:id', (req, res) => {
             city = $5,
             facebook_link = $6,
             twitter_link = $7,
-            instagram_link = $8
-        WHERE id = $9;
+            instagram_link = $8,
+            average_stars = $9,
+            is_ally = $10,
+            is_admin = $11,
+            is_reported = $12,
+            is_active = $13,
+            is_blocked = $14,
+            delete_requested = $15
+        WHERE id = $16;
     `;
     const sqlValues = [
         req.body.first_name,
@@ -49,6 +56,13 @@ router.put('/:id', (req, res) => {
         req.body.facebook_link,
         req.body.twitter_link,
         req.body.instagram_link,
+        req.body.average_stars,
+        req.body.is_ally,
+        req.body.is_admin,
+        req.body.is_reported,
+        req.body.is_active,
+        req.body.is_blocked,
+        req.body.delete_requested,
         req.params.id
     ];
     pool.query(sqlText, sqlValues)
@@ -80,5 +94,25 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     else console.warn('403, admins only :)')
   }
 )
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  if (req.user.is_admin) {
+  const sqlText = `
+    DELETE FROM "user"
+      WHERE id=$1
+  `;
+  const sqlValues = [req.params.id];
+  pool.query(sqlText, sqlValues)
+    .then(
+      res.sendStatus(204)
+    )
+    .catch((dbErr) => {
+      console.log('error in DELETE /user/:id', dbErr);
+      res.sendStatus(500);
+    })
+  } else {
+    console.warn('only admins can delete users, sorry!')
+  }
+})
 
 module.exports = router;

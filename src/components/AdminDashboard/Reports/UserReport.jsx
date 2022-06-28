@@ -1,8 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect} from "react";
+import { useEffect } from "react";
+import Swal from 'sweetalert2';
 
-import { DataGrid, GridToolbar, GridCellEditCommitParams } from "@mui/x-data-grid";
-import Box from "@mui/material/Box";
+import {
+  DataGrid,
+  GridToolbar,
+  GridActionsCellItem,
+} from "@mui/x-data-grid";
+import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 
 function UserReport() {
   const dispatch = useDispatch();
@@ -12,6 +18,7 @@ function UserReport() {
   }, []);
 
   const users = useSelector((store) => store.users);
+  
 
   // DataGrid config
   const columns = [
@@ -26,25 +33,25 @@ function UserReport() {
       field: "first_name",
       headerName: "First Name",
       width: 150,
-      editable: false,
+      editable: true,
     },
     {
       field: "last_name",
       headerName: "Last Name",
       width: 150,
-      editable: false,
+      editable: true,
     },
     {
       field: "email",
       headerName: "Email",
       width: 150,
-      editable: false,
+      editable: true,
     },
     {
       field: "phone_number",
       headerName: "Phone Number",
       width: 150,
-      editable: false,
+      editable: true,
     },
     {
       field: "dob",
@@ -58,7 +65,7 @@ function UserReport() {
       headerName: "Ally",
       type: "boolean",
       width: 90,
-      editable: false,
+      editable: true,
     },
     {
       field: "is_admin",
@@ -66,71 +73,70 @@ function UserReport() {
       type: "boolean",
       width: 90,
       editable: true,
-    //   valueSetter: toggleAdminStatus,
     },
     {
       field: "is_reported",
       headerName: "Reported",
       type: "boolean",
       width: 90,
-      editable: false,
+      editable: true,
     },
     {
       field: "is_active",
       headerName: "Active",
       type: "boolean",
       width: 90,
-      editable: false,
+      editable: true,
     },
     {
       field: "is_blocked",
       headerName: "Blocked",
       type: "boolean",
       width: 90,
-      editable: false,
+      editable: true,
     },
     {
       field: "delete_requested",
       headerName: "Delete",
       type: "boolean",
       width: 90,
-      editable: false,
+      editable: true,
     },
     {
       field: "city",
       headerName: "City",
       width: 150,
-      editable: false,
+      editable: true,
     },
     {
       field: "profile_pic",
       headerName: "Profile Pic Link",
       width: 150,
-      editable: false,
+      editable: true,
     },
     {
       field: "verify_pic",
       headerName: "Verification Pic Link",
       width: 150,
-      editable: false,
+      editable: true,
     },
     {
       field: "facebook_link",
       headerName: "Facebook Link",
       width: 150,
-      editable: false,
+      editable: true,
     },
     {
       field: "twitter_link",
       headerName: "Twitter Link",
       width: 150,
-      editable: false,
+      editable: true,
     },
     {
       field: "instagram_link",
       headerName: "Instagram Link",
       width: 150,
-      editable: false,
+      editable: true,
     },
     {
       field: "average_stars",
@@ -146,21 +152,59 @@ function UserReport() {
       width: 150,
       editable: false,
     },
+    {
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
+      width: 100,
+      cellClassName: "actions",
+      getActions: ({ id }) => {
+        return [
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            color="inherit"
+            onClick={handleDeleteClick(id)}
+          />,
+        ];
+      },
+    },
   ];
 
-  const handleEdit = (params, event) => {
-    console.log('did the changes just save?', params.row.is_admin)
+  // handles edits made to the DataGrid
+  const processRowUpdate = (newValue, oldValue) => {
+    console.log("in process row update", newValue, oldValue);
+    dispatch({ type: "UPDATE_PROFILE_ADMIN", payload: newValue });
+    return newValue;
   };
-  
-   
-  
-    // const handleChange = async (params, event) => {
-    //  onCellEditStart
-    // };
 
-//   const toggleAdminStatus = () =>{
-//     console.log(!params.row.is_admin)
-//   }
+  const handleProcessRowUpdateError = (error) => {
+    console.log("whoops!", error);
+  };
+
+  // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
+  const handleDeleteClick = (id) => () => {
+    Swal.fire({
+        title: "Are you sure you want to delete this user?",
+        text: "Once deleted, you will not be able to recover their data!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete'
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            dispatch({
+                type: 'DELETE_PROFILE',
+                payload: id
+            })
+          Swal.fire("The user has been deleted", {
+            icon: "success",
+          });
+        } else {
+          Swal.fire("Cancelled! The user data is safe.");
+        }
+      });
+  };
 
   return (
     <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
@@ -170,10 +214,11 @@ function UserReport() {
         pageSize={10}
         density="compact"
         rowsPerPageOptions={[10]}
-        disableSelectionOnClick
         components={{ Toolbar: GridToolbar }}
         experimentalFeatures={{ newEditingApi: true }}
-        // onCellEditStop={handleEdit}
+        processRowUpdate={processRowUpdate}
+        onProcessRowUpdateError={handleProcessRowUpdateError}
+        getRowId={(row) => row.id}
       />
     </Box>
   );

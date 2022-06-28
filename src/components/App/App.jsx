@@ -5,6 +5,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import swal from 'sweetalert2';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,6 +26,7 @@ import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import AllyStartCall from '../AllyStartCall/AllyStartCall';
 
 import './App.css';
+import AllyApplication from '../AllyApplication/AllyApplication';
 
 
 
@@ -135,6 +137,12 @@ function App() {
             path="/home"
           >
             <LandingPage />
+          </Route>
+          <Route
+            exact
+            path="/ally-application"
+          >
+            <AllyApplication />
           </Route>
 
           <Route
