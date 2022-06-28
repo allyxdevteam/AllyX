@@ -24,8 +24,21 @@ function* fetchUser() {
   }
 }
 
+function* requestDelete(action) {
+  const userId = action.payload;
+  yield axios({
+      method: 'PUT',
+      url: `/api/user`,
+      data: userId
+  })
+  yield put({
+      type: 'FETCH_USER'
+  })
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('REQUEST_DELETE', requestDelete);
 }
 
 export default userSaga;
