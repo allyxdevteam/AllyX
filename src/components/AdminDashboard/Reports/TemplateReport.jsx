@@ -12,6 +12,16 @@ function TemplateReport() {
     }, []);
 
     const users = useSelector((store) => store.users);
+
+      // handles edits made to the DataGrid
+  const processRowUpdate = (newValue, oldValue) =>{
+    console.log('in process row update', newValue, oldValue)
+    return newValue
+  }
+
+  const handleProcessRowUpdateError = (error) => {
+    console.log('whoops!', error)
+  }
     
 
     return (
@@ -22,10 +32,11 @@ function TemplateReport() {
             pageSize={10}
             density="compact"
             rowsPerPageOptions={[10]}
-            disableSelectionOnClick
             components={{ Toolbar: GridToolbar }}
             experimentalFeatures={{ newEditingApi: true }}
-            // onCellEditStop={handleEdit}
+            processRowUpdate={processRowUpdate}
+            onProcessRowUpdateError={handleProcessRowUpdateError}
+            getRowId={(row) => row.id}
           />
         </Box>
       );

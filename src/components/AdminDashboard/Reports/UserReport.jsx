@@ -166,7 +166,6 @@ function UserReport() {
         pageSize={10}
         density="compact"
         rowsPerPageOptions={[10]}
-        disableSelectionOnClick
         components={{ Toolbar: GridToolbar }}
         experimentalFeatures={{ newEditingApi: true }}
         processRowUpdate={processRowUpdate}
