@@ -6,6 +6,7 @@ import {
   GridToolbar,
   GridActionsCellItem,
   GridCellParams,
+  GridRowModes,
 } from "@mui/x-data-grid";
 import { Box, Snackbar, Alert } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
@@ -181,7 +182,8 @@ function UserReport() {
     console.log("whoops!", error);
   };
 
-  const handleDeleteClick = (id) => {
+  // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
+  const handleDeleteClick = (id) => () => {
     console.log("in handleDeleteClick", id);
   };
 
