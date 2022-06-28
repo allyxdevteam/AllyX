@@ -1,15 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect } from "react";
 import Swal from 'sweetalert2';
 
 import {
   DataGrid,
   GridToolbar,
   GridActionsCellItem,
-  GridCellParams,
-  GridRowModes,
 } from "@mui/x-data-grid";
-import { Box, Snackbar, Alert } from "@mui/material";
+import { Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 
 function UserReport() {
