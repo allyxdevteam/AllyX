@@ -5,8 +5,10 @@
 
 .card-float {
 
-    min-height: 40vh;
-    width: 30%;
+    min-height: 50vh;
+    height: 100%;
+    min-width: 50vw;
+    width: 50%;
     box-sizing: border-box;
     overflow: hidden;
     backface-visibility: hidden;

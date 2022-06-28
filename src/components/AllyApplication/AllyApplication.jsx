@@ -387,7 +387,7 @@ function AllyApplication() {
                                  {/* This is the top of the card */}
                                  <div className="card-top">
                                  <Box fullWidth sx={{ display: 'flex' }}>
-                                     <h5>Application Pending Approval </h5>
+                                     <h1>Application Pending Approval </h1>
                                 </Box> 
                                  </div>
                                  {/* This is the middle */}
