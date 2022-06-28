@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Box, FormControl, LinearProgress } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { SaveOutlined } from '@mui/icons-material';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -34,10 +39,11 @@ function LoginForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
-          <input
+          <TextField
             type="text"
+            label="username"
             name="username"
+            fullWidth
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)}
@@ -46,10 +52,11 @@ function LoginForm() {
       </div>
       <div>
         <label htmlFor="password">
-          Password:
-          <input
+          <TextField
             type="password"
             name="password"
+            label="password"
+            fullWidth
             required
             value={password}
             onChange={(event) => setPassword(event.target.value)}

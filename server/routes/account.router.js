@@ -5,27 +5,14 @@ const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-
-// router.put('/', rejectUnauthenticated, (req, res) => {
-//     console.log('************************************************', req);
-//     const sqlText = `
-//     UPDATE "user"
-//         SET
-//             is_active = false,
-//             delete_requested = true
-//         WHERE id = $1;
-//     `;
-//     const sqlValues = [
-//         req.user.id
-
-router.put('/:id', rejectUnauthenticated, (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         UPDATE "user"
             SET is_active = NOT is_active
             WHERE id = $1;
     `;
     const sqlValues =[
-        req.params.id
+        req.user.id
     ];
     pool.query(sqlText, sqlValues)
     .then((dbRes) => {

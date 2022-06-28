@@ -1,7 +1,7 @@
 import './AllyApplication.css'
 import ArrowL from './ArrowL.png';
 import ArrowR from './ArrowR.png';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Box, FormControl, LinearProgress } from '@mui/material';
@@ -10,8 +10,14 @@ import Button from '@mui/material/Button';
 import { SaveOutlined } from '@mui/icons-material';
 
 function AllyApplication() {
+
     ////
-    const dispatch = useDispatch();
+    const dispatch = useDispatch();   
+     useEffect(()=>{
+        dispatch({
+            type:'FETCH_ALLY_APP'
+        })
+    },[])
     const history = useHistory();
     ////
     const user = useSelector(store => store.user)
@@ -21,78 +27,73 @@ function AllyApplication() {
     /////////////////////////////////////////////
     //Is the unit finished or not?
     //////////////////////////////////////////////
-    const [isFinished, setIsFinished] = useState(false)
 
-    ////////////////////////////////////////////////////
-    // LIST OF REQUIRED RESPONSES KEPT AS REDUX STATE WE WILL POST ON SUBMIT
-    ////////////////////////////////////////////////////
-    const [response1, setResponse1] = useState('') // 
-    const [response2, setResponse2] = useState('') // 
-    const [response3, setResponse3] = useState('') // 
-    ///////////////////////////////////////////////
-    //Check if valid input functions
-    ///////////////////////////////////////////////
-    function ValidateEmail(inputText) {
-        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (inputText.match(mailformat)) {
-            showNext()
-            return true
-        }
-        else {
+    const res1 = useSelector((store)=> store.allyApp.answer_1) ;
+    const res2 = useSelector((store)=> store.allyApp.answer_2) ;
+    const res3 = useSelector((store)=> store.allyApp.answer_3) ;
+    const res4 = useSelector((store)=> store.allyApp.answer_4) ;
+    const isdone = useSelector((store)=> store.allyApp.is_complete)
 
-            hideNext()
-            return false;
-        }
-    }
+
+
     //////////////////////////////////////////////
     //Standard Slide Functions
     /////////////////////////////////////////////
-    const nextSlide = () => {
-        setX(X + 1);
-        setStep(0)
-        hideNext()
-    }
-
 
 
     // Use this if the next slide has a conditional next button
     const nextSlideAndHide = () => {
         setX(X + 1)
         setShowButton(false)
-        setStep(0)
     }
-    //Call this function to show a conditionally rendered next button
-    const showNext = () => {
-        setShowButton(true)
-    }
-    const hideNext = () => {
-        setShowButton(false)
-    }
-
   
-    
     /////////////////////////////////////////////////
     //save and POST to server via dispatch
     /////////////////////////////////////////////////
-    const postApp = ()=>{
+     const postApp = ()=>{
         dispatch({
             type:'CREATE_ALLY_APP',
             payload: {
-                answer1: response1,
-                answer2: response2,
-                answer3: response3,
+                answer1: res1,
+                answer2: res2,
+                answer3: res3,
+                answer4: res4,
             }
         })
-    }   
+     }  
+    /////////////////////////////////////////////////
+    //edit and save as redux state  via dispatch
+    /////////////////////////////////////////////////
+   
+    /////////////////////////////////////////////////
+    //Submit all and change 
+    /////////////////////////////////////////////////
+    const submitApp = ()=>{
+        dispatch({
+            type:'CREATE_ALLY_APP',
+            payload: {
+                answer1: res1,
+                answer2: res2,
+                answer3: res3,
+                answer4: res4,
+                done: true,
+            }
+        })
+        nextSlideAndHide()
+     }  
+  
     /////////////////////////////////////////////////
     return (
         <>
 
             <div className="card-float">
+            {(isdone != true) ?
 
-
+                <>
                 {/* Progress bar appears at the top at all times */}
                 <div className='progress-bar'>
+                {((X !=6) || ( isdone === true)) ?
+                    
                     <Box mb={2}>
                         <LinearProgress
                             variant="determinate"
@@ -100,7 +101,17 @@ function AllyApplication() {
                             value={((X-1) / 5) * 100}
                         />
                     </Box>
-                    { (X>=2) &&
+                    :
+                    <>
+                        <h1>Processing</h1>
+                    </>
+                    
+                    
+                }
+                    
+                
+                
+                    { ((X>=0) && (X<6) ) &&
                     
                     <Box>
                  
@@ -156,9 +167,12 @@ function AllyApplication() {
                                 placeholder=""
                                 multiline
                                 fullWidth
-                                value={response1}
+                                value={res1}
                                 onChange={(e) => {
-                                    setResponse1(e.target.value);
+                                    dispatch({
+                                        type: 'EDIT_ANSWER_1',
+                                        payload: e.target.value
+                                    })
                                 }}
                             />
                         </div>
@@ -169,11 +183,11 @@ function AllyApplication() {
 
                             </div>
 
-                            {(response1.length > 0) &&
+                           
                                 <div className="button-right">
                                     <Button fullWidth onClick={nextSlideAndHide}>Next</Button>
                                 </div>
-                            }
+                            
                         </div>
                     </div>
 
@@ -194,9 +208,12 @@ function AllyApplication() {
                                 placeholder=""
                                 multiline
                                 fullWidth
-                                value={response2}
+                                value={res2}
                                 onChange={(e) => {
-                                    setResponse2(e.target.value);
+                                    dispatch({
+                                        type: 'EDIT_ANSWER_2',
+                                        payload: e.target.value
+                                    })
                                 }}
                             />
                         </div>
@@ -207,11 +224,11 @@ function AllyApplication() {
 
                             </div>
 
-                            {(response2.length > 0) &&
+                           
                                 <div className="button-right">
                                     <Button fullWidth onClick={nextSlideAndHide}>Next</Button>
                                 </div>
-                            }
+                            
                         </div>
                     </div>
             
@@ -234,9 +251,12 @@ function AllyApplication() {
                                 placeholder=""
                                 multiline
                                 fullWidth
-                                value={response2}
+                                value={res3}
                                 onChange={(e) => {
-                                    setResponse2(e.target.value);
+                                    dispatch({
+                                        type: 'EDIT_ANSWER_3',
+                                        payload: e.target.value
+                                    })
                                 }}
                             />
                                 
@@ -249,6 +269,7 @@ function AllyApplication() {
 
                              
                                 <div className="button-right">
+                                <Button fullWidth onClick={nextSlideAndHide}>Next</Button>
                                 </div>
                                 
                             </div>
@@ -262,9 +283,26 @@ function AllyApplication() {
                     <div className="card-graphics">
                             {/* This is the top of the card */}
                             <div className="card-top">
+                            <Box fullWidth sx={{ display: 'flex' }}>
+                                <h5>Have you used a safety app or volunteered with a safety app previously? (phone line, chat, text line, in-person, etc?)</h5>
+                           </Box> 
                             </div>
                             {/* This is the middle */}
                             <div className="card-body">
+                            <TextField
+                                id="outlined-textarea"
+                                label=""
+                                placeholder=""
+                                multiline
+                                fullWidth
+                                value={res4}
+                                onChange={(e) => {
+                                    dispatch({
+                                        type: 'EDIT_ANSWER_4',
+                                        payload: e.target.value
+                                    })
+                                }}
+                            />
                                 
                             </div>
                             {/* This is where our controls (back+next) are */}
@@ -274,138 +312,111 @@ function AllyApplication() {
                                 </div>
 
                              
-                                <div className="button-right">
+                                <div className="button-right"> 
+                                <Button onClick={submitApp}>Submit Application</Button>
                                 </div>
                                 
                             </div>
                     </div>
                     </>
                 }
-
-                {(X === 5) &&
-
-                   <>
+                {((X === 6) && (isdone === true)) ?
+                    <>
                     <div className="card-graphics">
+                            {/* This is the top of the card */}
                             <div className="card-top">
+                            <Box fullWidth sx={{ display: 'flex' }}>
+                                <h5>Application Complete!</h5>
+                           </Box> 
                             </div>
-
+                            {/* This is the middle */}
                             <div className="card-body">
+                           <h1></h1>
                                 
                             </div>
-
+                            {/* This is where our controls (back+next) are */}
                             <div className="card-controls">
 
                                 <div className="button-left">
                                 </div>
 
                              
-                                <div className="button-right">
+                                <div className="button-right"> 
                                 </div>
                                 
                             </div>
                     </div>
-                   </>
-                }
+                    </>
 
+                    :
+                         <>
+                         <div className="card-graphics">
+                                 {/* This is the top of the card */}
+                                 <div className="card-top">
+                                 <Box fullWidth sx={{ display: 'flex' }}>
+                                     <h5>Application Incomplete</h5>
+                                </Box> 
+                                 </div>
+                                 {/* This is the middle */}
+                                 <div className="card-body">
+                                <h1></h1>
+                                     
+                                 </div>
+                                 {/* This is where our controls (back+next) are */}
+                                 <div className="card-controls">
+     
+                                     <div className="button-left">
+                                     </div>
+     
+                                  
+                                     <div className="button-right"> 
+                                     
+                                     </div>
+                                     
+                                 </div>
+                         </div>
+                         </>
+                }
+                </>
+               
+                :
+
+                <>
+                   <>
+                         <div className="card-graphics">
+                                 {/* This is the top of the card */}
+                                 <div className="card-top">
+                                 <Box fullWidth sx={{ display: 'flex' }}>
+                                     <h1>Application Pending Approval </h1>
+                                </Box> 
+                                 </div>
+                                 {/* This is the middle */}
+                                 <div className="card-body">
+                                <h1></h1>
+                                     
+                                 </div>
+                                 {/* This is where our controls (back+next) are */}
+                                 <div className="card-controls">
+     
+                                     <div className="button-left">
+                                     </div>
+     
+                                  
+                                     <div className="button-right"> 
+                                     
+                                     </div>
+                                     
+                                 </div>
+                         </div>
+                    </>
+                    
+                </>
+              
+               
+            }
             </div>
 
         </>
     )
 }
 export default AllyApplication
-
-
-
-// {(X === 3) &&
-//     // This will have the requirements for social media. GET route for previous social media needed
-
-//     <>
-//         <div className="card-graphics">
-
-//             <div className="card-top">
-//                 <h1> Tell us a bit more about yourself </h1>
-//             </div>
-
-//             <div className="card-body">
-
-
-//                 {/* Twitter Username */}
-//                 <Box mt={2}>
-//                     <FormControl fullWidth>
-//                         <TextField
-//                             id="outlined-textarea"
-//                             label="Twitter Handle"
-
-//                             placeholder="e.x. @HeyAllyxApp"
-//                             multiline
-//                             fullwidth
-//                             color={(response2.length > 4 && response2.length < 25) ? null : "warning"}
-//                             value={response2}
-//                             onChange={(e) => {
-//                                 setResponse2(e.target.value);
-//                             }}
-//                         />
-//                     </FormControl>
-//                 </Box>
-
-
-
-//                 {/* Instagram Username */}
-//                 <Box mt={2}>
-//                     <FormControl fullWidth>
-
-//                         <TextField
-//                             id="outlined-textarea"
-//                             label="Instagram Username"
-//                             placeholder="e.x. @HeyAllyxApp"
-//                             multiline
-//                             fullwidth
-//                             color={(response3.length > 4 && response3.length < 25) ? null : "warning"}
-//                             value={response3}
-//                             onChange={(e) => {
-//                                 setResponse3(e.target.value);
-//                             }}
-//                         />
-
-//                     </FormControl>
-//                 </Box>
-
-
-//                 {/* Facebook Account */}
-//                 <Box mt={2}>
-//                     <FormControl fullWidth>
-
-//                         <TextField
-//                             id="outlined-textarea"
-//                             label="Link to facebook account"
-//                             placeholder="e.x. aklsdjsadjaslkdja.com"
-//                             multiline
-//                             fullwidth
-//                             color={(response3.length > 4 && response3.length < 25) ? null : "warning"}
-//                             value={response3}
-//                             onChange={(e) => {
-//                                 setResponse3(e.target.value);
-//                             }}
-//                         />
-
-//                     </FormControl>
-//                 </Box>
-
-//             </div>
-
-//             <div className="card-controls">
-
-//                 <div className="button-left">
-//                     <Button onClick={prevSlide}>Back</Button>
-//                 </div>
-
-//                 {((response2.length > 5 && response2.length < 25) && (response3.length > 5 && response3.length < 25)) &&
-//                     <div className="button-right">
-//                         <button onClick={nextSlideAndHide}>Next</button>
-//                     </div>
-//                 }
-//             </div>
-//         </div>
-
-//     </>
-// }

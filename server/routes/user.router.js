@@ -53,4 +53,26 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+router.put('/', rejectUnauthenticated, (req, res) => {
+  console.log('************************************************', req);
+  const sqlText = `
+  UPDATE "user"
+      SET
+          is_active = false,
+          delete_requested = true
+      WHERE id = $1;
+  `;
+  const sqlValues = [
+    req.user.id
+  ];
+  pool.query(sqlText, sqlValues)
+    .then((dbRes) => {
+      res.sendStatus(200);
+    })
+    .catch((dbErr) => {
+      console.log('UPDATE database error', dbErr);
+      res.sendStatus(500);
+    });
+})
+
 module.exports = router;

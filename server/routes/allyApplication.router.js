@@ -13,7 +13,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     const sqlValues = [req.user.id];
     pool.query(sqlText, sqlValues)
       .then((dbRes) => {
-        res.send(dbRes.rows);
+        res.send(dbRes.rows[0]);
       })
       .catch((dbErr) => {
         console.log('error in GET /allyApplication/:id', dbErr);
