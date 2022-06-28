@@ -1,8 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useCallback, useState } from "react";
 
-import { DataGrid, GridToolbar, GridCellEditCommitParams } from "@mui/x-data-grid";
-import {Box, Snackbar, Alert} from "@mui/material";
+import {
+  DataGrid,
+  GridToolbar,
+  GridActionsCellItem,
+  GridCellParams,
+} from "@mui/x-data-grid";
+import { Box, Snackbar, Alert } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 
 function UserReport() {
   const dispatch = useDispatch();
@@ -145,19 +151,39 @@ function UserReport() {
       width: 150,
       editable: false,
     },
+    {
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
+      width: 100,
+      cellClassName: "actions",
+      getActions: ({ id }) => {
+        return [
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            color="inherit"
+            onClick={handleDeleteClick(id)}
+          />,
+        ];
+      },
+    },
   ];
 
   // handles edits made to the DataGrid
-  const processRowUpdate = (newValue, oldValue) =>{
-    console.log('in process row update', newValue, oldValue)
-    dispatch({type: "UPDATE_PROFILE_ADMIN", payload: newValue})
-    return newValue
-  }
+  const processRowUpdate = (newValue, oldValue) => {
+    console.log("in process row update", newValue, oldValue);
+    dispatch({ type: "UPDATE_PROFILE_ADMIN", payload: newValue });
+    return newValue;
+  };
 
   const handleProcessRowUpdateError = (error) => {
-    console.log('whoops!', error)
-  }
- 
+    console.log("whoops!", error);
+  };
+
+  const handleDeleteClick = (id) => {
+    console.log("in handleDeleteClick", id);
+  };
 
   return (
     <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
