@@ -50,7 +50,7 @@ function* updateProfileAdmin(action) {
     })
 }
 
-function deleteProfile(action){
+function* deleteProfile(action){
     const response = yield axios ({
         method: 'DELETE',
         url: `/api/profile/${action.payload}`
