@@ -38,7 +38,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "general-comment"(
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCES "user" NOT NULL,
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"num_stars" INT,
 	"comment" VARCHAR (5000),
 	"inserted_at" TIMESTAMPTZ DEFAULT now()
@@ -46,7 +46,7 @@ CREATE TABLE "general-comment"(
 
 CREATE TABLE "requested-call"(
 	"id" SERIAL PRIMARY KEY,
-	"member_id" INT REFERENCES "user" NOT NULL,
+	"member_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"time" TIMESTAMPTZ NOT NULL,
 	"inserted_at" TIMESTAMPTZ DEFAULT now(),
 	"open" BOOLEAN DEFAULT true
@@ -54,8 +54,8 @@ CREATE TABLE "requested-call"(
 
 CREATE TABLE "call"(
 	"id" SERIAL PRIMARY KEY,
-	"member_id" INT REFERENCES "user" NOT NULL,
-	"ally_id" INT REFERENCES "user" NOT NULL,
+	"member_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
+	"ally_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"date_time_started" TIMESTAMPTZ,
 	"date_time_ended" TIMESTAMPTZ,
 	"is_done_member" BOOLEAN DEFAULT false,
@@ -65,8 +65,8 @@ CREATE TABLE "call"(
 
 CREATE TABLE "report"(
 	"id" SERIAL PRIMARY KEY,
-	"reviewer_id" INT REFERENCES "user" NOT NULL,
-	"recipient_id" INT REFERENCES "user" NOT NULL,
+	"reviewer_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
+	"recipient_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"call_id" INT REFERENCES "call" NOT NULL,
 	"comment" VARCHAR (5000) NOT NULL,
 	"inserted_at" TIMESTAMPTZ DEFAULT now()
@@ -74,8 +74,8 @@ CREATE TABLE "report"(
 
 CREATE TABLE "call-rating"(
 	"id" SERIAL PRIMARY KEY,
-	"reviewer_id" INT REFERENCES "user" NOT NULL,
-	"recipient_id" INT REFERENCES "user" NOT NULL,
+	"reviewer_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
+	"recipient_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"call_id" INT REFERENCES "call" NOT NULL,
 	"num_stars" INT,
 	"comment" VARCHAR (5000),
@@ -84,7 +84,7 @@ CREATE TABLE "call-rating"(
 
 CREATE TABLE "ally-application"(
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCES "user" NOT NULL,
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"inserted_at" TIMESTAMPTZ DEFAULT now(),
 	"updated_at" TIMESTAMPTZ DEFAULT now(),
 	"answer_1" VARCHAR (1000),
