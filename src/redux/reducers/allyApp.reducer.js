@@ -21,6 +21,12 @@ const allyAppReducer = (state = [], action) => {
                 ...state,
                 answer_3: action.payload
             })
+            case `EDIT_ANSWER_4`:
+                console.log(`IN EDIT_ALLY APP IN allyAppReducer`)
+               return( {
+                    ...state,
+                    answer_4: action.payload
+                })
         default:
             return state;
     }

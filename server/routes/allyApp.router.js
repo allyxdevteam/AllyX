@@ -34,7 +34,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
   let answer_1 = req.body.answer1;
   let answer_2 = req.body.answer2;
   let answer_3 = req.body.answer3;
-  let answer_4 = req.body.answer1;
+  let answer_4 = req.body.answer4;
 
   let sqlValues = [user, answer_1, answer_2, answer_3, answer_4];
 
@@ -51,6 +51,10 @@ router.post("/", rejectUnauthenticated, (req, res) => {
                      WHERE user_id = $1`;
   let countValues = [user];
 
+  let booly = req.body.done;
+
+
+
 
 
   pool
@@ -63,6 +67,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 
 
       if (usercount > 0) {
+  
         pool
           .query(sqlQueryU, sqlValues)
           .then((result) => {
@@ -73,7 +78,36 @@ router.post("/", rejectUnauthenticated, (req, res) => {
             console.log(dberr)
             res.sendStatus(500)
           });
+          if(req.body.done === true){
+            let sqlQueryD = `UPDATE "ally-application" 
+                             SET is_complete= TRUE
+                              WHERE user_id = $1;`;
+            let sqlValueD = [user];
+            pool
+              .query(sqlQueryD, sqlValueD)
+              .then((dbres)=>{
+                console.log('DB DONE UPDATING', dbres)
+              })
+              .catch((dberr)=>{
+                console.log('DB DONE WITH ERROR UPDATING', dberr)
+        
+              })
+          }
       } else {
+        if(req.body.done === true){
+          let sqlQueryD = `UPDATE "ally-application" 
+                            SET is_complete = TRUE
+                            WHERE user_id = $1;`;
+          let sqlValueD = [user];
+          pool
+            .query(sqlQueryD, sqlValueD)
+            .then((dbres)=>{
+              console.log('DB DONE', dbres)
+            })
+            .catch((dberr)=>{
+              console.log('DB DONE WITH ERROR', dberr)
+            })
+        }
         pool
           .query(sqlQuery, sqlValues)
           .then((dbres) => {

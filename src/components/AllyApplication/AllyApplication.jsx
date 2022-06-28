@@ -32,6 +32,9 @@ function AllyApplication() {
     const res1 = useSelector((store)=> store.allyApp.answer_1) ;
     const res2 = useSelector((store)=> store.allyApp.answer_2) ;
     const res3 = useSelector((store)=> store.allyApp.answer_3) ;
+    const res4 = useSelector((store)=> store.allyApp.answer_4) ;
+
+
 
     ///////////////////////////////////////////////
     //Check if valid input functions
@@ -84,6 +87,7 @@ function AllyApplication() {
                 answer1: res1,
                 answer2: res2,
                 answer3: res3,
+                answer4: res4,
             }
         })
      }  
@@ -96,7 +100,21 @@ function AllyApplication() {
             payload: {}
         })
     }
-
+    /////////////////////////////////////////////////
+    //Submit all and change 
+    /////////////////////////////////////////////////
+    const submitApp = ()=>{
+        dispatch({
+            type:'CREATE_ALLY_APP',
+            payload: {
+                answer1: res1,
+                answer2: res2,
+                answer3: res3,
+                answer4: res4,
+                done: true,
+            }
+        })
+     }  
   
     /////////////////////////////////////////////////
     return (
@@ -285,9 +303,26 @@ function AllyApplication() {
                     <div className="card-graphics">
                             {/* This is the top of the card */}
                             <div className="card-top">
+                            <Box fullWidth sx={{ display: 'flex' }}>
+                                <h5>Have you used a safety app or volunteered with a safety app previously? (phone line, chat, text line, in-person, etc?)</h5>
+                           </Box> 
                             </div>
                             {/* This is the middle */}
                             <div className="card-body">
+                            <TextField
+                                id="outlined-textarea"
+                                label=""
+                                placeholder=""
+                                multiline
+                                fullWidth
+                                value={res4}
+                                onChange={(e) => {
+                                    dispatch({
+                                        type: 'EDIT_ANSWER_4',
+                                        payload: e.target.value
+                                    })
+                                }}
+                            />
                                 
                             </div>
                             {/* This is where our controls (back+next) are */}
@@ -329,6 +364,7 @@ function AllyApplication() {
                     </div>
                    </>
                 }
+                <Button onClick={submitApp}>Submit Application</Button>
 
             </div>
 
@@ -336,99 +372,3 @@ function AllyApplication() {
     )
 }
 export default AllyApplication
-
-
-
-// {(X === 3) &&
-//     // This will have the requirements for social media. GET route for previous social media needed
-
-//     <>
-//         <div className="card-graphics">
-
-//             <div className="card-top">
-//                 <h1> Tell us a bit more about yourself </h1>
-//             </div>
-
-//             <div className="card-body">
-
-
-//                 {/* Twitter Username */}
-//                 <Box mt={2}>
-//                     <FormControl fullWidth>
-//                         <TextField
-//                             id="outlined-textarea"
-//                             label="Twitter Handle"
-
-//                             placeholder="e.x. @HeyAllyxApp"
-//                             multiline
-//                             fullwidth
-//                             color={(response2.length > 4 && response2.length < 25) ? null : "warning"}
-//                             value={response2}
-//                             onChange={(e) => {
-//                                 setResponse2(e.target.value);
-//                             }}
-//                         />
-//                     </FormControl>
-//                 </Box>
-
-
-
-//                 {/* Instagram Username */}
-//                 <Box mt={2}>
-//                     <FormControl fullWidth>
-
-//                         <TextField
-//                             id="outlined-textarea"
-//                             label="Instagram Username"
-//                             placeholder="e.x. @HeyAllyxApp"
-//                             multiline
-//                             fullwidth
-//                             color={(response3.length > 4 && response3.length < 25) ? null : "warning"}
-//                             value={response3}
-//                             onChange={(e) => {
-//                                 setResponse3(e.target.value);
-//                             }}
-//                         />
-
-//                     </FormControl>
-//                 </Box>
-
-
-//                 {/* Facebook Account */}
-//                 <Box mt={2}>
-//                     <FormControl fullWidth>
-
-//                         <TextField
-//                             id="outlined-textarea"
-//                             label="Link to facebook account"
-//                             placeholder="e.x. aklsdjsadjaslkdja.com"
-//                             multiline
-//                             fullwidth
-//                             color={(response3.length > 4 && response3.length < 25) ? null : "warning"}
-//                             value={response3}
-//                             onChange={(e) => {
-//                                 setResponse3(e.target.value);
-//                             }}
-//                         />
-
-//                     </FormControl>
-//                 </Box>
-
-//             </div>
-
-//             <div className="card-controls">
-
-//                 <div className="button-left">
-//                     <Button onClick={prevSlide}>Back</Button>
-//                 </div>
-
-//                 {((response2.length > 5 && response2.length < 25) && (response3.length > 5 && response3.length < 25)) &&
-//                     <div className="button-right">
-//                         <button onClick={nextSlideAndHide}>Next</button>
-//                     </div>
-//                 }
-//             </div>
-//         </div>
-
-//     </>
-// }

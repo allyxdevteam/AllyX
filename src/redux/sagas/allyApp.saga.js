@@ -3,9 +3,8 @@ import axios from 'axios';
 
 
 
-function* fetchAllyApp(action){
+function* fetchAllyApp(){
     try{
-        console.log(action.payload)
        const getData = yield axios({
             method: 'GET',
             url: '/api/allyApp',
@@ -24,7 +23,6 @@ function* fetchAllyApp(action){
 
 function* updateAllyApp(action){
     try{
-        console.log('Update App Data', action.payload)
         yield axios({
             method:`PUT`,
             url: '/api/allyApp',
@@ -43,7 +41,6 @@ function* updateAllyApp(action){
 
 function* createAllyApp(action){
     try{
-        console.log('Post App Data', action.payload)
         yield axios({
             method:`POST`,
             url: '/api/allyApp',
