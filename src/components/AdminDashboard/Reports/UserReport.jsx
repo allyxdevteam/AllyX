@@ -150,6 +150,7 @@ function UserReport() {
   // handles edits made to the DataGrid
   const processRowUpdate = (newValue, oldValue) =>{
     console.log('in process row update', newValue, oldValue)
+    dispatch({type: "UPDATE_PROFILE_ADMIN", payload: newValue})
     return newValue
   }
 
