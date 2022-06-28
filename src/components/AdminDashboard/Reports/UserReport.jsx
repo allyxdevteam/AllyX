@@ -1,8 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect } from "react";
+import Swal from 'sweetalert2';
 
-import { DataGrid, GridToolbar, GridCellEditCommitParams } from "@mui/x-data-grid";
-import {Box, Snackbar, Alert} from "@mui/material";
+import {
+  DataGrid,
+  GridToolbar,
+  GridActionsCellItem,
+} from "@mui/x-data-grid";
+import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 
 function UserReport() {
   const dispatch = useDispatch();
@@ -12,6 +18,7 @@ function UserReport() {
   }, []);
 
   const users = useSelector((store) => store.users);
+  
 
   // DataGrid config
   const columns = [
@@ -145,19 +152,59 @@ function UserReport() {
       width: 150,
       editable: false,
     },
+    {
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
+      width: 100,
+      cellClassName: "actions",
+      getActions: ({ id }) => {
+        return [
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            color="inherit"
+            onClick={handleDeleteClick(id)}
+          />,
+        ];
+      },
+    },
   ];
 
   // handles edits made to the DataGrid
-  const processRowUpdate = (newValue, oldValue) =>{
-    console.log('in process row update', newValue, oldValue)
-    dispatch({type: "UPDATE_PROFILE_ADMIN", payload: newValue})
-    return newValue
-  }
+  const processRowUpdate = (newValue, oldValue) => {
+    console.log("in process row update", newValue, oldValue);
+    dispatch({ type: "UPDATE_PROFILE_ADMIN", payload: newValue });
+    return newValue;
+  };
 
   const handleProcessRowUpdateError = (error) => {
-    console.log('whoops!', error)
-  }
- 
+    console.log("whoops!", error);
+  };
+
+  // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
+  const handleDeleteClick = (id) => () => {
+    Swal.fire({
+        title: "Are you sure you want to delete this user?",
+        text: "Once deleted, you will not be able to recover their data!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete'
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            dispatch({
+                type: 'DELETE_PROFILE',
+                payload: id
+            })
+          Swal.fire("The user has been deleted", {
+            icon: "success",
+          });
+        } else {
+          Swal.fire("Cancelled! The user data is safe.");
+        }
+      });
+  };
 
   return (
     <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
