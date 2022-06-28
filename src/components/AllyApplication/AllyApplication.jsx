@@ -27,39 +27,18 @@ function AllyApplication() {
     /////////////////////////////////////////////
     //Is the unit finished or not?
     //////////////////////////////////////////////
-    const [isFinished, setIsFinished] = useState(false)
 
     const res1 = useSelector((store)=> store.allyApp.answer_1) ;
     const res2 = useSelector((store)=> store.allyApp.answer_2) ;
     const res3 = useSelector((store)=> store.allyApp.answer_3) ;
     const res4 = useSelector((store)=> store.allyApp.answer_4) ;
+    const isdone = useSelector((store)=> store.allyApp.is_complete)
 
 
 
-    ///////////////////////////////////////////////
-    //Check if valid input functions
-    ///////////////////////////////////////////////
-    function ValidateEmail(inputText) {
-        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (inputText.match(mailformat)) {
-            showNext()
-            return true
-        }
-        else {
-
-            hideNext()
-            return false;
-        }
-    }
     //////////////////////////////////////////////
     //Standard Slide Functions
     /////////////////////////////////////////////
-    const nextSlide = () => {
-        setX(X + 1);
-        setStep(0)
-        hideNext()
-    }
-
 
 
     // Use this if the next slide has a conditional next button
@@ -67,16 +46,7 @@ function AllyApplication() {
         setX(X + 1)
         setShowButton(false)
     }
-    //Call this function to show a conditionally rendered next button
-    const showNext = () => {
-        setShowButton(true)
-    }
-    const hideNext = () => {
-        setShowButton(false)
-    }
-
   
-    
     /////////////////////////////////////////////////
     //save and POST to server via dispatch
     /////////////////////////////////////////////////
@@ -94,12 +64,7 @@ function AllyApplication() {
     /////////////////////////////////////////////////
     //edit and save as redux state  via dispatch
     /////////////////////////////////////////////////
-    ()=>{
-        dispatch({
-            type:'EDIT_ALLY_APP',
-            payload: {}
-        })
-    }
+   
     /////////////////////////////////////////////////
     //Submit all and change 
     /////////////////////////////////////////////////
@@ -114,6 +79,7 @@ function AllyApplication() {
                 done: true,
             }
         })
+        nextSlideAndHide()
      }  
   
     /////////////////////////////////////////////////
@@ -121,10 +87,13 @@ function AllyApplication() {
         <>
 
             <div className="card-float">
+            {(isdone != true) ?
 
-
+                <>
                 {/* Progress bar appears at the top at all times */}
                 <div className='progress-bar'>
+                {((X !=6) || ( isdone === true)) ?
+                    
                     <Box mb={2}>
                         <LinearProgress
                             variant="determinate"
@@ -132,7 +101,17 @@ function AllyApplication() {
                             value={((X-1) / 5) * 100}
                         />
                     </Box>
-                    { (X>=0) &&
+                    :
+                    <>
+                        <h1>Processing</h1>
+                    </>
+                    
+                    
+                }
+                    
+                
+                
+                    { ((X>=0) && (X<6) ) &&
                     
                     <Box>
                  
@@ -144,7 +123,7 @@ function AllyApplication() {
                 </div>
 
 
-                {true &&
+                {(X === 1) &&
                     //This will display the initial CTA for becoming an ally. 
                     <div className="card-graphics">
                         <div className="card-top">
@@ -173,7 +152,7 @@ function AllyApplication() {
 
 
 
-                {true &&
+                {(X === 2) &&
                     <div className="card-graphics">
                         <div className="card-top">
                                                <h3>Tell us why you'd like to become an ally!</h3>
@@ -215,7 +194,7 @@ function AllyApplication() {
                 }
 
 
-                {true &&
+                {(X === 3) &&
 
                     <div className="card-graphics">
                         <div className="card-top">
@@ -255,7 +234,7 @@ function AllyApplication() {
             
                     
                 }
-                   {true &&
+                   {(X === 4) &&
                     <>
                     <div className="card-graphics">
                             {/* This is the top of the card */}
@@ -290,6 +269,7 @@ function AllyApplication() {
 
                              
                                 <div className="button-right">
+                                <Button fullWidth onClick={nextSlideAndHide}>Next</Button>
                                 </div>
                                 
                             </div>
@@ -298,7 +278,7 @@ function AllyApplication() {
                 }
 
 
-                {true &&
+                {(X === 5) &&
                     <>
                     <div className="card-graphics">
                             {/* This is the top of the card */}
@@ -332,40 +312,108 @@ function AllyApplication() {
                                 </div>
 
                              
-                                <div className="button-right">
+                                <div className="button-right"> 
+                                <Button onClick={submitApp}>Submit Application</Button>
                                 </div>
                                 
                             </div>
                     </div>
                     </>
                 }
-
-                {(X === 5) &&
-
-                   <>
+                {((X === 6) && (isdone === true)) ?
+                    <>
                     <div className="card-graphics">
+                            {/* This is the top of the card */}
                             <div className="card-top">
+                            <Box fullWidth sx={{ display: 'flex' }}>
+                                <h5>Application Complete!</h5>
+                           </Box> 
                             </div>
-
+                            {/* This is the middle */}
                             <div className="card-body">
+                           <h1></h1>
                                 
                             </div>
-
+                            {/* This is where our controls (back+next) are */}
                             <div className="card-controls">
 
                                 <div className="button-left">
                                 </div>
 
                              
-                                <div className="button-right">
+                                <div className="button-right"> 
                                 </div>
                                 
                             </div>
                     </div>
-                   </>
-                }
-                <Button onClick={submitApp}>Submit Application</Button>
+                    </>
 
+                    :
+                         <>
+                         <div className="card-graphics">
+                                 {/* This is the top of the card */}
+                                 <div className="card-top">
+                                 <Box fullWidth sx={{ display: 'flex' }}>
+                                     <h5>Application Incomplete</h5>
+                                </Box> 
+                                 </div>
+                                 {/* This is the middle */}
+                                 <div className="card-body">
+                                <h1></h1>
+                                     
+                                 </div>
+                                 {/* This is where our controls (back+next) are */}
+                                 <div className="card-controls">
+     
+                                     <div className="button-left">
+                                     </div>
+     
+                                  
+                                     <div className="button-right"> 
+                                     
+                                     </div>
+                                     
+                                 </div>
+                         </div>
+                         </>
+                }
+                </>
+               
+                :
+
+                <>
+                   <>
+                         <div className="card-graphics">
+                                 {/* This is the top of the card */}
+                                 <div className="card-top">
+                                 <Box fullWidth sx={{ display: 'flex' }}>
+                                     <h5>Application Pending Approval </h5>
+                                </Box> 
+                                 </div>
+                                 {/* This is the middle */}
+                                 <div className="card-body">
+                                <h1></h1>
+                                     
+                                 </div>
+                                 {/* This is where our controls (back+next) are */}
+                                 <div className="card-controls">
+     
+                                     <div className="button-left">
+                                     </div>
+     
+                                  
+                                     <div className="button-right"> 
+                                     
+                                     </div>
+                                     
+                                 </div>
+                         </div>
+                    </>
+                    
+                </>
+              
+               
+            }
             </div>
 
         </>

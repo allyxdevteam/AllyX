@@ -28,6 +28,10 @@ function* updateAllyApp(action){
             url: '/api/allyApp',
             data: action.payload,
         })
+        put({
+            type:'FETCH_ALLY_APP',
+        })
+       
     }
     catch (err){
         console.log('error in update ally app', err)

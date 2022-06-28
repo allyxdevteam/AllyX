@@ -29,12 +29,6 @@
     visibility: visible !important; 
   }
 
-  .touch{
-      height: 100%;
-  }
-  .touch:hover{
-    cursor: pointer;
-  }
 
   .card-top{
       padding-top: 20px;
