@@ -8,6 +8,8 @@ function RequestedCallItem( {call} ){
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(store => store.user);
+    const memberId = call.member_id;
+
 
 
     function handleClaimCall(){
@@ -19,7 +21,7 @@ function RequestedCallItem( {call} ){
         dispatch({
             type: 'FETCH_REQUESTED_CALLS',
         })
-        history.push(`/allyStartCall`)
+        history.push(`/allyStartCall/${memberId}`)
         }
         else{
             alert('this call has already been claimed')

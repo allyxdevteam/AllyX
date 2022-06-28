@@ -3,12 +3,27 @@ import { put, takeLatest } from 'redux-saga/effects';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-function* getClaimedCall(action){
+function* fetchClaimedCall(action){
+    const claimedCallId = action.payload.claimedCallId;
+    const memberId = action.payload.memberId;
+    console.log('this is the payload:', claimedCallId, memberId);
 
+    try{
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/claimedCalls/${memberId}`,
+        });
+        const memberInfo = response.data
+        yield put({
+            type: 'SET_CLAIMED_CALL_MEMBER',
+            payload: memberInfo
+        });
+    }catch{
+        console.log('problem in post requested call');
+    }
 }
 
 function* postClaimedCall(action){
-    console.log(action.payload);
     const user = action.payload.user;
     const call = action.payload.call;
     try{
@@ -17,7 +32,12 @@ function* postClaimedCall(action){
             url: '/api/claimedCalls',
             data: {user, call}
         });
-        yield console.log('this is response from claimedCalls............',response.data);
+        const callId = response.data.callId;
+        const memberId = response.data.memberId;
+        yield put({
+            type: 'SET_CLAIMED_CALL',
+            payload: callId
+        });
     }catch{
         console.log('problem in post requested call');
     }
@@ -27,7 +47,7 @@ function* postClaimedCall(action){
 
 function* claimedCallSaga() {
     yield takeLatest('POST_CLAIMED_CALL', postClaimedCall);
-    yield takeLatest('GET_CLAIMED_CALL', getClaimedCall);
+    yield takeLatest('FETCH_CLAIMED_CALL', fetchClaimedCall);
 
   }
 

@@ -1,31 +1,45 @@
 //react, redux, sagas------------------------------------------------------
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 
 
 
-function AllyStartCall(){
+function AllyStartCall() {
 
     const dispatch = useDispatch();
+    const params = useParams();
 
-    useEffect(()=>{
+    const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
+    const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);
+
+    const memberId = params.memberId
+
+    const date = new Date();
+    const dateTime = date.toLocaleString();
+
+    useEffect(() => {
         dispatch({
             type: 'FETCH_CLAIMED_CALL',
+            payload: { claimedCallId, memberId }
         })
     }, []);
 
-    function handleStartCall(){
-
+    function handleStartCall() {
+        console.log('this is the claimed call member info:', claimedCallMember);
+        dispatch({
+            type: 'PUT_CALL_STARTED_TIME',
+            payload: {claimedCallId, dateTime}
+        })
     }
-   
 
-    return(
+
+    return (
         <>
-        <button onClick={handleStartCall}>Start Call</button>
-        <a href="tel:6123109601">Call Me!</a>
+            <img src={claimedCallMember.profile_pic} alt="profile pic"></img>
+            <a href={`tel:${claimedCallMember.phone_number}`} onClick={handleStartCall}>Call {claimedCallMember.first_name}</a>
         </>
     )
 }

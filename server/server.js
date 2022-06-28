@@ -16,7 +16,8 @@ const requestedCallsRouter = require('./routes/requestedCalls.router');
 const scheduledCallsRouter = require('./routes/scheduledCalls.router');
 const claimedCallsRouter = require('./routes/claimedCalls.router')
 const profileRouter = require('./routes/profile.router');
-const AllyAppRouter = require('./routes/allyApp.router')
+const AllyAppRouter = require('./routes/allyApp.router');
+const callInProgress = require('./routes/callInProgress.router')
 
 
 // Body parser middleware
@@ -39,7 +40,9 @@ app.use('/api/requestedCalls', requestedCallsRouter);
 app.use('/api/scheduledCalls', scheduledCallsRouter);
 app.use('/api/claimedCalls', claimedCallsRouter);
 app.use('/api/profile', profileRouter);
-app.use('/api/allyApp', AllyAppRouter)
+app.use('/api/allyApp', AllyAppRouter);
+app.use('/api/callInProgress', callInProgress);
+
 
 // Serve static files
 app.use(express.static('build'));

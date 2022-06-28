@@ -99,7 +99,7 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/allyStartCall"
+            path="/allyStartCall/:memberId"
           >
             <AllyStartCall />
           </ProtectedRoute>
