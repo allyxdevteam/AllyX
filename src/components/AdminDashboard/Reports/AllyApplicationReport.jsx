@@ -1,8 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import Box from "@mui/material/Box";
+import { DataGrid, GridToolbar, GridActionsCellItem } from "@mui/x-data-grid";
+import {Box, Tooltip} from "@mui/material";
+import CheckIcon from '@mui/icons-material/Check';
+import ReplyIcon from '@mui/icons-material/Reply';
+import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
+
 
 function AllyApplicationReport() {
   const dispatch = useDispatch();
@@ -103,26 +107,55 @@ function AllyApplicationReport() {
         field: "is_complete",
         headerName: "Completed",
         type: "boolean",
-        width: 150,
+        width: 90,
         editable: false,
       },
       {
         field: "is_approved",
         headerName: "Approved",
-        width: 150,
+        width: 90,
         editable: false,
+      },
+      {
+        field: "actions",
+        type: "actions",
+        headerName: "Actions",
+        width: 100,
+        cellClassName: "actions",
+        getActions: ({ id }) => {
+          return [
+            <GridActionsCellItem
+              icon={<Tooltip title="Approve"><CheckIcon /></Tooltip>}
+              label="Approve"
+              color="inherit"
+            //   onClick={handleDeleteClick(id)}
+            />,
+            <GridActionsCellItem
+              icon={<Tooltip title="Reopen (contact user)"><ReplyIcon /></Tooltip>}
+              label="Reopen (contact user)"
+              color="inherit"
+            //   onClick={handleDeleteClick(id)}
+            />,
+            <GridActionsCellItem
+              icon={<Tooltip title="Reject"><DoNotDisturbIcon /></Tooltip>}
+              label="Reject"
+              color="inherit"
+            //   onClick={handleDeleteClick(id)}
+            />,
+          ];
+        },
       },
   ];
 
-  // handles edits made to the DataGrid
-  const processRowUpdate = (newValue, oldValue) => {
-    console.log("in process row update", newValue, oldValue);
-    return newValue;
-  };
+//   // handles edits made to the DataGrid
+//   const processRowUpdate = (newValue, oldValue) => {
+//     console.log("in process row update", newValue, oldValue);
+//     return newValue;
+//   };
 
-  const handleProcessRowUpdateError = (error) => {
-    console.log("whoops!", error);
-  };
+//   const handleProcessRowUpdateError = (error) => {
+//     console.log("whoops!", error);
+//   };
 
   return (
     <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
@@ -130,13 +163,12 @@ function AllyApplicationReport() {
         rows={allyApplications}
         columns={columns}
         pageSize={10}
-        checkboxSelection
         density="compact"
         rowsPerPageOptions={[10]}
         components={{ Toolbar: GridToolbar }}
-        experimentalFeatures={{ newEditingApi: true }}
-        processRowUpdate={processRowUpdate}
-        onProcessRowUpdateError={handleProcessRowUpdateError}
+        // experimentalFeatures={{ newEditingApi: true }}
+        // processRowUpdate={processRowUpdate}
+        // onProcessRowUpdateError={handleProcessRowUpdateError}
         getRowId={(row) => row.id}
       />
     </Box>
