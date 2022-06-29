@@ -12,6 +12,7 @@ import allyAppSaga from './allyApp.saga';
 import claimedCallSaga from './claimedCall.saga';
 import callInProgressSaga from './callInProgress.saga';
 import reportSaga from './report.saga';
+import callSaga from './calls.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -35,5 +36,6 @@ export default function* rootSaga() {
     claimedCallSaga(),
     callInProgressSaga(),
     reportSaga(),
+    callSaga(),
   ]);
 }

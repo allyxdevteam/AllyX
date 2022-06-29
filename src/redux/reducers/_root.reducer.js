@@ -10,7 +10,7 @@ import users from './users.reducer';
 import claimedCall from './claimedCall.reducer';
 import allyApp from './allyApp.reducer';
 import reports from './reports.reducer'
-
+import calls from './calls.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -30,5 +30,6 @@ const rootReducer = combineReducers({
   claimedCall,
   allyApp,
   reports, // contains all abuse reports/complaints for the admin dashboard
+  calls,
 });
 export default rootReducer;

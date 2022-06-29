@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import UserReport from "./Reports/UserReport";
 import CommentReport from "./Reports/CommentReport";
 import ReportReport from "./Reports/ReportReport";
+import CallReport from "./Reports/CallReport";
 
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 
@@ -73,7 +74,7 @@ function AdminDashboard() {
         <CommentReport />
       </TabPanel>
       <TabPanel value={view} index={2}>
-        Calls
+        <CallReport />
       </TabPanel>
       <TabPanel value={view} index={3}>
         Ratings
