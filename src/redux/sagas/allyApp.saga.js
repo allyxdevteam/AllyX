@@ -50,7 +50,7 @@ function* createAllyApp(action) {
   // fetches all applications for the admin dashboard
 function* fetchAllyApplications(){
     try{
-    const applications = yield axios.get('/api/allyApp') //this may need to be updated
+    const applications = yield axios.get('/api/allyApp/all') //this will need to be updated
     yield put ({
         type: 'SET_ALLY_APPLICATIONS',
         payload: applications.data

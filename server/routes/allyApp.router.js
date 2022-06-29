@@ -11,27 +11,35 @@ const { query } = require("express");
  * GET route template
  */
 router.get("/", rejectUnauthenticated, (req, res) => {
-    let user = req.user.id
+  let user = req.user.id;
 
-    let countQuery = `SELECT *
+  let countQuery = `SELECT *
                     FROM "ally-application" 
                      WHERE user_id = $1`;
-    let countValues = [user];
-    pool.query(countQuery, countValues)
-    .then((dbres)=>{
-      console.log(`*********************************************************`, dbres.rowCount)
-      if(dbres.rowCount === 0){
-        res.send({Response_1: '', Response_2: '', Response_3: '', Response_4: '', is_complete: false})
-      }
-      else{
-        console.log(dbres.rows)
-        res.send(dbres.rows[0])
+  let countValues = [user];
+  pool
+    .query(countQuery, countValues)
+    .then((dbres) => {
+      console.log(
+        `*********************************************************`,
+        dbres.rowCount
+      );
+      if (dbres.rowCount === 0) {
+        res.send({
+          Response_1: "",
+          Response_2: "",
+          Response_3: "",
+          Response_4: "",
+          is_complete: false,
+        });
+      } else {
+        console.log(dbres.rows);
+        res.send(dbres.rows[0]);
       }
     })
-    .catch((err)=>{
-      res.sendStatus(500)
-    })
-  
+    .catch((err) => {
+      res.sendStatus(500);
+    });
 });
 
 /**
@@ -50,10 +58,10 @@ router.post("/", rejectUnauthenticated, (req, res) => {
   let sqlQueryU = `UPDATE "ally-application"
                             SET answer_1= $2 , answer_2= $3 , answer_3= $4 , answer_4= $5
                             WHERE user_id = $1;`;
-//For post
+  //For post
   let sqlQuery = `INSERT INTO "ally-application" ("user_id", "answer_1", "answer_2", "answer_3", "answer_4") 
                         VALUES ($1, $2, $3, $4, $5);`;
-//For testing if the user already has a row
+  //For testing if the user already has a row
   let countQuery = `SELECT *
                     FROM "ally-application" 
                      WHERE user_id = $1`;
@@ -61,21 +69,12 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 
   let booly = req.body.done;
 
-
-
-
-
   pool
     .query(countQuery, countValues)
     .then((dbres) => {
-     
-
       let usercount = Number(dbres.rowCount);
 
-
-
       if (usercount > 0) {
-  
         pool
           .query(sqlQueryU, sqlValues)
           .then((result) => {
@@ -83,43 +82,41 @@ router.post("/", rejectUnauthenticated, (req, res) => {
             res.sendStatus(200);
           })
           .catch((dberr) => {
-            console.log(dberr)
-            res.sendStatus(500)
+            console.log(dberr);
+            res.sendStatus(500);
           });
-          if(req.body.done === true){
-            let sqlQueryD = `UPDATE "ally-application" 
+        if (req.body.done === true) {
+          let sqlQueryD = `UPDATE "ally-application" 
                              SET is_complete= TRUE
                               WHERE user_id = $1;`;
-            let sqlValueD = [user];
-            pool
-              .query(sqlQueryD, sqlValueD)
-              .then((dbres)=>{
-                console.log('DB DONE UPDATING', dbres)
-              })
-              .catch((dberr)=>{
-                console.log('DB DONE WITH ERROR UPDATING', dberr)
-        
-              })
-          }
+          let sqlValueD = [user];
+          pool
+            .query(sqlQueryD, sqlValueD)
+            .then((dbres) => {
+              console.log("DB DONE UPDATING", dbres);
+            })
+            .catch((dberr) => {
+              console.log("DB DONE WITH ERROR UPDATING", dberr);
+            });
+        }
       } else {
-
         pool
           .query(sqlQuery, sqlValues)
           .then((dbres) => {
             console.log("POSTED A NEW APP", dbres);
-            if(req.body.done === true){
+            if (req.body.done === true) {
               let sqlQueryD = `UPDATE "ally-application" 
                                 SET is_complete = TRUE
                                 WHERE user_id = $1;`;
               let sqlValueD = [user];
               pool
                 .query(sqlQueryD, sqlValueD)
-                .then((dbres)=>{
-                  console.log('DB  WITH DONE', dbres)
+                .then((dbres) => {
+                  console.log("DB  WITH DONE", dbres);
                 })
-                .catch((dberr)=>{
-                  console.log('DB  WITH ERROR IN DONE', dberr)
-                })
+                .catch((dberr) => {
+                  console.log("DB  WITH ERROR IN DONE", dberr);
+                });
             }
             res.sendStatus(200);
           })
@@ -127,9 +124,6 @@ router.post("/", rejectUnauthenticated, (req, res) => {
             console.log(dberr, "Something bad happened in posting a new app");
             res.sendStatus(500);
           });
-
-
-          
       }
     })
     .catch((dberr) => {
@@ -137,5 +131,22 @@ router.post("/", rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     });
 });
+
+router.get('/all', rejectUnauthenticated, (req, res) => {
+  if(req.user.is_admin){
+  const sqlText = `
+    SELECT * FROM "ally-application"
+  `;
+  pool.query(sqlText)
+    .then((dbRes) => {
+      res.send(dbRes.rows);
+    })
+    .catch((dbErr) => {
+      console.log('error getting ally applications', dbErr);
+      res.sendStatus(500);
+    })}
+    else console.warn('403, admins only :)')
+  }
+)
 
 module.exports = router;
