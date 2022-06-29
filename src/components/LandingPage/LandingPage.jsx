@@ -8,7 +8,7 @@ import './LandingPage.css';
 
 
 // CUSTOM COMPONENTS---------------------------------------------------
-
+import ImageUploader from '../ImageUploader/ImageUploader';
 
 function LandingPage() {
 
@@ -17,8 +17,10 @@ function LandingPage() {
   const dispatch = useDispatch();
 
   //variables that evaluate to something specific----------------------------------
+  const profileImage = useSelector((store) => store.profileImage)
   const user = useSelector((store) => store.user);
   console.log('this is the user:', user);
+  console.log('this is the profile image url:', profileImage);
 
   const date = new Date();
   const dateTime = date.toLocaleString();
@@ -92,6 +94,10 @@ function LandingPage() {
           console.log(callTime);
         }}
       ></input>
+
+      <ImageUploader/>
+
+      <img src={profileImage} alt=''/>
 
     </div>
 
