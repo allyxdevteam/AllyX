@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import UserReport from "./Reports/UserReport";
 import CommentReport from "./Reports/CommentReport";
+import ReportReport from "./Reports/ReportReport";
 
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 
@@ -78,7 +79,7 @@ function AdminDashboard() {
         Ratings
       </TabPanel>
       <TabPanel value={view} index={4}>
-        Reports
+        <ReportReport />
       </TabPanel>
       <TabPanel value={view} index={5}>
         Ally Applications
