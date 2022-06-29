@@ -32,6 +32,6 @@ const rootReducer = combineReducers({
   allyApp,
   reports, // contains all abuse reports/complaints for the admin dashboard
   calls,
-  allyApplications, // contains all ally applications for the admin dashboard
+  allyApplications, // contains all ally applications for the admin dashboard has a join to include user data
 });
 export default rootReducer;

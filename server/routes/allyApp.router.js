@@ -135,7 +135,8 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 router.get('/all', rejectUnauthenticated, (req, res) => {
   if(req.user.is_admin){
   const sqlText = `
-    SELECT * FROM "ally-application"
+  SELECT * FROM "ally-application"
+	  JOIN "user" ON "user".id = "ally-application".user_id;
   `;
   pool.query(sqlText)
     .then((dbRes) => {
