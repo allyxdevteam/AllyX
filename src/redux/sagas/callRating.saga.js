@@ -6,7 +6,7 @@ function* fetchCallRatings(){
     try{
     const ratings = yield axios.get('/api/call-ratings')
     yield put ({
-        type: 'SET_RATINGS',
+        type: 'SET_CALL_RATINGS',
         payload: ratings.data
     })
     }catch{
