@@ -8,7 +8,9 @@ import requestedCalls from './requestedCalls.reducer';
 import allyApplication from './allyApplication.reducer';
 import users from './users.reducer';
 import claimedCall from './claimedCall.reducer';
-import allyApp from './allyApp.reducer'
+import allyApp from './allyApp.reducer';
+import reports from './reports.reducer'
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,8 +26,9 @@ const rootReducer = combineReducers({
   gencomments, //contains all general comments, not tied to specific calls
   requestedCalls, 
   allyApplication,
-  users,
+  users, // contains all users for the admin dashboard
   claimedCall,
   allyApp,
+  reports, // contains all abuse reports/complaints for the admin dashboard
 });
 export default rootReducer;
