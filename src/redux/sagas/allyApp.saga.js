@@ -10,9 +10,12 @@ function* fetchAllyApp(){
             url: '/api/allyApp',
            
         })
+        
+        console.log(getData.data)
+
         yield put({
             type:'SET_ALLY_APP',
-            payload: getData,
+            payload: getData.data,
         })
        
     }
@@ -28,9 +31,10 @@ function* updateAllyApp(action){
             url: '/api/allyApp',
             data: action.payload,
         })
+        .then(
         put({
             type:'FETCH_ALLY_APP',
-        })
+        }) )
        
     }
     catch (err){

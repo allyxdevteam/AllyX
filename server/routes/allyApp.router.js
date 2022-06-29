@@ -4,26 +4,34 @@ const router = express.Router();
 const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
+const e = require("express");
+const { query } = require("express");
 
 /**
  * GET route template
  */
 router.get("/", rejectUnauthenticated, (req, res) => {
     let user = req.user.id
-    let sqlQuery = `SELECT * 
-                    FROM "ally-application"
-                    WHERE user_id = $1;`
-    let sqlValues = [user]
-    pool.query(sqlQuery, sqlValues)
-        .then((dbres)=>{
-            console.log('', dbres)
 
-            res.send(dbres.rows)
-        })
-        .catch((err)=>{
-            console.log(err);
-            res.sendStatus(500)
-        })
+    let countQuery = `SELECT *
+                    FROM "ally-application" 
+                     WHERE user_id = $1`;
+    let countValues = [user];
+    pool.query(countQuery, countValues)
+    .then((dbres)=>{
+      console.log(`*********************************************************`, dbres.rowCount)
+      if(dbres.rowCount === 0){
+        res.send({Response_1: '', Response_2: '', Response_3: '', Response_4: '', is_complete: false})
+      }
+      else{
+        console.log(dbres.rows)
+        res.send(dbres.rows[0])
+      }
+    })
+    .catch((err)=>{
+      res.sendStatus(500)
+    })
+  
 });
 
 /**
@@ -94,30 +102,34 @@ router.post("/", rejectUnauthenticated, (req, res) => {
               })
           }
       } else {
-        if(req.body.done === true){
-          let sqlQueryD = `UPDATE "ally-application" 
-                            SET is_complete = TRUE
-                            WHERE user_id = $1;`;
-          let sqlValueD = [user];
-          pool
-            .query(sqlQueryD, sqlValueD)
-            .then((dbres)=>{
-              console.log('DB DONE', dbres)
-            })
-            .catch((dberr)=>{
-              console.log('DB DONE WITH ERROR', dberr)
-            })
-        }
+
         pool
           .query(sqlQuery, sqlValues)
           .then((dbres) => {
             console.log("POSTED A NEW APP", dbres);
+            if(req.body.done === true){
+              let sqlQueryD = `UPDATE "ally-application" 
+                                SET is_complete = TRUE
+                                WHERE user_id = $1;`;
+              let sqlValueD = [user];
+              pool
+                .query(sqlQueryD, sqlValueD)
+                .then((dbres)=>{
+                  console.log('DB  WITH DONE', dbres)
+                })
+                .catch((dberr)=>{
+                  console.log('DB  WITH ERROR IN DONE', dberr)
+                })
+            }
             res.sendStatus(200);
           })
           .catch((dberr) => {
             console.log(dberr, "Something bad happened in posting a new app");
             res.sendStatus(500);
           });
+
+
+          
       }
     })
     .catch((dberr) => {
