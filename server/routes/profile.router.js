@@ -76,8 +76,7 @@ router.put('/:id', (req, res) => {
   }
 });
 
-//// NOTE: is rejectUnauthenticated enough here? do we want to make sure the user 
-// running the query has admin level privileges? 
+
 router.get('/', rejectUnauthenticated, (req, res) => {
   if(req.user.is_admin){
   const sqlText = `

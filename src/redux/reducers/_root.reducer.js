@@ -8,7 +8,8 @@ import requestedCalls from './requestedCalls.reducer';
 import allyApplication from './allyApplication.reducer';
 import users from './users.reducer';
 import claimedCall from './claimedCall.reducer';
-import allyApp from './allyApp.reducer'
+import allyApp from './allyApp.reducer';
+import calls from './calls.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,5 +28,6 @@ const rootReducer = combineReducers({
   users,
   claimedCall,
   allyApp,
+  calls,
 });
 export default rootReducer;

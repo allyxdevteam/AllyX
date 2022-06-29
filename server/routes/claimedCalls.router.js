@@ -56,6 +56,23 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     }
 });
 
+router.get('/', rejectUnauthenticated, (req, res) => {
+  if(req.user.is_admin){
+  const sqlText = `
+    SELECT * FROM "call"
+  `;
+  pool.query(sqlText)
+    .then((dbRes) => {
+      res.send(dbRes.rows);
+    })
+    .catch((dbErr) => {
+      console.log('error getting users', dbErr);
+      res.sendStatus(500);
+    })}
+    else console.warn('403, admins only :)')
+  }
+)
+
 
 
 
