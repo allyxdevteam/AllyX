@@ -19,21 +19,22 @@ function* fetchAllyApp() {
   }
 }
 
-function* updateAllyApp(action) {
-  try {
-    yield axios({
-      method: `PUT`,
-      url: "/api/allyApp",
-      data: action.payload,
-    }).then(
-      put({
-        type: "FETCH_ALLY_APP",
-      })
-    );
-  } catch (err) {
-    console.log("error in update ally app", err);
-  }
-}
+// commented this out because this is not how the PUT route on allyApp works
+// function* updateAllyApp(action) {
+//   try {
+//     yield axios({
+//       method: `PUT`,
+//       url: "/api/allyApp",
+//       data: action.payload,
+//     }).then(
+//       put({
+//         type: "FETCH_ALLY_APP",
+//       })
+//     );
+//   } catch (err) {
+//     console.log("error in update ally app", err);
+//   }
+// }
 
 function* createAllyApp(action) {
   try {
@@ -62,7 +63,7 @@ function* fetchAllyApplications(){
 
 function* allyAppSaga() {
   yield takeLatest("FETCH_ALLY_APP", fetchAllyApp);
-  yield takeLatest("UPDATE_ALLY_APP", updateAllyApp);
+//   yield takeLatest("UPDATE_ALLY_APP", updateAllyApp);
   yield takeLatest("CREATE_ALLY_APP", createAllyApp);
   yield takeLatest("FETCH_ALLY_APPLICATIONS", fetchAllyApplications);
 }
