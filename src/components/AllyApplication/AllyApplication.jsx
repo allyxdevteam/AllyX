@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import { SaveOutlined } from "@mui/icons-material";
 
 function AllyApplication() {
-    const timer = setInterval(fetchApp, 100);
+const timer = setInterval(fetchApp, 100);
 
   const [X, setX] = useState(0);
   const [showButton, setShowButton] = useState(true);
@@ -27,7 +27,6 @@ function AllyApplication() {
           
     }
     else if(X === 6){
-        console.log(X)
     dispatch({
       type: "FETCH_ALLY_APP",
     });
@@ -124,7 +123,7 @@ function AllyApplication() {
             <>
               {/* Progress bar appears at the top at all times */}
               <div className="progress-bar">
-                {X != 6 || isdone === true ? (
+                {X != 6 ? (
                   <Box mb={2}>
                     <LinearProgress
                       variant="determinate"
@@ -133,7 +132,7 @@ function AllyApplication() {
                   </Box>
                 ) : (
                   <>
-                    <h1>Processing</h1>
+                    <h1>Processing...</h1>
                   </>
                 )}
 
@@ -152,7 +151,7 @@ function AllyApplication() {
                 <div className="card-graphics">
                   <div className="card-top">
                     <h1>Apply to become an ally! </h1>
-                    <h5>Learn More!</h5> {/* TODO: Link to FAQ/About Page */}
+                    <h5>Please have a valid social media account registered and be prepared to answer four short prompts</h5> {/* TODO: Link to FAQ/About Page */}
                   </div>
 
                   <div className="card-body">
@@ -381,7 +380,7 @@ function AllyApplication() {
                   </div>
                   {/* This is the middle */}
                   <div className="card-body">
-                    <h1>See you soon!</h1>
+                    <h1>Check back in soon!</h1>
                   </div>
                   {/* This is where our controls (back+next) are */}
                   <div className="card-controls">
@@ -402,17 +401,23 @@ function AllyApplication() {
                   {/* This is the top of the card */}
                   <div className="card-top">
                     <Box fullWidth sx={{ display: "flex" }}>
-                      <h1>Loading....</h1>
+                      <h1>Loading...</h1>
                     </Box>
                   </div>
                   {/* This is the middle */}
                   <div className="card-body">
+                  <h1>We're waiting for our server to give us cool data!</h1>
+
                   </div>
                   {/* This is where our controls (back+next) are */}
                   <div className="card-controls">
-                    <div className="button-left"></div>
+                    <div className="button-left">
 
-                    <div className="button-right"></div>
+                    </div>
+
+                    <div className="button-right">
+
+                    </div>
                   </div>
                 </div>
 
