@@ -20,6 +20,22 @@ router.get('/:memberId', (req, res) => {
       })
   });
 
+  router.put('/:requestedCallId', (req, res) => {
+    const requestedCallId = req.params.requestedCallId;
+
+    const sqlQuery = 'UPDATE "requested-call" SET "open" = true WHERE "id" = $1';
+    const sqlValues = [requestedCallId];
+    
+    pool.query(sqlQuery, sqlValues)
+      .then(result => {
+        res.sendStatus(201);
+      })
+      .catch(err => {
+        console.log('ERROR: cancel claimed call', err);
+        res.sendStatus(500)
+      })
+  });
+
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
     const memberId = req.body.call.member_id;
