@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function AllyApplicationStatus() {
     useEffect(() => {
@@ -9,7 +10,7 @@ function AllyApplicationStatus() {
         });
       }, []);
 
-
+    const history = useHistory();
     const dispatch = useDispatch();
     const allyApplication = useSelector(store => store.allyApplication);
     const user = useSelector(store => store.user);
@@ -20,7 +21,7 @@ function AllyApplicationStatus() {
         return (
             <h3
                 onClick={() => {
-                    history.push('/allyApplication')
+                    history.push('/ally-application')
                 }}
             >
                 Apply to become an Ally
@@ -34,13 +35,32 @@ function AllyApplicationStatus() {
         return (
             <h3
                 onClick={() => {
-                    history.push('/allyApplication')
+                    history.push('/ally-application')
                 }}
             >
                 Your application requires attention.
             </h3>
         )
+        }
+    else if (allyApplication.is_complete === true) {
+         return (
+             <h3
+                        onClick={() => {
+                            history.push('/ally-application')
+                        }}
+            >
+                        Your application has been submitted and is awaiting Approval.
+                    </h3>
+                )
+                    }
+    else{
+        return(
+            <>
+            <h3>Ally Application has not been submitted</h3>
+            </>
+        )
     }
+    
 }
 
 export default AllyApplicationStatus;
