@@ -4,7 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 // fetches all call ratings for the admin dashboard
 function* fetchCallRatings(){
     try{
-    const ratings = yield axios.get('/api/call-ratings')
+    const ratings = yield axios.get('/api/rate-call')
     yield put ({
         type: 'SET_CALL_RATINGS',
         payload: ratings.data
