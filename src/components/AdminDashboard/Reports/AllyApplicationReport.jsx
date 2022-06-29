@@ -105,13 +105,13 @@ function AllyApplicationReport() {
         headerName: "Completed",
         type: "boolean",
         width: 150,
-        editable: true,
+        editable: false,
       },
       {
         field: "is_approved",
         headerName: "Approved",
         width: 150,
-        editable: true,
+        editable: false,
       },
   ];
 

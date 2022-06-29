@@ -150,4 +150,43 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
   }
 )
 
+router.put('/:id', rejectUnauthenticated, async (req, res) =>{
+  if(req.user.is_admin){
+    const allyStatus = req.body.is_ally;
+    const completeStatus = req.body.is_complete;
+    const approvalStatus = req.body.is_approved;
+    const appID = req.body.id;
+    const userID = req.body.user_id;
+
+    const connection = await pool.connect();
+
+    const sqlQueryUser = `
+    UPDATE "user"
+      SET
+        is_ally = $1
+      WHERE id = $2  
+    `;
+
+    const sqlQueryApp = `
+    UPDATE "ally-application"
+      SET
+        is_complete = $3
+        is_approved = $4
+      WHERE id = $5 
+    `;
+
+    try {
+      await connection.query('BEGIN');
+      await connection.query(sqlQueryUser, [allyStatus, userID]);
+      await connection.query(sqlQueryApp, [completeStatus, approvalStatus, appID]);
+      await connection.query('COMMIT');
+      res.sendStatus(204)
+    } catch (dbErr) {
+      console.error('Update application status error', dbErr);
+      await connection.query('ROLLBACK');
+      res.sendStatus(500);
+    }
+  } else console.warn('403, admins only :)')
+})
+
 module.exports = router;

@@ -6,6 +6,8 @@ import CommentReport from "./Reports/CommentReport";
 import ReportReport from "./Reports/ReportReport";
 import CallReport from "./Reports/CallReport";
 
+import AllyApplicationReport from "./Reports/AllyApplicationReport";
+
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 
 // a11y config for admin dashboard nav bar
@@ -83,7 +85,7 @@ function AdminDashboard() {
         <ReportReport />
       </TabPanel>
       <TabPanel value={view} index={5}>
-        Ally Applications
+        <AllyApplicationReport />
       </TabPanel>
     </Box>
   );
