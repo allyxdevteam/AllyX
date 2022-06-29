@@ -59,7 +59,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 router.get('/', rejectUnauthenticated, (req, res) => {
   if(req.user.is_admin){
   const sqlText = `
-    SELECT * FROM "calls"
+    SELECT * FROM "call"
   `;
   pool.query(sqlText)
     .then((dbRes) => {
