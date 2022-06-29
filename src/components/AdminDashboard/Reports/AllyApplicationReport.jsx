@@ -15,41 +15,40 @@ function AllyApplicationReport() {
 
   // DataGrid config
   const columns = [
-    { field: "id", headerName: "ID", width: 40 },
     {
       field: "user_id",
       headerName: "User ID",
-      width: 90,
+      width: 80,
       editable: false,
     },
     {
         field: "username",
         headerName: "Username",
-        width: 150,
+        width: 120,
         editable: false,
       },
       {
         field: "first_name",
         headerName: "First Name",
-        width: 150,
+        width: 120,
         editable: false,
       },
       {
         field: "last_name",
         headerName: "Last Name",
-        width: 150,
+        width: 120,
         editable: false,
       },
       {
         field: "city",
         headerName: "City",
-        width: 150,
+        width: 120,
         editable: false,
       },
       {
         field: "dob",
         headerName: "Birthday",
-        width: 150,
+        width: 110,
         editable: false,
       },
       {
@@ -131,6 +130,7 @@ function AllyApplicationReport() {
         rows={allyApplications}
         columns={columns}
         pageSize={10}
+        checkboxSelection
         density="compact"
         rowsPerPageOptions={[10]}
         components={{ Toolbar: GridToolbar }}
