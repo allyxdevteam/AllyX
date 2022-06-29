@@ -14,12 +14,22 @@ function* postCallStartedTime(action){
             url: '/api/callInProgress',
             data: {callId, dateTime}
         });
-        // const callId = response.data.callId;
-        // const memberId = response.data.memberId;
-        // yield put({
-        //     type: 'SET_CLAIMED_CALL',
-        //     payload: callId
-        // });
+    }catch{
+        console.log('problem in post requested call');
+    }
+}
+
+function* postCallEndedTime(action){
+    
+    const callId = action.payload.claimedCallId;
+    const dateTime = action.payload.dateTime;
+
+    try{
+        const response = yield axios({
+            method: 'PUT',
+            url: `/api/callInProgress/${callId}`,
+            data: {callId, dateTime}
+        });
     }catch{
         console.log('problem in post requested call');
     }
@@ -30,6 +40,7 @@ function* postCallStartedTime(action){
 
 function* callInProgressSaga() {
     yield takeLatest('PUT_CALL_STARTED_TIME', postCallStartedTime);
+    yield takeLatest('PUT_CALL_ENDED_TIME', postCallEndedTime);
   }
 
 export default callInProgressSaga;

@@ -11,6 +11,7 @@ function AllyStartCall() {
 
     const dispatch = useDispatch();
     const params = useParams();
+    const history = useHistory();
 
     const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
     const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);
@@ -33,6 +34,7 @@ function AllyStartCall() {
             type: 'PUT_CALL_STARTED_TIME',
             payload: {claimedCallId, dateTime}
         })
+        history.push(`/allyCallInProgress/${memberId}`)
     }
 
 
@@ -40,6 +42,7 @@ function AllyStartCall() {
         <>
             <img src={claimedCallMember.profile_pic} alt="profile pic"></img>
             <a href={`tel:${claimedCallMember.phone_number}`} onClick={handleStartCall}>Call {claimedCallMember.first_name}</a>
+
         </>
     )
 }
