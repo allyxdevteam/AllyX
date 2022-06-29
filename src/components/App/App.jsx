@@ -24,6 +24,7 @@ import GeneralComment from '../GeneralComment/GeneralComment';
 import AllyRequestedCalls from '../AllyRequestedCalls/AllyRequestedCalls';
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import AllyStartCall from '../AllyStartCall/AllyStartCall';
+import ReviewCall from '../ReviewCall/ReviewCall';
 
 import './App.css';
 import AllyApplication from '../AllyApplication/AllyApplication';
@@ -102,6 +103,13 @@ function App() {
             path="/allyStartCall/:memberId"
           >
             <AllyStartCall />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/reviewCall"
+          >
+            <ReviewCall />
           </ProtectedRoute>
 
           <Route
