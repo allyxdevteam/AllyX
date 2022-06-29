@@ -5,12 +5,23 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-router.get('/', (req, res) => {
-  // GET route code here
-});
+
+ router.get('/', rejectUnauthenticated, (req, res) => {
+    if(req.user.is_admin){
+    const sqlText = `
+      SELECT * FROM "call-rating"
+    `;
+    pool.query(sqlText)
+      .then((dbRes) => {
+        res.send(dbRes.rows);
+      })
+      .catch((dbErr) => {
+        console.log('error getting reports', dbErr);
+        res.sendStatus(500);
+      })}
+      else console.warn('403, admins only :)')
+    }
+  )
 
 /**
  * POST route template
