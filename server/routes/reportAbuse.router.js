@@ -51,8 +51,8 @@ router.post('/member', rejectUnauthenticated, (req, res) => {
   `;
   const sqlValues = [
       req.user.id,
-      req.body.,
-      req.body.,
+      req.body.something,
+      req.body.something,
       req.body.abuseComments
   ];
   pool.query(sqlText, sqlValues)
