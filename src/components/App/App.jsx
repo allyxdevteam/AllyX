@@ -24,6 +24,7 @@ import GeneralComment from '../GeneralComment/GeneralComment';
 import AllyRequestedCalls from '../AllyRequestedCalls/AllyRequestedCalls';
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import AllyStartCall from '../AllyStartCall/AllyStartCall';
+import AllyCallInProgress from '../AllyCallInProgress/AllyCallInProgress';
 import AllyReviewCall from '../AllyReviewCall/AllyReviewCall';
 import MemberReviewCall from '../MemberReviewCall/MemberReviewCall';
 
@@ -101,13 +102,16 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/allyStartCall/:memberId"
+            path="/allyStartCall/:memberId/:requestedCallId"
           >
             <AllyStartCall />
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
+            path="/allyCallInProgress/:memberId"
+          >
+            <AllyCallInProgress />
             path="/allyReviewCall"
           >
             <AllyReviewCall />

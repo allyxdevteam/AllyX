@@ -20,7 +20,6 @@ function* fetchOneCall() {
 
 
 function* callsSaga() {
-    
     yield takeLatest('FETCH_CALLS', fetchCalls);
     yield takeLatest('FETCH_ONE_CALL', fetchOneCall);
   }

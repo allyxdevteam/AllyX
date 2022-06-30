@@ -13,6 +13,8 @@ import claimedCallSaga from './claimedCall.saga';
 import callInProgressSaga from './callInProgress.saga';
 import reportSaga from './report.saga';
 import callSaga from './calls.saga';
+import imageUploadSaga from './imageUpload.saga';
+import callRatingSaga from './callRating.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -37,5 +39,7 @@ export default function* rootSaga() {
     callInProgressSaga(),
     reportSaga(),
     callSaga(),
+    imageUploadSaga(),
+    callRatingSaga(),
   ]);
 }

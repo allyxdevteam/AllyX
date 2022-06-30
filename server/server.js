@@ -1,8 +1,54 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const multer = require("multer");
+
+
+
 
 const app = express();
+
+CLOUD_NAME = process.env.CLOUD_NAME;
+API_KEY = process.env.API_KEY;
+API_SECRET = process.env.API_SECRET;
+
+
+cloudinary.config({
+  cloud_name: CLOUD_NAME,
+  api_key: API_KEY,
+  api_secret: API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "DEV",
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.get("/imageUpload", (req, res) => {
+  return res.json({ message: "Hello World 🇵🇹 🙌" });
+});
+
+app.post("/imageUpload", upload.single("file"), async (req, res) => {
+  return res.json({ picture: req.file.path });
+});
+
+// const start = (port) => {
+//   try {
+//     app.listen(port, () => {
+//       console.log(`Api up and running at: http://localhost:${port}`);
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     process.exit();
+//   }
+// };
+// start(3333);
 
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
@@ -19,6 +65,7 @@ const profileRouter = require('./routes/profile.router');
 const AllyAppRouter = require('./routes/allyApp.router');
 const callInProgress = require('./routes/callInProgress.router');
 const report = require('./routes/report.router');
+const callRatingRouter = require ('./routes/call-ratings.router');
 
 
 // Body parser middleware
@@ -44,6 +91,7 @@ app.use('/api/profile', profileRouter);
 app.use('/api/allyApp', AllyAppRouter);
 app.use('/api/callInProgress', callInProgress);
 app.use('/api/report', report);
+app.use('/api/rate-call', callRatingRouter);
 
 // Serve static files
 app.use(express.static('build'));
