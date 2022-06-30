@@ -121,6 +121,13 @@ function App() {
             <AllyReviewCall />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            exact
+            path="/allyReportAbuse"
+          >
+            <AllyReportAbuse />
+          </ProtectedRoute>
+
           <Route
             exact
             path="/login"
