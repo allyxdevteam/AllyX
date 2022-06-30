@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Button, Typography} from '@mui/material';
 
 
-function AllyCallInProgress(){
+function MemberCallRequested(){
 
     const dispatch = useDispatch();
     const params = useParams();
@@ -24,7 +24,7 @@ function AllyCallInProgress(){
             type: 'PUT_CALL_ENDED_TIME',
             payload: {claimedCallId, dateTime}
         })
-        history.push('/allyReviewCall');
+        history.push('/memberReviewCall');
     }
 
 
@@ -36,4 +36,4 @@ function AllyCallInProgress(){
     )
 }
 
-export default AllyCallInProgress
+export default MemberCallRequested
