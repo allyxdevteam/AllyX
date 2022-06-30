@@ -75,6 +75,30 @@ function CallRatingReport() {
         },
       }
   ];
+  
+   // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
+   const handleDeleteClick = (id) => () => {
+    Swal.fire({
+        title: "Are you sure you want to delete this user?",
+        text: "Once deleted, you will not be able to recover their data!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete'
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            dispatch({
+                type: 'DELETE_PROFILE',
+                payload: id
+            })
+          Swal.fire("The user has been deleted", {
+            icon: "success",
+          });
+        } else {
+          Swal.fire("Cancelled! The user data is safe.");
+        }
+      });
+  };
 
   //       // handles edits made to the DataGrid
   //   const processRowUpdate = (newValue, oldValue) =>{
