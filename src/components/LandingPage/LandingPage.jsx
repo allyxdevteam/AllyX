@@ -88,7 +88,7 @@ function LandingPage() {
 
       <button onClick={handleScheduleCall}>Schedule a call</button>
 
-      <CallSpeedDial />
+     
       <input type="datetime-local"
         onChange={(e) => {
           setCallTime(e.target.value)
