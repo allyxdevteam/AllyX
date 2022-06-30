@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import Swal from 'sweetalert2';
 
 import {
   DataGrid,
@@ -167,25 +168,25 @@ function AllyApplicationReport() {
   // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
   const handleApprove = (id, user_id) => () => {
     const approved = {
-      id: id,
-      user_id: user_id,
-      is_ally: true,
-      is_complete: true,
-      is_approved: true,
-    };
-    Swal.fire({
-      title: "Are you sure you want to approve this application?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Approve",
-    }).then((willApprove) => {
-      if (willApprove) {
-        dispatch({ type: "HANDLE_APPLICATION", payload: approved });
-      }
-    });
-    Swal.fire("This member has been promoted to ally!", {
-      icon: "success",
-    });
+        id: id,
+        user_id: user_id,
+        is_ally: true,
+        is_complete: true,
+        is_approved: true,
+      };
+    // Swal.fire({
+    //   title: "Are you sure you want to approve this application?",
+    //   icon: "question",
+    //   showCancelButton: true,
+    //   confirmButtonText: "Approve",
+    // }).then((willApprove) => {
+    //   if (willApprove) {
+        dispatch({ type: "HANDLE_APPLICATION", payload: {approved} });
+    //   }
+    // });
+    // Swal.fire("This member has been promoted to ally!", {
+    //   icon: "success",
+    // });
   };
 
   const handleReopen = (id, user_id) => () => {
@@ -210,19 +211,19 @@ function AllyApplicationReport() {
       is_complete: true,
       is_approved: false,
     };
-    Swal.fire({
-      title: "Are you sure you want to reject this application?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Reject",
-    }).then((willReject) => {
-      if (willReject) {
+    // Swal.fire({
+    //   title: "Are you sure you want to reject this application?",
+    //   icon: "question",
+    //   showCancelButton: true,
+    //   confirmButtonText: "Reject",
+    // }).then((willReject) => {
+    //   if (willReject) {
         dispatch({ type: "HANDLE_APPLICATION", payload: rejected });
-      }
-    });
-    Swal.fire("This application has been rejected", {
-      icon: "error",
-    });
+    //   }
+    // });
+    // Swal.fire("This application has been rejected", {
+    //   icon: "error",
+    // });
   };
 
   return (

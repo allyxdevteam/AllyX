@@ -152,9 +152,9 @@ router.get("/all", rejectUnauthenticated, (req, res) => {
 
 router.put("/:id", rejectUnauthenticated, async (req, res) => {
   if (req.user.is_admin) {
-    const allyStatus = req.body.is_ally;
-    const completeStatus = req.body.is_complete;
-    const approvalStatus = req.body.is_approved;
+    const allyStatus = Boolean(req.body.is_ally);
+    const completeStatus = Boolean(req.body.is_complete);
+    const approvalStatus = Boolean(req.body.is_approved);
     const appID = req.body.id;
     const userID = req.body.user_id;
 
@@ -170,7 +170,7 @@ router.put("/:id", rejectUnauthenticated, async (req, res) => {
     const sqlQueryApp = `
     UPDATE "ally-application"
       SET
-        is_complete = $3
+        is_complete = $3,
         is_approved = $4
       WHERE id = $5 
     `;

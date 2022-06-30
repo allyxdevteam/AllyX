@@ -19,7 +19,8 @@ function* fetchAllyApp() {
   }
 }
 
-// commented this out because it doesn't seem to be in use and I made a put route for approving applications
+// commented this out because it doesn't seem to be in use and I made a 
+// put route for approving applications - MDS
 // function* updateAllyApp(action) {
 //   try {
 //     yield axios({
@@ -61,7 +62,7 @@ function* fetchAllyApplications(){
     }
 }
 
-function* handleApplications(action){
+function* handleApplication(action){
     try {
         yield axios({
           method: `PUT`,
@@ -73,15 +74,16 @@ function* handleApplications(action){
           })
         );
       } catch (err) {
-        console.log("error handling applications", err);
+        console.log("error handling application", err);
       }
 }
 
 function* allyAppSaga() {
   yield takeLatest("FETCH_ALLY_APP", fetchAllyApp);
-//   yield takeLatest("UPDATE_ALLY_APP", updateAllyApp);
   yield takeLatest("CREATE_ALLY_APP", createAllyApp);
   yield takeLatest("FETCH_ALLY_APPLICATIONS", fetchAllyApplications);
+  yield takeLatest("HANDLE_APPLICATION", handleApplication);
+
 }
 
 export default allyAppSaga;
