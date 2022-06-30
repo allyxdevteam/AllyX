@@ -31,6 +31,33 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     });
   });
 
+  router.put('/:end', rejectUnauthenticated, (req, res) => {
+
+    const callId = req.body.callId;
+    const dateTime = req.body.dateTime;
+    console.log('this is req dot boooooooody in call in progress router:', dateTime, callId);
+
+
+    const sqlText = `
+    UPDATE "call"
+    SET "date_time_ended" = $1, "is_done_ally" = true
+    WHERE "id" = $2;
+  `;
+  const sqlValues = [
+    dateTime, callId
+  ];
+  
+  pool.query(sqlText, sqlValues)
+    .then((dbRes) => {
+      res.sendStatus(201);
+    })
+    .catch((dbErr) => {
+      console.log('put cal start time error', dbErr);
+      res.sendStatus(500);
+    });
+  });
+
+
 
 
 
