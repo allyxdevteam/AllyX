@@ -23,11 +23,44 @@ const {
     }
   )
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
+router.post('/', rejectUnauthenticated, (req, res) => {
+  if (req.user.is_ally === true) {
+    const sqlText = `
+    INSERT INTO "call-rating"
+      ("reviewer_id", "recipient_id", "call_id", "num_stars", "comment")
+      VALUES (1, 2, 2, 4, 'Yo!');
+    `;
+    const sqlValues = [
+      req.user.id,
+      req.body.memberId,
+      req.body.callId,
+      req.body.rating,
+      req.body.comment
+    ];
+    pool.query(sqlText, sqlValues)
+      .then((dbRes) => {
+      res.sendStatus(201);
+    })
+  } else if (req.user.is_ally === false) {
+    if (req.user.is_ally === true) {
+      const sqlText = `
+      INSERT INTO "call-rating"
+        ("reviewer_id", "recipient_id", "call_id", "num_stars", "comment")
+        VALUES (1, 2, 2, 4, 'Yo!');
+      `;
+      const sqlValues = [
+        req.user.id,
+        req.body.allyId,
+        req.body.callId,
+        req.body.rating,
+        req.body.comment
+      ];
+      pool.query(sqlText, sqlValues)
+        .then((dbRes) => {
+        res.sendStatus(201);
+      })
+    }
+  }
 });
 
 module.exports = router;

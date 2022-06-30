@@ -16,7 +16,6 @@ function AllyReviewCall() {
     const dispatch = useDispatch();
     const callId = useSelector(store => store.claimedCall);
     const user = useSelector(store => store.user);
-    const allyId = useSelector(store => store.user.id);
     const allyFirstName = useSelector(store => store.oneCall.first_name);
     const memberId = useSelector(store => store.oneCall.recipient_id);
 
@@ -43,7 +42,7 @@ function AllyReviewCall() {
                 dispatch({
                     type: 'ADD_CALL_RATING',
                     payload: {
-                    allyId,
+                    user,
                     memberId,
                     callId,
                     rating,
