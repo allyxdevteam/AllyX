@@ -68,8 +68,8 @@ function CommentReport() {
    // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
    const handleDeleteClick = (id) => () => {
     Swal.fire({
-        title: "Are you sure you want to delete this user?",
-        text: "Once deleted, you will not be able to recover their data!",
+        title: "Are you sure you want to delete this comment?",
+        text: "Once deleted, you will not be able to recover this data!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete'
@@ -77,7 +77,7 @@ function CommentReport() {
       .then((willDelete) => {
         if (willDelete) {
             dispatch({
-                type: 'DELETE_PROFILE',
+                type: 'DELETE_GEN_COMMENT',
                 payload: id
             })
           Swal.fire("The user has been deleted", {
@@ -100,7 +100,6 @@ function CommentReport() {
             disableSelectionOnClick
             components={{ Toolbar: GridToolbar }}
             experimentalFeatures={{ newEditingApi: true }}
-            // onCellEditStop={handleEdit}
           />
         </Box>
       );
