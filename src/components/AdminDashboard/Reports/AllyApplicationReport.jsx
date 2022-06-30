@@ -19,6 +19,7 @@ function AllyApplicationReport() {
 
   // DataGrid config
   const columns = [
+    { field: "id", headerName: "ID", width: 40 },
     {
       field: "user_id",
       headerName: "User ID",
@@ -122,13 +123,13 @@ function AllyApplicationReport() {
         headerName: "Actions",
         width: 100,
         cellClassName: "actions",
-        getActions: ({ id }) => {
+        getActions: ({ id, user_id }) => {
           return [
             <GridActionsCellItem
               icon={<Tooltip title="Approve"><CheckIcon /></Tooltip>}
               label="Approve"
               color="inherit"
-            //   onClick={handleDeleteClick(id)}
+              onClick={handleApprove(id, user_id)}
             />,
             <GridActionsCellItem
               icon={<Tooltip title="Reopen (contact user)"><ReplyIcon /></Tooltip>}
@@ -146,6 +147,11 @@ function AllyApplicationReport() {
         },
       },
   ];
+
+  // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
+  const handleApprove = (id) => () => {
+  console.log('in approve', id)
+  };
 
 //   // handles edits made to the DataGrid
 //   const processRowUpdate = (newValue, oldValue) => {
@@ -169,7 +175,7 @@ function AllyApplicationReport() {
         // experimentalFeatures={{ newEditingApi: true }}
         // processRowUpdate={processRowUpdate}
         // onProcessRowUpdateError={handleProcessRowUpdateError}
-        getRowId={(row) => row.id}
+        // getRowId={(row) => row.id}
       />
     </Box>
   );

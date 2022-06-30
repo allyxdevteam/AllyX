@@ -132,26 +132,26 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
-router.get('/all', rejectUnauthenticated, (req, res) => {
-  if(req.user.is_admin){
-  const sqlText = `
-  SELECT * FROM "ally-application"
-	  JOIN "user" ON "user".id = "ally-application".user_id;
+router.get("/all", rejectUnauthenticated, (req, res) => {
+  if (req.user.is_admin) {
+    const sqlText = `
+  SELECT "ally-application".id, user_id, "ally-application".inserted_at, "ally-application".updated_at, answer_1, answer_2, answer_3, answer_4, is_complete, is_approved, "user".username, "user".first_name, "user".last_name, "user".city, "user".dob, "user".facebook_link, "user".twitter_link, "user".instagram_link FROM "ally-application"
+	JOIN "user" ON "user".id = "ally-application".user_id;
   `;
-  pool.query(sqlText)
-    .then((dbRes) => {
-      res.send(dbRes.rows);
-    })
-    .catch((dbErr) => {
-      console.log('error getting ally applications', dbErr);
-      res.sendStatus(500);
-    })}
-    else console.warn('403, admins only :)')
-  }
-)
+    pool
+      .query(sqlText)
+      .then((dbRes) => {
+        res.send(dbRes.rows);
+      })
+      .catch((dbErr) => {
+        console.log("error getting ally applications", dbErr);
+        res.sendStatus(500);
+      });
+  } else console.warn("403, admins only :)");
+});
 
-router.put('/:id', rejectUnauthenticated, async (req, res) =>{
-  if(req.user.is_admin){
+router.put("/:id", rejectUnauthenticated, async (req, res) => {
+  if (req.user.is_admin) {
     const allyStatus = req.body.is_ally;
     const completeStatus = req.body.is_complete;
     const approvalStatus = req.body.is_approved;
@@ -176,17 +176,21 @@ router.put('/:id', rejectUnauthenticated, async (req, res) =>{
     `;
 
     try {
-      await connection.query('BEGIN');
+      await connection.query("BEGIN");
       await connection.query(sqlQueryUser, [allyStatus, userID]);
-      await connection.query(sqlQueryApp, [completeStatus, approvalStatus, appID]);
-      await connection.query('COMMIT');
-      res.sendStatus(204)
+      await connection.query(sqlQueryApp, [
+        completeStatus,
+        approvalStatus,
+        appID,
+      ]);
+      await connection.query("COMMIT");
+      res.sendStatus(204);
     } catch (dbErr) {
-      console.error('Update application status error', dbErr);
-      await connection.query('ROLLBACK');
+      console.error("Update application status error", dbErr);
+      await connection.query("ROLLBACK");
       res.sendStatus(500);
     }
-  } else console.warn('403, admins only :)')
-})
+  } else console.warn("403, admins only :)");
+});
 
 module.exports = router;
