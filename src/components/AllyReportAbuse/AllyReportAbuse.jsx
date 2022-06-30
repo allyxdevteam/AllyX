@@ -7,6 +7,7 @@ function ReportAbuse() {
 
     const [abuseComments, setAbuseComments] = useState('');
     const dispatch = useDispatch();
+    const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
     const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);
 
     return (
@@ -19,7 +20,7 @@ function ReportAbuse() {
                 onClick={() => {
                     dispatch({
                         type: 'ALLY_REPORT_ABUSE',
-                        payload: claimedCallMember.id
+                        payload: { claimedCallId, claimedCallMember, abuseComments }
                     })
                 }}
             >
