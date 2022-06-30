@@ -11,26 +11,21 @@ function AllyReviewCall() {
         })
     }, []);
 
+
+    console.log('**************************router', allyFirstName);
+
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const dispatch = useDispatch();
     const callId = useSelector(store => store.claimedCall);
     const user = useSelector(store => store.user);
-    const allyFirstName = useSelector(store => store.oneCall.first_name);
+    const allyFirstName = useSelector(store => store.claimedCall.oneCallReducer);
     const memberId = useSelector(store => store.oneCall.recipient_id);
 
     const handleComment = (e) => {
       setComment(e.target.value);
     };
-  
-    const handleSubmit = (e) => {
-      dispatch({
-          type: 'ADD_GEN_COMMENT',
-          payload: { rating, comment }
-      })
-      setRating(0);
-      setComment('');
-    };
+
 
     return (
     

@@ -57,6 +57,35 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     });
   });
 
+  router.get('/:callId', rejectUnauthenticated, (req, res) => {
+    const user = [req.body.user];
+    const sqlQuery = [req.params.callId];
+  
+    if (user.is_ally === true) {
+      const sqlText = `
+        SELECT ("call".id, "member_id", "ally_id", "first_name")
+          FROM "call"
+            JOIN "user" on "user".id = "ally_id"
+          WHERE "call".id = $1;
+      `;
+      pool.query(sqlText, sqlQuery)
+        .then((dbRes) => {
+          res.send(dbRes.rows);
+        })
+    } else if (user.is_ally === false) {
+      const sqlText = `
+        SELECT ("call".id, "member_id", "ally_id", "first_name")
+          FROM "call"
+            JOIN "user" on "user".id = "member_id"
+          WHERE "call".id = $1;
+      `;
+      pool.query(sqlText, sqlQuery)
+        .then((dbRes) => {
+          res.send(dbRes.rows);
+        })
+    }
+  })
+
 
 
 

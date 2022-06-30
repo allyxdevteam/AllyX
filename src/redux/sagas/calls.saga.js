@@ -15,10 +15,12 @@ function* fetchCalls(){
 }
 
 function* fetchOneCall(action) {
+
+    console.log('**************************router', action.payload);
     const callId = action.payload.callId;
     const oneCall = yield axios({
         method: 'GET',
-        url: `/api/claimedCalls/${callId}`,
+        url: `/api/callInProgress/${callId}`,
         data: action.payload
     })
     yield put ({

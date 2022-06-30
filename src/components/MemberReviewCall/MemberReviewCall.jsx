@@ -16,6 +16,8 @@ function MemberReviewCall() {
     const dispatch = useDispatch();
     const callId = useSelector(store => store.claimedCall);
     const user = useSelector(store => store.user);
+    const memberFirstName = useSelector(store => store.oneCall.first_name);
+    const memberId = useSelector(store => store.oneCall.recipient_id);
 
     const handleComment = (e) => {
       setComment(e.target.value);
@@ -33,36 +35,51 @@ function MemberReviewCall() {
     return (
     
     <Box sx={[{maxWidth: '35vw'},{m:'auto'}]}>
-        <Typography>How was your call with {ally.first_name}?</Typography>
-        <Typography component="legend">Rating</Typography>
-        <Rating
-            type="rating"
-            name="general-rating"
-            value={rating}
-            onChange={(event, newRating) => {
-                setRating(newRating);
-            }}
-        />
-        <Typography component="legend">Comment</Typography>
-        <TextField 
-            type="comment"
-            name="general-comment"
-            value={comment}
-            fullWidth 
-            multiline 
-            maxRows={4} 
-            onChange={handleComment}
-        />
-        <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>Submit</Button>
-        <Button
-            variant="contained"
-            sx={{m:1}}
-            onClick={() => {
-                history.push(`/allyReportAbuse`);
+        <Typography>How was your call with {memberFirstName}?</Typography>
+        <form
+            onSubmit={() => {
+                dispatch({
+                    type: 'ADD_CALL_RATING',
+                    payload: {
+                    user,
+                    memberId,
+                    callId,
+                    rating,
+                    comment
+                    }
+                })
             }}
         >
-            Report Abuse
-        </Button>
+        <Typography component="legend">Rating</Typography>
+            <Rating
+                type="rating"
+                name="general-rating"
+                value={rating}
+                onChange={(event, newRating) => {
+                    setRating(newRating);
+                }}
+            />
+            <Typography component="legend">Comment</Typography>
+            <TextField 
+                type="comment"
+                name="general-comment"
+                value={comment}
+                fullWidth 
+                multiline 
+                maxRows={4} 
+                onChange={handleComment}
+            />
+            <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>Submit</Button>
+            <Button
+                variant="contained"
+                sx={{m:1}}
+                onClick={() => {
+                    history.push(`/memberReportAbuse`);
+                }}
+            >
+                Report Abuse
+            </Button>
+        </form>
     </Box>
     )
 }
