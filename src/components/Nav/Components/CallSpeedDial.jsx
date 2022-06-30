@@ -3,66 +3,83 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Call, Schedule } from "@mui/icons-material/";
-import { Box, Backdrop, SpeedDial, SpeedDialAction, Dialog, DialogTitle } from "@mui/material";
+import {
+  Box,
+  Backdrop,
+  SpeedDial,
+  SpeedDialAction,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button
+} from "@mui/material";
 
 function CallSpeedDial() {
-
   const history = useHistory();
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
 
+  // speed dial config
   const [openSpeedDial, setOpenSpeedDial] = useState(false);
   const handleOpenSpeedDial = () => setOpenSpeedDial(true);
   const handleCloseSpeedDial = () => setOpenSpeedDial(false);
 
+  const actions = [
+    { icon: <Call />, name: "Call Now", onClick: handleRequestCall },
+    { icon: <Schedule />, name: "Schedule Call", onClick: openScheduleDialog },
+  ];
+
+  // dialog config
+  const [open, setOpen] = useState(false);
+  const handleCloseDialog = () => setOpen(false);
+  
   const date = new Date();
   const dateTime = date.toLocaleString();
-  console.log('this is the time', dateTime);
+  console.log("this is the time", dateTime);
   console.log(date.toLocaleDateString());
 
   const [callTime, setCallTime] = useState(dateTime);
 
-  const actions = [
-    { icon: <Call />, name: "Call Now", onClick: handleRequestCall },
-    { icon: <Schedule />, name: "Schedule Call", onClick: handleScheduleCall },
-  ];
 
   function handleRequestCall() {
-    console.log('in handleRequestCall');
-    user.id ?
-      dispatch({
-        type: "POST_REQUESTED_CALL",
-        payload: { dateTime, user }
-      })
-
-      :
-      history.push('/login')
-
+    console.log("in handleRequestCall");
+    user.id
+      ? dispatch({
+          type: "POST_REQUESTED_CALL",
+          payload: { dateTime, user },
+        })
+      : history.push("/login");
   }
 
   function handleScheduleCall() {
-    console.log('in handleScheduleCall');
-    console.log('this is the set date and time:', callTime);
+    console.log("in handleScheduleCall");
+    console.log("this is the set date and time:", callTime);
 
     const newDate = new Date(callTime);
     const chosenTime = newDate.getTime();
 
-    console.log('chosen time',chosenTime);
-    console.log('current time',new Date().getTime());
+    console.log("chosen time", chosenTime);
+    console.log("current time", new Date().getTime());
 
+    if (chosenTime >= new Date().getTime()) {
+      dispatch({
+        type: "POST_SCHEDULED_CALL",
+        payload: { callTime, user },
+      });
+    } else {
+      alert("no!");
+    }
+    setOpen(false);
+  }
 
-      if(user.id===undefined){history.push('/login')}
-
-      else if(chosenTime >= new Date().getTime( )) {
-
-        dispatch({
-          type: "POST_SCHEDULED_CALL",
-          payload: { callTime, user }
-        })
-      }
-
-      else{alert('no!')}
+  // checks if a user is logged in
+  // if not, redirects to log in, if so opens schedule dialog
+  function openScheduleDialog() {
+    if (user.id === undefined) {
+      history.push("/login");
+    } else setOpen(true);
   }
 
   return (
@@ -86,8 +103,23 @@ function CallSpeedDial() {
           />
         ))}
       </SpeedDial>
-      <Dialog openDialog={openDialog}>
-
+      <Dialog open={open} onClose={handleCloseDialog}>
+        <DialogTitle>Select a time you'd like to be called</DialogTitle>
+        <DialogContent>
+          <Box>
+          <input
+            type="datetime-local"
+            onChange={(e) => {
+              setCallTime(e.target.value);
+              console.log(callTime);
+            }}
+          ></input>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleScheduleCall}>Schedule</Button>
+          <Button onClick={handleCloseDialog}>Cancel</Button>
+        </DialogActions>
       </Dialog>
     </Box>
   );
