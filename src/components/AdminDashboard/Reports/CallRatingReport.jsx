@@ -100,15 +100,15 @@ function CallRatingReport() {
       });
   };
 
-  //       // handles edits made to the DataGrid
-  //   const processRowUpdate = (newValue, oldValue) =>{
-  //     console.log('in process row update', newValue, oldValue)
-  //     return newValue
-  //   }
+        // handles edits made to the DataGrid
+    const processRowUpdate = (newValue, oldValue) =>{
+      console.log('in process row update', newValue, oldValue)
+      return newValue
+    }
 
-  //   const handleProcessRowUpdateError = (error) => {
-  //     console.log('whoops!', error)
-  //   }
+    const handleProcessRowUpdateError = (error) => {
+      console.log('whoops!', error)
+    }
 
   return (
     <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
@@ -119,9 +119,9 @@ function CallRatingReport() {
         density="compact"
         rowsPerPageOptions={[10]}
         components={{ Toolbar: GridToolbar }}
-        // experimentalFeatures={{ newEditingApi: true }}
-        // processRowUpdate={processRowUpdate}
-        // onProcessRowUpdateError={handleProcessRowUpdateError}
+        experimentalFeatures={{ newEditingApi: true }}
+        processRowUpdate={processRowUpdate}
+        onProcessRowUpdateError={handleProcessRowUpdateError}
         getRowId={(row) => row.id}
       />
     </Box>
