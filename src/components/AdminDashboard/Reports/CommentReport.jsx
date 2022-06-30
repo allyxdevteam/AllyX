@@ -44,6 +44,23 @@ function CommentReport() {
         headerName: "Date",
         width: 150,
         editable: false,
+      },
+      {
+        field: "actions",
+        type: "actions",
+        headerName: "Actions",
+        width: 100,
+        cellClassName: "actions",
+        getActions: ({ id }) => {
+          return [
+            <GridActionsCellItem
+              icon={<DeleteIcon />}
+              label="Delete"
+              color="inherit"
+              onClick={handleDeleteClick(id)}
+            />,
+          ];
+        },
       }
   ]
     return (
