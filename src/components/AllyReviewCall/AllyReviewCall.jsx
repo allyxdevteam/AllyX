@@ -22,8 +22,20 @@ function AllyReviewCall() {
     const allyFirstName = useSelector(store => store.claimedCall.oneCallReducer);
     const memberId = useSelector(store => store.oneCall.recipient_id);
 
+
+
     const handleComment = (e) => {
       setComment(e.target.value);
+    };
+
+  
+    const handleSubmit = (e) => {
+      dispatch({
+          type: 'ADD_GEN_COMMENT',
+          payload: { rating, comment }
+      })
+      setRating(0);
+      setComment('');
     };
 
 
@@ -75,8 +87,10 @@ function AllyReviewCall() {
                 Report Abuse
             </Button>
         </form>
+
     </Box>
     )
 }
 
 export default AllyReviewCall;
+

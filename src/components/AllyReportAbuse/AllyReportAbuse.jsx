@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, TextField } from "@mui/material";
 
-function MemberReportAbuse() {
+function AllyReportAbuse() {
 
     const [abuseComments, setAbuseComments] = useState('');
     const dispatch = useDispatch();
     const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
-    const  = useSelector(store => store.claimedCall.);
+    const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);
 
     const handleSubmit = () => {
         dispatch({
-            type: 'MARK_ALLY_REPORTED',
-            payload: {  }
+            type: 'MARK_MEMBER_REPORTED',
+            payload: { claimedCallMember }
         })
     }
 
@@ -28,8 +28,8 @@ function MemberReportAbuse() {
             <Button
                 onClick={() => {
                     dispatch({
-                        type: 'MEMBER_REPORT_ABUSE',
-                        payload: { claimedCallId, , abuseComments }
+                        type: 'ALLY_REPORT_ABUSE',
+                        payload: { claimedCallId, claimedCallMember, abuseComments }
                     })
                 }}
             >

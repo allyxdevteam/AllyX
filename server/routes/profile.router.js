@@ -22,8 +22,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
-router.put('/:id', (req, res) => {
-  if (req.isAuthenticated()) {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
     console.log('*********************************************', req.body);
     const sqlText = `
     UPDATE "user"
@@ -71,7 +70,6 @@ router.put('/:id', (req, res) => {
       console.log('UPDATE database error', dbErr);
       res.sendStatus(500);
     });
-  }
 });
 
 
