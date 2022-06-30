@@ -21,6 +21,7 @@
 
   .card-graphics {
     height: 100%;
+    width: 100%;
     opacity: 1;
     animation-name: fadeIn;
     -webkit-animation-name: fadeIn; 
@@ -39,7 +40,6 @@
   }
 
   h1{
-      font-size: 3vh;
       margin-top: 0px;
       padding: 0px;
   }

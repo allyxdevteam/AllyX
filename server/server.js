@@ -65,6 +65,7 @@ const profileRouter = require('./routes/profile.router');
 const AllyAppRouter = require('./routes/allyApp.router');
 const callInProgress = require('./routes/callInProgress.router');
 const report = require('./routes/report.router');
+const callRatingRouter = require ('./routes/call-ratings.router');
 
 
 // Body parser middleware
@@ -90,6 +91,7 @@ app.use('/api/profile', profileRouter);
 app.use('/api/allyApp', AllyAppRouter);
 app.use('/api/callInProgress', callInProgress);
 app.use('/api/report', report);
+app.use('/api/rate-call', callRatingRouter);
 
 // Serve static files
 app.use(express.static('build'));
