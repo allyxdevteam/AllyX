@@ -43,11 +43,27 @@ function* postClaimedCall(action){
     }
 }
 
+function* cancelClaimedCall(action){
+    const requestedCallId = action.payload.requestedCallId;
+
+    try{
+        const response = yield axios({
+            method: 'PUT',
+            url: `/api/claimedCalls/${requestedCallId}`,
+        });
+
+    }catch{
+        console.log('problem in cancel claimed call');
+    }
+}
+
 
 
 function* claimedCallSaga() {
     yield takeLatest('POST_CLAIMED_CALL', postClaimedCall);
     yield takeLatest('FETCH_CLAIMED_CALL', fetchClaimedCall);
+    yield takeLatest('CANCEL_CLAIMED_CALL', cancelClaimedCall);
+
 
   }
 

@@ -5,6 +5,9 @@ import UserReport from "./Reports/UserReport";
 import CommentReport from "./Reports/CommentReport";
 import ReportReport from "./Reports/ReportReport";
 import CallReport from "./Reports/CallReport";
+import CallRatingReport from "./Reports/CallRatingReport";
+
+import AllyApplicationReport from "./Reports/AllyApplicationReport";
 
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 
@@ -77,13 +80,13 @@ function AdminDashboard() {
         <CallReport />
       </TabPanel>
       <TabPanel value={view} index={3}>
-        Ratings
+        <CallRatingReport />
       </TabPanel>
       <TabPanel value={view} index={4}>
         <ReportReport />
       </TabPanel>
       <TabPanel value={view} index={5}>
-        Ally Applications
+        <AllyApplicationReport />
       </TabPanel>
     </Box>
   );
