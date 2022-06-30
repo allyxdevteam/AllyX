@@ -1,8 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import Box from "@mui/material/Box";
+import {
+  DataGrid,
+  GridToolbar,
+  GridActionsCellItem,
+} from "@mui/x-data-grid";
+import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 
 function ReportReport() {
   const dispatch = useDispatch();
