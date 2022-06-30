@@ -157,7 +157,7 @@ function AllyApplicationReport() {
             }
             label="Reject"
             color="inherit"
-            //   onClick={handleApprove(id, row.user_id)}
+            onClick={handleReject(id, row.user_id)}
           />,
         ];
       },
@@ -200,6 +200,29 @@ function AllyApplicationReport() {
     Swal.fire(
       "Please remember to contact this user and let them know what they need to do to get this application approved."
     );
+  };
+
+  const handleReject = (id, user_id) => () => {
+    const rejected = {
+      id: id,
+      user_id: user_id,
+      is_ally: false,
+      is_complete: true,
+      is_approved: false,
+    };
+    Swal.fire({
+      title: "Are you sure you want to reject this application?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Reject",
+    }).then((willReject) => {
+      if (willReject) {
+        dispatch({ type: "HANDLE_APPLICATION", payload: rejected });
+      }
+    });
+    Swal.fire("This application has been rejected", {
+      icon: "error",
+    });
   };
 
   return (
