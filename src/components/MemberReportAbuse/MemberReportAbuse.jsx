@@ -8,7 +8,7 @@ function MemberReportAbuse() {
     const [abuseComments, setAbuseComments] = useState('');
     const dispatch = useDispatch();
     const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
-    const  = useSelector(store => store.claimedCall.);
+    const  claimedCall = useSelector(store => store.claimedCall);
 
     const handleSubmit = () => {
         dispatch({
@@ -29,7 +29,7 @@ function MemberReportAbuse() {
                 onClick={() => {
                     dispatch({
                         type: 'MEMBER_REPORT_ABUSE',
-                        payload: { claimedCallId, , abuseComments }
+                        payload: { claimedCallId,  abuseComments }
                     })
                 }}
             >
@@ -39,4 +39,4 @@ function MemberReportAbuse() {
     )
 }
 
-export default AllyReportAbuse;
+export default MemberReportAbuse;
