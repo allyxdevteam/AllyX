@@ -167,63 +167,56 @@ function AllyApplicationReport() {
 
   // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
   const handleApprove = (id, user_id) => () => {
-    const approved = {
-        id: id,
-        user_id: user_id,
-        is_ally: true,
-        is_complete: true,
-        is_approved: true,
-      };
-    // Swal.fire({
-    //   title: "Are you sure you want to approve this application?",
-    //   icon: "question",
-    //   showCancelButton: true,
-    //   confirmButtonText: "Approve",
-    // }).then((willApprove) => {
-    //   if (willApprove) {
-        dispatch({ type: "HANDLE_APPLICATION", payload: {approved} });
-    //   }
-    // });
-    // Swal.fire("This member has been promoted to ally!", {
-    //   icon: "success",
-    // });
+    Swal.fire({
+      title: "Are you sure you want to approve this application?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Approve",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch({ type: "HANDLE_APPLICATION", payload: {id: id,
+          user_id: user_id,
+          is_ally: true,
+          is_complete: true,
+          is_approved: true,} });
+      }
+      Swal.fire("This member has been promoted to ally!", {
+        icon: "success",
+      });
+    });
+   
   };
 
   const handleReopen = (id, user_id) => () => {
-    const reopen = {
-      id: id,
+    dispatch({ type: "HANDLE_APPLICATION", payload: {id: id,
       user_id: user_id,
       is_ally: false,
       is_complete: false,
-      is_approved: null,
-    };
-    dispatch({ type: "HANDLE_APPLICATION", payload: reopen });
+      is_approved: null,} });
     Swal.fire(
       "Please remember to contact this user and let them know what they need to do to get this application approved."
     );
   };
 
   const handleReject = (id, user_id) => () => {
-    const rejected = {
-      id: id,
-      user_id: user_id,
-      is_ally: false,
-      is_complete: true,
-      is_approved: false,
-    };
-    // Swal.fire({
-    //   title: "Are you sure you want to reject this application?",
-    //   icon: "question",
-    //   showCancelButton: true,
-    //   confirmButtonText: "Reject",
-    // }).then((willReject) => {
-    //   if (willReject) {
-        dispatch({ type: "HANDLE_APPLICATION", payload: rejected });
-    //   }
-    // });
-    // Swal.fire("This application has been rejected", {
-    //   icon: "error",
-    // });
+    Swal.fire({
+      title: "Are you sure you want to reject this application?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Reject",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch({ type: "HANDLE_APPLICATION", payload: { id: id,
+          user_id: user_id,
+          is_ally: false,
+          is_complete: true,
+          is_approved: false,} });
+      }
+      Swal.fire("This application has been rejected", {
+        icon: "error",
+      });
+    });
+ 
   };
 
   return (

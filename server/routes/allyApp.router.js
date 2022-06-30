@@ -157,6 +157,8 @@ router.put("/:id", rejectUnauthenticated, async (req, res) => {
     const approvalStatus = Boolean(req.body.is_approved);
     const appID = req.body.id;
     const userID = req.body.user_id;
+    console.log(req.body)
+    console.log(allyStatus, completeStatus, approvalStatus, appID, userID)
 
     const connection = await pool.connect();
 
@@ -170,14 +172,14 @@ router.put("/:id", rejectUnauthenticated, async (req, res) => {
     const sqlQueryApp = `
     UPDATE "ally-application"
       SET
-        is_complete = $3,
-        is_approved = $4
-      WHERE id = $5 
+        is_complete = $1,
+        is_approved = $2
+      WHERE id = $3 
     `;
 
     try {
       await connection.query("BEGIN");
-      await connection.query(sqlQueryUser, [allyStatus, userID]);
+      await connection.query(sqlQueryUser, [allyStatus, userID] );
       await connection.query(sqlQueryApp, [
         completeStatus,
         approvalStatus,
