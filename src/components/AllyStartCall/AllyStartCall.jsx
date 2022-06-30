@@ -15,7 +15,7 @@ function AllyStartCall() {
     const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
     const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);
 
-    const memberId = params.memberId
+    const memberId = params.memberId;
 
     const date = new Date();
     const dateTime = date.toLocaleString();

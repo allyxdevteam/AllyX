@@ -14,10 +14,15 @@ function* fetchCalls(){
     }
 }
 
+function* fetchOneCall() {
+    const singleCall = yield axios.get('api/')
+}
+
 
 function* callsSaga() {
     
     yield takeLatest('FETCH_CALLS', fetchCalls);
+    yield takeLatest('FETCH_ONE_CALL', fetchOneCall);
   }
 
 export default callsSaga;

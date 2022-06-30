@@ -1,13 +1,20 @@
-import { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Typography, Rating, TextField, Box, Button } from "@mui/material";
 
-function ReviewCall() {
+function MemberReviewCall() {
+    // useEffect(() => {
+    //     dispatch({
+    //         type: 'FETCH_ONE_CALL',
+    //         payload: callId
+    //     })
+    // }, [])
+
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
-  
     const dispatch = useDispatch();
+    const member = useSelector(store => store.claimedCallMember);
 
     const handleComment = (e) => {
       setComment(e.target.value);
@@ -15,8 +22,8 @@ function ReviewCall() {
   
     const handleSubmit = (e) => {
       dispatch({
-          type: 'ADD_GEN_COMMENT',
-          payload: { rating, comment }
+          type: 'ADD_CALL_RATING',
+          payload: { member, rating, comment }
       })
       setRating(0);
       setComment('');
@@ -45,8 +52,17 @@ function ReviewCall() {
             onChange={handleComment}
         />
         <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>Submit</Button>
+        <Button
+            variant="contained"
+            sx={{m:1}}
+            onClick={() => {
+                history.push(`/memberReportAbuse`);
+            }}
+        >
+            Report Abuse
+        </Button>
     </Box>
     )
 }
 
-export default ReviewCall;
+export default MemberReviewCall;
