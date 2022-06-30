@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Call, Schedule } from "@mui/icons-material/";
-import { Box, Backdrop, SpeedDial, SpeedDialAction } from "@mui/material";
+import { Box, Backdrop, SpeedDial, SpeedDialAction, Dialog, DialogTitle } from "@mui/material";
 
 function CallSpeedDial() {
 
@@ -12,9 +12,9 @@ function CallSpeedDial() {
 
   const user = useSelector((store) => store.user);
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openSpeedDial, setOpenSpeedDial] = useState(false);
+  const handleOpenSpeedDial = () => setOpenSpeedDial(true);
+  const handleCloseSpeedDial = () => setOpenSpeedDial(false);
 
   const date = new Date();
   const dateTime = date.toLocaleString();
@@ -67,14 +67,14 @@ function CallSpeedDial() {
 
   return (
     <Box sx={{ height: 330, transform: "translateZ(0px)", flexGrow: 1 }}>
-      <Backdrop open={open} />
+      <Backdrop open={openSpeedDial} />
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
         sx={{ position: "absolute", bottom: 16, right: 16 }}
         icon={<Call />}
-        onClose={handleClose}
-        onOpen={handleOpen}
-        open={open}
+        onClose={handleCloseSpeedDial}
+        onOpen={handleOpenSpeedDial}
+        open={openSpeedDial}
       >
         {actions.map((action) => (
           <SpeedDialAction
@@ -86,6 +86,9 @@ function CallSpeedDial() {
           />
         ))}
       </SpeedDial>
+      <Dialog openDialog={openDialog}>
+
+      </Dialog>
     </Box>
   );
 }
