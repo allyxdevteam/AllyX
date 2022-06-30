@@ -91,6 +91,8 @@ function LandingPage() {
     <div className="container">
       <h2>Welcome {user.username}</h2> 
 
+      <Button onClick={handleGoToAllyPage}>go to Ally Requested Calls/ become an Ally</Button>
+
       <Button onClick={handleRequestCall}>Request a call</Button>
 
       <Button onClick={handleScheduleCall}>Schedule a call</Button>

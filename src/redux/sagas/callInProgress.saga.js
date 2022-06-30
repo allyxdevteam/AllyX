@@ -43,8 +43,8 @@ function* postCallEndedTimeMember(action){
     try{
         const response = yield axios({
             method: 'PUT',
-            url: `/api/callInProgress/${callId}`,
-            data: {callId, dateTime}
+            url: `/api/callInProgress/${userId}`,
+            data: {userId, dateTime}
         });
     }catch{
         console.log('problem in post call end time member');

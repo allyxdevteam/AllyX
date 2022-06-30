@@ -42,14 +42,9 @@ router.put('/:end', rejectUnauthenticated, (req, res) => {
 
 
     const sqlText = `
-    IF "date_time_ended" = NULL
-    THEN
     UPDATE "call"
     SET "date_time_ended" = $1, "is_done_ally" = true
     WHERE "id" = $2
-    ELSE
-    UPDATE "call"
-    SET "is_done_ally" = true;
   `;
     const sqlValues = [
       dateTime, callId

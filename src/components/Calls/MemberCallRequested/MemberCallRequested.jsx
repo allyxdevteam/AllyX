@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {Button, Typography} from '@mui/material';
 
+//add requested call id to the call table
 
 function MemberCallRequested(){
 
@@ -11,7 +12,8 @@ function MemberCallRequested(){
     const params = useParams();
     const history = useHistory();
 
-    const user = useSelector((store) => store.user)
+    const user = useSelector((store) => store.user);
+    const callId = useSelector((store)=> store.claimedCalls);
 
     const date = new Date();
     const dateTime = date.toLocaleString();
@@ -21,11 +23,12 @@ function MemberCallRequested(){
     }
 
     function handleCompleteCall(){
-        dispatch({
-            type: 'PUT_CALL_ENDED_TIME_MEMBER',
-            payload: {user, dateTime}
-        })
-        history.push('/memberReviewCall');
+        console.log('this is the callId:', callId);
+        // dispatch({
+        //     type: 'PUT_CALL_ENDED_TIME_MEMBER',
+        //     payload: {user, dateTime}
+        // })
+        // history.push('/memberReviewCall');
     }
 
 
@@ -37,7 +40,6 @@ function MemberCallRequested(){
             Don't forget to leave a review after your call! Thanks for using Allyx!</Typography>
         <Button onClick={cancelCallRequest}>Cancel Request</Button>
         <Button onClick={handleCompleteCall}>Call Complete</Button>
-
         </>
     )
 }
