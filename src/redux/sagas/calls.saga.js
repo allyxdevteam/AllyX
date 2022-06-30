@@ -16,14 +16,14 @@ function* fetchCalls(){
 
 function* fetchOneCall(action) {
     const callId = action.payload.callId;
-    const response = yield axios({
+    const oneCall = yield axios({
         method: 'GET',
         url: `/api/claimedCalls/${callId}`,
         data: action.payload
     })
     yield put ({
         type: 'SET_ONE_CALL',
-        payload: response.data
+        payload: oneCall.data
     })
 }
 

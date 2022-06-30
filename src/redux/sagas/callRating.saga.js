@@ -14,9 +14,18 @@ function* fetchCallRatings(){
     }
 }
 
+function* addCallRating(action) {
+    yield axios({
+        method: 'POST',
+        url: '/api/rate-call',
+        data: action.payload
+    })
+}
+
 
 function* callRatingSaga() {
     yield takeLatest('FETCH_CALL_RATINGS', fetchCallRatings);
+    yield takeLatest('ADD_CALL_RATING', addCallRating);
   }
 
 export default callRatingSaga;
