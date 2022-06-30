@@ -23,7 +23,6 @@ function* updateProfile(action) {
     })
     yield put({
         type: 'FETCH_USER'
-        // payload: updatedProfile
     })
 }
 

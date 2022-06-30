@@ -25,6 +25,8 @@ import AllyRequestedCalls from '../AllyRequestedCalls/AllyRequestedCalls';
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import AllyStartCall from '../AllyStartCall/AllyStartCall';
 import AllyCallInProgress from '../AllyCallInProgress/AllyCallInProgress';
+import AllyReviewCall from '../AllyReviewCall/AllyReviewCall';
+import AllyReportAbuse from '../AllyReportAbuse/AllyReportAbuse';
 
 import './App.css';
 import AllyApplication from '../AllyApplication/AllyApplication';
@@ -110,6 +112,13 @@ function App() {
             path="/allyCallInProgress/:memberId"
           >
             <AllyCallInProgress />
+          </ProtectedRoute>
+          
+          <ProtectedRoute
+            exact
+            path="/allyReviewCall"
+          >
+            <AllyReviewCall />
           </ProtectedRoute>
 
           <Route
