@@ -9,6 +9,7 @@ import './LandingPage.css';
 
 // CUSTOM COMPONENTS---------------------------------------------------
 import ImageUploader from '../ImageUploader/ImageUploader';
+import ConditionalAllyButton from './Components/ConditionalAllyButton';
 
 function LandingPage() {
 
@@ -72,16 +73,15 @@ function LandingPage() {
       else{alert('no!')}
   }
 
-  function handleGoToAllyPage(){
-    history.push('/allyRequestedCalls')
-  }
+  
 
 
   return (
     <div className="container">
       <h2>Welcome {user.username}</h2> 
 
-      <button onClick={handleGoToAllyPage}>go to Ally Requested Calls/ become an Ally</button>
+      <ConditionalAllyButton user={user}/>
+      {/* <button onClick={handleGoToAllyPage}>go to Ally Requested Calls/ become an Ally</button> */}
 
       <button onClick={handleRequestCall}>Request a call</button>
 
