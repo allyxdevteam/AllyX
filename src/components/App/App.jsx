@@ -26,6 +26,7 @@ import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import AllyStartCall from '../AllyStartCall/AllyStartCall';
 import AllyCallInProgress from '../AllyCallInProgress/AllyCallInProgress';
 import AllyReviewCall from '../AllyReviewCall/AllyReviewCall';
+import MemberReviewCall from '../MemberReviewCall/MemberReviewCall';
 import AllyReportAbuse from '../AllyReportAbuse/AllyReportAbuse';
 
 import './App.css';
@@ -123,9 +124,17 @@ function App() {
 
           <ProtectedRoute
             exact
+            path="/memberReviewCall"
+          >
+            <MemberReviewCall />
+            </ProtectedRoute>
+            
+            <ProtectedRoute
+            exact
             path="/allyReportAbuse"
           >
             <AllyReportAbuse />
+
           </ProtectedRoute>
 
           <Route

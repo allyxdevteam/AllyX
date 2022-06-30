@@ -19,7 +19,19 @@ const claimedCall = (state = {}, action) => {
           }
         };
 
+const oneCallReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_ONE_CALL':
+      return action.payload;
+    case 'UNSET_ONE_CALL':
+      return [];
+    default:
+      return state;
+  }
+}
+
     export default combineReducers({
         claimedCall,
         claimedCallMember,
+        oneCallReducer,
       });

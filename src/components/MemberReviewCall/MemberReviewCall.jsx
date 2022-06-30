@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Typography, Rating, TextField, Box, Button } from "@mui/material";
 
-function AllyReviewCall() {
+function MemberReviewCall() {
     useEffect(() => {
         dispatch({
             type: 'FETCH_ONE_CALL',
@@ -11,23 +11,17 @@ function AllyReviewCall() {
         })
     }, []);
 
-
-    console.log('**************************router', allyFirstName);
-
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const dispatch = useDispatch();
     const callId = useSelector(store => store.claimedCall);
     const user = useSelector(store => store.user);
-    const allyFirstName = useSelector(store => store.claimedCall.oneCallReducer);
+    const memberFirstName = useSelector(store => store.oneCall.first_name);
     const memberId = useSelector(store => store.oneCall.recipient_id);
-
-
 
     const handleComment = (e) => {
       setComment(e.target.value);
     };
-
   
     const handleSubmit = (e) => {
       dispatch({
@@ -38,12 +32,10 @@ function AllyReviewCall() {
       setComment('');
     };
 
-
     return (
     
     <Box sx={[{maxWidth: '35vw'},{m:'auto'}]}>
-        <Typography>How was your call with {allyFirstName}?</Typography>
-        <Typography component="legend">Rating</Typography>
+        <Typography>How was your call with {memberFirstName}?</Typography>
         <form
             onSubmit={() => {
                 dispatch({
@@ -58,6 +50,7 @@ function AllyReviewCall() {
                 })
             }}
         >
+        <Typography component="legend">Rating</Typography>
             <Rating
                 type="rating"
                 name="general-rating"
@@ -81,16 +74,14 @@ function AllyReviewCall() {
                 variant="contained"
                 sx={{m:1}}
                 onClick={() => {
-                    history.push(`/allyReportAbuse`);
+                    history.push(`/memberReportAbuse`);
                 }}
             >
                 Report Abuse
             </Button>
         </form>
-
     </Box>
     )
 }
 
-export default AllyReviewCall;
-
+export default MemberReviewCall;

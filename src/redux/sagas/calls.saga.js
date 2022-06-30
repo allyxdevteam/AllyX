@@ -14,9 +14,25 @@ function* fetchCalls(){
     }
 }
 
+function* fetchOneCall(action) {
+
+    console.log('**************************router', action.payload);
+    const callId = action.payload.callId;
+    const oneCall = yield axios({
+        method: 'GET',
+        url: `/api/callInProgress/${callId}`,
+        data: action.payload
+    })
+    yield put ({
+        type: 'SET_ONE_CALL',
+        payload: oneCall.data
+    })
+}
+
 
 function* callsSaga() {
     yield takeLatest('FETCH_CALLS', fetchCalls);
+    yield takeLatest('FETCH_ONE_CALL', fetchOneCall);
   }
 
 export default callsSaga;

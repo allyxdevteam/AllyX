@@ -14,6 +14,15 @@ function* fetchCallRatings(){
     }
 }
 
+function* addCallRating(action) {
+    yield axios({
+        method: 'POST',
+        url: '/api/rate-call',
+        data: action.payload
+    })
+}
+
+
 function* deleteCallRating(action){
     const response = yield axios ({
         method: 'DELETE',
@@ -27,6 +36,7 @@ function* deleteCallRating(action){
 
 function* callRatingSaga() {
     yield takeLatest('FETCH_CALL_RATINGS', fetchCallRatings);
+    yield takeLatest('ADD_CALL_RATING', addCallRating);
     yield takeLatest('DELETE_CALL_RATING', deleteCallRating);
   }
 
