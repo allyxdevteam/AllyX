@@ -15,6 +15,7 @@ import reportSaga from './report.saga';
 import callSaga from './calls.saga';
 import imageUploadSaga from './imageUpload.saga';
 import callRatingSaga from './callRating.saga';
+import reportAbuseSaga from './reportAbuse.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -41,5 +42,6 @@ export default function* rootSaga() {
     callSaga(),
     imageUploadSaga(),
     callRatingSaga(),
+    reportAbuseSaga(),
   ]);
 }

@@ -24,7 +24,7 @@ function AllyCallInProgress(){
             type: 'PUT_CALL_ENDED_TIME',
             payload: {claimedCallId, dateTime}
         })
-        history.push('/home');
+        history.push('/allyReviewCall');
     }
 
 

@@ -5,8 +5,7 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-router.get('/:id', (req, res) => {
-  if (req.isAuthenticated()) {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = `
     SELECT * FROM "user"
       WHERE id=$1
@@ -21,11 +20,9 @@ router.get('/:id', (req, res) => {
       console.log('error in GET /user/:id', dbErr);
       res.sendStatus(500);
     })
-  }
 })
 
-router.put('/:id', (req, res) => {
-  if (req.isAuthenticated()) {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
     console.log('*********************************************', req.body);
     const sqlText = `
     UPDATE "user"
@@ -73,7 +70,6 @@ router.put('/:id', (req, res) => {
       console.log('UPDATE database error', dbErr);
       res.sendStatus(500);
     });
-  }
 });
 
 

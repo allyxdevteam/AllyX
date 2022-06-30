@@ -10,6 +10,7 @@ import './LandingPage.css';
 // CUSTOM COMPONENTS---------------------------------------------------
 import ImageUploader from '../ImageUploader/ImageUploader';
 import ConditionalAllyButton from './Components/ConditionalAllyButton';
+import CallSpeedDial from "../Nav/Components/CallSpeedDial";
 
 function LandingPage() {
 
@@ -87,7 +88,7 @@ function LandingPage() {
 
       <button onClick={handleScheduleCall}>Schedule a call</button>
 
-
+     
       <input type="datetime-local"
         onChange={(e) => {
           setCallTime(e.target.value)
