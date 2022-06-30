@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-import { DataGrid, GridToolbar, GridActionsCellItem } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, GridActionsCellItem, GridCellParams } from "@mui/x-data-grid";
 import {Box, Tooltip} from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
 import ReplyIcon from '@mui/icons-material/Reply';
@@ -123,13 +123,13 @@ function AllyApplicationReport() {
         headerName: "Actions",
         width: 100,
         cellClassName: "actions",
-        getActions: ({ id, user_id }) => {
+        getActions: ({ id, row }) => {
           return [
             <GridActionsCellItem
               icon={<Tooltip title="Approve"><CheckIcon /></Tooltip>}
               label="Approve"
               color="inherit"
-              onClick={handleApprove(id, user_id)}
+              onClick={handleApprove(id, row.user_id)}
             />,
             <GridActionsCellItem
               icon={<Tooltip title="Reopen (contact user)"><ReplyIcon /></Tooltip>}
@@ -149,19 +149,10 @@ function AllyApplicationReport() {
   ];
 
   // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
-  const handleApprove = (id) => () => {
-  console.log('in approve', id)
+  const handleApprove = (id, user_id) => () => {
+  console.log('in approve', id, user_id)
   };
 
-//   // handles edits made to the DataGrid
-//   const processRowUpdate = (newValue, oldValue) => {
-//     console.log("in process row update", newValue, oldValue);
-//     return newValue;
-//   };
-
-//   const handleProcessRowUpdateError = (error) => {
-//     console.log("whoops!", error);
-//   };
 
   return (
     <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
@@ -172,10 +163,6 @@ function AllyApplicationReport() {
         density="compact"
         rowsPerPageOptions={[10]}
         components={{ Toolbar: GridToolbar }}
-        // experimentalFeatures={{ newEditingApi: true }}
-        // processRowUpdate={processRowUpdate}
-        // onProcessRowUpdateError={handleProcessRowUpdateError}
-        // getRowId={(row) => row.id}
       />
     </Box>
   );
