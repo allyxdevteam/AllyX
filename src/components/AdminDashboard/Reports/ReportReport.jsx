@@ -84,8 +84,8 @@ function ReportReport() {
    // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
    const handleDeleteClick = (id) => () => {
     Swal.fire({
-        title: "Are you sure you want to delete this user?",
-        text: "Once deleted, you will not be able to recover their data!",
+        title: "Are you sure you want to delete this report?",
+        text: "Once deleted, you will not be able to recover this data!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete'
@@ -93,14 +93,14 @@ function ReportReport() {
       .then((willDelete) => {
         if (willDelete) {
             dispatch({
-                type: 'DELETE_PROFILE',
+                type: 'DELETE_REPORT',
                 payload: id
             })
-          Swal.fire("The user has been deleted", {
+          Swal.fire("The report has been deleted", {
             icon: "success",
           });
         } else {
-          Swal.fire("Cancelled! The user data is safe.");
+          Swal.fire("Cancelled! The data is safe.");
         }
       });
   };

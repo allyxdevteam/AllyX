@@ -80,11 +80,11 @@ function CommentReport() {
                 type: 'DELETE_GEN_COMMENT',
                 payload: id
             })
-          Swal.fire("The user has been deleted", {
+          Swal.fire("The comment has been deleted", {
             icon: "success",
           });
         } else {
-          Swal.fire("Cancelled! The user data is safe.");
+          Swal.fire("Cancelled! The data is safe.");
         }
       });
   };
