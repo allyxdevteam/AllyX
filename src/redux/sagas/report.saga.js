@@ -24,7 +24,7 @@ function* deleteReport(action){
 
 function* reportSaga() {
     yield takeLatest('FETCH_REPORTS', fetchReports);
-    yield takeLatest('DELETE_REPORTS', deleteReport);
+    yield takeLatest('DELETE_REPORT', deleteReport);
 }
 
 export default reportSaga;
