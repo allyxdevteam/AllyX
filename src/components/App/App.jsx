@@ -112,6 +112,10 @@ function App() {
             path="/allyCallInProgress/:memberId"
           >
             <AllyCallInProgress />
+          </ProtectedRoute>
+          
+          <ProtectedRoute
+            exact
             path="/allyReviewCall"
           >
             <AllyReviewCall />

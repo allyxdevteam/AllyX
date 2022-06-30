@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Typography, Rating, TextField, Box, Button } from "@mui/material";
 
-function AllyReviewCall() {
+function MemberReviewCall() {
     useEffect(() => {
         dispatch({
             type: 'FETCH_ONE_CALL',
@@ -67,4 +67,4 @@ function AllyReviewCall() {
     )
 }
 
-export default AllyReviewCall;
+export default MemberReviewCall;
