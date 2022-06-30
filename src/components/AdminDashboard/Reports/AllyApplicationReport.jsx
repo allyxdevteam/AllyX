@@ -5,7 +5,7 @@ import {
   DataGrid,
   GridToolbar,
   GridActionsCellItem,
-  GridCellParams,
+  GridCellParams, // not called but needs to be imported for actions to work
 } from "@mui/x-data-grid";
 import { Box, Tooltip } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";

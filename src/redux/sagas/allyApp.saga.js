@@ -19,7 +19,7 @@ function* fetchAllyApp() {
   }
 }
 
-// commented this out because this is not how the PUT route on allyApp works
+// commented this out because it doesn't seem to be in use and I made a put route for approving applications
 // function* updateAllyApp(action) {
 //   try {
 //     yield axios({
@@ -59,6 +59,22 @@ function* fetchAllyApplications(){
     }catch{
         console.log('fetch applications error');
     }
+}
+
+function* handleApplications(action){
+    try {
+        yield axios({
+          method: `PUT`,
+          url: `/api/allyApp/${action.payload.id}`,
+          data: action.payload,
+        }).then(
+          put({
+            type: "FETCH_ALLY_APPLICATIONS",
+          })
+        );
+      } catch (err) {
+        console.log("error handling applications", err);
+      }
 }
 
 function* allyAppSaga() {
