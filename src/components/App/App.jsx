@@ -25,7 +25,7 @@ import AllyRequestedCalls from '../AllyRequestedCalls/AllyRequestedCalls';
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import AllyStartCall from '../AllyStartCall/AllyStartCall';
 import AllyCallInProgress from '../AllyCallInProgress/AllyCallInProgress';
-
+import BottomNav from '../Nav/Components/BottomNav';
 import './App.css';
 import AllyApplication from '../AllyApplication/AllyApplication';
 
@@ -172,6 +172,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
+        <BottomNav />
       </div>
     </Router>
   );
