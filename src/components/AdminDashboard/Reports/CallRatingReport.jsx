@@ -75,12 +75,12 @@ function CallRatingReport() {
         },
       }
   ];
-  
+
    // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
    const handleDeleteClick = (id) => () => {
     Swal.fire({
-        title: "Are you sure you want to delete this user?",
-        text: "Once deleted, you will not be able to recover their data!",
+        title: "Are you sure you want to delete this call rating?",
+        text: "Once deleted, you will not be able to recover this data!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete'
@@ -88,14 +88,14 @@ function CallRatingReport() {
       .then((willDelete) => {
         if (willDelete) {
             dispatch({
-                type: 'DELETE_PROFILE',
+                type: 'DELETE_CALL_RATING',
                 payload: id
             })
-          Swal.fire("The user has been deleted", {
+          Swal.fire("The call rating has been deleted", {
             icon: "success",
           });
         } else {
-          Swal.fire("Cancelled! The user data is safe.");
+          Swal.fire("Cancelled! The data is safe.");
         }
       });
   };
