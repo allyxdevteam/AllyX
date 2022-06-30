@@ -25,3 +25,21 @@ router.post('/ally', rejectUnauthenticated, (req, res) => {
     res.sendStatus(500);
   });
 })
+
+router.put('/ally', rejectUnauthenticated, (req, res) => {
+  const sqlText = `
+  UPDATE "user"
+	SET
+		is_reported=TRUE
+	WHERE id = $1;
+  `;
+  sqlValues = [req.body.id];
+  pool.query(sqlText, sqlValues)
+    .then((dbRes) => {
+    res.sendStatus(201);
+  })
+  .catch((dbErr) => {
+    console.log('INSERT database error', dbErr);
+    res.sendStatus(500);
+  });
+})

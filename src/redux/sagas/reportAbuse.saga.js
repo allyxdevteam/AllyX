@@ -9,8 +9,17 @@ function* allyReportAbuse(action) {
     })
 }
 
+function* markMemberReported(action) {
+    yield axios({
+        method: 'PUT',
+        url: `/api/reportAbuse/ally`,
+        data: action.payload.id
+    })
+}
+
 function* reportAbuseSaga() {
-    yield takeLatest('ALLY_REPORT_ABUSE', allyReportAbuse)
+    yield takeLatest('ALLY_REPORT_ABUSE', allyReportAbuse);
+    yield takeLatest('MARK_MEMBER_REPORTED', markMemberReported);
 }
 
 export default reportAbuseSaga;
