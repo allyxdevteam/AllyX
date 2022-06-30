@@ -21,7 +21,7 @@ function AllyCallInProgress(){
 
     function handleCompleteCall(){
         dispatch({
-            type: 'PUT_CALL_ENDED_TIME',
+            type: 'PUT_CALL_ENDED_TIME_ALLY',
             payload: {claimedCallId, dateTime}
         })
         history.push('/allyReviewCall');

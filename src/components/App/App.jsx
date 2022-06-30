@@ -21,10 +21,11 @@ import Profile from '../Profile/Profile';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import UpdateProfile from '../UpdateProfile/UpdateProfile';
 import GeneralComment from '../GeneralComment/GeneralComment';
-import AllyRequestedCalls from '../AllyRequestedCalls/AllyRequestedCalls';
+import AllyRequestedCalls from '../Calls/AllyRequestedCalls/AllyRequestedCalls';
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
-import AllyStartCall from '../AllyStartCall/AllyStartCall';
-import AllyCallInProgress from '../AllyCallInProgress/AllyCallInProgress';
+import AllyStartCall from '../Calls/AllyStartCall/AllyStartCall';
+import AllyCallInProgress from '../Calls/AllyCallInProgress/AllyCallInProgress';
+import MemberCallRequested from '../Calls/MemberCallRequested/MemberCallRequested';
 
 import './App.css';
 import AllyApplication from '../AllyApplication/AllyApplication';
@@ -96,6 +97,13 @@ function App() {
             path="/allyRequestedCalls"
           >
             <AllyRequestedCalls />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/memberCallRequested"
+          >
+            <MemberCallRequested />
           </ProtectedRoute>
 
           <ProtectedRoute

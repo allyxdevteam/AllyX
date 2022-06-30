@@ -11,18 +11,19 @@ function MemberCallRequested(){
     const params = useParams();
     const history = useHistory();
 
-    const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
-    const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);
-
-    const memberId = params.memberId
+    const user = useSelector((store) => store.user)
 
     const date = new Date();
     const dateTime = date.toLocaleString();
 
+    function cancelCallRequest(){
+            console.log('in cancel call request');
+    }
+
     function handleCompleteCall(){
         dispatch({
-            type: 'PUT_CALL_ENDED_TIME',
-            payload: {claimedCallId, dateTime}
+            type: 'PUT_CALL_ENDED_TIME_MEMBER',
+            payload: {user, dateTime}
         })
         history.push('/memberReviewCall');
     }
@@ -30,8 +31,13 @@ function MemberCallRequested(){
 
     return(
         <>
-        <Typography>Call in progress!</Typography>
+        <Typography>Your call has been requested, you should be receiving a call soon, 
+            or close to whenever it was scheduled. You may cancel this request if you wish.
+            When your call is complete please press the Call Complete button below.
+            Don't forget to leave a review after your call! Thanks for using Allyx!</Typography>
+        <Button onClick={cancelCallRequest}>Cancel Request</Button>
         <Button onClick={handleCompleteCall}>Call Complete</Button>
+
         </>
     )
 }

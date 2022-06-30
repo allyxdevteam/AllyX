@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 //styling, mui ----------------------------------------------------------
 import './LandingPage.css';
+import { Button } from '@mui/material';
 
 
 // CUSTOM COMPONENTS---------------------------------------------------
@@ -38,10 +39,14 @@ function LandingPage() {
   function handleRequestCall() {
     console.log('in handleRequestCall');
     user.id ?
-      dispatch({
+      (dispatch({
         type: "POST_REQUESTED_CALL",
         payload: { dateTime, user }
-      })
+      }), 
+      
+      history.push('/memberCallRequested'))
+      
+      
 
       :
       history.push('/login')
@@ -67,7 +72,12 @@ function LandingPage() {
           type: "POST_SCHEDULED_CALL",
           payload: { callTime, user }
         })
+
+        history.push('/memberCallRequested')
+
       }
+
+      
 
       else{alert('no!')}
   }
@@ -81,11 +91,9 @@ function LandingPage() {
     <div className="container">
       <h2>Welcome {user.username}</h2> 
 
-      <button onClick={handleGoToAllyPage}>go to Ally Requested Calls/ become an Ally</button>
+      <Button onClick={handleRequestCall}>Request a call</Button>
 
-      <button onClick={handleRequestCall}>Request a call</button>
-
-      <button onClick={handleScheduleCall}>Schedule a call</button>
+      <Button onClick={handleScheduleCall}>Schedule a call</Button>
 
 
       <input type="datetime-local"
@@ -94,8 +102,6 @@ function LandingPage() {
           console.log(callTime);
         }}
       ></input>
-
-      <ImageUploader/>
 
       <img src={profileImage} alt=''/>
 
