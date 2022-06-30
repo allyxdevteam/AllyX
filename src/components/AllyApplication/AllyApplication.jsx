@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import { SaveOutlined } from "@mui/icons-material";
 
 function AllyApplication() {
-const timer = setInterval(fetchApp, 100);
+const timer = setInterval(fetchApp, 2000);
 
   const [X, setX] = useState(0);
   const [showButton, setShowButton] = useState(true);

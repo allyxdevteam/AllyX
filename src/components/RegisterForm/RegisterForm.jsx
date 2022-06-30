@@ -247,10 +247,10 @@ function RegisterForm() {
                       placeholder=""
                       multiline
                       fullwidth
-                      color={response2.length > 0 ? null : "warning"}
-                      value={response2}
+                      color={response1.length > 0 ? null : "warning"}
+                      value={response1}
                       onChange={(e) => {
-                        setResponse2(e.target.value);
+                        setResponse(e.target.value);
                       }}
                     />
                   </FormControl>
