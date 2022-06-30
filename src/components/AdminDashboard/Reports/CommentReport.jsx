@@ -1,8 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect} from "react";
+import Swal from 'sweetalert2';
 
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import Box from "@mui/material/Box";
+import {
+  DataGrid,
+  GridToolbar,
+  GridActionsCellItem,
+} from "@mui/x-data-grid";
+import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 
 function CommentReport() {
     const dispatch = useDispatch();
@@ -39,8 +45,50 @@ function CommentReport() {
         headerName: "Date",
         width: 150,
         editable: false,
+      },
+      {
+        field: "actions",
+        type: "actions",
+        headerName: "Actions",
+        width: 100,
+        cellClassName: "actions",
+        getActions: ({ id }) => {
+          return [
+            <GridActionsCellItem
+              icon={<DeleteIcon />}
+              label="Delete"
+              color="inherit"
+              onClick={handleDeleteClick(id)}
+            />,
+          ];
+        },
       }
   ]
+
+   // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
+   const handleDeleteClick = (id) => () => {
+    Swal.fire({
+        title: "Are you sure you want to delete this comment?",
+        text: "Once deleted, you will not be able to recover this data!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete'
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            dispatch({
+                type: 'DELETE_GEN_COMMENT',
+                payload: id
+            })
+          Swal.fire("The comment has been deleted", {
+            icon: "success",
+          });
+        } else {
+          Swal.fire("Cancelled! The data is safe.");
+        }
+      });
+  };
+
     return (
         <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
           <DataGrid
@@ -52,7 +100,6 @@ function CommentReport() {
             disableSelectionOnClick
             components={{ Toolbar: GridToolbar }}
             experimentalFeatures={{ newEditingApi: true }}
-            // onCellEditStop={handleEdit}
           />
         </Box>
       );

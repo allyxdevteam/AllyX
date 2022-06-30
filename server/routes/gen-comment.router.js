@@ -49,4 +49,24 @@ pool.query(sqlText, sqlValues)
   });
 });
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  if (req.user.is_admin) {
+  const sqlText = `
+    DELETE FROM "general-comment"
+      WHERE id=$1
+  `;
+  const sqlValues = [req.params.id];
+  pool.query(sqlText, sqlValues)
+    .then(
+      res.sendStatus(204)
+    )
+    .catch((dbErr) => {
+      console.log('error in DELETE /general-comment/:id', dbErr);
+      res.sendStatus(500);
+    })
+  } else {
+    console.warn('only admins can delete comments, sorry!')
+  }
+})
+
 module.exports = router;

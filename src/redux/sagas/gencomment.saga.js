@@ -26,9 +26,20 @@ function* addGenComment(action){
     }
 }
 
+function* deleteGenComment(action){
+    const response = yield axios ({
+        method: 'DELETE',
+        url: `/api/comment/${action.payload}`,
+    })
+    yield put ({
+        type: 'FETCH_GEN_COMMENTS'
+    })
+}
+
 function* genCommentSaga(){
     yield takeLatest('FETCH_GEN_COMMENTS', fetchGenComments);
     yield takeLatest('ADD_GEN_COMMENT', addGenComment);
+    yield takeLatest('DELETE_GEN_COMMENT', deleteGenComment);
 }
 
 export default genCommentSaga

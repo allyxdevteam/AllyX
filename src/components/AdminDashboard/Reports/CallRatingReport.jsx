@@ -1,8 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import Swal from 'sweetalert2';
 
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import Box from "@mui/material/Box";
+import {
+  DataGrid,
+  GridToolbar,
+  GridActionsCellItem,
+} from "@mui/x-data-grid";
+import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 
 function CallRatingReport() {
   const dispatch = useDispatch();
@@ -51,18 +57,59 @@ function CallRatingReport() {
         headerName: "Date",
         width: 150,
         editable: false,
+      },
+      {
+        field: "actions",
+        type: "actions",
+        headerName: "Actions",
+        width: 100,
+        cellClassName: "actions",
+        getActions: ({ id }) => {
+          return [
+            <GridActionsCellItem
+              icon={<DeleteIcon />}
+              label="Delete"
+              color="inherit"
+              onClick={handleDeleteClick(id)}
+            />,
+          ];
+        },
       }
   ];
 
-  //       // handles edits made to the DataGrid
-  //   const processRowUpdate = (newValue, oldValue) =>{
-  //     console.log('in process row update', newValue, oldValue)
-  //     return newValue
-  //   }
+   // contains a layer of abstraction else this function will execute on render (MUI's choice not mine)
+   const handleDeleteClick = (id) => () => {
+    Swal.fire({
+        title: "Are you sure you want to delete this call rating?",
+        text: "Once deleted, you will not be able to recover this data!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete'
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            dispatch({
+                type: 'DELETE_CALL_RATING',
+                payload: id
+            })
+          Swal.fire("The call rating has been deleted", {
+            icon: "success",
+          });
+        } else {
+          Swal.fire("Cancelled! The data is safe.");
+        }
+      });
+  };
 
-  //   const handleProcessRowUpdateError = (error) => {
-  //     console.log('whoops!', error)
-  //   }
+        // handles edits made to the DataGrid
+    const processRowUpdate = (newValue, oldValue) =>{
+      console.log('in process row update', newValue, oldValue)
+      return newValue
+    }
+
+    const handleProcessRowUpdateError = (error) => {
+      console.log('whoops!', error)
+    }
 
   return (
     <Box sx={{ height: 600, width: "98%", margin: "auto" }}>
@@ -73,9 +120,9 @@ function CallRatingReport() {
         density="compact"
         rowsPerPageOptions={[10]}
         components={{ Toolbar: GridToolbar }}
-        // experimentalFeatures={{ newEditingApi: true }}
-        // processRowUpdate={processRowUpdate}
-        // onProcessRowUpdateError={handleProcessRowUpdateError}
+        experimentalFeatures={{ newEditingApi: true }}
+        processRowUpdate={processRowUpdate}
+        onProcessRowUpdateError={handleProcessRowUpdateError}
         getRowId={(row) => row.id}
       />
     </Box>

@@ -30,4 +30,24 @@ router.post('/', (req, res) => {
   // POST route code here
 });
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  if (req.user.is_admin) {
+  const sqlText = `
+    DELETE FROM "report"
+      WHERE id=$1
+  `;
+  const sqlValues = [req.params.id];
+  pool.query(sqlText, sqlValues)
+    .then(
+      res.sendStatus(204)
+    )
+    .catch((dbErr) => {
+      console.log('error in DELETE /report/:id', dbErr);
+      res.sendStatus(500);
+    })
+  } else {
+    console.warn('only admins can delete reports, sorry!')
+  }
+})
+
 module.exports = router;
