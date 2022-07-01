@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { List, Typography, Box, usePagination, Pagination } from "@mui/material";
+import { List, Typography, Box, Pagination } from "@mui/material";
 
 import RequestedCallItem from "./Components/RequestedCallItem";
 
@@ -21,7 +21,7 @@ function AllyRequestedCalls() {
   //config pagination
   const itemsPerPage = 7;
   const [page, setPage] = useState(1);
-  const [noOfPages] = useState(Math.ceil(requestedCalls.length / itemsPerPage));
+  const noOfPages = Math.ceil(requestedCalls.length / itemsPerPage);
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -31,7 +31,7 @@ function AllyRequestedCalls() {
     <Box sx={{height: '80vh'}}>
       <List>
         {requestedCalls
-        .slice(page* itemsPerPage, page * itemsPerPage + itemsPerPage)
+        .slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage)
         .map((call) => {
           return <RequestedCallItem key={call.id} call={call} />;
         })}
