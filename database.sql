@@ -56,6 +56,7 @@ CREATE TABLE "call"(
 	"id" SERIAL PRIMARY KEY,
 	"member_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"ally_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
+	"requested_call_id" INT REFERENCES "requested-call" ON DELETE CASCADE NOT NULL,
 	"date_time_started" TIMESTAMPTZ,
 	"date_time_ended" TIMESTAMPTZ,
 	"is_done_member" BOOLEAN DEFAULT false,
