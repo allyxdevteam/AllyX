@@ -40,14 +40,15 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
     const memberId = req.body.call.member_id;
     const allyId = req.body.user.id;
+    const requestedCallId = req.body.call.id;
     const requestedCallTime = req.body.call.time
     
     try {
          await client.query('BEGIN')
-         const sqlQuery = `INSERT INTO "call" ("member_id", "ally_id")
-         VALUES ($1, $2)
-         RETURNING id, member_id;`;
-         const sqlValues = [memberId, allyId];
+         const sqlQuery = `INSERT INTO "call" ("member_id", "ally_id", "requested_call_id")
+         VALUES ($1, $2, $3)
+         RETURNING id, member_id, requested_call_id;`;
+         const sqlValues = [memberId, allyId, requestedCallId];
          const insertCallResults = await client.query(sqlQuery, sqlValues);
          
          const callId = insertCallResults.rows[0].id;

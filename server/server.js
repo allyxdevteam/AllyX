@@ -38,17 +38,6 @@ app.post("/imageUpload", upload.single("file"), async (req, res) => {
   return res.json({ picture: req.file.path });
 });
 
-// const start = (port) => {
-//   try {
-//     app.listen(port, () => {
-//       console.log(`Api up and running at: http://localhost:${port}`);
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     process.exit();
-//   }
-// };
-// start(3333);
 
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
