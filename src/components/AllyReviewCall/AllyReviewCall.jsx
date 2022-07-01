@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Typography, Rating, TextField, Box, Button } from "@mui/material";
@@ -12,79 +13,71 @@ function AllyReviewCall() {
     }, []);
 
 
-
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const dispatch = useDispatch();
+    const history = useHistory();
     const callId = useSelector(store => store.claimedCall.claimedCall);
     const user = useSelector(store => store.user);
-    const allyFirstName = useSelector(store => store.claimedCall.oneCallReducer.first_name);
-    const oneCallReducer = useSelector((store)=> store.claimedCall.oneCallReducer);
+    const memberFirstName = useSelector(store => store.claimedCall.oneCallReducer.first_name);
+    const memberId = useSelector(store => store.claimedCall.oneCallReducer.member_id);
+    const oneCallReducer = useSelector(store => store.claimedCall.oneCallReducer)
 
     const handleComment = (e) => {
       setComment(e.target.value);
     };
 
   
-    const handleSubmit = (e) => {
-      dispatch({
-          type: 'ADD_GEN_COMMENT',
-          payload: { rating, comment }
-      })
+    const handleSubmit = () => {
+        dispatch({
+            type: 'ADD_CALL_RATING',
+            payload: {
+            user,
+            memberId,
+            callId,
+            rating,
+            comment
+            }
+        })
+        console.log('this is the oneCallReducer', oneCallReducer);
       setRating(0);
       setComment('');
+      history.push('/');
     };
 
 
     return (
-    
     <Box sx={[{maxWidth: '35vw'},{m:'auto'}]}>
-        <Typography>How was your call with {allyFirstName}?</Typography>
+        <Typography>How was your call with {memberFirstName}?</Typography>
         <Typography component="legend">Rating</Typography>
-        <form
-            onSubmit={() => {
-                dispatch({
-                    type: 'ADD_CALL_RATING',
-                    payload: {
-                    user,
-                    memberId,
-                    callId,
-                    rating,
-                    comment
-                    }
-                })
+        <Rating
+            type="rating"
+            name="general-rating"
+            value={rating}
+            onChange={(event, newRating) => {
+                setRating(newRating);
+            }}
+        />
+        <Typography component="legend">Comment</Typography>
+        <TextField 
+            type="comment"
+            name="general-comment"
+            value={comment}
+            fullWidth 
+            multiline 
+            maxRows={4} 
+            onChange={handleComment}
+        />
+        <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>Submit</Button>
+        <Button
+            variant="contained"
+            sx={{m:1}}
+            onClick={() => {
+                history.push(`/allyReportAbuse`);
             }}
         >
-            <Rating
-                type="rating"
-                name="general-rating"
-                value={rating}
-                onChange={(event, newRating) => {
-                    setRating(newRating);
-                }}
-            />
-            <Typography component="legend">Comment</Typography>
-            <TextField 
-                type="comment"
-                name="general-comment"
-                value={comment}
-                fullWidth 
-                multiline 
-                maxRows={4} 
-                onChange={handleComment}
-            />
-            <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>Submit</Button>
-            <Button
-                variant="contained"
-                sx={{m:1}}
-                onClick={() => {
-                    history.push(`/allyReportAbuse`);
-                }}
-            >
-                Report Abuse
-            </Button>
-        </form>
-
+            Report Abuse
+        </Button>
     </Box>
     )
 }
