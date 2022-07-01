@@ -97,6 +97,7 @@ function CallSpeedDial() {
       >
         {actions.map((action) => (
           <SpeedDialAction
+            ariaLabel={action.name}
             key={action.name}
             icon={action.icon}
             tooltipTitle={action.name}
@@ -111,6 +112,7 @@ function CallSpeedDial() {
         <DialogContent>
           <Box>
           <input
+            ariaLabel="Date time selection for scheduled call"
             type="datetime-local"
             onChange={(e) => {
               setCallTime(e.target.value);
@@ -120,8 +122,8 @@ function CallSpeedDial() {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleScheduleCall}>Schedule</Button>
-          <Button onClick={handleCloseDialog}>Cancel</Button>
+          <Button ariaLabel="schedule" onClick={handleScheduleCall}>Schedule</Button>
+          <Button ariaLabel="cancel"onClick={handleCloseDialog}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </Box>
