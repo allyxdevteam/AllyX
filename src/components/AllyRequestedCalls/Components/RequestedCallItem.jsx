@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import {ListItem, ListItemAvatar, ListItemText, Button, Typography, Avatar, Divider} from '@mui/material/';
+
 function RequestedCallItem( {call} ){
 
     const dispatch = useDispatch();
@@ -31,10 +33,13 @@ function RequestedCallItem( {call} ){
 
     
     return(
-        <li key={call.id}>
-        {call.time}
-        <button onClick={handleClaimCall}>Claim Call</button>
-        </li>
+        <ListItem key={call.id}>
+            <ListItemAvatar>
+                <Avatar />
+            </ListItemAvatar>
+            <ListItemText primary={call.time} />
+        <Button onClick={handleClaimCall}>Claim Call</Button>
+        </ListItem>
     )
     
 }
