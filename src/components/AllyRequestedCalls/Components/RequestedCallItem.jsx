@@ -12,6 +12,7 @@ import {
   Avatar,
   Divider,
 } from "@mui/material/";
+import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 
 function RequestedCallItem({ call }) {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function RequestedCallItem({ call }) {
   const requestedCallId = call.id;
   const [picture, setPicture] = useState(null);
 
-  useEffect(() => grabProfilePic, []);
+  useEffect(() => grabProfilePic(), []);
 
   function grabProfilePic() {
     if (call.profile_pic) {
@@ -44,13 +45,18 @@ function RequestedCallItem({ call }) {
     }
   }
 
+  console.log("picture", picture);
+
   return (
     <ListItem key={call.id}>
       <ListItemAvatar>
-        <Avatar src={picture} />
+        <Avatar ariaLabel="requester avatar" srcSet={picture} />
       </ListItemAvatar>
-      <ListItemText primary={call.time} />
-      <Button onClick={handleClaimCall}>Claim Call</Button>
+      <ListItemText
+        primary={<Typography ariaLabel="requester first name" variant="h6">{call.first_name}</Typography>}
+        secondary={<Typography>wants a call at {call.time}</Typography>}
+      />
+      <Button variant="outlined" ariaLabel="claim call button" onClick={handleClaimCall} startIcon={<AddIcCallIcon />}>Claim Call</Button>
     </ListItem>
   );
 }
