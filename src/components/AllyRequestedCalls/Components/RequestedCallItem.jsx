@@ -1,7 +1,6 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import {
   ListItem,
@@ -10,7 +9,6 @@ import {
   Button,
   Typography,
   Avatar,
-  Divider,
 } from "@mui/material/";
 import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 
@@ -21,6 +19,7 @@ function RequestedCallItem({ call }) {
   const memberId = call.member_id;
   const requestedCallId = call.id;
   const [picture, setPicture] = useState(null);
+
 
   useEffect(() => grabProfilePic(), []);
 
