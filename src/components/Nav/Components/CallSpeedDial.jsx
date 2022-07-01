@@ -12,7 +12,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Button
+  Button,
+  Tooltip
 } from "@mui/material";
 
 function CallSpeedDial() {
@@ -27,8 +28,8 @@ function CallSpeedDial() {
   const handleCloseSpeedDial = () => setOpenSpeedDial(false);
 
   const actions = [
-    { icon: <Call />, name: "Call Now", onClick: handleRequestCall },
-    { icon: <Schedule />, name: "Schedule Call", onClick: openScheduleDialog },
+    { icon: <Call />, name: "Now", onClick: handleRequestCall },
+    { icon: <Schedule />, name: "Later", onClick: openScheduleDialog },
   ];
 
   // dialog config
@@ -85,6 +86,7 @@ function CallSpeedDial() {
   return (
     <Box sx={{ height: 330, transform: "translateZ(0px)", flexGrow: 1 }}>
       <Backdrop open={openSpeedDial} />
+      <Tooltip title="Call Me" placement="top">
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
         sx={{ position: "absolute", bottom: 16, right: 16 }}
@@ -103,6 +105,7 @@ function CallSpeedDial() {
           />
         ))}
       </SpeedDial>
+      </Tooltip>
       <Dialog open={open} onClose={handleCloseDialog}>
         <DialogTitle>Select a time you'd like to be called</DialogTitle>
         <DialogContent>
