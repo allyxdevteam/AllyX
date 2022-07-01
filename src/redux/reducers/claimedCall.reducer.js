@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 
-const claimedCall = (state = {}, action) => {
+const claimedCall = (state = 0, action) => {
     switch (action.type) {
         case 'SET_CLAIMED_CALL':
           return action.payload;

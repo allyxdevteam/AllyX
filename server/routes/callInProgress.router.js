@@ -57,31 +57,38 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     });
   });
 
+  //added user to the variables here
   router.get('/:callId', rejectUnauthenticated, (req, res) => {
-    const user = [req.body.user];
-    const sqlQuery = [req.params.callId];
+    const user = req.user;
+    const callId = req.params.callId;
+
+    console.log('this is req.body in get router for fetch one call:', req.user);
+    console.log('this is params in get router for fetch one call:', req.params);
+
   
     if (user.is_ally === true) {
-      const sqlText = `
-        SELECT ("call".id, "member_id", "ally_id", "first_name")
-          FROM "call"
-            JOIN "user" on "user".id = "ally_id"
-          WHERE "call".id = $1;
+      const sqlQuery = `
+      SELECT call.id AS call_id, call.member_id, call.ally_id, "user".first_name
+      FROM "call"
+        JOIN "user" on "user".id = call.member_id
+      WHERE call.id = $1;
       `;
-      pool.query(sqlText, sqlQuery)
+      const sqlValues = [callId]
+      pool.query(sqlQuery, sqlValues)
         .then((dbRes) => {
-          res.send(dbRes.rows);
+          res.send(dbRes.rows[0]);
         })
     } else if (user.is_ally === false) {
-      const sqlText = `
-        SELECT ("call".id, "member_id", "ally_id", "first_name")
-          FROM "call"
-            JOIN "user" on "user".id = "member_id"
-          WHERE "call".id = $1;
+      const sqlQuery = `
+      SELECT call.id AS call_id, call.member_id, call.ally_id, "user".first_name
+      FROM "call"
+        JOIN "user" on "user".id = call.ally_id
+      WHERE call.id = $1;
       `;
-      pool.query(sqlText, sqlQuery)
+      const sqlValues = [callId]
+      pool.query(sqlQuery, sqlValues)
         .then((dbRes) => {
-          res.send(dbRes.rows);
+          res.send(dbRes.rows[0]);
         })
     }
   })

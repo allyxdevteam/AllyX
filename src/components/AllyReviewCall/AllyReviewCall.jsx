@@ -12,17 +12,14 @@ function AllyReviewCall() {
     }, []);
 
 
-    console.log('**************************router', allyFirstName);
 
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const dispatch = useDispatch();
-    const callId = useSelector(store => store.claimedCall);
+    const callId = useSelector(store => store.claimedCall.claimedCall);
     const user = useSelector(store => store.user);
-    const allyFirstName = useSelector(store => store.claimedCall.oneCallReducer);
-    const memberId = useSelector(store => store.oneCall.recipient_id);
-
-
+    const allyFirstName = useSelector(store => store.claimedCall.oneCallReducer.first_name);
+    const oneCallReducer = useSelector((store)=> store.claimedCall.oneCallReducer);
 
     const handleComment = (e) => {
       setComment(e.target.value);
