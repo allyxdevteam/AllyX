@@ -10,6 +10,7 @@ import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import { Box } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import CallSpeedDial from "./CallSpeedDial";
 
 function bottomNav() {
     const history = useHistory();
@@ -22,28 +23,17 @@ function bottomNav() {
     }
   return (
     <>
-      <BottomNavigation sx={{ position: "relative"}}showLabels> 
+      <BottomNavigation sx={{ position: "sticky"}}showLabels> 
         <BottomNavigationAction label="" icon={<Logout />} onClick={handleLogout}/>
 
          
-        <BottomNavigationAction label="Call" 
+        <BottomNavigationAction label="" 
         
         
         
         //INSERT SPEED DIAL COMP HERE AS AN ICON
-        icon={<SpeedDial
-          ariaLabel="SpeedDial basic"
-          sx={{ position: "absolute", mb: 15}}
-          icon={<SpeedDialIcon />}
-        >   <Box sx={{ position: "absolute", mt: 10}}>
-             <h1>Hello</h1>
-             </Box>
-            <SpeedDialAction
-           
-            icon={<Phone />}
-            />
-      
-            </SpeedDial> } />
+        icon={<CallSpeedDial />}
+          />
      
 
         
