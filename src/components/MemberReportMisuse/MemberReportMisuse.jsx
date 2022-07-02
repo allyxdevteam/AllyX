@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, TextField } from "@mui/material";
 
-function MemberReportAbuse() {
+function MemberReportMisuse() {
 
-    const [abuseComments, setAbuseComments] = useState('');
+    const [misuseComments, setMisuseComments] = useState('');
     const dispatch = useDispatch();
     const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
     const  claimedCall = useSelector(store => store.claimedCall);
@@ -22,21 +22,21 @@ function MemberReportAbuse() {
             onSubmit={handleSubmit}
         >
             <TextField 
-                onChange={() => {setAbuseComments(e.target.value)}}
-                value={abuseComments}
+                onChange={() => {setMisuseComments(e.target.value)}}
+                value={misuseComments}
             />
             <Button
                 onClick={() => {
                     dispatch({
-                        type: 'MEMBER_REPORT_ABUSE',
-                        payload: { claimedCallId,  abuseComments }
+                        type: 'MEMBER_REPORT_MISUSE',
+                        payload: { claimedCallId,  misuseComments }
                     })
                 }}
             >
-                Report Abuse
+                Report Misuse
             </Button>
         </form>
     )
 }
 
-export default MemberReportAbuse;
+export default MemberReportMisuse;
