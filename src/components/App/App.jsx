@@ -107,7 +107,7 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/memberRequestedCall/:requestedCallId"
+            path="/memberRequestedCall"
           >
             <MemberCallRequested />
           </ProtectedRoute>

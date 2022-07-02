@@ -4,20 +4,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Rating, TextField, Box, Button } from "@mui/material";
 
 function MemberReviewCall() {
+    //need to change this dispatch, it will not work at all, make a new saga...
     useEffect(() => {
         dispatch({
-            type: 'FETCH_ONE_CALL',
-            payload: { callId, user }
+            type: 'FETCH_ONE_CALL_MEMBER',
+            payload: requestedCallId
         })
     }, []);
 
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const dispatch = useDispatch();
-    const callId = useSelector(store => store.claimedCall);
+
     const user = useSelector(store => store.user);
-    const memberFirstName = useSelector(store => store.oneCall.first_name);
-    const memberId = useSelector(store => store.oneCall.recipient_id);
+    const requestedCallId = useSelector(store => store.requestedCalls.requestedCall);
+
+    const completedCall = useSelector(store => store.claimedCall.oneCallReducerMember);
+    const allyFirstName = completedCall.first_name;
+    const allyId = completedCall.ally_id;
+
+
+    console.log('this is the completed call info:',completedCall);
+
 
     const handleComment = (e) => {
       setComment(e.target.value);
@@ -32,10 +40,12 @@ function MemberReviewCall() {
       setComment('');
     };
 
+
     return (
     
     <Box sx={[{maxWidth: '35vw'},{m:'auto'}]}>
-        <Typography>How was your call with {memberFirstName}?</Typography>
+        <h1>member review page</h1>
+        <Typography>How was your call with {allyFirstName}?</Typography>
         <form
             onSubmit={() => {
                 dispatch({

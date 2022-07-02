@@ -30,8 +30,20 @@ const oneCallReducer = (state = [], action) => {
   }
 }
 
+const oneCallReducerMember = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_ONE_CALL_MEMBER':
+      return action.payload;
+    case 'UNSET_ONE_CALL':
+      return [];
+    default:
+      return state;
+  }
+}
+
     export default combineReducers({
         claimedCall,
         claimedCallMember,
         oneCallReducer,
+        oneCallReducerMember,
       });
