@@ -13,7 +13,7 @@ function ConditionalAllyButton(user) {
     });
   }, []);
 
-  const requestedCalls = useSelector((store) => store.requestedCalls);
+  const requestedCalls = useSelector((store) => store.requestedCalls.requestedCalls);
   const history = useHistory();
 
   function handleGoToAllyPage() {
