@@ -44,7 +44,7 @@ function LandingPage() {
         type: "POST_REQUESTED_CALL",
         payload: { dateTime, user }
       }),
-      history.push('/memberRequestedCall/:requestedCallId')
+      history.push('/memberRequestedCall')
       )
 
       :

@@ -14,7 +14,7 @@ function AllyRequestedCalls(){
         })
     }, []);
 
-    const requestedCalls = useSelector(store => store.requestedCalls);
+    const requestedCalls = useSelector(store => store.requestedCalls.requestedCalls);
     const user = useSelector(store => store.user);
 
 
