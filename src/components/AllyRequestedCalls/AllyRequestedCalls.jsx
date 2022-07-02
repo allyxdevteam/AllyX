@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -28,10 +28,11 @@ function AllyRequestedCalls() {
   };
 
   return (
-    <Box sx={{height: '80vh'}}>
+    <Box sx={[{height: '80vh'},{width: '98vw'}, {margin: 'auto'}]}>
+    <Typography variant="h4">Requested Calls</Typography>
       <List>
         {requestedCalls
-        .slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage)
+        .slice((page-1)* itemsPerPage, page * itemsPerPage )
         .map((call) => {
           return <RequestedCallItem key={call.id} call={call} />;
         })}
