@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 function RequestedCallItem( {call} ){
 
@@ -10,7 +11,6 @@ function RequestedCallItem( {call} ){
     const user = useSelector(store => store.user);
     const memberId = call.member_id;
     const requestedCallId = call.id;
-
 
 
     function handleClaimCall(){
@@ -32,7 +32,7 @@ function RequestedCallItem( {call} ){
     
     return(
         <li key={call.id}>
-        {call.time}
+        {dayjs(call.time).format('MMMM D hh:mm A')}
         <button onClick={handleClaimCall}>Claim Call</button>
         </li>
     )
