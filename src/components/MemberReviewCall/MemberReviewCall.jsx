@@ -4,38 +4,42 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Rating, TextField, Box, Button } from "@mui/material";
 
 function MemberReviewCall() {
+    //need to change this dispatch, it will not work at all, make a new saga...
     useEffect(() => {
         dispatch({
-            type: 'FETCH_ONE_CALL',
-            payload: { callId, user }
+            type: 'FETCH_ONE_CALL_MEMBER',
+            payload: requestedCallId
         })
     }, []);
 
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const dispatch = useDispatch();
-    const callId = useSelector(store => store.claimedCall);
-    const user = useSelector(store => store.user);
-    const memberFirstName = useSelector(store => store.oneCall.first_name);
-    const memberId = useSelector(store => store.oneCall.recipient_id);
+    const requestedCallId = useSelector(store => store.claimedCall.claimedCall);
+    // const user = useSelector(store => store.user);
+    // const memberFirstName = useSelector(store => store.oneCall.first_name);
+    // const memberId = useSelector(store => store.oneCall.recipient_id);
 
-    const handleComment = (e) => {
-      setComment(e.target.value);
-    };
+    // const handleComment = (e) => {
+    //   setComment(e.target.value);
+    // };
   
-    const handleSubmit = (e) => {
-      dispatch({
-          type: 'ADD_GEN_COMMENT',
-          payload: { rating, comment }
-      })
-      setRating(0);
-      setComment('');
-    };
+    // const handleSubmit = (e) => {
+    //   dispatch({
+    //       type: 'ADD_GEN_COMMENT',
+    //       payload: { rating, comment }
+    //   })
+    //   setRating(0);
+    //   setComment('');
+    // };
+
+    console.log(callId);
 
     return (
     
     <Box sx={[{maxWidth: '35vw'},{m:'auto'}]}>
-        <Typography>How was your call with {memberFirstName}?</Typography>
+        <h1>member review page</h1>
+        {/* <Typography>How was your call with {memberFirstName}?</Typography>
         <form
             onSubmit={() => {
                 dispatch({
@@ -79,7 +83,7 @@ function MemberReviewCall() {
             >
                 Report Abuse
             </Button>
-        </form>
+        </form> */}
     </Box>
     )
 }

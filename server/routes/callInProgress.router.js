@@ -147,31 +147,37 @@ router.get('/:callId', rejectUnauthenticated, (req, res) => {
   const user = req.user;
   const callId = req.params.callId;
 
-  if (user.is_ally === true) {
-    const sqlQuery = `
+
+  const sqlQuery = `
       SELECT call.id AS call_id, call.member_id, call.ally_id, "user".first_name
       FROM "call"
         JOIN "user" on "user".id = call.member_id
       WHERE call.id = $1;
       `;
-    const sqlValues = [callId]
-    pool.query(sqlQuery, sqlValues)
-      .then((dbRes) => {
-        res.send(dbRes.rows[0]);
-      })
-  } else if (user.is_ally === false) {
-    const sqlQuery = `
-      SELECT call.id AS call_id, call.member_id, call.ally_id, "user".first_name
-      FROM "call"
-        JOIN "user" on "user".id = call.ally_id
-      WHERE call.id = $1;
+  const sqlValues = [callId]
+  pool.query(sqlQuery, sqlValues)
+    .then((dbRes) => {
+      res.send(dbRes.rows[0]);
+    })
+})
+
+router.get('/member/:requestedCallId', rejectUnauthenticated, (req, res) => {
+
+  const requestedCallId = req.params.requestedCallId;
+
+
+  const sqlQuery = `
+  SELECT call.id AS call_id, call.member_id, call.ally_id, "user".first_name
+  FROM "call"
+  JOIN "user" on "user".id = call.ally_id
+  WHERE call.requested_call_id = $1;
       `;
-    const sqlValues = [callId]
-    pool.query(sqlQuery, sqlValues)
-      .then((dbRes) => {
-        res.send(dbRes.rows[0]);
-      })
-  }
+  const sqlValues = [requestedCallId]
+  pool.query(sqlQuery, sqlValues)
+    .then((dbRes) => {
+      res.send(dbRes.rows[0]);
+    })
+
 })
 
 

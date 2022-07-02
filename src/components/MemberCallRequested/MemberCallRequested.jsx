@@ -25,7 +25,7 @@ function MemberCallRequested() {
             payload: {requestedCallId, dateTime}
         })
 
-        // history.push('/memberReviewCall')
+        history.push('/memberReviewCall')
 
     }
 

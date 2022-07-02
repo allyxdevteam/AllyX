@@ -30,10 +30,27 @@ function* fetchOneCall(action) {
     })
 }
 
+function* fetchOneCallMember(action) {
+    //action.payload.callId.claimedCall is the call id
+    const requestedCallId = action.payload
+
+    const oneCall = yield axios({
+        method: 'GET',
+        url: `/api/callInProgress/member/${requestedCallId}`,
+        data: requestedCallId
+    })
+    yield put ({
+        type: 'SET_ONE_CALL',
+        payload: oneCall.data
+    })
+}
+
 
 function* callsSaga() {
     yield takeLatest('FETCH_CALLS', fetchCalls);
     yield takeLatest('FETCH_ONE_CALL', fetchOneCall);
+    yield takeLatest('FETCH_ONE_CALL_MEMBER', fetchOneCallMember);
+
   }
 
 export default callsSaga;
