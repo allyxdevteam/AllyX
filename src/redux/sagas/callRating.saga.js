@@ -15,6 +15,7 @@ function* fetchCallRatings(){
 }
 
 function* addCallRating(action) {
+    console.log('this is the payload', action.payload);
     yield axios({
         method: 'POST',
         url: '/api/rate-call',

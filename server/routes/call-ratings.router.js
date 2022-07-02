@@ -27,8 +27,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   if (req.user.is_ally === true) {
     const sqlText = `
     INSERT INTO "call-rating"
-      ("reviewer_id", "recipient_id", "call_id", "num_stars", "comment")
-      VALUES (1, 2, 2, 4, 'Yo!');
+      (reviewer_id, recipient_id, call_id, num_stars, comment)
+      VALUES ($1, $2, $3, $4, $5);
     `;
     const sqlValues = [
       req.user.id,
@@ -45,8 +45,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     if (req.user.is_ally === true) {
       const sqlText = `
       INSERT INTO "call-rating"
-        ("reviewer_id", "recipient_id", "call_id", "num_stars", "comment")
-        VALUES (1, 2, 2, 4, 'Yo!');
+        reviewer_id, recipient_id, call_id, num_stars, comment
+        VALUES ($1, $2, $3, $4, $5);
       `;
       const sqlValues = [
         req.user.id,
