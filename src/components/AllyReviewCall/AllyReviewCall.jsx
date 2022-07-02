@@ -73,10 +73,10 @@ function AllyReviewCall() {
             variant="contained"
             sx={{m:1}}
             onClick={() => {
-                history.push(`/allyReportAbuse`);
+                history.push(`/allyReportMisuse`);
             }}
         >
-            Report Abuse
+            Report Misuse
         </Button>
     </Box>
     )

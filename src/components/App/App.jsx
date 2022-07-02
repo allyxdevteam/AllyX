@@ -30,7 +30,7 @@ import BottomNav from '../Nav/Components/BottomNav';
 
 import AllyReviewCall from '../AllyReviewCall/AllyReviewCall';
 import MemberReviewCall from '../MemberReviewCall/MemberReviewCall';
-import AllyReportAbuse from '../AllyReportAbuse/AllyReportAbuse';
+import AllyReportMisuse from '../AllyReportMisuse/AllyReportMisuse';
 import MemberCallRequested from '../MemberCallRequested/MemberCallRequested';
 
 import './App.css';
@@ -142,9 +142,9 @@ function App() {
             
             <ProtectedRoute
             exact
-            path="/allyReportAbuse"
+            path="/allyReportMisuse"
           >
-            <AllyReportAbuse />
+            <AllyReportMisuse />
 
           </ProtectedRoute>
 

@@ -7,7 +7,7 @@ const {
 
 router.get('/:memberId', (req, res) => {
     const memberId = req.params.memberId;
-    const sqlQuery = 'SELECT "first_name", "phone_number", "profile_pic"  FROM "user" WHERE "is_active" = true AND "is_blocked" = false AND "id" = $1;';
+    const sqlQuery = 'SELECT "id", "first_name", "phone_number", "profile_pic"  FROM "user" WHERE "is_active" = true AND "is_blocked" = false AND "id" = $1;';
     const sqlValues = [memberId];
     
     pool.query(sqlQuery, sqlValues)
