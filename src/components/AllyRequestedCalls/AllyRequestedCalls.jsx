@@ -15,7 +15,7 @@ function AllyRequestedCalls() {
     });
   }, []);
 
-  const requestedCalls = useSelector((store) => store.requestedCalls);
+  const requestedCalls = useSelector((store) => store.requestedCalls.requestedCalls);
   const user = useSelector((store) => store.user);
 
   //config pagination
@@ -31,11 +31,12 @@ function AllyRequestedCalls() {
     <Box sx={[{height: '80vh'},{width: '98vw'}, {margin: 'auto'}]}>
     <Typography variant="h4">Requested Calls</Typography>
       <List>
-        {requestedCalls
+        {requestedCalls ? requestedCalls
         .slice((page-1)* itemsPerPage, page * itemsPerPage )
         .map((call) => {
           return <RequestedCallItem key={call.id} call={call} />;
-        })}
+        }) : <Typography>No Calls Yet!</Typography>
+      }
       </List>
       <Box display="flex" justifyContent="center">
         <Pagination

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Button, TextField } from "@mui/material";
+import { Button, Box, TextField } from "@mui/material";
 
 function AllyReportMisuse() {
 
@@ -17,6 +17,7 @@ function AllyReportMisuse() {
 
     return (
         <>
+        <Box sx={[{height: '80vh'},{width: '98vw'}, {margin: 'auto'}]} display='flex' flexDirection='column' justifyContent = 'center'>
             <TextField 
                 onChange={(e) => {setMisuseComments(e.target.value)}}
                 value={misuseComments}
@@ -36,6 +37,7 @@ function AllyReportMisuse() {
             >
                 Report Misuse
             </Button>
+            </Box>
         </>
     )
 }
