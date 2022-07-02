@@ -26,19 +26,32 @@ WHERE "open" = true ORDER BY "time" ASC;`;
 /**
  * POST route template
  */
-router.post('/', rejectUnauthenticated, (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
+
+  const client = await pool.connect();
   const dateTime = req.body.dateTime;
   const memberId = req.body.user.id;
 
-
-  const sqlQuery = `INSERT INTO "requested-call" ("member_id", "time") VALUES ($1, $2);`;
+  try{
+  await client.query('BEGIN')
+  const sqlQuery = `INSERT INTO "requested-call" ("member_id", "time") VALUES ($1, $2) RETURNING id;`;
   const sqlValues = [memberId, dateTime];
-  pool.query(sqlQuery, sqlValues)
-    .then((result) => { console.log(result); res.sendStatus(200) })
-    .catch((err) => {
-      console.log('Error in POST requested call', err);
-      res.sendStatus(500);
-    })
+  const insertRequestedCallResuts = await client.query(sqlQuery, sqlValues);
+  const requestedCallId = insertRequestedCallResuts.rows[0].id
+
+  await client.query('COMMIT')
+
+    
+      console.log('this is the requested call id:',requestedCallId);
+     res.status(201).send({ requestedCallId });
+    
+  }catch (error) {
+    await client.query('ROLLBACK')
+    console.log('Error POST /api/requestedCalls', error);
+    res.sendStatus(500);
+} finally {
+    client.release()
+}
 })
 
 module.exports = router;

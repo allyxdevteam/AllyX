@@ -18,14 +18,17 @@ function* fetchRequestedCalls(){
 function* postRequestedCall(action){
     const dateTime = action.payload.dateTime;
     const user = action.payload.user;
-    console.log('this is the date and time!!!!!!!!!!',dateTime);
-    console.log('this is the user data!!!!!!!!!!!', user);
     try{
-        yield axios({
+        const response = yield axios({
             method: 'POST',
             url: '/api/requestedCalls',
             data: {dateTime, user}
         });
+        console.log('response from post requested call:', response);
+        yield put({
+            type: 'SET_REQUESTED_CALL',
+            payload: response.data.requestedCallId
+        })
     }catch{
         console.log('problem in post requested call');
     }
