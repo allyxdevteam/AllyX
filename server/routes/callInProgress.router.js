@@ -165,6 +165,8 @@ router.get('/member/:requestedCallId', rejectUnauthenticated, (req, res) => {
 
   const requestedCallId = req.params.requestedCallId;
 
+  console.log('this is req call id?:', requestedCallId);
+
 
   const sqlQuery = `
   SELECT call.id AS call_id, call.member_id, call.ally_id, "user".first_name
@@ -175,6 +177,7 @@ router.get('/member/:requestedCallId', rejectUnauthenticated, (req, res) => {
   const sqlValues = [requestedCallId]
   pool.query(sqlQuery, sqlValues)
     .then((dbRes) => {
+      console.log('this is dbres:',dbRes.rows);
       res.send(dbRes.rows[0]);
     })
 

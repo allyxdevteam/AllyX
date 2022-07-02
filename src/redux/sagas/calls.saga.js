@@ -34,13 +34,16 @@ function* fetchOneCallMember(action) {
     //action.payload.callId.claimedCall is the call id
     const requestedCallId = action.payload
 
+    console.log(requestedCallId);
+
     const oneCall = yield axios({
         method: 'GET',
         url: `/api/callInProgress/member/${requestedCallId}`,
         data: requestedCallId
     })
+    console.log(oneCall);
     yield put ({
-        type: 'SET_ONE_CALL',
+        type: 'SET_ONE_CALL_MEMBER',
         payload: oneCall.data
     })
 }

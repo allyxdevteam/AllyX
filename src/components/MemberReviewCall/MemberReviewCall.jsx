@@ -15,31 +15,37 @@ function MemberReviewCall() {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const dispatch = useDispatch();
-    const requestedCallId = useSelector(store => store.claimedCall.claimedCall);
-    // const user = useSelector(store => store.user);
-    // const memberFirstName = useSelector(store => store.oneCall.first_name);
-    // const memberId = useSelector(store => store.oneCall.recipient_id);
 
-    // const handleComment = (e) => {
-    //   setComment(e.target.value);
-    // };
+    const user = useSelector(store => store.user);
+    const requestedCallId = useSelector(store => store.requestedCalls.requestedCall);
+
+    const completedCall = useSelector(store => store.claimedCall.oneCallReducerMember);
+    const allyFirstName = completedCall.first_name;
+    const allyId = completedCall.ally_id;
+
+
+    console.log('this is the completed call info:',completedCall);
+
+
+    const handleComment = (e) => {
+      setComment(e.target.value);
+    };
   
-    // const handleSubmit = (e) => {
-    //   dispatch({
-    //       type: 'ADD_GEN_COMMENT',
-    //       payload: { rating, comment }
-    //   })
-    //   setRating(0);
-    //   setComment('');
-    // };
+    const handleSubmit = (e) => {
+      dispatch({
+          type: 'ADD_GEN_COMMENT',
+          payload: { rating, comment }
+      })
+      setRating(0);
+      setComment('');
+    };
 
-    console.log(callId);
 
     return (
     
     <Box sx={[{maxWidth: '35vw'},{m:'auto'}]}>
         <h1>member review page</h1>
-        {/* <Typography>How was your call with {memberFirstName}?</Typography>
+        <Typography>How was your call with {allyFirstName}?</Typography>
         <form
             onSubmit={() => {
                 dispatch({
@@ -83,7 +89,7 @@ function MemberReviewCall() {
             >
                 Report Abuse
             </Button>
-        </form> */}
+        </form>
     </Box>
     )
 }
