@@ -45,7 +45,7 @@ function RequestedCallItem({ call }) {
     }
   }
 
-// {dayjs(call.time).format('MMMM D hh:mm A')}
+  const formattedTime = dayjs(call.time).format('hh:mm A on dddd, MMMM D');
 
   console.log("picture", picture);
 
@@ -56,7 +56,7 @@ function RequestedCallItem({ call }) {
       </ListItemAvatar>
       <ListItemText
         primary={<Typography ariaLabel="requester first name" variant="h6">{call.first_name}</Typography>}
-        secondary={<Typography>wants a call at {call.time}</Typography>}
+        secondary={<Typography>wants a call at {formattedTime}</Typography>}
       />
       <Button variant="outlined" ariaLabel="claim call button" onClick={handleClaimCall} startIcon={<AddIcCallIcon />}>Claim Call</Button>
     </ListItem>
