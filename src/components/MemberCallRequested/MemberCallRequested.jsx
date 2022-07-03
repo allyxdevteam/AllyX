@@ -81,7 +81,7 @@ function MemberCallRequested() {
           onClick={callCompleteMember}
           size="large"
           variant="contained"
-          sx={{ m: 1 }}
+          sx={{ m: 2 }}
         >
           Call Complete
         </Button>
@@ -91,7 +91,7 @@ function MemberCallRequested() {
           onClick={cancelCallMember}
           size="large"
           variant="contained"
-          sx={{ m: 1 }}
+          sx={{ m: 2 }}
         >
           Cancel Call
         </Button>
