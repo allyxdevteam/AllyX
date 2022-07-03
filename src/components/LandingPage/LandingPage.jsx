@@ -8,7 +8,7 @@ import './LandingPage.css';
 
 
 // CUSTOM COMPONENTS---------------------------------------------------
-import ImageUploader from '../ImageUploader/ImageUploader';
+import ImageUploader from '../Profile/ImageUploader/ImageUploader';
 import ConditionalAllyButton from './Components/ConditionalAllyButton';
 import CallSpeedDial from "../Nav/Components/CallSpeedDial";
 
@@ -19,10 +19,8 @@ function LandingPage() {
   const dispatch = useDispatch();
 
   //variables that evaluate to something specific----------------------------------
-  const profileImage = useSelector((store) => store.profileImage)
   const user = useSelector((store) => store.user);
   console.log('this is the user:', user);
-  console.log('this is the profile image url:', profileImage);
 
   const date = new Date();
   const dateTime = date.toLocaleString();
@@ -84,12 +82,6 @@ function LandingPage() {
       <h2>Welcome {user.username}</h2> 
 
       <ConditionalAllyButton user={user}/>
-      {/* <button onClick={handleGoToAllyPage}>go to Ally Requested Calls/ become an Ally</button> */}
-
-      <button onClick={handleRequestCall}>Request a call</button>
-
-      <button onClick={handleScheduleCall}>Schedule a call</button>
-
      
       <input type="datetime-local"
         onChange={(e) => {
@@ -98,9 +90,7 @@ function LandingPage() {
         }}
       ></input>
 
-      <ImageUploader/>
-
-      <img src={profileImage} alt=''/>
+      
 
     </div>
 
