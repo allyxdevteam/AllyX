@@ -52,8 +52,8 @@ router.post('/member', rejectUnauthenticated, (req, res) => {
   `;
   const sqlValues = [
       req.user.id,
-      req.body.claimedCallMember.id,
-      req.body.claimedCallId,
+      req.body.allyId,
+      req.body.requestedCallId,
       req.body.misuseComments
   ];
   pool.query(sqlText, sqlValues)
@@ -73,7 +73,7 @@ SET
   is_reported=TRUE
 WHERE id = $1;
 `;
-sqlValues = [req.body.id];
+sqlValues = [req.body.allyId];
 pool.query(sqlText, sqlValues)
   .then((dbRes) => {
   res.sendStatus(201);
