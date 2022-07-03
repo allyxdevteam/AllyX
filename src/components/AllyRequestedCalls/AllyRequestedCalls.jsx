@@ -32,7 +32,7 @@ function AllyRequestedCalls() {
 
   return (
     <Box className="boxDefault" ref={listRef}>
-    <Typography variant="h4">Requested Calls</Typography>
+    <Typography variant="h2">Requested Calls</Typography>
       <List >
        
         {requestedCalls ? requestedCalls
