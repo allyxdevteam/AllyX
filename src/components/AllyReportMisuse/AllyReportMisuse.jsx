@@ -10,10 +10,7 @@ function AllyReportMisuse() {
     const dispatch = useDispatch();
     const history = useHistory();
     const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
-    const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);
-
-    // const handleSubmit = () => {
-        
+    const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);        
 
     return (
         <>
