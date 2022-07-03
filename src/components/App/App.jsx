@@ -32,6 +32,7 @@ import AllyReviewCall from '../AllyReviewCall/AllyReviewCall';
 import MemberReviewCall from '../MemberReviewCall/MemberReviewCall';
 import AllyReportMisuse from '../AllyReportMisuse/AllyReportMisuse';
 import MemberCallRequested from '../MemberCallRequested/MemberCallRequested';
+import MemberReportMisuse from '../MemberReportMisuse/MemberReportMisuse';
 
 import './App.css';
 import AllyApplication from '../AllyApplication/AllyApplication';
@@ -139,6 +140,13 @@ function App() {
           >
             <MemberReviewCall />
             </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/memberReportMisuse"
+          >
+            <MemberReportMisuse />
+          </ProtectedRoute>
             
             <ProtectedRoute
             exact
