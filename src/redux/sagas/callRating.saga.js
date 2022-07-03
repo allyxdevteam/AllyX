@@ -14,11 +14,20 @@ function* fetchCallRatings(){
     }
 }
 
-function* addCallRating(action) {
+function* allyCallRating(action) {
     console.log('this is the payload', action.payload);
     yield axios({
         method: 'POST',
-        url: '/api/rate-call',
+        url: '/api/rate-call/ally',
+        data: action.payload
+    })
+}
+
+function* memberCallRating(action) {
+    console.log('this is the payload', action.payload);
+    yield axios({
+        method: 'POST',
+        url: '/api/rate-call/member',
         data: action.payload
     })
 }
@@ -37,7 +46,8 @@ function* deleteCallRating(action){
 
 function* callRatingSaga() {
     yield takeLatest('FETCH_CALL_RATINGS', fetchCallRatings);
-    yield takeLatest('ADD_CALL_RATING', addCallRating);
+    yield takeLatest('ALLY_CALL_RATING', allyCallRating);
+    yield takeLatest('MEMBER_CALL_RATING', memberCallRating);
     yield takeLatest('DELETE_CALL_RATING', deleteCallRating);
   }
 

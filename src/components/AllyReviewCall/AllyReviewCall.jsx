@@ -30,7 +30,7 @@ function AllyReviewCall() {
   
     const handleSubmit = () => {
         dispatch({
-            type: 'ADD_CALL_RATING',
+            type: 'ALLY_CALL_RATING',
             payload: {
             user,
             memberId,
@@ -47,38 +47,38 @@ function AllyReviewCall() {
 
 
     return (
-    <Box sx={[{maxWidth: '35vw'},{m:'auto'}]}>
-        <Typography>How was your call with {memberFirstName}?</Typography>
-        <Typography component="legend">Rating</Typography>
-        <Rating
-            type="rating"
-            name="general-rating"
-            value={rating}
-            onChange={(event, newRating) => {
-                setRating(newRating);
-            }}
-        />
-        <Typography component="legend">Comment</Typography>
-        <TextField 
-            type="comment"
-            name="general-comment"
-            value={comment}
-            fullWidth 
-            multiline 
-            maxRows={4} 
-            onChange={handleComment}
-        />
-        <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>Submit</Button>
-        <Button
-            variant="contained"
-            sx={{m:1}}
-            onClick={() => {
-                history.push(`/allyReportMisuse`);
-            }}
-        >
-            Report Misuse
-        </Button>
-    </Box>
+        <Box sx={[{maxWidth: '35vw'},{m:'auto'}]}>
+            <Typography>How was your call with {memberFirstName}?</Typography>
+            <Typography component="legend">Rating</Typography>
+            <Rating
+                type="rating"
+                name="general-rating"
+                value={rating}
+                onChange={(event, newRating) => {
+                    setRating(newRating);
+                }}
+            />
+            <Typography component="legend">Comment</Typography>
+            <TextField 
+                type="comment"
+                name="general-comment"
+                value={comment}
+                fullWidth 
+                multiline 
+                maxRows={4} 
+                onChange={handleComment}
+            />
+            <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>Submit</Button>
+            <Button
+                variant="contained"
+                sx={{m:1}}
+                onClick={() => {
+                    history.push(`/allyReportMisuse`);
+                }}
+            >
+                Report Misuse
+            </Button>
+        </Box>
     )
 }
 
