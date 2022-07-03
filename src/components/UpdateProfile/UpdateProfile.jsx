@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { Button, TextField, Box } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Avatar from '@mui/material/Avatar';
+
+import ImageUploader from '../Profile/ImageUploader/ImageUploader';
 
 function UpdateProfile() {
     useEffect(() => {
@@ -13,10 +16,25 @@ function UpdateProfile() {
         })
     }, [])
 
+    const profileImage = useSelector((store) => store.profileImage)
+
+
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
     const profile = useSelector(store => store.profile);
+
+    const [imageSelected, setImageSelected] = useState('');
+
+    const uploadImage = () => {
+        const formData = new FormData()
+        formData.append("file", imageSelected)
+        formData.append("upload_preset", "lpv0o9ul")
+        dispatch({
+            type: 'POST_IMAGE',
+            payload: formData
+        })
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,12 +44,30 @@ function UpdateProfile() {
         })
         history.push('/profile');
     }
-    
+
     return (
-        <form
-            id="edit-item-form"
-            onSubmit={handleSubmit}
-        >
+        <Box sx={[{ maxWidth: '45vw' }, { m: 'auto' }, { mb: '25%' }]} display='flex' flexDirection={'column'} gap={'20px'}>
+            {profileImage ?
+                <Avatar
+                    alt={user.username}
+                    src={profileImage}
+                />
+                :
+                <AccountCircleIcon />
+
+            }
+            <Button
+                component="label"
+            >
+                Choose new pic
+                <input
+                    type="file"
+                    hidden
+                    onChange={(event) => { setImageSelected(event.target.files[0]) }}
+                />
+            </Button>
+            {/* <Input type="file" onChange={(event) => { setImageSelected(event.target.files[0]); }} /> */}
+            <Button variant="contained" onClick={uploadImage}>upload image</Button>
             <TextField
                 label="first name"
                 value={profile.first_name}
@@ -44,6 +80,7 @@ function UpdateProfile() {
             >
             </TextField>
             <TextField
+                mt={10}
                 label="last name"
                 value={profile.last_name}
                 onChange={(e) => {
@@ -121,11 +158,11 @@ function UpdateProfile() {
             >
             </TextField>
             <Button
-                type="submit"
+                onClick={handleSubmit}
             >
-                Submit
+                Save Profile
             </Button>
-        </form>
+        </Box>
     )
 }
 
