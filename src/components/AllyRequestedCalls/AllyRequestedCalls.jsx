@@ -28,7 +28,7 @@ function AllyRequestedCalls() {
   };
 
   return (
-    <Box sx={[{height: '80vh'},{width: '98vw'}, {margin: 'auto'}]}>
+    <Box className="boxDefault">
     <Typography variant="h4">Requested Calls</Typography>
       <List>
         {requestedCalls ? requestedCalls
