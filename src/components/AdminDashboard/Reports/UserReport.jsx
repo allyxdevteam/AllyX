@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Swal from 'sweetalert2';
+import dayjs from 'dayjs';
 
 import {
   DataGrid,
@@ -59,6 +60,14 @@ function UserReport() {
       type: "dateTime",
       width: 150,
       editable: false,
+      valueFormatter: (params) =>{
+        if(params.value == null) {
+          return('');
+        }
+
+        const formattedDate = dayjs(params.value).format('MM/DD/YYYY');
+        return `${formattedDate}`;
+      }
     },
     {
       field: "is_ally",
@@ -151,6 +160,14 @@ function UserReport() {
       type: "dateTime",
       width: 150,
       editable: false,
+      valueFormatter: (params) =>{
+        if(params.value == null) {
+          return('');
+        }
+
+        const formattedDate = dayjs(params.value).format('MM/DD/YY, hh:mm A');
+        return `${formattedDate}`;
+      }
     },
     {
       field: "actions",
