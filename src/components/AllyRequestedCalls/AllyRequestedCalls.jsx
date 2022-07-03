@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -16,10 +16,12 @@ function AllyRequestedCalls() {
   }, []);
 
   const requestedCalls = useSelector((store) => store.requestedCalls.requestedCalls);
+  
   const user = useSelector((store) => store.user);
 
   //config pagination
-  const itemsPerPage = 7;
+  const listRef = useRef(null);
+  const itemsPerPage = (listRef.current?.clientHeight / 120);
   const [page, setPage] = useState(1);
   const noOfPages = Math.ceil(requestedCalls.length / itemsPerPage);
 
@@ -27,16 +29,19 @@ function AllyRequestedCalls() {
     setPage(value);
   };
 
+
   return (
-    <Box className="boxDefault">
+    <Box className="boxDefault" ref={listRef}>
     <Typography variant="h4">Requested Calls</Typography>
-      <List>
+      <List >
+       
         {requestedCalls ? requestedCalls
         .slice((page-1)* itemsPerPage, page * itemsPerPage )
         .map((call) => {
-          return <RequestedCallItem key={call.id} call={call} />;
+          return <RequestedCallItem key={call.id} call={call}/>;
         }) : <Typography>No Calls Yet!</Typography>
       }
+   
       </List>
       <Box display="flex" justifyContent="center">
         <Pagination

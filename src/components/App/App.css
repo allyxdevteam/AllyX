@@ -118,5 +118,6 @@ MUI standardization
 .boxDefault {
   width: 98vw;
   margin: auto;
-  height: 90vh;
+  height: 91vh;
+  padding-top: 1vh;
 }
