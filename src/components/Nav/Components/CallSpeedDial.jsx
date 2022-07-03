@@ -16,6 +16,8 @@ import {
   Tooltip
 } from "@mui/material";
 
+import Swal from 'sweetalert2';
+
 function CallSpeedDial() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -60,6 +62,8 @@ function CallSpeedDial() {
     console.log("in handleScheduleCall");
     console.log("this is the set date and time:", callTime);
 
+
+
     const newDate = new Date(callTime);
     const chosenTime = newDate.getTime();
 
@@ -67,12 +71,13 @@ function CallSpeedDial() {
     console.log("current time", new Date().getTime());
 
     if (chosenTime >= new Date().getTime()) {
+      Swal.fire('Your call has been scheduled');
       dispatch({
         type: "POST_SCHEDULED_CALL",
         payload: { callTime, user },
       });
     } else {
-      alert("no!");
+      Swal.fire('You cannot schedule calls for the past');
     }
     setOpen(false);
   }
