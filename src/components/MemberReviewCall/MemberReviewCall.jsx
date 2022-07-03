@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Typography, Rating, TextField, Box, Button } from "@mui/material";
@@ -15,7 +16,7 @@ function MemberReviewCall() {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const dispatch = useDispatch();
-
+    const history = useHistory();
     const user = useSelector(store => store.user);
     const requestedCallId = useSelector(store => store.requestedCalls.requestedCall);
 
@@ -31,13 +32,20 @@ function MemberReviewCall() {
       setComment(e.target.value);
     };
   
-    const handleSubmit = (e) => {
-      dispatch({
-          type: 'ADD_GEN_COMMENT',
-          payload: { rating, comment }
-      })
-      setRating(0);
-      setComment('');
+    const handleSubmit = () => {
+        dispatch({
+            type: 'MEMBER_CALL_RATING',
+            payload: {
+            user,
+            allyId,
+            requestedCallId,
+            rating,
+            comment
+            }
+        })
+        history.push('/');
+        setRating(0);
+        setComment('');
     };
 
 
@@ -69,17 +77,7 @@ function MemberReviewCall() {
                     variant="contained"
                     sx={{m:1}}
                     onClick={() => {
-                        dispatch({
-                            type: 'ADD_CALL_RATING',
-                            payload: {
-                            user,
-                            memberId,
-                            callId,
-                            rating,
-                            comment
-                            }
-                        })
-                        history.push(`/memberReportMisuse`);
+                        history.push('/memberReportMisuse');
                     }}
                 >
                     Report Misuse
