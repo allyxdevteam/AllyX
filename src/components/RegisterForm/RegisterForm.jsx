@@ -5,9 +5,11 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 
-import { Box, FormControl, TextField, Button } from "@mui/material";
+import { Box, FormControl, TextField, Button, Typography } from "@mui/material";
 
 function RegisterForm() {
+
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -17,27 +19,31 @@ function RegisterForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const [response1, setResponse1] = useState(""); // Reason for becoming an ally
+  const [response1, setResponse1] = useState(""); //
   const [response2, setResponse2] = useState(""); // Twitter
   const [response3, setResponse3] = useState(""); // Insta
 
+  const [emailDone, setEmailDone] = useState('');
+  const [phoneDone, setPhoneDone] = useState('');
+  const [dobDone, setDobDone] = useState('');
+
+
+  //PLEASE KEEP THIS UNDER THE STATES IT IS WATCHING
   useEffect(() => {
     doneCheck();
   }, [email, phone, dob]);
-
-  const [emailDone, setEmailDone] = useState(false);
-  const [phoneDone, setPhoneDone] = useState(false);
-  const [dobDone, setDobDone] = useState(false);
-
   const errors = useSelector((store) => store.errors);
 
   const dispatch = useDispatch();
 
-//Run on update of email, phone, and DOB
+  //Run on update of email, phone, and DOB
   const doneCheck = () => {
+    console.log('In donecheck')
     if (emailDone === true && phoneDone === true && dobDone === true) {
       showNext();
+      console.log('Done!')
     } else {
+      console.log('Not Done :(')
       hideNext();
     }
   };
@@ -73,15 +79,17 @@ function RegisterForm() {
     setX(X + 1);
   };
 
-  //VALIDATOR FUNCTIONS   vvvvvv
-
   //VALIDATE EMAIL
   const ValidateEmail = (email) => {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     if (email.match(mailformat)) {
+      setEmail(email);
+
       setEmailDone(true);
     } else {
+      setEmail(email);
+
       setEmailDone(false);
     }
   };
@@ -138,7 +146,7 @@ function RegisterForm() {
     setPhoneDone(false);
   };
 
-  //VALIDATE 
+  //VALIDATE
 
   const validateDob = (e) => {
     let now = dayjs();
@@ -153,175 +161,195 @@ function RegisterForm() {
   //
   return (
     <>
-      <form
-        className="formPanel"
-        onSubmit={(e) => {
-          registerUser;
-        }}
-      >
-        <h2>Register User</h2>
+      <h1>Registration</h1>
 
-        {errors.registrationMessage && (
-          <h3 className="alert" role="alert">
-            {errors.registrationMessage}
-          </h3>
-        )}
+      {errors.registrationMessage && (
+        <h3 className="alert" role="alert">
+          {errors.registrationMessage}
+        </h3>
+      )}
 
-        {X === 1 && (
-          <div>
-            <h1></h1>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="Date of Birth"
-                value={dob}
-                inputFormat="MM/DD/YY"
-                views={["year", "month", "day"]}
+      {X === 1 && (
+        <>
+          <Typography>Information (required)</Typography>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              error={!emailDone}
+              label="Date of Birth"
+              value={dob}
+              inputFormat="MM/DD/YY"
+              views={["year", "month", "day"]}
+              required
+              onChange={(e) => {
+                validateDob(e);
+              }}
+              renderInput={(params) => {
+                return <TextField fullWidth {...params} />;
+              }}
+            />
+          </LocalizationProvider>
+
+          <Box mt={2}>
+            <FormControl fullWidth>
+              <TextField
+                autoComplete="on"
+                id="outlined-textarea"
+                label="email"
+                helperText={!emailDone && "please enter a valid email" }
                 required
+                placeholder="heyallyx@allyx.com"
+                multiline
+                fullwidth
+                value={email}
                 onChange={(e) => {
-                  validateDob(e);
+                  ValidateEmail(e.target.value);
                 }}
-                renderInput={(params) => {
-                  return <TextField fullWidth {...params} />;
-                }}
+                error={(emailDone === false)}
+                errorText="please insert valid email"
               />
-            </LocalizationProvider>
-            <div>
-              <Box mt={2}>
-                <FormControl fullWidth>
-                  <TextField
-                    id="outlined-textarea"
-                    label="email"
-                    required
-                    placeholder="heyallyx@allyx.com"
-                    multiline
-                    fullwidth
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      ValidateEmail(e.target.value);
-                    }}
-                  />
-                </FormControl>
-              </Box>
-            </div>
-            <div>
-              <Box mt={2}>
-                <FormControl fullWidth>
-                  <TextField
-                    id="outlined-textarea"
-                    label="Phone"
-                    placeholder="(905)123-5678"
-                    required
-                    multiline
-                    fullwidth
-                    value={phone}
-                    onChange={(e) => {
-                      phonenumber(e.target.value);
-                    }}
-                  />
-                </FormControl>
-              </Box>
-            </div>
-            <div>
-              <Button disabled={!showButton} onClick={nextSlide}>
-                Next
-              </Button>
-            </div>
-          </div>
-        )}
+            </FormControl>
+          </Box>
 
-        {X === 2 && (
-          <div>
-            <div className="card-graphics">
-              <div className="card-top">
-                <h4> Social Media (optional) </h4>
-              </div>
-
-              <div className="card-body">
-                {/* Twitter Username */}
-                <Box mt={2}>
-                  <FormControl fullWidth>
-                    <TextField
-                      id="outlined-textarea"
-                      label="Twitter URL"
-                      placeholder=""
-                      multiline
-                      fullwidth
-                      color={response1.length > 0 ? null : "warning"}
-                      value={response1}
-                      onChange={(e) => {
-                        setResponse(e.target.value);
-                      }}
-                    />
-                  </FormControl>
-                </Box>
-
-                {/* Instagram Username */}
-                <Box mt={2}>
-                  <FormControl fullWidth>
-                    <TextField
-                      id="outlined-textarea"
-                      label="Instagram URL"
-                      placeholder="e.x. @HeyAllyxApp"
-                      multiline
-                      fullwidth
-                      color={response2.length > 0 ? null : "warning"}
-                      value={response2}
-                      onChange={(e) => {
-                        setResponse2(e.target.value);
-                      }}
-                    />
-                  </FormControl>
-                </Box>
-
-                {/* Facebook Account */}
-                <Box mt={2}>
-                  <FormControl fullWidth>
-                    <TextField
-                      id="outlined-textarea"
-                      label="Facebook URL"
-                      placeholder="e.x. aklsdjsadjaslkdja.com"
-                      multiline
-                      fullwidth
-                      color={response3.length > 0 ? null : "warning"}
-                      value={response3}
-                      onChange={(e) => {
-                        setResponse3(e.target.value);
-                      }}
-                    />
-                  </FormControl>
-                </Box>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="username">
-                Username:
-                <input
-                  type="username"
-                  name="username"
-                  value={username}
-                  required
-                  onChange={(event) => setUsername(event.target.value)}
-                />
-              </label>
-            </div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={password}
+          <Box mt={2}>
+            <FormControl fullWidth>
+              <TextField
+                id="outlined-textarea"
+                label="Phone"
+                placeholder="(905)123-5678"
                 required
-                onChange={(event) => setPassword(event.target.value)}
+                multiline
+                fullwidth
+                value={phone}
+                onChange={(e) => {
+                  phonenumber(e.target.value);
+                }}
               />
-            </label>
-            <div>
-              <Button onClick={registerUser}>register</Button>
-            </div>
-          </div>
-        )}
-      </form>
+            </FormControl>
+          </Box>
+
+         
+        </>
+      )}
+
+      {/* Name Information */}
+      {X === 1 && (
+        <>
+          <Typography>Name (required)</Typography>
+
+          <Box mt={2}>
+            <FormControl fullWidth>
+              <TextField
+                id="outlined-textarea"
+                label="First Name (Required)"
+                required
+                fullwidth
+                value={firstName}
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
+              />
+            </FormControl>
+          </Box>
+
+          <Box mt={2}>
+            <FormControl fullWidth>
+              <TextField
+                id="outlined-textarea"
+                label="Last Name (optional)"
+                multiline
+                fullwidth
+                value={lastName}
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
+              />
+            </FormControl>
+          </Box>
+
+          <Typography>Social Media (optional)</Typography>
+
+          {/* Twitter Username */}
+
+          <Box mt={2}>
+            <FormControl fullWidth>
+              <TextField
+                id="outlined-textarea"
+                label="Twitter URL"
+                placeholder=""
+                multiline
+                fullwidth
+                color={response1.length > 0 ? null : "warning"}
+                value={response1}
+                onChange={(e) => {
+                  setResponse(e.target.value);
+                }}
+              />
+            </FormControl>
+          </Box>
+
+          {/* Instagram Username */}
+          <Box mt={2}>
+            <FormControl fullWidth>
+              <TextField
+                id="outlined-textarea"
+                label="Instagram URL"
+                placeholder="e.x. @HeyAllyxApp"
+                multiline
+                fullwidth
+                color={response2.length > 0 ? null : "warning"}
+                value={response2}
+                onChange={(e) => {
+                  setResponse2(e.target.value);
+                }}
+              />
+            </FormControl>
+          </Box>
+
+          {/* Facebook Account */}
+          <Box mt={2}>
+            <FormControl fullWidth>
+              <TextField
+                id="outlined-textarea"
+                label="Facebook URL"
+                placeholder="e.x. aklsdjsadjaslkdja.com"
+                multiline
+                fullwidth
+                color={response3.length > 0 ? null : "warning"}
+                value={response3}
+                onChange={(e) => {
+                  setResponse3(e.target.value);
+                }}
+              />
+            </FormControl>
+          </Box>
+
+          <Button disabled={!showButton} onClick={nextSlide}>
+            Next
+          </Button>
+        </>
+      )}
+
+      {X === 1 && (
+        <>
+          <input
+            type="username"
+            name="username"
+            value={username}
+            required
+            onChange={(event) => setUsername(event.target.value)}
+          />
+
+          <input
+            type="password"
+            name="password"
+            value={password}
+            required
+            onChange={(event) => setPassword(event.target.value)}
+          />
+
+          <Button onClick={registerUser}>register</Button>
+        </>
+      )}
     </>
   );
 }
