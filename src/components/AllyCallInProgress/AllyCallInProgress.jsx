@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +10,13 @@ function AllyCallInProgress(){
     const dispatch = useDispatch();
     const params = useParams();
     const history = useHistory();
+
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_CLAIMED_CALL',
+            payload: { claimedCallId, memberId }
+        })
+    }, []);
 
     const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
     const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);
