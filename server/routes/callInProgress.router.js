@@ -90,6 +90,8 @@ router.put('/end/member/:requestedCallId', rejectUnauthenticated, async (req, re
   const requestedCallId = req.body.requestedCallId;
   const dateTime = req.body.dateTime;
 
+  console.log('req dot booooooooooooooody:',req.body);
+
   try {
 
     await client.query('BEGIN')
@@ -169,10 +171,10 @@ router.get('/member/:requestedCallId', rejectUnauthenticated, (req, res) => {
 
 
   const sqlQuery = `
-  SELECT call.id AS call_id, call.member_id, call.ally_id, "user".first_name
+  SELECT "call".id AS call_id, "call".member_id, "call".ally_id, "user".first_name
   FROM "call"
-  JOIN "user" on "user".id = call.ally_id
-  WHERE call.requested_call_id = $1;
+  JOIN "user" on "user".id = "call".ally_id
+  WHERE "call".requested_call_id = $1;
       `;
   const sqlValues = [requestedCallId]
   pool.query(sqlQuery, sqlValues)

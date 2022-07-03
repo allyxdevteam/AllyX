@@ -24,6 +24,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     console.log('*********************************************', req.body);
+    const updatedProfileInfo = req.body.updatedProfile;
+    const updatedProfilePic = req.body.updatedImage;
     const sqlText = `
     UPDATE "user"
         SET
@@ -41,25 +43,27 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             is_reported = $12,
             is_active = $13,
             is_blocked = $14,
-            delete_requested = $15
-        WHERE id = $16;
+            delete_requested = $15,
+            profile_pic = $16
+        WHERE id = $17;
     `;
     const sqlValues = [
-        req.body.first_name,
-        req.body.last_name,
-        req.body.phone_number,
-        req.body.email,
-        req.body.city,
-        req.body.facebook_link,
-        req.body.twitter_link,
-        req.body.instagram_link,
-        req.body.average_stars,
-        req.body.is_ally,
-        req.body.is_admin,
-        req.body.is_reported,
-        req.body.is_active,
-        req.body.is_blocked,
-        req.body.delete_requested,
+      updatedProfileInfo.first_name,
+      updatedProfileInfo.last_name,
+      updatedProfileInfo.phone_number,
+      updatedProfileInfo.email,
+      updatedProfileInfo.city,
+      updatedProfileInfo.facebook_link,
+      updatedProfileInfo.twitter_link,
+      updatedProfileInfo.instagram_link,
+      updatedProfileInfo.average_stars,
+      updatedProfileInfo.is_ally,
+      updatedProfileInfo.is_admin,
+      updatedProfileInfo.is_reported,
+      updatedProfileInfo.is_active,
+      updatedProfileInfo.is_blocked,
+      updatedProfileInfo.delete_requested,
+      updatedProfilePic,
         req.params.id
     ];
     pool.query(sqlText, sqlValues)
@@ -87,7 +91,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     })}
     else console.warn('403, admins only :)')
-  }
+   }
 )
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {

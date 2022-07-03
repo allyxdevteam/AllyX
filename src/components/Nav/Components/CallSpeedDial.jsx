@@ -47,10 +47,12 @@ function CallSpeedDial() {
   function handleRequestCall() {
     console.log("in handleRequestCall");
     user.id
-      ? dispatch({
+      ? (dispatch({
           type: "POST_REQUESTED_CALL",
           payload: { dateTime, user },
-        })
+        }),
+        history.push('/memberRequestedCall'))
+
       : history.push("/login");
   }
 

@@ -22,6 +22,9 @@ function AllyCallInProgress(){
     const claimedCallId = useSelector(store => store.claimedCall.claimedCall);
     const claimedCallMember = useSelector(store => store.claimedCall.claimedCallMember);
 
+    const newDate = new Date();
+    const dateTime = newDate.toLocaleString();
+
     const memberId = params.memberId
 
     function handleCompleteCall(){

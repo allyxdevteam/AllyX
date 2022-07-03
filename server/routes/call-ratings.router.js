@@ -24,6 +24,8 @@ const {
   )
 
 router.post('/ally', rejectUnauthenticated, (req, res) => {
+
+  console.log('req dot booooooooody in call ratings router:', req.body );
     const sqlText = `
     INSERT INTO "call-rating"
       (reviewer_id, recipient_id, call_id, num_stars, comment)
@@ -40,7 +42,7 @@ router.post('/ally', rejectUnauthenticated, (req, res) => {
       .then((dbRes) => {
       res.sendStatus(201);
     })
-  });
+   });
 
 router.post('/member', rejectUnauthenticated, (req, res) => {
   const sqlText = `

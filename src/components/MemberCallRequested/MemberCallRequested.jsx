@@ -9,6 +9,9 @@ function MemberCallRequested() {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const newDate = new Date();
+  const dateTime = newDate.toLocaleString();
+
   const requestedCallId = useSelector(
     (store) => store.requestedCalls.requestedCall
   );
