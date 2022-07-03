@@ -208,7 +208,7 @@ function App() {
           </Route>
         </Switch>        
         <BottomNav />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );
