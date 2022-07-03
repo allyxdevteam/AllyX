@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { Typography, Rating, TextField, Box, Button } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 
 function MemberCallRequested() {
   const history = useHistory();
@@ -11,8 +10,6 @@ function MemberCallRequested() {
   const requestedCallId = useSelector(
     (store) => store.requestedCalls.requestedCall
   );
-  const date = new Date();
-  const dateTime = date.toLocaleString();
 
   function cancelCallMember() {
     console.log("in cancelCallMember");
