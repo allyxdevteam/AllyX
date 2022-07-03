@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 import { Typography, Box, Button } from "@mui/material";
 import { Cancel, Done } from "@mui/icons-material";
@@ -14,6 +15,12 @@ function MemberCallRequested() {
 
   function cancelCallMember() {
     console.log("in cancelCallMember");
+    dispatch({
+        type: "CANCEL_CLAIMED_CALL",
+        payload: requestedCallId
+    })
+    Swal.fire('We removed your call from the queue. Thanks for using Allyx!');
+    history.push("/home")
   }
 
   function callCompleteMember() {
