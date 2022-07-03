@@ -125,7 +125,7 @@ MUI standardization
 
 .commentBox {
    margin: auto;
-   margin-top: 10vh;
+   padding-top: 10vh;
   max-width: 600px;
   width: 80vw
 }
