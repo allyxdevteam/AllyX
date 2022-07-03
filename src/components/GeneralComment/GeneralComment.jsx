@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Swal from 'sweetalert2';
+import { useHistory } from "react-router-dom";
 
 import { Typography, Rating, TextField, Box, Button } from "@mui/material";
-import React from "react";
+
 
 function GeneralComment() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // sets the comment variable with the content of the textfield
   const handleComment = (e) => {
