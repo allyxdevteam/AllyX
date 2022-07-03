@@ -75,7 +75,7 @@ function AllyReviewCall() {
         </Typography>
         <TextField
           type="comment"
-          name="ally-review-comment"
+          name="call-comment"
           value={comment}
           fullWidth
           multiline
