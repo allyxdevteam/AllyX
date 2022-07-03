@@ -47,12 +47,10 @@ function CallSpeedDial() {
   function handleRequestCall() {
     console.log("in handleRequestCall");
     user.id
-      ? (dispatch({
+      ? dispatch({
           type: "POST_REQUESTED_CALL",
           payload: { dateTime, user },
-        }),
-        history.push('/memberRequestedCall'))
-
+        })
       : history.push("/login");
   }
 
@@ -90,7 +88,7 @@ function CallSpeedDial() {
       <Backdrop open={openSpeedDial} />
       <Tooltip title="Call Me" placement="top">
       <SpeedDial
-        aria-label="SpeedDial tooltip example"
+        ariaLabel="SpeedDial tooltip example"
         sx={{ position: "absolute", bottom: 16, right: 16 }}
         icon={<Call />}
         onClose={handleCloseSpeedDial}
@@ -99,7 +97,7 @@ function CallSpeedDial() {
       >
         {actions.map((action) => (
           <SpeedDialAction
-            aria-label={action.name}
+            ariaLabel={action.name}
             key={action.name}
             icon={action.icon}
             tooltipTitle={action.name}
@@ -124,8 +122,8 @@ function CallSpeedDial() {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button aria-label="schedule" onClick={handleScheduleCall}>Schedule</Button>
-          <Button aria-label="cancel"onClick={handleCloseDialog}>Cancel</Button>
+          <Button ariaLabel="schedule" onClick={handleScheduleCall}>Schedule</Button>
+          <Button ariaLabel="cancel"onClick={handleCloseDialog}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </Box>
