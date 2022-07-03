@@ -51,14 +51,14 @@ function UserReport() {
     {
       field: "phone_number",
       headerName: "Phone Number",
-      width: 150,
+      width: 120,
       editable: true,
     },
     {
       field: "dob",
       headerName: "Birthday",
       type: "dateTime",
-      width: 150,
+      width: 110,
       editable: false,
       valueFormatter: (params) =>{
         if(params.value == null) {
