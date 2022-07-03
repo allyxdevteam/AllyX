@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Button, TextField, Box } from '@mui/material';
+import { Button, TextField, Box, Card, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Avatar from '@mui/material/Avatar';
 
@@ -40,34 +40,45 @@ function UpdateProfile() {
         e.preventDefault();
         dispatch({
             type: 'UPDATE_PROFILE',
-            payload: profile
+            payload: {profile, profileImage}
         })
         history.push('/profile');
     }
 
     return (
-        <Box sx={[{ maxWidth: '45vw' }, { m: 'auto' }, { mb: '25%' }]} display='flex' flexDirection={'column'} gap={'20px'}>
+        <Box sx={[{ maxWidth: '50vw' }, { m: 'auto' }, { mb: '25%' }]} display='flex' flexDirection={'column'} gap={'20px'}>
             {profileImage ?
-                <Avatar
-                    alt={user.username}
-                    src={profileImage}
-                />
+                <Card sx={[{ maxWidth: '40vw' }, { m: 'auto' }]}>
+                    <img src={profileImage}/>
+                </Card>
                 :
+            user.profile_pic ?
+                <Card sx={[{ maxWidth: '40vw' }, { m: 'auto' }]}>
+                    <img src={user.profile_pic}/>
+                </Card>
+                :
+                <Card sx={[{ maxWidth: '40vw' }, { m: 'auto' }]}>
                 <AccountCircleIcon />
-
+            </Card>
             }
+            <Typography>Change/Add profile pic:</Typography>
+            <Box display={'flex'}>
             <Button
+                fullWidth="50%"
                 component="label"
+                variant='outlined'
             >
-                Choose new pic
+                1: Choose file to upload
                 <input
                     type="file"
                     hidden
                     onChange={(event) => { setImageSelected(event.target.files[0]) }}
                 />
             </Button>
-            {/* <Input type="file" onChange={(event) => { setImageSelected(event.target.files[0]); }} /> */}
-            <Button variant="contained" onClick={uploadImage}>upload image</Button>
+            <Button fullWidth='50%' variant="contained" onClick={uploadImage}>2: upload file</Button>
+            </Box>
+            <Typography>Change/Add profile info:</Typography>
+
             <TextField
                 label="first name"
                 value={profile.first_name}

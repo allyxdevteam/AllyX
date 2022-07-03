@@ -20,9 +20,6 @@ function Profile() {
         })
     }, [])
 
-    const profileImage = useSelector((store) => store.profileImage)
-
-
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
@@ -34,10 +31,10 @@ function Profile() {
                 :
                 <></>
             }
-            {profileImage ?
+            {user.profile_pic ?
                 <Avatar
                     alt={user.username}
-                    src={profileImage}
+                    src={user.profile_pic}
                 />
                 :
                 <AccountCircleIcon />
