@@ -73,7 +73,7 @@ SET
   is_reported=TRUE
 WHERE id = $1;
 `;
-sqlValues = [req.body.id];
+sqlValues = [req.body.allyId];
 pool.query(sqlText, sqlValues)
   .then((dbRes) => {
   res.sendStatus(201);

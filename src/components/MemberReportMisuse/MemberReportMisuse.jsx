@@ -27,12 +27,12 @@ function MemberReportMisuse() {
             <Button
                 onClick={() => {
                     dispatch({
-                        type: 'MEMBER_REPORT_MISUSE',
-                        payload: { requestedCallId, allyId, misuseComments }
-                    })
-                    dispatch({
                         type: 'MARK_ALLY_REPORTED',
                         payload: { allyId }
+                    })
+                    dispatch({
+                        type: 'MEMBER_REPORT_MISUSE',
+                        payload: { requestedCallId, allyId, misuseComments }
                     })
                     history.push('/');
                 }}
