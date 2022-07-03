@@ -51,8 +51,8 @@ function AllyReviewCall() {
     };
 
   return (
-    <Box className="boxDefault">
-      <Box sx={[{ maxWidth: "35vw" }, { m: "auto" }, {mt: '10vh'}]}>
+    <Box className="boxDefault" >
+      <Box className="commentBox">
         <Typography variant="h4">
           How was your call with {memberFirstName}?
         </Typography>

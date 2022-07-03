@@ -50,7 +50,7 @@ function CallSpeedDial() {
       ? dispatch({
           type: "POST_REQUESTED_CALL",
           payload: { dateTime, user },
-        })
+        }, history.push("/memberRequestedCall"))
       : history.push("/login");
   }
 
