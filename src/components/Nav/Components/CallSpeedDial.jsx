@@ -90,7 +90,7 @@ function CallSpeedDial() {
       <Backdrop open={openSpeedDial} />
       <Tooltip title="Call Me" placement="top">
       <SpeedDial
-        ariaLabel="SpeedDial tooltip example"
+        aria-label="SpeedDial tooltip example"
         sx={{ position: "absolute", bottom: 16, right: 16 }}
         icon={<Call />}
         onClose={handleCloseSpeedDial}
@@ -99,7 +99,7 @@ function CallSpeedDial() {
       >
         {actions.map((action) => (
           <SpeedDialAction
-            ariaLabel={action.name}
+            aria-label={action.name}
             key={action.name}
             icon={action.icon}
             tooltipTitle={action.name}
@@ -114,7 +114,7 @@ function CallSpeedDial() {
         <DialogContent>
           <Box>
           <input
-            ariaLabel="Date time selection for scheduled call"
+            aria-label="Date time selection for scheduled call"
             type="datetime-local"
             onChange={(e) => {
               setCallTime(e.target.value);
@@ -124,8 +124,8 @@ function CallSpeedDial() {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button ariaLabel="schedule" onClick={handleScheduleCall}>Schedule</Button>
-          <Button ariaLabel="cancel"onClick={handleCloseDialog}>Cancel</Button>
+          <Button aria-label="schedule" onClick={handleScheduleCall}>Schedule</Button>
+          <Button aria-label="cancel"onClick={handleCloseDialog}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </Box>
