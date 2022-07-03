@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Swal from 'sweetalert2';
+import dayjs from 'dayjs';
 
 import {
   DataGrid,
@@ -61,6 +62,14 @@ function ReportReport() {
       headerName: "Date",
       width: 150,
       editable: false,
+      valueFormatter: (params) =>{
+        if(params.value == null) {
+          return('');
+        }
+
+        const formattedDate = dayjs(params.value).format('MM/DD/YY, hh:mm A');
+        return `${formattedDate}`;
+      }
     },
     {
       field: "actions",

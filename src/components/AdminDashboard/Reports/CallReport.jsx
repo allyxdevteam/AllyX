@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import dayjs from 'dayjs';
 
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
@@ -13,15 +14,6 @@ function CallReport() {
 
   const calls = useSelector((store) => store.calls);
 
-  //       // handles edits made to the DataGrid
-  //   const processRowUpdate = (newValue, oldValue) =>{
-  //     console.log('in process row update', newValue, oldValue)
-  //     return newValue
-  //   }
-
-  //   const handleProcessRowUpdateError = (error) => {
-  //     console.log('whoops!', error)
-  //   }
   // DataGrid config
   const columns = [
     { field: "id", headerName: "ID", width: 40 },
@@ -42,18 +34,42 @@ function CallReport() {
       headerName: "Time Accepted",
       width: 150,
       editable: false,
+      valueFormatter: (params) =>{
+        if(params.value == null) {
+          return('');
+        }
+
+        const formattedDate = dayjs(params.value).format('MM/DD/YY, hh:mm A');
+        return `${formattedDate}`;
+      }
     },
     {
       field: "date_time_started",
       headerName: "Time Started",
       width: 150,
       editable: false,
+      valueFormatter: (params) =>{
+        if(params.value == null) {
+          return('');
+        }
+
+        const formattedDate = dayjs(params.value).format('MM/DD/YY, hh:mm A');
+        return `${formattedDate}`;
+      }
     },
     {
       field: "date_time_ended",
       headerName: "Time Ended",
       width: 150,
       editable: false,
+      valueFormatter: (params) =>{
+        if(params.value == null) {
+          return('');
+        }
+
+        const formattedDate = dayjs(params.value).format('MM/DD/YY, hh:mm A');
+        return `${formattedDate}`;
+      }
     },
     {
       field: "is_done_member",
@@ -80,9 +96,6 @@ function CallReport() {
         density="compact"
         rowsPerPageOptions={[10]}
         components={{ Toolbar: GridToolbar }}
-        // experimentalFeatures={{ newEditingApi: true }}
-        // processRowUpdate={processRowUpdate}
-        // onProcessRowUpdateError={handleProcessRowUpdateError}
         getRowId={(row) => row.id}
       />
     </Box>
