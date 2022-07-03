@@ -8,8 +8,6 @@ import dayjs from "dayjs";
 import { Box, FormControl, TextField, Button, Typography } from "@mui/material";
 
 function RegisterForm() {
-
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -19,14 +17,14 @@ function RegisterForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const [response1, setResponse1] = useState(""); //
-  const [response2, setResponse2] = useState(""); // Twitter
-  const [response3, setResponse3] = useState(""); // Insta
+  const [twitter, setTwitter] = useState(""); // Twitter
+  const [instagram, setInstagram] = useState(""); // Insta
+  const [facebook, setFacebook] = useState(""); // Insta
 
-  const [emailDone, setEmailDone] = useState('');
-  const [phoneDone, setPhoneDone] = useState('');
-  const [dobDone, setDobDone] = useState('');
-
+  const [emailDone, setEmailDone] = useState("");
+  const [phoneDone, setPhoneDone] = useState("");
+  const [dobDone, setDobDone] = useState("");
+  const [firstNameDone, setFirstNameDone] = useState("");
 
   //PLEASE KEEP THIS UNDER THE STATES IT IS WATCHING
   useEffect(() => {
@@ -38,13 +36,15 @@ function RegisterForm() {
 
   //Run on update of email, phone, and DOB
   const doneCheck = () => {
-    console.log('In donecheck')
-    if (emailDone === true && phoneDone === true && dobDone === true) {
-      showNext();
-      console.log('Done!')
+    if (
+      emailDone === true &&
+      phoneDone === true &&
+      dobDone === true &&
+      firstNameDone === true
+    ) {
+      return true;
     } else {
-      console.log('Not Done :(')
-      hideNext();
+      return false;
     }
   };
   // Slide controls
@@ -54,17 +54,25 @@ function RegisterForm() {
   const registerUser = (event) => {
     event.preventDefault();
     console.log("hey its the register button");
-
-    dispatch({
-      type: "REGISTER",
-      payload: {
-        username: username,
-        password: password,
-        email: email,
-        dob: dob,
-        phone: phone,
-      },
-    });
+    if (doneCheck() === true) {
+      dispatch({
+        type: "REGISTER",
+        payload: {
+          username: username,
+          password: password,
+          email: email,
+          dob: dob,
+          phone: phone,
+          firstname: firstName,
+          lastname: lastName,
+          instagram: instagram,
+          twitter: twitter,
+          facebook: facebook,
+        },
+      });
+    } else {
+      alert("Please complete all required fields");
+    }
   };
   //
   const showNext = () => {
@@ -75,9 +83,6 @@ function RegisterForm() {
     setShowButton(false);
   };
   //
-  const nextSlide = () => {
-    setX(X + 1);
-  };
 
   //VALIDATE EMAIL
   const ValidateEmail = (email) => {
@@ -133,7 +138,6 @@ function RegisterForm() {
       inputtxt.length != phone.toString().length &&
       desirable.test(inputtxt) === true
     ) {
-      console.log("Backspace!");
       setPhone(inputtxt);
       setPhoneDone(false);
       return;
@@ -146,11 +150,20 @@ function RegisterForm() {
     setPhoneDone(false);
   };
 
-  //VALIDATE
+  const handleNameChange = (e) => {
+    setFirstName(e);
+    if (e <= 2) {
+      setFirstNameDone(false);
+    } else {
+      setFirstNameDone(true);
+    }
+  };
+
+  //VALIDATE DOB
 
   const validateDob = (e) => {
     let now = dayjs();
-    if (now.diff(e, "year") > 18) {
+    if (now.diff(e, "year") >= 18) {
       setDob(e);
       setDobDone(true);
     } else {
@@ -174,17 +187,27 @@ function RegisterForm() {
           <Typography>Information (required)</Typography>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              error={!emailDone}
-              label="Date of Birth"
+              label="Date of Birth (Required)"
               value={dob}
-              inputFormat="MM/DD/YY"
+              inputFormat="MM/DD/YYYY"
               views={["year", "month", "day"]}
               required
               onChange={(e) => {
                 validateDob(e);
               }}
               renderInput={(params) => {
-                return <TextField fullWidth {...params} />;
+                return (
+                  <TextField
+                    {...params}
+                    fullWidth
+                    required
+                    error={dobDone === false}
+                    helperText={
+                      !dobDone &&
+                      "Please enter a valid date of birth. You must be 18+ to join Allyx"
+                    }
+                  />
+                );
               }}
             />
           </LocalizationProvider>
@@ -194,8 +217,8 @@ function RegisterForm() {
               <TextField
                 autoComplete="on"
                 id="outlined-textarea"
-                label="email"
-                helperText={!emailDone && "please enter a valid email" }
+                label="Email (Required)"
+                helperText={!emailDone && "Please enter a valid email"}
                 required
                 placeholder="heyallyx@allyx.com"
                 multiline
@@ -204,8 +227,7 @@ function RegisterForm() {
                 onChange={(e) => {
                   ValidateEmail(e.target.value);
                 }}
-                error={(emailDone === false)}
-                errorText="please insert valid email"
+                error={emailDone === false}
               />
             </FormControl>
           </Box>
@@ -214,8 +236,12 @@ function RegisterForm() {
             <FormControl fullWidth>
               <TextField
                 id="outlined-textarea"
-                label="Phone"
+                label="Phone Number (Required)"
                 placeholder="(905)123-5678"
+                helperText={
+                  !phoneDone && "Please enter a valid 10 digit phone number"
+                }
+                error={phoneDone === false}
                 required
                 multiline
                 fullwidth
@@ -226,8 +252,6 @@ function RegisterForm() {
               />
             </FormControl>
           </Box>
-
-         
         </>
       )}
 
@@ -243,9 +267,13 @@ function RegisterForm() {
                 label="First Name (Required)"
                 required
                 fullwidth
+                error={firstNameDone === false}
+                helperText={
+                  firstNameDone === false && "Please enter your first name"
+                }
                 value={firstName}
                 onChange={(e) => {
-                  setFirstName(e.target.value);
+                  handleNameChange(e.target.value);
                 }}
               />
             </FormControl>
@@ -278,10 +306,10 @@ function RegisterForm() {
                 placeholder=""
                 multiline
                 fullwidth
-                color={response1.length > 0 ? null : "warning"}
-                value={response1}
+                color={twitter.length > 0 ? null : "warning"}
+                value={twitter}
                 onChange={(e) => {
-                  setResponse(e.target.value);
+                  setTwitter(e.target.value);
                 }}
               />
             </FormControl>
@@ -293,13 +321,13 @@ function RegisterForm() {
               <TextField
                 id="outlined-textarea"
                 label="Instagram URL"
-                placeholder="e.x. @HeyAllyxApp"
+                placeholder=""
                 multiline
                 fullwidth
-                color={response2.length > 0 ? null : "warning"}
-                value={response2}
+                color={instagram.length > 0 ? null : "warning"}
+                value={instagram}
                 onChange={(e) => {
-                  setResponse2(e.target.value);
+                  setInstagram(e.target.value);
                 }}
               />
             </FormControl>
@@ -311,21 +339,17 @@ function RegisterForm() {
               <TextField
                 id="outlined-textarea"
                 label="Facebook URL"
-                placeholder="e.x. aklsdjsadjaslkdja.com"
+                placeholder=""
                 multiline
                 fullwidth
-                color={response3.length > 0 ? null : "warning"}
-                value={response3}
+                color={facebook.length > 0 ? null : "warning"}
+                value={facebook}
                 onChange={(e) => {
-                  setResponse3(e.target.value);
+                  setFacebook(e.target.value);
                 }}
               />
             </FormControl>
           </Box>
-
-          <Button disabled={!showButton} onClick={nextSlide}>
-            Next
-          </Button>
         </>
       )}
 
