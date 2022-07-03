@@ -68,7 +68,7 @@ CREATE TABLE "report"(
 	"id" SERIAL PRIMARY KEY,
 	"reviewer_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"recipient_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
-	"call_id" INT REFERENCES "call" NOT NULL,
+	"call_id" INT REFERENCES "call" ON DELETE CASCADE NOT NULL,
 	"comment" VARCHAR (5000) NOT NULL,
 	"inserted_at" TIMESTAMPTZ DEFAULT now()
 );
@@ -77,7 +77,7 @@ CREATE TABLE "call-rating"(
 	"id" SERIAL PRIMARY KEY,
 	"reviewer_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"recipient_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
-	"call_id" INT REFERENCES "call" NOT NULL,
+	"call_id" INT REFERENCES "call" ON DELETE CASCADE NOT NULL,
 	"num_stars" INT,
 	"comment" VARCHAR (5000),
 	"inserted_at" TIMESTAMPTZ DEFAULT now()
