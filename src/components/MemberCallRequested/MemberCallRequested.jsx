@@ -1,47 +1,59 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import Swal from 'sweetalert2';
 
-import { Typography, Rating, TextField, Box, Button } from "@mui/material";
-
+import { Typography, Box, Button } from "@mui/material";
+import { Cancel, Done } from "@mui/icons-material";
 
 function MemberCallRequested() {
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-    const history = useHistory();
-    const dispatch = useDispatch();
+  const requestedCallId = useSelector(
+    (store) => store.requestedCalls.requestedCall
+  );
 
-    const requestedCallId = useSelector((store) => store.requestedCalls.requestedCall)
-    const date = new Date();
-    const dateTime = date.toLocaleString();
+  function cancelCallMember() {
+    console.log("in cancelCallMember");
+    dispatch({
+        type: "CANCEL_CLAIMED_CALL",
+        payload: requestedCallId
+    })
+    Swal.fire('We removed your call from the queue. Thanks for using Allyx!');
+    history.push("/home")
+  }
 
-    function cancelCallMember() {
-        console.log('in cancelCallMember');
-    }
+  function callCompleteMember() {
+    console.log("in callCompleteMember");
+    dispatch({
+      type: "PUT_CALL_ENDED_TIME_MEMBER",
+      payload: { requestedCallId, dateTime },
+    });
 
-    function callCompleteMember() {
-        console.log('in callCompleteMember');
-        dispatch({
-            type: 'PUT_CALL_ENDED_TIME_MEMBER',
-            payload: {requestedCallId, dateTime}
-        })
+    history.push("/memberReviewCall");
+  }
 
-        history.push('/memberReviewCall')
+  return (
+    <Box className="boxDefault">
+        
+      <Typography variant="h2"sx={{m:3}}>Your call has been requested!</Typography>
 
-    }
+      <Typography variant="h4" color="text.secondary" sx={[{m:3}, {ml:8}]}>You may cancel this call if you wish.</Typography>
 
-    return (
-        <>
-            <Typography>Your call has been requested! You may cancel this call if you wish.
-                When the call is complete please hit the Call Complete button and leave a review.
-                Thanks for using Allyx! We hope you're having a great night!
-            </Typography>
+      <Typography variant="h4" sx={[{m:3}, {ml:8}]}>
+        When the call is complete please hit the <strong>Call Complete</strong> button and leave
+        a review.
+      </Typography>
 
-            <Button onClick={cancelCallMember}>Cancel Call</Button>
-            <Button onClick={callCompleteMember}>Call Complete!</Button>
-
-        </>
-    )
+      <Typography variant="h4" color="text.secondary" sx={[{m:3}, {ml:8}]}>
+        Thanks for using Allyx! We hope you're having a great night!
+      </Typography>
+      <Box sx={[{ml:'40vw'}]}>
+      <Button startIcon={<Cancel />} color="error" onClick={cancelCallMember} variant="contained" sx={{m:1}}>Cancel Call</Button>
+      <Button startIcon={<Done />} onClick={callCompleteMember} variant="contained" sx={{m:1}}>Call Complete</Button>
+      </Box>
+    </Box>
+  );
 }
-
 
 export default MemberCallRequested;

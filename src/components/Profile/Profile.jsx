@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import DisableAccount from '../DisableAccount/DisableAccount';
 import AllyApplicationStatus from '../AllyApplicationStatus/AllyApplicationStatus';
+import ImageUploader from './ImageUploader/ImageUploader';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Avatar from '@mui/material/Avatar';
@@ -19,25 +20,30 @@ function Profile() {
         })
     }, [])
 
+    const profileImage = useSelector((store) => store.profileImage)
+
+
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
 
     return (
-        <Box>
+        <Box sx={[{ maxWidth: '35vw' }, { m: 'auto' }]}>
             {user.is_admin === true ?
                 <h3>ADMIN</h3>
-            :
+                :
                 <></>
             }
-            {user.user_pic ?
-                <Avatar 
+            {profileImage ?
+                <Avatar
                     alt={user.username}
-                    src={user.user_pic}
+                    src={profileImage}
                 />
-            :
+                :
                 <AccountCircleIcon />
+
             }
+
             <h6>{user.first_name}</h6>
             <h6>{user.last_name}</h6>
             <h6>{user.username}</h6>
@@ -63,19 +69,20 @@ function Profile() {
                         buttons: true,
                         dangerMode: true
                     })
-                    .then((deleteRequested) => {
-                        if (deleteRequested) {
-                            swal({
-                                text: "You have requested your account be deleted. A member of admin will be in contact.",
-                                icon: "success"
-                            });
-                            dispatch({
-                                type: 'REQUEST_DELETE',
-                                payload: user.id
-                            })
+                        .then((deleteRequested) => {
+                            if (deleteRequested) {
+                                swal({
+                                    text: "You have requested your account be deleted. A member of admin will be in contact.",
+                                    icon: "success"
+                                });
+                                dispatch({
+                                    type: 'REQUEST_DELETE',
+                                    payload: user.id
+                                })
+                            }
                         }
-                    }
-                )}}
+                        )
+                }}
             >
                 Request Delete?
             </Button>

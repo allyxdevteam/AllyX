@@ -34,21 +34,21 @@ function AllyReviewCall() {
   };
 
   const handleSubmit = () => {
-    dispatch({
-      type: "ADD_CALL_RATING",
-      payload: {
-        user,
-        memberId,
-        callId,
-        rating,
-        comment,
-      },
-    });
-    console.log("this is the oneCallReducer", oneCallReducer);
-    setRating(0);
-    setComment("");
-    history.push("/");
-  };
+        dispatch({
+            type: 'ALLY_CALL_RATING',
+            payload: {
+            user,
+            memberId,
+            callId,
+            rating,
+            comment
+            }
+        })
+        console.log('this is the oneCallReducer', oneCallReducer);
+      setRating(0);
+      setComment('');
+      history.push('/');
+    };
 
   return (
     <Box className="boxDefault">
@@ -105,6 +105,7 @@ function AllyReviewCall() {
       </Box>
     </Box>
   );
+
 }
 
 export default AllyReviewCall;

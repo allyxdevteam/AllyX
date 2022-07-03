@@ -31,7 +31,7 @@ function* markAllyReported(action) {
     yield axios({
         method: 'PUT',
         url: `/api/reportMisuse/member`,
-        data: action.payload.id
+        data: action.payload
     })
 }
 
