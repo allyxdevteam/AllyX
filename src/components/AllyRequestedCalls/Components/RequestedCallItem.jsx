@@ -10,6 +10,7 @@ import {
   Button,
   Typography,
   Avatar,
+  Card,
 } from "@mui/material/";
 import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 
@@ -50,16 +51,18 @@ function RequestedCallItem({ call }) {
   console.log("picture", picture);
 
   return (
+    <Card sx={{m:2}}>
     <ListItem key={call.id}>
       <ListItemAvatar>
-        <Avatar ariaLabel="requester avatar" srcSet={picture} />
+        <Avatar aria-label="requester avatar" srcSet={picture} />
       </ListItemAvatar>
       <ListItemText
-        primary={<Typography ariaLabel="requester first name" variant="h6">{call.first_name}</Typography>}
+        primary={<Typography aria-label="requester first name" variant="h6">{call.first_name}</Typography>}
         secondary={<Typography>wants a call at {formattedTime}</Typography>}
       />
-      <Button variant="outlined" ariaLabel="claim call button" onClick={handleClaimCall} startIcon={<AddIcCallIcon />}>Claim Call</Button>
+      <Button variant="contained" aria-label="claim call button" onClick={handleClaimCall} startIcon={<AddIcCallIcon />}>Claim Call</Button>
     </ListItem>
+    </Card>
   );
 }
 

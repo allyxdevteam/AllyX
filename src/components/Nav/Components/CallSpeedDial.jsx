@@ -49,12 +49,10 @@ function CallSpeedDial() {
   function handleRequestCall() {
     console.log("in handleRequestCall");
     user.id
-      ? (dispatch({
+      ? dispatch({
           type: "POST_REQUESTED_CALL",
           payload: { dateTime, user },
-        }),
-        history.push('/memberRequestedCall'))
-
+        }, history.push("/memberRequestedCall"))
       : history.push("/login");
   }
 
@@ -119,7 +117,7 @@ function CallSpeedDial() {
         <DialogContent>
           <Box>
           <input
-            ariaLabel="Date time selection for scheduled call"
+            aria-label="Date time selection for scheduled call"
             type="datetime-local"
             onChange={(e) => {
               setCallTime(e.target.value);

@@ -119,6 +119,13 @@ MUI standardization
 .boxDefault {
   width: 98vw;
   margin: auto;
-  height: 91vh;
-  padding-top: 1vh;
+  margin-top: 1vh;
+  height: 90vh;
+}
+
+.commentBox {
+   margin: auto;
+   padding-top: 10vh;
+  max-width: 600px;
+  width: 80vw
 }
