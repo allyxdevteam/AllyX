@@ -18,8 +18,8 @@ function* fetchClaimedCall(action){
             type: 'SET_CLAIMED_CALL_MEMBER',
             payload: memberInfo
         });
-    }catch{
-        console.log('problem in post requested call');
+    }catch(err){
+        console.log('problem in post requested call', err);
     }
 }
 
@@ -44,12 +44,13 @@ function* postClaimedCall(action){
 }
 
 function* cancelClaimedCall(action){
-    const requestedCallId = action.payload.requestedCallId;
-
+    const requestedCallId = action.payload;
+    
     try{
         const response = yield axios({
             method: 'PUT',
             url: `/api/claimedCalls/${requestedCallId}`,
+            data: requestedCallId
         });
 
     }catch{

@@ -37,7 +37,7 @@ function AllyCallInProgress(){
 
     return(
         <Box className="boxDefault">
-        <Typography variant="h2" align="center" sx={[{ mt: "5vh" }, {mb:2}]}>
+        <Typography variant="h2" align="center" sx={[{ pt: "5vh" }, {mb:2}]}>
           You're talking to {claimedCallMember.first_name}
         </Typography>
         <Typography align="center" variant="h5" color="text.secondary" sx={{mb:2}}>

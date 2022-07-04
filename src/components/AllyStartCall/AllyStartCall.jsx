@@ -49,7 +49,7 @@ function AllyStartCall() {
 
   return (
     <Box className="boxDefault">
-      <Typography variant="h2" align="center" sx={[{ mt: "10vh" }, {mb:2}]}>
+      <Typography variant="h2" align="center" sx={[{ pt: "10vh" }, {mb:2}]}>
         You're calling {claimedCallMember.first_name}
       </Typography>
       <Box sx={[{ width: "40vw" }, {maxWidth: '300px'}, { m: "auto" }, {mb:2}]}>

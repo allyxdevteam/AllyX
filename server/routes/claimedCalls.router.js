@@ -23,10 +23,11 @@ router.get('/:memberId', (req, res) => {
   router.put('/:requestedCallId', (req, res) => {
     const requestedCallId = req.params.requestedCallId;
 
+
     const sqlQuery = 'UPDATE "requested-call" SET "open" = true WHERE "id" = $1';
-    const sqlValues = [requestedCallId];
+    const sqlValues = requestedCallId;
     
-    pool.query(sqlQuery, sqlValues)
+    pool.query(sqlQuery, [requestedCallId])
       .then(result => {
         res.sendStatus(201);
       })

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 function* putCallStartedTime(action){
-    
+    console.log('in put call started time action.payload:', action.payload)
     const callId = action.payload.claimedCallId;
     const dateTime = action.payload.dateTime;
 
@@ -14,8 +14,8 @@ function* putCallStartedTime(action){
             url: '/api/callInProgress',
             data: {callId, dateTime}
         });
-    }catch{
-        console.log('problem in post requested call');
+    }catch(err){
+        console.log('problem in PUT call started time', err);
     }
 }
 
