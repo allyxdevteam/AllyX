@@ -61,7 +61,8 @@ function bottomNav() {
       <BottomNavigation
         fullWidth="true"
         sx={[
-          { position: "absolute", bottom: 0, left: 0, right: 0 },
+          { position: "sticky", bottom: 0, left: 0, right: 0 },
+          {zIndex: 100},
           { maxHeight: "25vh" },
           { bgcolor: "#ffc9c9" },
         ]}

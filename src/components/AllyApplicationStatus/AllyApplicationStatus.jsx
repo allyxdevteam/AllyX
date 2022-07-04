@@ -21,7 +21,7 @@ function AllyApplicationStatus() {
     
     if (allyApplication.id === undefined) {
         return (
-            <Button variant='contained' sx={{m:'10px'}}
+            <Button variant='contained' sx={[{maxWidth: '35vw'}, {m:'10px'}]}
                 onClick={() => {
                     history.push('/ally-application')
                 }}
@@ -35,7 +35,7 @@ function AllyApplicationStatus() {
         return <Typography sx={{m:'10px'}}>Your Ally application is being reviewed, thanks for applying!</Typography>
     } else if (allyApplication.is_complete === false && allyApplication.is_approved === false) {
         return (
-            <Button sx={{m:'10px'}}
+            <Button sx={[{maxWidth: '35vw'},{m:'10px'}]}
                 onClick={() => {
                     history.push('/ally-application')
                 }}
