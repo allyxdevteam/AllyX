@@ -4,7 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-
+import Swal from "sweetalert2";
 import { Box, FormControl, TextField, Button, Typography } from "@mui/material";
 
 function RegisterForm() {
@@ -71,18 +71,15 @@ function RegisterForm() {
         },
       });
     } else {
-      alert("Please complete all required fields");
+      Swal.fire({
+        title: 'Registration Error',
+        html:`Please insert the following required fields:`+` ${(emailDone != true) ? "<b>Email</b>": ""}` +` ${(phoneDone != true) ? "<b>Phone</b>": ""}`+` ${(dobDone != true) ? "<b>Birthday</b>": ""}`+` ${(firstNameDone != true) ? "<b>First Name</b>": ""}`,
+
+    })
     }
   };
   //
-  const showNext = () => {
-    setShowButton(true);
-  };
-  //
-  const hideNext = () => {
-    setShowButton(false);
-  };
-  //
+ 
 
   //VALIDATE EMAIL
   const ValidateEmail = (email) => {
