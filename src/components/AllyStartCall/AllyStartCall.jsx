@@ -52,8 +52,8 @@ function AllyStartCall() {
       <Typography variant="h2" align="center" sx={[{ pt: "10vh" }, {mb:2}]}>
         You're calling {claimedCallMember.first_name}
       </Typography>
-      <Box sx={[{ width: "40vw" }, {maxWidth: '300px'}, { m: "auto" }, {mb:2}]}>
-        <img 
+      <Box display='grid' alignItems="center" justifyContent="center" sx={[{ width: "40vw" }, {maxWidth: '300px'}, { m: "auto" }, {mb:2}]}>
+        <img
           src={
             claimedCallMember.profile_pic
               ? claimedCallMember.profile_pic
