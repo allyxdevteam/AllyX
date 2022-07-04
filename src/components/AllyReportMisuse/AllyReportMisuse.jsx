@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 import { Button, Box, TextField, Typography } from "@mui/material";
 
@@ -29,12 +29,10 @@ function AllyReportMisuse() {
           value={misuseComments}
         />
         <Button
-          sx={{ m: 'auto' }}
+          sx={{ m: "auto" }}
           color="warning"
-          
           variant="contained"
           onClick={() => {
-            history.push("/");
             dispatch({
               type: "MARK_MEMBER_REPORTED",
               payload: { claimedCallMember },
@@ -43,6 +41,10 @@ function AllyReportMisuse() {
               type: "ALLY_REPORT_MISUSE",
               payload: { claimedCallId, claimedCallMember, misuseComments },
             });
+            Swal.fire(
+              "We have logged your report and will take action on it. If necessary, someone will follow up with you. Thank you for being an ally and taking the time to share your experience."
+            );
+            history.push("/");
           }}
         >
           Report Problem
