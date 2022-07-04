@@ -6,7 +6,7 @@ import  {
   SpeedDial,
   SpeedDialAction,
 } from "@mui/material"
-import SpeedDialIcon from "@mui/material/SpeedDialIcon";
+
 import { Box } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -23,7 +23,7 @@ function bottomNav() {
     }
   return (
     <>
-      <BottomNavigation sx={{ position: "sticky"}}showLabels> 
+      <BottomNavigation sx={[{ position: 'absolute', bottom: 0, left: 0, right: 0},{maxHeight:'20vh'},]}showLabels> 
         <BottomNavigationAction label="" icon={<Logout />} onClick={handleLogout}/>
 
          
