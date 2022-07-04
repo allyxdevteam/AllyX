@@ -65,6 +65,9 @@ function AllyApplication() {
         done: false,
       },
     });
+    Swal.fire({
+      title:'Application Saved',
+  })
   };
 
   /////////////////////////////////////////////////
@@ -82,7 +85,8 @@ function AllyApplication() {
       },
     });
     Swal.fire({
-      title:'Application submitted',
+      title:'Application Submitted',
+
 
   })
     history.push('/home')
@@ -94,17 +98,17 @@ function AllyApplication() {
   return (
     <div>
       <Box sx={[{ height: "80vh" }, { width: "98vw" }, { margin: "auto" }]}>
-        <Typography>Apply to become an ally! </Typography>
-        <Box>
+        <Typography variant="h1">Apply to become an ally! </Typography>
+       
+        <Typography variant="h4">
+          Please have a valid social media account registered and be prepared to
+          answer four short prompts </Typography>
+       <Box>
           <Button onClick={postApp}>
-            {" "}
+          
             <SaveOutlined /> Save Progress
           </Button>
         </Box>
-        <h5>
-          Please have a valid social media account registered and be prepared to
-          answer four short prompts
-        </h5>{" "}
         {/* TODO: Link to FAQ/About Page */}
         <h3>Tell us why you'd like to become an ally!</h3>
         <TextField
