@@ -81,6 +81,7 @@ function UpdateProfile() {
 
             <TextField
                 label="first name"
+                defaultValue=""
                 value={profile.first_name}
                 onChange={(e) => {
                     dispatch({
@@ -93,6 +94,7 @@ function UpdateProfile() {
             <TextField
                 mt={10}
                 label="last name"
+                defaultValue=""
                 value={profile.last_name}
                 onChange={(e) => {
                     dispatch({
@@ -104,6 +106,7 @@ function UpdateProfile() {
             </TextField>
             <TextField
                 label="phone number"
+                defaultValue=""
                 value={profile.phone_number}
                 onChange={(e) => {
                     dispatch({
@@ -115,6 +118,7 @@ function UpdateProfile() {
             </TextField>
             <TextField
                 label="email"
+                defaultValue=""
                 value={profile.email}
                 onChange={(e) => {
                     dispatch({
@@ -126,6 +130,7 @@ function UpdateProfile() {
             </TextField>
             <TextField
                 label="city"
+                defaultValue=""
                 value={profile.city}
                 onChange={(e) => {
                     dispatch({
@@ -137,6 +142,7 @@ function UpdateProfile() {
             </TextField>
             <TextField
                 label="facebook link"
+                defaultValue=""
                 value={profile.facebook_link}
                 onChange={(e) => {
                     dispatch({
@@ -148,6 +154,7 @@ function UpdateProfile() {
             </TextField>
             <TextField
                 label="twitter link"
+                defaultValue=""
                 value={profile.twitter_link}
                 onChange={(e) => {
                     dispatch({
@@ -159,6 +166,7 @@ function UpdateProfile() {
             </TextField>
             <TextField
                 label="instagram link"
+                defaultValue=""
                 value={profile.instagram_link}
                 onChange={(e) => {
                     dispatch({

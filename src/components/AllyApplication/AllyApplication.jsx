@@ -1,4 +1,3 @@
-import "./AllyApplication.css";
 import ArrowL from "./ArrowL.png";
 import ArrowR from "./ArrowR.png";
 import { useEffect, useState } from "react";
@@ -11,22 +10,24 @@ import { SaveOutlined } from "@mui/icons-material";
 import Swal from "sweetalert2";
 
 function AllyApplication() {
-  const timer = setInterval(fetchApp, 2000);
+  // const timer = setInterval(fetchApp, 2000);
 
   const [showButton, setShowButton] = useState(true);
 
   const dispatch = useDispatch();
 
-  const fetchApp = () => {
-    dispatch({
-      type: "FETCH_ALLY_APP",
-    });
-  };
+  // const fetchApp = () => {
+  //   dispatch({
+  //     type: "FETCH_ALLY_APP",
+  //   });
+  // };
 
   ////
 
   useEffect(() => {
-    fetchApp();
+    dispatch({
+      type: "FETCH_ALLY_APP",
+    });
   }, []);
 
   const history = useHistory();
@@ -49,7 +50,6 @@ function AllyApplication() {
   /////////////////////////////////////////////
 
   // Use this if the next slide has a conditional next button
- 
 
   /////////////////////////////////////////////////
   //save and POST to server via dispatch
@@ -66,8 +66,8 @@ function AllyApplication() {
       },
     });
     Swal.fire({
-      title:'Application Saved',
-  })
+      title: "Application Saved",
+    });
   };
 
   /////////////////////////////////////////////////
@@ -85,11 +85,9 @@ function AllyApplication() {
       },
     });
     Swal.fire({
-      title:'Application Submitted',
-
-
-  })
-    history.push('/home')
+      title: "Application Submitted",
+    });
+    history.push("/home");
   };
 
   //
@@ -97,15 +95,15 @@ function AllyApplication() {
   /////////////////////////////////////////////////
   return (
     <div>
-      <Box sx={[{ height: "80vh" }, { width: "98vw" }, { margin: "auto" }]}>
+      <Box className='boxDefault'>
         <Typography variant="h1">Apply to become an ally! </Typography>
-       
+
         <Typography variant="h4">
           Please have a valid social media account registered and be prepared to
-          answer four short prompts </Typography>
-       <Box>
+          answer four short prompts{" "}
+        </Typography>
+        <Box>
           <Button onClick={postApp}>
-          
             <SaveOutlined /> Save Progress
           </Button>
         </Box>

@@ -39,10 +39,10 @@ const Theme = createTheme({
         fontColor: '#7F64A5'
     },
 
-    MuiTextField: {
-        primary: '#86c736',
-        secondary: '#c7363e'
-    }
+    // MuiTextField: {
+    //     primary: '#86c736',
+    //     secondary: '#c7363e'
+    // }
 
 })
 

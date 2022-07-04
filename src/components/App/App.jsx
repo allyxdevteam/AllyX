@@ -55,7 +55,7 @@ function App() {
     <ThemeProvider theme={Theme}>
     <Router>
       <div>
-        {/* <Nav /> */}
+        <div sx={{zIndex:0}}>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -218,7 +218,8 @@ function App() {
           <Route>
             <h1>404</h1>
           </Route>
-        </Switch>        
+        </Switch>  
+        </div>      
         <BottomNav />
         {/* <Footer /> */}
       </div>

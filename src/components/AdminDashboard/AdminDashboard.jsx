@@ -54,7 +54,7 @@ function AdminDashboard() {
   };
 
   return (
-    <Box className="boxDefault">
+    <Box className="boxDefault" sx={{bgcolor: "whitesmoke"}}>
       <Typography variant="h4">Admin Dashboard</Typography>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
