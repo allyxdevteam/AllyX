@@ -4,7 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-
+import Swal from "sweetalert2";
 import { Box, FormControl, TextField, Button, Typography } from "@mui/material";
 
 function RegisterForm() {
@@ -71,18 +71,15 @@ function RegisterForm() {
         },
       });
     } else {
-      alert("Please complete all required fields");
+      Swal.fire({
+        title: 'Registration Error',
+        html:`Please insert the following required fields:`+` ${(emailDone != true) ? "<b>Email</b>": ""}` +` ${(phoneDone != true) ? "<b>Phone</b>": ""}`+` ${(dobDone != true) ? "<b>Birthday</b>": ""}`+` ${(firstNameDone != true) ? "<b>First Name</b>": ""}`,
+
+    })
     }
   };
   //
-  const showNext = () => {
-    setShowButton(true);
-  };
-  //
-  const hideNext = () => {
-    setShowButton(false);
-  };
-  //
+ 
 
   //VALIDATE EMAIL
   const ValidateEmail = (email) => {
@@ -174,8 +171,8 @@ function RegisterForm() {
   //
   return (
     <>
-      <h1>Registration</h1>
-
+  <Box sx={{m: 5}}>
+  <Typography variant="h1">Registration</Typography>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -184,7 +181,7 @@ function RegisterForm() {
 
       {X === 1 && (
         <>
-          <Typography>Information (required)</Typography>
+          <Typography variant="h6">Information (required)</Typography>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Date of Birth (Required)"
@@ -199,7 +196,7 @@ function RegisterForm() {
                 return (
                   <TextField
                     {...params}
-                    fullWidth
+                    
                     required
                     error={dobDone === false}
                     helperText={
@@ -213,7 +210,7 @@ function RegisterForm() {
           </LocalizationProvider>
 
           <Box mt={2}>
-            <FormControl fullWidth>
+            <FormControl >
               <TextField
                 autoComplete="on"
                 id="outlined-textarea"
@@ -233,7 +230,7 @@ function RegisterForm() {
           </Box>
 
           <Box mt={2}>
-            <FormControl fullWidth>
+            <FormControl fullWdth>
               <TextField
                 id="outlined-textarea"
                 label="Phone Number (Required)"
@@ -258,10 +255,10 @@ function RegisterForm() {
       {/* Name Information */}
       {X === 1 && (
         <>
-          <Typography>Name (required)</Typography>
+          <Typography variant="h6">Name (required)</Typography>
 
           <Box mt={2}>
-            <FormControl fullWidth>
+            <FormControl >
               <TextField
                 id="outlined-textarea"
                 label="First Name (Required)"
@@ -280,10 +277,12 @@ function RegisterForm() {
           </Box>
 
           <Box mt={2}>
-            <FormControl fullWidth>
+            <FormControl >
               <TextField
                 id="outlined-textarea"
                 label="Last Name (optional)"
+                type="lastname"
+                name="lastname"
                 multiline
                 fullwidth
                 value={lastName}
@@ -294,19 +293,17 @@ function RegisterForm() {
             </FormControl>
           </Box>
 
-          <Typography>Social Media (optional)</Typography>
+          <Typography variant="h6">Social Media (optional)</Typography>
 
           {/* Twitter Username */}
 
           <Box mt={2}>
-            <FormControl fullWidth>
+            <FormControl >
               <TextField
                 id="outlined-textarea"
                 label="Twitter URL"
                 placeholder=""
-                multiline
                 fullwidth
-                color={twitter.length > 0 ? null : "warning"}
                 value={twitter}
                 onChange={(e) => {
                   setTwitter(e.target.value);
@@ -317,14 +314,13 @@ function RegisterForm() {
 
           {/* Instagram Username */}
           <Box mt={2}>
-            <FormControl fullWidth>
+            <FormControl >
               <TextField
                 id="outlined-textarea"
                 label="Instagram URL"
                 placeholder=""
-                multiline
+                
                 fullwidth
-                color={instagram.length > 0 ? null : "warning"}
                 value={instagram}
                 onChange={(e) => {
                   setInstagram(e.target.value);
@@ -335,14 +331,12 @@ function RegisterForm() {
 
           {/* Facebook Account */}
           <Box mt={2}>
-            <FormControl fullWidth>
+            <FormControl >
               <TextField
                 id="outlined-textarea"
                 label="Facebook URL"
                 placeholder=""
-                multiline
                 fullwidth
-                color={facebook.length > 0 ? null : "warning"}
                 value={facebook}
                 onChange={(e) => {
                   setFacebook(e.target.value);
@@ -355,25 +349,42 @@ function RegisterForm() {
 
       {X === 1 && (
         <>
-          <input
-            type="username"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
+           <Typography variant="h6">Username and Password (required)</Typography>
 
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
+          <Box mt={2} mr={4}>
+             <FormControl >
+              <TextField
+                id="outlined-textarea"
+                label="Username"
+                placeholder=""
+                type="username"
+                name="username"
+                
+                value={username}
+                onChange={(event) => setUsername(event.target.value)
+                }
+              />
+            </FormControl>
+            <FormControl >
+              <TextField
+                id="outlined-textarea"
+                label="Password"
+                placeholder=""
+                type="password"
+                name="password"
+                
+                value={password}
+                onChange={(event) => setPassword(event.target.value)
+                }
+              />
+            </FormControl>
+          </Box>
+  
 
           <Button onClick={registerUser}>register</Button>
         </>
       )}
+      </Box>
     </>
   );
 }
