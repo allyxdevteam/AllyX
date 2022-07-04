@@ -66,7 +66,7 @@ function AllyStartCall() {
       <Box display="grid" justifyItems="center">
         <Button
           startIcon={<Call />}
-          color="success"
+          color="primary"
           align="center"
           href={`tel:${claimedCallMember.phone_number}`}
           variant="contained"

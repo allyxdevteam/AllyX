@@ -36,6 +36,9 @@ import MemberReportMisuse from '../MemberReportMisuse/MemberReportMisuse';
 
 import './App.css';
 import AllyApplication from '../AllyApplication/AllyApplication';
+import Theme from '../_Theme/_Theme';
+
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 
 
@@ -49,6 +52,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    <ThemeProvider theme={Theme}>
     <Router>
       <div>
         {/* <Nav /> */}
@@ -219,6 +223,7 @@ function App() {
         {/* <Footer /> */}
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

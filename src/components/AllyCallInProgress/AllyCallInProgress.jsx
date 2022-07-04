@@ -43,7 +43,7 @@ function AllyCallInProgress(){
         <Typography align="center" variant="h5" color="text.secondary" sx={{mb:2}}>
             When you're finished, please remember to hit <i>call complete</i> and leave a rating and review of your call.
         </Typography>
-        <Box sx={[{ width: "40vw" }, {maxWidth: '300px'}, { m: "auto" }, {mb:2}]}>
+        <Box display='grid' alignItems="center" justifyContent="center" sx={[{ width: "40vw" }, {maxWidth: '300px'}, { m: "auto" }, {mb:2}]}>
           <img 
             src={
               claimedCallMember.profile_pic

@@ -1,3 +1,8 @@
+
+/* font-family: 'Noto Sans', sans-serif;
+font-family: 'Noto Serif', serif;
+font-family: 'Noto Serif Display', serif; */
+
 html,
 body,
 #react-root {
@@ -7,6 +12,7 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  background-color: #FFDBDB ;
 }
 
 img {
@@ -128,4 +134,8 @@ MUI standardization
    padding-top: 10vh;
   max-width: 600px;
   width: 80vw
+}
+
+.bottomNav {
+  background-color: #ffc9c9 ;
 }

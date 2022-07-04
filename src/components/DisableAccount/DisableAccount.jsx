@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import './DisableAccount.css';
 import Switch from '@mui/material/Switch';
 
+import { Typography, Button, Box } from '@mui/material'
+
 function DisableAccount() {
     const [checked, setChecked] = useState(true);
     const [unchecked, setUnchecked] = useState(false);
@@ -20,8 +22,8 @@ function DisableAccount() {
 
     return(
         user.is_active ?
-            <>
-                <h6 className="disable-account">Disable account?</h6>
+            <Box display='flex' sx={{ml:'3rem'}}>
+                <Typography className="disable-account">Disable account?</Typography>
                 <Switch
                     unchecked={unchecked}
                     onChange={handleCheck}
@@ -32,11 +34,11 @@ function DisableAccount() {
                         });
                     }}
                 />
-                </>
+                </Box>
         :
                 <>
-                    <h6>Your account is currently disabled.</h6>
-                    <h6 className="disable-account">Enable account?</h6>
+                    <Typography>Your account is currently disabled.</Typography>
+                    <Typography className="disable-account">Enable account?</Typography>
                     <Switch 
                         checked={checked}
                         onChange={handleUncheck}
