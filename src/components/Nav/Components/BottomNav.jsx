@@ -8,7 +8,7 @@ import {
   Home,
   AssignmentTurnedIn,
   Feedback,
-  MenuIcon
+  Menu as MenuIcon,
 } from "@mui/icons-material";
 
 import {
@@ -16,10 +16,12 @@ import {
   BottomNavigationAction,
   Badge,
   Menu,
-  MenuItem
+  MenuItem,
+  ListItemIcon,
+  Box
 } from "@mui/material";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import CallSpeedDial from "./CallSpeedDial";
@@ -43,6 +45,17 @@ function bottomNav() {
     dispatch({ type: "LOGOUT" });
   };
 
+  //configure menu--------------------------------
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  //----------------------------------------------
+
   return (
     <>
       <BottomNavigation
@@ -50,46 +63,56 @@ function bottomNav() {
         sx={[
           { position: "absolute", bottom: 0, left: 0, right: 0 },
           { maxHeight: "25vh" },
+          { bgcolor: "#ffc9c9" },
         ]}
         showLabels="true"
       >
         <BottomNavigationAction
-          label="Logout"
-          icon={<Logout />}
-          onClick={handleLogout}
+          label="Menu"
+          icon={<MenuIcon />}
+          onClick={handleClick}
+          aria-controls={open ? "menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
         />
+        <Menu
+          anchorEl={anchorEl}
+          id="account-menu"
+          open={open}
+          onClose={handleClose}
+          onClick={handleClose}
+          transformOrigin={{ horizontal: "left", vertical: "bottom" }}
+          anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+        >
+          <MenuItem onClick={handleLogout}>
+            <ListItemIcon>
+              <Logout />
+            </ListItemIcon>
+            Log Out
+          </MenuItem>
 
-        <BottomNavigationAction
-          label="Home"
-          icon={<Home />}
-          onClick={() => history.push("/home")}
-        />
+          <MenuItem onClick={() => history.push("/about")}>
+            <ListItemIcon>
+              <Info />
+            </ListItemIcon>
+            About
+          </MenuItem>
 
-        <BottomNavigationAction
-          label="About"
-          icon={<Info />}
-          onClick={() => history.push("/about")}
-        />
+          <MenuItem onClick={() => history.push("/comment")}>
+            <ListItemIcon>
+              <Feedback />
+            </ListItemIcon>
+            Feedback
+          </MenuItem>
 
-        <BottomNavigationAction
-          label="Feedback"
-          icon={<Feedback />}
-          onClick={() => history.push("/comment")}
-        />
+          <MenuItem onClick={() => history.push("/profile")}>
+            <ListItemIcon>
+              <AccountCircle />
+            </ListItemIcon>
+            Profile
+          </MenuItem>
+        </Menu>
 
-        <BottomNavigationAction
-          label="Profile"
-          icon={<AccountCircle />}
-          onClick={() => history.push("/profile")}
-        />
-
-        {user.is_admin && (
-          <BottomNavigationAction
-            label="Admin Dashboard"
-            icon={<Assessment />}
-            onClick={() => history.push("/admin")}
-          />
-        )}
 
         {user.is_ally ? (
           <BottomNavigationAction
@@ -113,12 +136,18 @@ function bottomNav() {
           />
         )}
 
-        <BottomNavigationAction
-          sx={[{ mr: 2 }, { ml: 2 }]}
-          label=""
-          //INSERT SPEED DIAL COMP HERE AS AN ICON
-          icon={<CallSpeedDial />}
-        />
+        {user.is_admin && (
+          <BottomNavigationAction
+            label="Admin Dashboard"
+            icon={<Assessment />}
+            onClick={() => history.push("/admin")}
+          />
+        )}
+
+<BottomNavigationAction
+  icon={<CallSpeedDial />}
+/>
+
       </BottomNavigation>
     </>
   );
