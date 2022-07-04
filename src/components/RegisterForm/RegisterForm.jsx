@@ -171,7 +171,8 @@ function RegisterForm() {
   //
   return (
     <>
-<Typography variant="h1">Registration</Typography>
+  <Box sx={{m: 5}}>
+  <Typography variant="h1">Registration</Typography>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -348,9 +349,9 @@ function RegisterForm() {
 
       {X === 1 && (
         <>
-                  <Typography variant="h6">Username and Password (required)</Typography>
+           <Typography variant="h6">Username and Password (required)</Typography>
 
-          <Box mt={2}>
+          <Box mt={2} mr={4}>
              <FormControl >
               <TextField
                 id="outlined-textarea"
@@ -383,6 +384,7 @@ function RegisterForm() {
           <Button onClick={registerUser}>register</Button>
         </>
       )}
+      </Box>
     </>
   );
 }
