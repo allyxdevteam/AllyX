@@ -4,10 +4,11 @@ import ArrowR from "./ArrowR.png";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { Box, FormControl, LinearProgress } from "@mui/material";
+import { Box, FormControl, LinearProgress, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { SaveOutlined } from "@mui/icons-material";
+import Swal from "sweetalert2";
 
 function AllyApplication() {
   const timer = setInterval(fetchApp, 2000);
@@ -48,10 +49,7 @@ function AllyApplication() {
   /////////////////////////////////////////////
 
   // Use this if the next slide has a conditional next button
-  const nextSlideAndHide = () => {
-    setX(X + 1);
-    setShowButton(false);
-  };
+ 
 
   /////////////////////////////////////////////////
   //save and POST to server via dispatch
@@ -83,7 +81,11 @@ function AllyApplication() {
         done: true,
       },
     });
-    nextSlideAndHide();
+    Swal.fire({
+      title:'Application submitted',
+
+  })
+    history.push('/home')
   };
 
   //
@@ -92,13 +94,13 @@ function AllyApplication() {
   return (
     <div>
       <Box sx={[{ height: "80vh" }, { width: "98vw" }, { margin: "auto" }]}>
+        <Typography>Apply to become an ally! </Typography>
         <Box>
           <Button onClick={postApp}>
             {" "}
             <SaveOutlined /> Save Progress
           </Button>
         </Box>
-        <h1>Apply to become an ally! </h1>
         <h5>
           Please have a valid social media account registered and be prepared to
           answer four short prompts
