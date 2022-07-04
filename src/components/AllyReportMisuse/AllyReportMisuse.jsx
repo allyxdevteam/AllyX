@@ -15,7 +15,7 @@ function AllyReportMisuse() {
   );
 
   return (
-    <>
+   
       <Box display="flex" flexDirection="column" className="commentBox">
         <Typography variant="h4" align="center" sx={{ m: 2 }}>
           Please tell us what went wrong.
@@ -50,7 +50,7 @@ function AllyReportMisuse() {
           Report Problem
         </Button>
       </Box>
-    </>
+   
   );
 }
 
