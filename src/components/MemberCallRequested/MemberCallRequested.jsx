@@ -17,7 +17,7 @@ function MemberCallRequested() {
   );
 
   function cancelCallMember() {
-    console.log("in cancelCallMember");
+  
     dispatch({
       type: "CANCEL_CLAIMED_CALL",
       payload: requestedCallId,
