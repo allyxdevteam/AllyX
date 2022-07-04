@@ -81,6 +81,7 @@ function MemberCallRequested() {
           onClick={callCompleteMember}
           size="large"
           variant="contained"
+          color="primary"
           sx={{ m: 2 }}
         >
           Call Complete

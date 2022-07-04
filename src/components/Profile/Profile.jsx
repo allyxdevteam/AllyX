@@ -6,10 +6,12 @@ import DisableAccount from '../DisableAccount/DisableAccount';
 import AllyApplicationStatus from '../AllyApplicationStatus/AllyApplicationStatus';
 import ImageUploader from './ImageUploader/ImageUploader';
 
+import dayjs from 'dayjs';
+
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import {Box, Button, Typography} from '@mui/material';
+
 import swal from 'sweetalert';
 
 function Profile() {
@@ -23,32 +25,33 @@ function Profile() {
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
+    const formattedDate = dayjs(user.dob).format('MM/DD/YYYY');
 
     return (
-        <Box sx={[{ maxWidth: '35vw' }, { m: 'auto' }]}>
+        <Box display='flex' flexDirection='column' textAlign='center' justifyItems='center' sx={[{ maxWidth: '35vw' }, { pb: '10%' }, { m: 'auto' }]}>
             {user.is_admin === true ?
-                <h3>ADMIN</h3>
+                <Typography>ADMIN</Typography>
                 :
                 <></>
             }
             {user.profile_pic ?
-                <Avatar
+                <Avatar sx={{m:'auto'}}
                     alt={user.username}
                     src={user.profile_pic}
                 />
                 :
-                <AccountCircleIcon />
+                <AccountCircleIcon sx={{m:'auto'}} />
 
             }
 
-            <h6>{user.first_name}</h6>
-            <h6>{user.last_name}</h6>
-            <h6>{user.username}</h6>
-            <h6>{user.average_stars}</h6>
-            <h6>{user.phone_number}</h6>
-            <h6>{user.email}</h6>
-            <h6>{user.dob}</h6>
-            <Button
+            <Typography sx={{m:2}} variant='h4' >{user.first_name}</Typography>
+            <Typography sx={{m:2}}>{user.last_name}</Typography>
+            <Typography sx={{m:2}}>{user.username}</Typography>
+            <Typography sx={{m:2}}>{user.average_stars}</Typography>
+            <Typography sx={{m:2}}>{user.phone_number}</Typography>
+            <Typography sx={{m:2}}>{user.email}</Typography>
+            <Typography sx={{m:2}}>Birthday: {formattedDate}</Typography>
+            <Button variant = 'outlined' sx={{m:2}}
                 onClick={() => {
                     history.push(`/profile/${user.id}`)
                 }}
@@ -57,7 +60,10 @@ function Profile() {
             </Button>
 
             <br />
-            <Button
+            <AllyApplicationStatus />
+            <br />
+            <DisableAccount />
+            <Button color='warning' variant='contained' sx={{m:2}}
                 onClick={() => {
                     swal({
                         title: "Are you sure?",
@@ -81,11 +87,9 @@ function Profile() {
                         )
                 }}
             >
-                Request Delete?
+                Request Delete
             </Button>
-            <AllyApplicationStatus />
-            <br />
-            <DisableAccount />
+            
 
         </Box>
     )

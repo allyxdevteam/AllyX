@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
+import { Typography, Button } from '@mui/material'
+
 function AllyApplicationStatus() {
     useEffect(() => {
         dispatch({
@@ -19,44 +21,44 @@ function AllyApplicationStatus() {
     
     if (allyApplication.id === undefined) {
         return (
-            <h3
+            <Button variant='contained' sx={{m:'10px'}}
                 onClick={() => {
                     history.push('/ally-application')
                 }}
             >
                 Apply to become an Ally
-            </h3>
+            </Button>
         )
     } else if (allyApplication.is_complete === true && allyApplication.is_approved === true) {
-        return <h3>Thank you for being an Ally!</h3>
+        return <Typography sx={{m:'10px'}}>Thank you for being an Ally!</Typography>
     } else if (allyApplication.is_complete === true && allyApplication.is_approved === false) {
-        return <h3>Your Ally application is being reviewed, thanks for applying!</h3>
+        return <Typography sx={{m:'10px'}}>Your Ally application is being reviewed, thanks for applying!</Typography>
     } else if (allyApplication.is_complete === false && allyApplication.is_approved === false) {
         return (
-            <h3
+            <Button sx={{m:'10px'}}
                 onClick={() => {
                     history.push('/ally-application')
                 }}
             >
-                Your application requires attention.
-            </h3>
+                Your application requires attention!
+            </Button>
         )
         }
     else if (allyApplication.is_complete === true) {
          return (
-             <h3
+             <Typography sx={{m:'10px'}}
                         onClick={() => {
                             history.push('/ally-application')
                         }}
             >
                         Your application has been submitted and is awaiting Approval.
-                    </h3>
+                    </Typography>
                 )
                     }
     else{
         return(
             <>
-            <h3>Ally Application has not been submitted</h3>
+            <Typography sx={{m:'10px'}}>Ally Application has not been submitted</Typography>
             </>
         )
     }
