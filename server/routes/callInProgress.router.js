@@ -71,7 +71,7 @@ router.put('/end/ally/:callId', rejectUnauthenticated, async (req, res) => {
       await client.query(sqlQueryDontPutDateEnded, sqlValuesDontPutDateEnded)
     }
 
-    await client.query('COMMIT')
+    await client.query('COMMIT');
 
     res.sendStatus(201);
 
