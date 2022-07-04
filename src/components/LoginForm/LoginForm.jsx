@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { Box, FormControl, LinearProgress } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { SaveOutlined } from '@mui/icons-material';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Box, Button, Typography } from "@mui/material";
+import TextField from "@mui/material/TextField";
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const errors = useSelector(store => store.errors);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
   const login = (event) => {
@@ -18,55 +15,58 @@ function LoginForm() {
 
     if (username && password) {
       dispatch({
-        type: 'LOGIN',
+        type: "LOGIN",
         payload: {
           username: username,
           password: password,
         },
       });
     } else {
-      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+    <Box className="commentBox">
+      <Typography align="center" variant="h2">
+        Login
+      </Typography>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
         </h3>
       )}
-      <div>
+      <Box display="grid" justifyContent="center">
         <label htmlFor="username">
           <TextField
             type="text"
             label="username"
             name="username"
-            fullWidth
             required
             value={username}
+            sx={{ m: 2 }}
             onChange={(event) => setUsername(event.target.value)}
           />
         </label>
-      </div>
-      <div>
+
         <label htmlFor="password">
           <TextField
             type="password"
             name="password"
             label="password"
-            fullWidth
             required
+            sx={{ m: 2 }}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-      </div>
-    </form>
+        </Box>
+        <Box display="grid" justifyContent="center">
+        <Button sx={{ m: 2 }} variant="contained" size="large" onClick={login}>
+          Login
+        </Button>
+      </Box>
+    </Box>
   );
 }
 

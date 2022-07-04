@@ -1,26 +1,31 @@
-import React from 'react';
 import LoginForm from '../LoginForm/LoginForm';
 import { useHistory } from 'react-router-dom';
+
+import {Typography, Button, Box, Fade, Card} from '@mui/material';
 
 function LoginPage() {
   const history = useHistory();
 
   return (
-    <div>
+    <Box className="boxDefault">
+      <Box sx={{pt:'10vh'}}>
       <LoginForm />
 
-      <center>
-        <button
-          type="button"
-          className="btn btn_asLink"
+      <Box display="grid" justifyContent="center">
+        <Button
+        variant="outlined"
           onClick={() => {
             history.push('/registration');
           }}
         >
           Register
-        </button>
-      </center>
-    </div>
+        </Button>
+      </Box>
+      <Fade in="true" timeout={30000}>
+      <Typography align='center' color="text.secondary" sx={{pt:4}}>If something seems wrong, send us an email at hey @heyallyx.com and we'll help you fix it.</Typography>
+      </Fade>
+      </Box>
+    </Box >
   );
 }
 
