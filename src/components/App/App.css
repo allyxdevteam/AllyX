@@ -97,3 +97,7 @@ MUI standardization
   margin-left: 3vw;
   color: #ff897a; 
 }
+
+.card-header {
+  font-size: 2rem;
+}

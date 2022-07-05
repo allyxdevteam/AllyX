@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './AboutPage.css';
 import { Box, Card, CardContent, CardHeader, CardMedia, Grid, Typography } from '@mui/material';
 
 // This is one of our simplest components
@@ -12,17 +11,24 @@ function AboutPage() {
   return (
     <Box className="boxDefault">
       <Typography
-        variant="h4"
+        variant="h1"
         gutterBottom
         sx={{ textAlign: 'center' }}
       >
         Team Allyx:
       </Typography>
         <Card 
-          sx={{ display: 'inline-block', width: '25%' }} >
+          sx={{
+            display: 'inline-block',
+            width: '25%'
+        }} >
           <CardHeader
             title="Chris"
-            sx={{ textAlign: 'center' }} />
+            className="card-header"
+            sx={{
+              textAlign: 'center', 
+              backgroundColor: '#ff897a'
+            }} />
           <CardMedia
             sx={{ display: 'flex', justifyContent: 'center'}}
           >
@@ -33,11 +39,16 @@ function AboutPage() {
           />
           </CardMedia>
           <CardContent
-            sx={{ textAlign: 'center' }}
-          >
-            <a href="https://www.linkedin.com/in/chris-boyd-1695ba8/">
+            sx={{
+              textAlign: 'center', 
+              backgroundColor: '#ff897a' 
+            }} >
+            <Typography
+              variant="h5"
+              href="https://www.linkedin.com/in/chris-boyd-1695ba8/"
+            >
               linkedin.com/in/chris-boyd-1695ba8/
-            </a>
+            </Typography>
           </CardContent>
         </Card>
         <Card 
@@ -45,8 +56,11 @@ function AboutPage() {
         >
           <CardHeader
             title="Ian"
-            sx={{ textAlign: 'center' }}
-          />
+            className="card-header"
+            sx={{
+              textAlign: 'center', 
+              backgroundColor: '#ff897a' 
+            }} />
           <CardMedia
             sx={{ display: 'flex', justifyContent: 'center'}}
           >
@@ -57,9 +71,14 @@ function AboutPage() {
             />
           </CardMedia>
           <CardContent
-            sx={{ textAlign: 'center' }}
-          >
-            <Typography href="https://www.linkedin.com/in/ian-larsen-505824154/">
+            sx={{
+              textAlign: 'center', 
+              backgroundColor: '#ff897a' 
+            }} >
+            <Typography
+              variant="h5"
+              href="https://www.linkedin.com/in/ian-larsen-505824154/"
+            >
               linkedin.com/in/ian-larsen-505824154/
             </Typography>
           </CardContent>
@@ -69,8 +88,11 @@ function AboutPage() {
         >
           <CardHeader
             title="Meir"
-            sx={{ textAlign: 'center' }}
-          />
+            className="card-header"
+            sx={{
+              textAlign: 'center', 
+              backgroundColor: '#ff897a' 
+            }} />
           <CardMedia
             sx={{ display: 'flex', justifyContent: 'center'}}
           >
@@ -81,9 +103,14 @@ function AboutPage() {
             />
           </CardMedia>
           <CardContent
-            sx={{ textAlign: 'center' }}
-          >
-            <Typography href="https://www.linkedin.com/in/meirsedlis/">
+            sx={{
+              textAlign: 'center', 
+              backgroundColor: '#ff897a' 
+            }} >
+            <Typography
+              variant="h5"
+              href="https://www.linkedin.com/in/meirsedlis/"
+            >
               linkedin.com/in/meirsedlis/
             </Typography>
           </CardContent>
@@ -93,8 +120,11 @@ function AboutPage() {
         >
           <CardHeader
             title="Joe"
-            sx={{ textAlign: 'center' }}
-          />
+            className="card-header"
+            sx={{
+              textAlign: 'center', 
+              backgroundColor: '#ff897a' 
+            }} />
           <CardMedia
             sx={{ display: 'flex', justifyContent: 'center'}}
           >
@@ -104,8 +134,15 @@ function AboutPage() {
             width="100%"
           />
           </CardMedia>
-          <CardContent sx={{ textAlign: 'center' }} >
-            <Typography href="https://www.linkedin.com/in/joe-anthony-brown/">
+          <CardContent
+            sx={{
+              textAlign: 'center', 
+              backgroundColor: '#ff897a' 
+            }} >
+          <Typography
+              variant="h5"
+              href="https://www.linkedin.com/in/joe-anthony-brown/"
+            >
               linkedin.com/in/joe-anthony-brown/
             </Typography>
           </CardContent>
@@ -122,49 +159,49 @@ function AboutPage() {
                 textAlign="center"
               >
                 <Typography
-                  variant="h5"
+                  variant="h1"
                   gutterBottom
                 >
                   Technologies used:
                 </Typography>
                 <Typography
-                  variant="subtitle1"
+                  variant="h4"
                   gutterBottom
                 >
                   React
                 </Typography>
                 <Typography
-                  variant="subtitle1"
+                  variant="h4"
                   gutterBottom
                 >
                   React-Redux
                 </Typography>
                 <Typography
-                  variant="subtitle1"
+                  variant="h4"
                   gutterBottom
                 >
                   Redux-Saga
                 </Typography>
                 <Typography
-                  variant="subtitle1"
+                  variant="h4"
                   gutterBottom
                 >
                   Node.js
                 </Typography>
                 <Typography
-                  variant="subtitle1"
+                  variant="h4"
                   gutterBottom
                 >
                   PostgreSQL
                 </Typography>
                 <Typography
-                  variant="subtitle1"
+                  variant="h4"
                   gutterBottom
                 >
                   MUI
                 </Typography>
                 <Typography
-                  variant="subtitle1"
+                  variant="h4"
                   gutterBottom
                 >
                   Cloudinary
@@ -176,37 +213,37 @@ function AboutPage() {
               textAlign="center"
             >
             <Typography
-              variant="h5"
+              variant="h1"
               gutterBottom
             >
               Thank you to:
             </Typography>
             <Typography
-              variant="subtitle1"
+              variant="h4"
               gutterBottom
             >
               Alexandra Edmonson
             </Typography>
             <Typography
-              variant="subtitle1"
+              variant="h4"
               gutterBottom
             >
               The Dahl Cohort
             </Typography>
             <Typography
-              variant="subtitle1"
+              variant="h4"
               gutterBottom
             >
               Matt Black
             </Typography>
             <Typography
-              variant="subtitle1"
+              variant="h4"
               gutterBottom
             >
               Prime Digital Academy
             </Typography>
             <Typography
-              variant="subtitle1"
+              variant="h4"
               gutterBottom
             >
               Friends and family
