@@ -19,25 +19,17 @@ function AboutPage() {
         Team Allyx:
       </Typography>
         <Card 
-          sx={{
-          display: 'inline-block', 
-          width: '25%',
-          height: '47%'
-        }} >
+          sx={{ display: 'inline-block', width: '25%' }} >
           <CardHeader
             title="Chris"
-            sx={{
-              textAlign: 'center',
-              height: '1%'
-            }}
-          />
+            sx={{ textAlign: 'center' }} />
           <CardMedia
             sx={{ display: 'flex', justifyContent: 'center'}}
           >
           <img
             src="/images/Chris.jpg"
             alt="Chris Boyd"
-            width="70%"
+            width="100%"
           />
           </CardMedia>
           <CardContent
@@ -49,17 +41,11 @@ function AboutPage() {
           </CardContent>
         </Card>
         <Card 
-          sx={{
-          display: 'inline-block', 
-          width: '25%',
-          height: '47%'
-        }} >
+          sx={{ display: 'inline-block', width: '25%'}}
+        >
           <CardHeader
             title="Ian"
-            sx={{
-              textAlign: 'center',
-              height: '1%'
-            }}
+            sx={{ textAlign: 'center' }}
           />
           <CardMedia
             sx={{ display: 'flex', justifyContent: 'center'}}
@@ -67,29 +53,23 @@ function AboutPage() {
             <img
               src="/images/Ian.jpg"
               alt="Ian Larsen"
-              width="70%"
+              width="100%"
             />
           </CardMedia>
           <CardContent
             sx={{ textAlign: 'center' }}
           >
-            <a href="https://www.linkedin.com/in/ian-larsen-505824154/">
+            <Typography href="https://www.linkedin.com/in/ian-larsen-505824154/">
               linkedin.com/in/ian-larsen-505824154/
-            </a>
+            </Typography>
           </CardContent>
         </Card>
         <Card 
-          sx={{
-          display: 'inline-block', 
-          width: '25%',
-          height: '47%'
-        }} >
+          sx={{ display: 'inline-block', width: '25%' }}
+        >
           <CardHeader
             title="Meir"
-            sx={{
-              textAlign: 'center',
-              height: '1%'
-            }}
+            sx={{ textAlign: 'center' }}
           />
           <CardMedia
             sx={{ display: 'flex', justifyContent: 'center'}}
@@ -97,29 +77,23 @@ function AboutPage() {
             <img
               src="/images/Meir.jpg"
               alt="Meir Sedlis"
-              width="70%"
+              width="100%"
             />
           </CardMedia>
           <CardContent
             sx={{ textAlign: 'center' }}
           >
-            <a href="https://www.linkedin.com/in/meirsedlis/">
+            <Typography href="https://www.linkedin.com/in/meirsedlis/">
               linkedin.com/in/meirsedlis/
-            </a>
+            </Typography>
           </CardContent>
         </Card>
         <Card 
-          sx={{
-          display: 'inline-block', 
-          width: '25%',
-          height: '47%'
-        }} >
+          sx={{ display: 'inline-block', width: '25%' }}
+        >
           <CardHeader
             title="Joe"
-            sx={{
-              textAlign: 'center',
-              height: '1%'
-            }}
+            sx={{ textAlign: 'center' }}
           />
           <CardMedia
             sx={{ display: 'flex', justifyContent: 'center'}}
@@ -127,13 +101,13 @@ function AboutPage() {
           <img
             src="/images/Joe.jpeg"
             alt="Joe Anthony-Brown"
-            width="70%"
+            width="100%"
           />
           </CardMedia>
           <CardContent sx={{ textAlign: 'center' }} >
-            <a href="https://www.linkedin.com/in/joe-anthony-brown/">
+            <Typography href="https://www.linkedin.com/in/joe-anthony-brown/">
               linkedin.com/in/joe-anthony-brown/
-            </a>
+            </Typography>
           </CardContent>
         </Card>
           <Grid
