@@ -207,9 +207,7 @@ function RegisterForm() {
             {errors.registrationMessage}
           </h3>
         )}
-        <Grid item display="flex"
-        flexDirection='column'
-        justifyContent="center">
+        <Box display="grid" justifyContent="center">
           <Typography align="center" variant="h5">Name</Typography>
           <FormControl>
             <TextField
@@ -247,10 +245,8 @@ function RegisterForm() {
             />
           </FormControl>
           
-        </Grid>
-        <Grid item display="flex"
-        flexDirection='column'
-        justifyContent="center">
+        </Box>
+        <Box display="grid" justifyContent="center">
           <Typography align="center" variant="h5">About You</Typography>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
@@ -313,7 +309,7 @@ function RegisterForm() {
               }}
             />
           </FormControl>
-        </Grid>
+        </Box>
 
         {/* Name Information */}
         
@@ -364,9 +360,7 @@ function RegisterForm() {
           </FormControl> */}
         {/* </Grid> */}
 
-        <Grid item display="flex"
-        flexDirection='column'
-        justifyContent="center">
+        <Box display="grid" justifyContent="center">
           <Typography align="center" variant="h5">Login Info</Typography>
 
           <FormControl>
@@ -397,8 +391,8 @@ function RegisterForm() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </FormControl>
-          <Button className='p' variant='contained' size = 'large' onClick={registerUser}>register</Button>
-        </Grid>
+          <Button variant='contained' onClick={registerUser}>register</Button>
+        </Box>
       </Grid>
     </Container>
   );

@@ -7,7 +7,7 @@ function RegisterPage() {
   const history = useHistory();
 
   return (
-    <div sx={{overflow:'hidden'}}>
+    <div sx={{overflow:'scroll'}}>
       <RegisterForm />
     </div>
   );

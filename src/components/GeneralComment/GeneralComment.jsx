@@ -34,12 +34,12 @@ function GeneralComment() {
   return (
     <Box className="boxDefault">
       <Box sx={[{ pt: "5vh" }, { width: "80vw" }, { m: "auto" }]}>
-        <Typography align="center" variant="h2">
+        <Typography align="center" variant="h3" sx={{pb:2}}>
           Use this form to give us feedback on your experience with Allyx, or
           send us ideas for what you'd like to see from us in the future.
         </Typography>
 
-        <Typography align="center" variant="h4" color="text.secondary">
+        <Typography align="center" variant="h5" color="text.secondary">
           If you'd like to make a media inquiry or want to be sure you hear
           back from us as soon as possible, send an email to hey @
           heyallyx.com.
@@ -53,7 +53,7 @@ function GeneralComment() {
           { width: "80vw" },
         ]}
       >
-        <Typography variant="h5" component="legend">
+        {/* <Typography variant="h5" component="legend">
           Rating
         </Typography>
         <Rating
@@ -66,7 +66,7 @@ function GeneralComment() {
           onChange={(event, newRating) => {
             setRating(newRating);
           }}
-        />
+        /> */}
         <Typography variant="h5" component="legend">
           Comment
         </Typography>
@@ -79,6 +79,7 @@ function GeneralComment() {
           maxRows={4}
           onChange={handleComment}
         />
+           <Box justifyContent="center" display="flex">
         <Button
           size="large"
           variant="contained"
@@ -87,6 +88,7 @@ function GeneralComment() {
         >
           Submit
         </Button>
+      </Box>
       </Box>
     </Box>
   );

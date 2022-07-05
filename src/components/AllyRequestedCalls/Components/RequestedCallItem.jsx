@@ -57,8 +57,8 @@ function RequestedCallItem({ call }) {
         <Avatar aria-label="requester avatar" srcSet={picture} />
       </ListItemAvatar>
       <ListItemText
-        primary={<Typography aria-label="requester first name" variant="h6">{call.first_name}</Typography>}
-        secondary={<Typography>wants a call at {formattedTime}</Typography>}
+        primary={<Typography aria-label="requester first name" variant="h4">{call.first_name}</Typography>}
+        secondary={<Typography color="text.secondary" variant="h6">wants a call at {formattedTime}</Typography>}
       />
       <Button variant="contained" aria-label="claim call button" onClick={handleClaimCall} startIcon={<AddIcCallIcon />}>Claim Call</Button>
     </ListItem>

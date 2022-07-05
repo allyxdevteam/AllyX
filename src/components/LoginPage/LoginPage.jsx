@@ -8,7 +8,7 @@ function LoginPage() {
 
   return (
     <Box className="boxDefault">
-      <Box sx={{pt:'10vh'}}>
+      <Box sx={{pt:'3vh'}}>
       <LoginForm />
 
       <Box display="grid" justifyContent="center">
@@ -22,7 +22,7 @@ function LoginPage() {
         </Button>
       </Box>
       <Fade in="true" timeout={30000}>
-      <Typography align='center' color="text.secondary" sx={{pt:4}}>If something seems wrong, send us an email at hey @heyallyx.com and we'll help you fix it.</Typography>
+      <Typography align='center' color="text.secondary" sx={{pt:4}}><i>If something seems wrong, send us an email at hey @heyallyx.com and we'll help you fix it.</i></Typography>
       </Fade>
       </Box>
     </Box >

@@ -25,6 +25,7 @@ import AllyRequestedCalls from '../AllyRequestedCalls/AllyRequestedCalls';
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import AllyStartCall from '../AllyStartCall/AllyStartCall';
 import AllyCallInProgress from '../AllyCallInProgress/AllyCallInProgress';
+import Logo from '../_Logo/Logo';
 
 import BottomNav from '../Nav/Components/BottomNav';
 
@@ -55,7 +56,9 @@ function App() {
     <ThemeProvider theme={Theme}>
     <Router>
       <div>
-        <div sx={{zIndex:0}}>
+      <Logo sx={{zIndex:-1}}/>
+        <div sx={{zIndex:20}}>
+          
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
