@@ -18,6 +18,7 @@ function MemberReportProblem() {
   const allyId = completedCall.ally_id;
 
   return (
+    <Box className="boxDefault">
     <Box display="flex" flexDirection="column" className="commentBox">
       <Typography variant="h4" align="center" sx={{ m: 2 }}>
         Please tell us what went wrong.
@@ -51,6 +52,7 @@ function MemberReportProblem() {
       >
         Report Problem
       </Button>
+    </Box>
     </Box>
   );
 }

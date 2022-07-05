@@ -29,12 +29,7 @@ function CommentReport() {
       width: 90,
       editable: false,
     },
-    {
-        field: "num_stars",
-        headerName: "Rating",
-        width: 80,
-        editable: false,
-      },
+    
       {
         field: "comment",
         headerName: "Comment",
