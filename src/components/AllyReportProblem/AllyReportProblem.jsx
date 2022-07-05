@@ -5,8 +5,8 @@ import Swal from "sweetalert2";
 
 import { Button, Box, TextField, Typography } from "@mui/material";
 
-function AllyReportMisuse() {
-  const [misuseComments, setMisuseComments] = useState("");
+function AllyReportProblem() {
+  const [problemComments, setProblemComments] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
   const claimedCallId = useSelector((store) => store.claimedCall.claimedCall);
@@ -24,9 +24,9 @@ function AllyReportMisuse() {
           sx={{ m: 2 }}
           placeholder="describe what happened"
           onChange={(e) => {
-            setMisuseComments(e.target.value);
+            setProblemComments(e.target.value);
           }}
-          value={misuseComments}
+          value={problemComments}
         />
         <Button
           sx={{ m: "auto" }}
@@ -38,8 +38,8 @@ function AllyReportMisuse() {
               payload: { claimedCallMember },
             });
             dispatch({
-              type: "ALLY_REPORT_MISUSE",
-              payload: { claimedCallId, claimedCallMember, misuseComments },
+              type: "ALLY_REPORT_PROBLEM",
+              payload: { claimedCallId, claimedCallMember, problemComments },
             });
             Swal.fire(
               "We have logged your report and will take action on it. If necessary, someone will follow up with you. Thank you for being an ally and taking the time to share your experience."
@@ -54,4 +54,4 @@ function AllyReportMisuse() {
   );
 }
 
-export default AllyReportMisuse;
+export default AllyReportProblem;

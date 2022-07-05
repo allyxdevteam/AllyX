@@ -31,9 +31,9 @@ import BottomNav from '../Nav/Components/BottomNav';
 
 import AllyReviewCall from '../AllyReviewCall/AllyReviewCall';
 import MemberReviewCall from '../MemberReviewCall/MemberReviewCall';
-import AllyReportMisuse from '../AllyReportMisuse/AllyReportMisuse';
+import AllyReportProblem from '../AllyReportProblem/AllyReportProblem';
 import MemberCallRequested from '../MemberCallRequested/MemberCallRequested';
-import MemberReportMisuse from '../MemberReportMisuse/MemberReportMisuse';
+import MemberReportProblem from '../MemberReportProblem/MemberReportProblem';
 
 import './App.css';
 import AllyApplication from '../AllyApplication/AllyApplication';
@@ -150,16 +150,16 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/memberReportMisuse"
+            path="/memberReportProblem"
           >
-            <MemberReportMisuse />
+            <MemberReportProblem />
           </ProtectedRoute>
             
             <ProtectedRoute
             exact
-            path="/allyReportMisuse"
+            path="/allyReportProblem"
           >
-            <AllyReportMisuse />
+            <AllyReportProblem />
 
           </ProtectedRoute>
 

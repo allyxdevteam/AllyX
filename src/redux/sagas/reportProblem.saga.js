@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { takeLatest } from 'redux-saga/effects';
 
-function* allyReportMisuse(action) {
-    console.log('this is the action.payload in allyReportMisuse', action.payload);
+function* allyReportProblem(action) {
+    console.log('this is the action.payload in allyReportProblem', action.payload);
     yield axios({
         method: 'POST',
-        url: `/api/reportMisuse/ally`,
+        url: `/api/reportProblem/ally`,
         data: action.payload
     })
 }
@@ -14,15 +14,15 @@ function* markMemberReported(action) {
     console.log('this is action.payload in markMemberReported', action.payload);
     yield axios({
         method: 'PUT',
-        url: `/api/reportMisuse/ally`,
+        url: `/api/reportProblem/ally`,
         data: action.payload
     })
 }
 
-function* memberReportMisuse(action) {
+function* memberReportProblem(action) {
     yield axios({
         method: 'POST',
-        url: `/api/reportMisuse/member`,
+        url: `/api/reportProblem/member`,
         data: action.payload
     })
 }
@@ -30,17 +30,17 @@ function* memberReportMisuse(action) {
 function* markAllyReported(action) {
     yield axios({
         method: 'PUT',
-        url: `/api/reportMisuse/member`,
+        url: `/api/reportProblem/member`,
         data: action.payload
     })
 }
 
 
-function* reportMisuseSaga() {
-    yield takeLatest('ALLY_REPORT_MISUSE', allyReportMisuse);
+function* reportProblemSaga() {
+    yield takeLatest('ALLY_REPORT_PROBLEM', allyReportProblem);
     yield takeLatest('MARK_MEMBER_REPORTED', markMemberReported);
-    yield takeLatest('MEMBER_REPORT_MISUSE', memberReportMisuse);
+    yield takeLatest('MEMBER_REPORT_PROBLEM', memberReportProblem);
     yield takeLatest('MARK_ALLY_REPORTED', markAllyReported);
 }
 
-export default reportMisuseSaga;
+export default reportProblemSaga;

@@ -94,10 +94,10 @@ function MemberReviewCall() {
           color="warning"
           sx={{ m: 2 }}
           onClick={() => {
-            history.push("/memberReportMisuse");
+            history.push("/memberReportProblem");
           }}
         >
-          Report Misuse
+          Report Problem
         </Button>
       </Box>
     </Box>
