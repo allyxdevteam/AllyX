@@ -51,7 +51,7 @@ const AllyAppRouter = require('./routes/allyApp.router');
 const callInProgress = require('./routes/callInProgress.router');
 const report = require('./routes/report.router');
 const callRatingRouter = require ('./routes/call-ratings.router');
-const reportMisuse = require('./routes/reportMisuse.router');
+const reportProblem = require('./routes/reportProblem.router');
 const imageUpload = require('./routes/imageUpload.router');
 
 
@@ -79,7 +79,7 @@ app.use('/api/allyApp', AllyAppRouter);
 app.use('/api/callInProgress', callInProgress);
 app.use('/api/report', report);
 app.use('/api/rate-call', callRatingRouter);
-app.use('/api/reportMisuse', reportMisuse);
+app.use('/api/reportProblem', reportProblem);
 app.use('/api/imageUpload', imageUpload)
 
 // Serve static files

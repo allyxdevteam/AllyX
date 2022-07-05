@@ -32,7 +32,7 @@ const rootReducer = combineReducers({
   users, // contains all users for the admin dashboard
   claimedCall,
   allyApp,
-  reports, // contains all misuse reports/complaints for the admin dashboard
+  reports, // contains all problem reports/complaints for the admin dashboard
   profileImage,
   allyApplications, // contains all ally applications for the admin dashboard has a join to include user data
   calls, // contains all calls for the admin dashboard

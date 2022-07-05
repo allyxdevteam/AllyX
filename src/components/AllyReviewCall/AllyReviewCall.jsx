@@ -97,10 +97,10 @@ function AllyReviewCall() {
           color="warning"
           sx={{ m: 2 }}
           onClick={() => {
-            history.push(`/allyReportMisuse`);
+            history.push(`/allyReportProblem`);
           }}
         >
-          Report Misuse
+          Report Problem
         </Button>
       </Box>
     </Box>

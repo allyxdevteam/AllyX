@@ -14,7 +14,7 @@ router.post('/ally', rejectUnauthenticated, (req, res) => {
         req.user.id,
         req.body.claimedCallMember.id,
         req.body.claimedCallId,
-        req.body.misuseComments
+        req.body.problemComments
     ];
     pool.query(sqlText, sqlValues)
     .then((dbRes) => {
@@ -45,7 +45,7 @@ router.put('/ally', rejectUnauthenticated, (req, res) => {
 })
 
 router.post('/member', rejectUnauthenticated, (req, res) => {
-  console.log('this is req in reportMisuse', req);
+  console.log('this is req in reportProblem', req);
   const sqlText = `
   INSERT INTO "report" (reviewer_id, recipient_id, call_id, comment)
     VALUES ($1, $2, $3, $4);
@@ -54,7 +54,7 @@ router.post('/member', rejectUnauthenticated, (req, res) => {
       req.user.id,
       req.body.allyId,
       req.body.requestedCallId,
-      req.body.misuseComments
+      req.body.problemComments
   ];
   pool.query(sqlText, sqlValues)
   .then((dbRes) => {
