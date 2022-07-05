@@ -1,7 +1,11 @@
-
-/* font-family: 'Noto Sans', sans-serif;
+/* font-family: 'Dosis', sans-serif;
+font-family: 'Jost', sans-serif;
+font-family: 'Karla', sans-serif;
+font-family: 'Noto Sans', sans-serif;
 font-family: 'Noto Serif', serif;
-font-family: 'Noto Serif Display', serif; */
+font-family: 'Noto Serif Display', serif;
+font-family: 'Nunito', sans-serif;
+font-family: 'Quicksand', sans-serif; */
 
 html,
 body,
@@ -10,7 +14,6 @@ body,
 }
 
 body {
-  font-family: 'Noto Sans';
   margin: 0px;
   background-color: #FFDBDB ;
 }
@@ -69,10 +72,11 @@ MUI standardization
 .boxDefault {
   width: 98vw;
   margin: auto;
-  margin-top: 1vh;
   height: 100vh;
   overflow: scroll;
   padding-bottom: 15vh;
+  position: relative;
+
 }
 
 .commentBox {
@@ -84,4 +88,12 @@ MUI standardization
 
 .bottomNav {
   background-color: #ffc9c9 ;
+}
+
+#allyx-logo {
+  font-family: 'Noto Serif Display';
+  font-size: 5rem !important;
+  position: top;
+  margin-left: 3vw;
+  color: #ff897a; 
 }

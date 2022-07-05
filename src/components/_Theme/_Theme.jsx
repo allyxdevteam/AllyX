@@ -7,9 +7,11 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 const drawerWidth = 400
 
-/* font-family: 'Noto Sans', sans-serif;
-font-family: 'Noto Serif', serif;
-font-family: 'Noto Serif Display', serif; */
+// font-family: 'Karla', sans-serif;
+// font-family: 'Noto Sans', sans-serif;
+// font-family: 'Noto Serif', serif;
+// font-family: 'Noto Serif Display', serif;
+// font-family: 'Quicksand', sans-serif;
 
 
 const Theme = createTheme({
@@ -29,13 +31,16 @@ const Theme = createTheme({
         },
 
         warning: {
-            main: '#ff8949'
+            main: '#f6f6b9'
+        },
+        allyx: {
+            main: '#ff897a '
         }
     },
 
 
     typography: {
-        fontFamily: 'Noto Sans, sans-serif',
+        fontFamily: 'Quicksand, sans-serif',
         fontColor: '#7F64A5'
     },
 

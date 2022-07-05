@@ -43,6 +43,7 @@ function Profile() {
           { width: "40vw" },
           { maxWidth: "300px" },
           { m: "auto" },
+          {mt:0},
           { mb: 2 },
         ]}
       >
@@ -71,6 +72,8 @@ function Profile() {
       sx={[
         { width: "35vw" },
         { m: "auto" },
+        {mt:1},
+        {mb:1}
       ]}>
       <Button
         variant="outlined"

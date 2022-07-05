@@ -1,12 +1,10 @@
-import ArrowL from "./ArrowL.png";
-import ArrowR from "./ArrowR.png";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Box, FormControl, LinearProgress, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { SaveOutlined } from "@mui/icons-material";
+import { SaveOutlined, Done } from "@mui/icons-material";
 import Swal from "sweetalert2";
 
 function AllyApplication() {
@@ -95,21 +93,16 @@ function AllyApplication() {
   /////////////////////////////////////////////////
   return (
     <div>
-      <Box className='boxDefault'>
-        <Typography variant="h1">Apply to become an ally! </Typography>
-
-        <Typography variant="h4">
-          Please have a valid social media account registered and be prepared to
-          answer four short prompts{" "}
+      <Box className="boxDefault">
+        <Typography align="center" variant="h1" sx={{ mb: 2 }}>
+          Apply to be an ally!
         </Typography>
-        <Box>
-          <Button onClick={postApp}>
-            <SaveOutlined /> Save Progress
-          </Button>
-        </Box>
-        {/* TODO: Link to FAQ/About Page */}
-        <h3>Tell us why you'd like to become an ally!</h3>
+
+        <Typography sx={{ mb: 1 }} variant="h5" align="center">
+          Tell us why you'd like to become an ally!
+        </Typography>
         <TextField
+          sx={{ mb: 2 }}
           id="outlined-textarea"
           label=""
           placeholder=""
@@ -123,8 +116,11 @@ function AllyApplication() {
             });
           }}
         />
-        <h3>How did you find out about Allyx?</h3>
+        <Typography sx={{ mb: 1 }} variant="h5" align="center">
+          How did you find out about Allyx?
+        </Typography>
         <TextField
+          sx={{ mb: 2 }}
           id="outlined-textarea"
           label=""
           placeholder=""
@@ -138,16 +134,18 @@ function AllyApplication() {
             });
           }}
         />
-        <Box fullWidth sx={{ display: "flex" }}>
-          <h5>
-            Allyx is fun, but safety is a priority and sometimes requires allies
-            to handle challenging conversations with callers. In what way(s)
-            have you prepared for, or what experience do you have working in
-            areas related to safety or women's safety, if any?
-          </h5>
-        </Box>
-        {/* This is the middle */}
+
+        <Typography sx={{ mb: 2 }} variant="h5" align="center" color="text.secondary">
+          Allyx is fun, but safety is a priority and sometimes requires allies
+          to handle challenging conversations with callers.
+        </Typography>
+        <Typography sx={{ mb: 1 }} variant="h5" align="center">
+          In what way(s) have you prepared for, or what experience do you have
+          working in areas related to safety or women's safety, if any?
+        </Typography>
+
         <TextField
+          sx={{ mb: 2 }}
           id="outlined-textarea"
           label=""
           placeholder=""
@@ -161,15 +159,14 @@ function AllyApplication() {
             });
           }}
         />
-        {/* This is where our controls (back+next) are */}
-        <Box fullWidth sx={{ display: "flex" }}>
-          <h5>
-            Have you used a safety app or volunteered with a safety app
-            previously? (phone line, chat, text line, in-person, etc?)
-          </h5>
-        </Box>
-        {/* This is the middle */}
+
+        <Typography sx={{ mb: 1 }} variant="h5" align="center">
+          Have you used a safety app or volunteered with a safety app
+          previously? <i>(phone line, chat, text line, in-person, etc?)</i>
+        </Typography>
+
         <TextField
+          sx={{ mb: 2 }}
           id="outlined-textarea"
           label=""
           placeholder=""
@@ -183,8 +180,35 @@ function AllyApplication() {
             });
           }}
         />
-        {/* This is where our controls (back+next) are */}
-        <Button onClick={submitApp}>Submit Application</Button>
+        <Typography
+          align="center"
+          color="text.secondary"
+          variant="h6"
+          sx={{ mb: 1 }}
+        >
+          <i>
+            Please make sure you've linked to at least once social media account
+            in your profile. We can't approve this application until you do.
+          </i>
+        </Typography>
+        <Box justifyContent="center" display="flex">
+          <Button
+            variant="contained"
+            size="large"
+            sx={{ m: 2 }}
+            onClick={postApp}
+          >
+            <SaveOutlined /> Save Progress
+          </Button>
+          <Button
+            variant="contained"
+            size="large"
+            sx={{ m: 2 }}
+            onClick={submitApp}
+          >
+            <Done /> Submit Application
+          </Button>
+        </Box>
       </Box>
     </div>
   );

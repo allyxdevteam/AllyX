@@ -133,7 +133,7 @@ function bottomNav() {
           <BottomNavigationAction
             label="Apply to be an Ally"
             icon={<AssignmentTurnedIn />}
-            onClick={console.log("yay")}
+            onClick={()=>history.push("/ally-application")}
           />
         )}
 
