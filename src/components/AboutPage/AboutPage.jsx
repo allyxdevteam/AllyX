@@ -22,13 +22,13 @@ function AboutPage() {
           sx={{
           display: 'inline-block', 
           width: '25%',
-          height: '45%'
+          height: '47%'
         }} >
           <CardHeader
             title="Chris"
             sx={{
               textAlign: 'center',
-              height: '7%'
+              height: '1%'
             }}
           />
           <CardMedia
@@ -52,13 +52,13 @@ function AboutPage() {
           sx={{
           display: 'inline-block', 
           width: '25%',
-          height: '45%'
+          height: '47%'
         }} >
           <CardHeader
             title="Ian"
             sx={{
               textAlign: 'center',
-              height: '7%'
+              height: '1%'
             }}
           />
           <CardMedia
@@ -82,13 +82,13 @@ function AboutPage() {
           sx={{
           display: 'inline-block', 
           width: '25%',
-          height: '45%'
+          height: '47%'
         }} >
           <CardHeader
             title="Meir"
             sx={{
               textAlign: 'center',
-              height: '7%'
+              height: '1%'
             }}
           />
           <CardMedia
@@ -112,13 +112,13 @@ function AboutPage() {
           sx={{
           display: 'inline-block', 
           width: '25%',
-          height: '45%'
+          height: '47%'
         }} >
           <CardHeader
             title="Joe"
             sx={{
               textAlign: 'center',
-              height: '7%'
+              height: '1%'
             }}
           />
           <CardMedia
