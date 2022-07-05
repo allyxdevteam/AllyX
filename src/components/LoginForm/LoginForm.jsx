@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useHistory, useParams } from 'react-router-dom';
+
 import { Box, Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
@@ -9,6 +11,8 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const login = (event) => {
     event.preventDefault();
@@ -21,6 +25,7 @@ function LoginForm() {
           password: password,
         },
       });
+      history.push('/home')
     } else {
       dispatch({ type: "LOGIN_INPUT_ERROR" });
     }

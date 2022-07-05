@@ -213,7 +213,7 @@ function App() {
               <AdminDashboard />
               :
               // Otherwise, show 403 
-              <h1>403</h1>
+              <h1 className='boxDefault'>403</h1>
             }
           </Route>
 
