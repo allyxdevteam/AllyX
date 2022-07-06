@@ -45,7 +45,7 @@ router.put('/ally', rejectUnauthenticated, (req, res) => {
 })
 
 router.post('/member', rejectUnauthenticated, (req, res) => {
-  console.log('this is req in reportProblem', req);
+  console.log('this is req in member reportProblem', req.body);
   const sqlText = `
   INSERT INTO "report" (reviewer_id, recipient_id, call_id, comment)
     VALUES ($1, $2, $3, $4);
