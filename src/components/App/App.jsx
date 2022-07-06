@@ -4,9 +4,7 @@ import {
   Redirect,
   Route,
   Switch,
-  useHistory
 } from "react-router-dom";
-import swal from "sweetalert2";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -147,9 +145,11 @@ function App() {
               <Route exact path="/home">
                 <LandingPage />
               </Route>
-              <Route exact path="/ally-application">
+
+
+              <ProtectedRoute exact path="/ally-application">
                 <AllyApplication />
-              </Route>
+              </ProtectedRoute>
 
               <Route exact path="/admin">
                 {user.is_admin ? (

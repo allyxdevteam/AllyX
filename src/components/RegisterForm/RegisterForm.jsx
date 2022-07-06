@@ -12,7 +12,7 @@ import {
   Button,
   Typography,
   Grid,
-  Container
+  Container,
 } from "@mui/material";
 
 function RegisterForm() {
@@ -24,10 +24,6 @@ function RegisterForm() {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
-  const [twitter, setTwitter] = useState(""); // Twitter
-  const [instagram, setInstagram] = useState(""); // Insta
-  const [facebook, setFacebook] = useState(""); // Insta
 
   const [emailDone, setEmailDone] = useState("");
   const [phoneDone, setPhoneDone] = useState("");
@@ -55,13 +51,10 @@ function RegisterForm() {
       return false;
     }
   };
-  // Slide controls
-  const [X, setX] = useState(1);
-  const [showButton, setShowButton] = useState(true);
+
   //Register user
   const registerUser = (event) => {
     event.preventDefault();
-    console.log("hey its the register button");
     if (doneCheck() === true) {
       dispatch({
         type: "REGISTER",
@@ -90,7 +83,6 @@ function RegisterForm() {
       });
     }
   };
-  //
 
   //VALIDATE EMAIL
   const ValidateEmail = (email) => {
@@ -179,44 +171,36 @@ function RegisterForm() {
       setDobDone(false);
     }
   };
-  //
 
-  //   <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-  //   {Array.from(Array(6)).map((_, index) => (
-  //     <Grid item xs={2} sm={4} md={4} key={index}>
-  //       <Item>xs=2</Item>
-  //     </Grid>
-  //   ))}
-  // </Grid>
   return (
     <Container className="boxDefault">
-      <Typography variant="h1" align="center" sx={{p:2}}>
+      <Typography variant="h1" align="center" sx={{ p: 2 }}>
         Registration
       </Typography>
       <Grid
         container
         rowSpacing={2}
-        columns={{ xs:12 }}
+        columns={{ xs: 12 }}
         display="flex"
-        flexDirection='column'
+        flexDirection="column"
         justifyContent="center"
-        
       >
         {errors.registrationMessage && (
           <h3 className="alert" role="alert">
             {errors.registrationMessage}
           </h3>
         )}
-        <Box display="grid" justifyContent="center">
-          <Typography align="center" variant="h5">Name</Typography>
+        <Grid item display="flex" flexDirection="column" justifyContent="center" alignItems="center" sx={{ m: 1 }}>
+          <Typography align="center" variant="h5">
+            Name
+          </Typography>
           <FormControl>
             <TextField
-            InputProps={{ sx: [{ fontSize: '1.5rem' }, {margin:1}] }}
-            InputLabelProps={{ style: { fontSize: '1.5rem' } }}
+              InputProps={{ sx: [{ fontSize: "1.5rem" }, { margin: 1 }] }}
+              InputLabelProps={{ style: { fontSize: "1.5rem" } }}
               id="outlined-textarea"
               label="First Name"
               required
-              fullwidth
               error={firstNameDone === false}
               helperText={
                 firstNameDone === false && "Please enter your first name"
@@ -227,32 +211,31 @@ function RegisterForm() {
               }}
             />
           </FormControl>
-         
+
           <FormControl>
             <TextField
-            InputProps={{ sx: [{ fontSize: '1.5rem' }, {margin:1}] }}
-            InputLabelProps={{ style: { fontSize: '1.5rem' } }}
+              InputProps={{ sx: [{ fontSize: "1.5rem" }, { margin: 1 }] }}
+              InputLabelProps={{ style: { fontSize: "1.5rem" } }}
               id="outlined-textarea"
-              label="Last Name (optional)"
+              label="Last Name"
               type="lastname"
               name="lastname"
-              multiline
-              fullwidth
               value={lastName}
               onChange={(e) => {
                 setLastName(e.target.value);
               }}
             />
           </FormControl>
-          
-        </Box>
-        <Box display="grid" justifyContent="center">
-          <Typography align="center" variant="h5">About You</Typography>
+        </Grid>
+        <Grid item display="flex" flexDirection="column" justifyContent="center" alignItems="center" sx={{ m: 1 }}>
+          <Typography align="center" variant="h5">
+            About You
+          </Typography>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-            InputProps={{ sx: [{ fontSize: '1.5rem' }, {margin:1}] }}
-            InputLabelProps={{ style: { fontSize: '1.5rem' } }}
-              label="Date of Birth"
+              InputProps={{ sx: [{ fontSize: "1.5rem" }, { margin: 1 }] }}
+              InputLabelProps={{ style: { fontSize: "1.5rem" } }}
+              label="Birthday"
               value={dob}
               inputFormat="MM/DD/YYYY"
               views={["year", "month", "day"]}
@@ -263,12 +246,11 @@ function RegisterForm() {
               renderInput={(params) => {
                 return (
                   <TextField
-                  InputProps={{ sx: [{ fontSize: '1.5rem' }, {margin:1}] }}
-              InputLabelProps={{ style: { fontSize: '1.5rem' } }}
+                    InputProps={{ sx: [{ fontSize: "1.5rem" }, { margin: 1 }] }}
+                    InputLabelProps={{ style: { fontSize: "1.5rem" } }}
                     {...params}
                     required
                     error={dobDone === false}
-                    
                   />
                 );
               }}
@@ -276,15 +258,13 @@ function RegisterForm() {
           </LocalizationProvider>
           <FormControl>
             <TextField
-            InputProps={{ sx: [{ fontSize: '1.5rem' }, {margin:1}] }}
-            InputLabelProps={{ style: { fontSize: '1.5rem' } }}
+              InputProps={{ sx: [{ fontSize: "1.5rem" }, { margin: 1 }] }}
+              InputLabelProps={{ style: { fontSize: "1.5rem" } }}
               autoComplete="on"
               id="outlined-textarea"
               label="Email"
               required
               placeholder="heyallyx@allyx.com"
-              multiline
-              fullwidth
               value={email}
               onChange={(e) => {
                 ValidateEmail(e.target.value);
@@ -292,81 +272,32 @@ function RegisterForm() {
               error={emailDone === false}
             />
           </FormControl>
-          <FormControl fullWdth>
+          <FormControl>
             <TextField
-            InputProps={{sx: [{ fontSize: '1.5rem' }, {margin:1}] }}
-            InputLabelProps={{ style: { fontSize: '1.5rem' } }}
+              InputProps={{ sx: [{ fontSize: "1.5rem" }, { margin: 1 }] }}
+              InputLabelProps={{ style: { fontSize: "1.5rem" } }}
               id="outlined-textarea"
               label="Phone Number"
               placeholder="(905)123-5678"
               error={phoneDone === false}
               required
-              multiline
-              fullwidth
               value={phone}
               onChange={(e) => {
                 phonenumber(e.target.value);
               }}
             />
           </FormControl>
-        </Box>
+        </Grid>
 
-        {/* Name Information */}
-        
-        {/* <Grid item> */}
-        {/* <Typography variant="h4">Social Media (optional)</Typography> */}
-
-        {/* Twitter Username */}
-        {/* <FormControl>
-            <TextField
-              id="outlined-textarea"
-              label="Twitter URL"
-              placeholder=""
-              fullwidth
-              value={twitter}
-              onChange={(e) => {
-                setTwitter(e.target.value);
-              }}
-            />
-          </FormControl> */}
-
-        {/* Instagram Username */}
-        {/* <FormControl>
-            <TextField
-              id="outlined-textarea"
-              label="Instagram URL"
-              placeholder=""
-              fullwidth
-              value={instagram}
-              onChange={(e) => {
-                setInstagram(e.target.value);
-              }}
-            />
-          </FormControl> */}
-
-        {/* Facebook Account */}
-
-        {/* <FormControl>
-            <TextField
-              id="outlined-textarea"
-              label="Facebook URL"
-              placeholder=""
-              fullwidth
-              value={facebook}
-              onChange={(e) => {
-                setFacebook(e.target.value);
-              }}
-            />
-          </FormControl> */}
-        {/* </Grid> */}
-
-        <Box display="grid" justifyContent="center">
-          <Typography align="center" variant="h5">Login Info</Typography>
+        <Grid item display="flex" flexDirection="column" justifyContent="center" alignItems="center" sx={{ m: 1 }}>
+          <Typography align="center" variant="h5">
+            Login Info
+          </Typography>
 
           <FormControl>
             <TextField
-            InputProps={{ sx: [{ fontSize: '1.5rem' }, {margin:1}] }}
-            InputLabelProps={{ style: { fontSize: '1.5rem' } }}
+              InputProps={{ sx: [{ fontSize: "1.5rem" }, { margin: 1 }] }}
+              InputLabelProps={{ style: { fontSize: "1.5rem" } }}
               required
               id="outlined-textarea"
               label="Username"
@@ -379,8 +310,8 @@ function RegisterForm() {
           </FormControl>
           <FormControl>
             <TextField
-              InputProps={{ sx: [{ fontSize: '1.5rem' }, {margin:1}] }}
-              InputLabelProps={{ style: { fontSize: '1.5rem' } }}
+              InputProps={{ sx: [{ fontSize: "1.5rem" }, { margin: 1 }] }}
+              InputLabelProps={{ style: { fontSize: "1.5rem" } }}
               required
               id="outlined-textarea"
               label="Password"
@@ -391,9 +322,15 @@ function RegisterForm() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </FormControl>
-          <Button variant='contained' onClick={registerUser}>register</Button>
-        </Box>
+        </Grid>
       </Grid>
+      <Button
+        variant="contained"
+        onClick={registerUser}
+        sx={{ m: "auto", display: "flex" }}
+      >
+        register
+      </Button>
     </Container>
   );
 }

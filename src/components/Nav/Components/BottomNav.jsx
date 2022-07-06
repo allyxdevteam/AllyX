@@ -18,7 +18,8 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
-  Box
+  Box,
+  Typography
 } from "@mui/material";
 
 import { useEffect, useState } from "react";
@@ -69,8 +70,8 @@ function bottomNav() {
         showLabels="true"
       >
         <BottomNavigationAction
-          label="Menu"
-          icon={<MenuIcon />}
+          label={<Typography variant="h6">Menu</Typography>}
+          icon={<MenuIcon fontSize="large"/>}
           onClick={handleClick}
           aria-controls={open ? "menu" : undefined}
           aria-haspopup="true"
@@ -108,7 +109,7 @@ function bottomNav() {
 
           <MenuItem onClick={() => history.push("/profile")}>
             <ListItemIcon>
-              <AccountCircle />
+              <AccountCircle fontSize="large"/>
             </ListItemIcon>
             Profile
           </MenuItem>
@@ -122,25 +123,25 @@ function bottomNav() {
               <Badge
                 badgeContent={requestedCalls.length}
                 color="primary"
-                label="Requested Calls"
+                label={<Typography variant="h6">Requested Calls</Typography>}
               >
-                <ContactPhone />
+                <ContactPhone fontSize="large"/>
               </Badge>
             }
             onClick={() => history.push("/allyRequestedCalls")}
           />
         ) : (
           <BottomNavigationAction
-            label="Apply to be an Ally"
-            icon={<AssignmentTurnedIn />}
+            label={<Typography variant="h6">Apply to be an Ally</Typography>}
+            icon={<AssignmentTurnedIn fontSize="large"/>}
             onClick={()=>history.push("/ally-application")}
           />
         )}
 
         {user.is_admin && (
           <BottomNavigationAction
-            label="Admin Dashboard"
-            icon={<Assessment />}
+            label={<Typography variant="h6">Admin Dashboard</Typography>}
+            icon={<Assessment fontSize="large"/>}
             onClick={() => history.push("/admin")}
           />
         )}
