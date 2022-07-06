@@ -43,7 +43,7 @@ function* updateProfileAdmin(action) {
     yield axios({
         method: 'PUT',
         url: `/api/profile/${updatedProfile.id}`,
-        data: updatedProfile
+        data: {updatedProfile}
     })
     yield put({
         type: 'FETCH_PROFILES'
