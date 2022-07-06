@@ -12,7 +12,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Avatar from "@mui/material/Avatar";
 import { Box, Button, Typography } from "@mui/material";
 
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 function Profile() {
   useEffect(() => {
@@ -93,15 +93,15 @@ function Profile() {
         variant="contained"
         sx={[ {maxWidth: '35vw'}, { m: 1 }]}
         onClick={() => {
-          swal({
+          Swal.fire({
             title: "Are you sure?",
             text: "You cannot recover your account, once deleted.",
             icon: "warning",
-            buttons: true,
-            dangerMode: true,
+            showCancelButton: true,
+            confirmButtonText: 'Request Delete',
           }).then((deleteRequested) => {
-            if (deleteRequested) {
-              swal({
+            if (deleteRequested.isConfirmed) {
+              Swal.fire({
                 text: "You have requested your account be deleted. A member of admin will be in contact.",
                 icon: "success",
               });
