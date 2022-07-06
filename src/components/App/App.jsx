@@ -147,9 +147,11 @@ function App() {
               <Route exact path="/home">
                 <LandingPage />
               </Route>
-              <Route exact path="/ally-application">
+
+
+              <ProtectedRoute exact path="/ally-application">
                 <AllyApplication />
-              </Route>
+              </ProtectedRoute>
 
               <Route exact path="/admin">
                 {user.is_admin ? (
