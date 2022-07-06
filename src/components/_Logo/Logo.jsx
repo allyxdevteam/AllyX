@@ -5,7 +5,7 @@ function Logo(){
     const history = useHistory();
 
     return(
-        <Typography id="allyx-logo" onClick={()=>history.push('/home')} display="inline">allyx</Typography>
+        <Typography id="allyx-logo" onClick={()=>history.push('/home')} display="inline"><i>allyx</i></Typography>
     )
 }
 
