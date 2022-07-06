@@ -53,9 +53,9 @@ function RegisterForm() {
   };
 
   //Register user
-  const registerUser = (event) => {
-    event.preventDefault();
-    if (doneCheck() === true) {
+  const registerUser = () => {
+    // event.preventDefault();
+    // if (doneCheck() === true) {
       dispatch({
         type: "REGISTER",
         payload: {
@@ -66,22 +66,19 @@ function RegisterForm() {
           phone: phone,
           firstname: firstName,
           lastname: lastName,
-          instagram: instagram,
-          twitter: twitter,
-          facebook: facebook,
         },
       });
-    } else {
-      Swal.fire({
-        title: "Registration Error",
-        html:
-          `Please insert the following required fields:` +
-          ` ${emailDone != true ? "<b>Email</b>" : ""}` +
-          ` ${phoneDone != true ? "<b>Phone</b>" : ""}` +
-          ` ${dobDone != true ? "<b>Birthday</b>" : ""}` +
-          ` ${firstNameDone != true ? "<b>First Name</b>" : ""}`,
-      });
-    }
+    // } else {
+    //   Swal.fire({
+    //     title: "Registration Error",
+    //     html:
+    //       `Please insert the following required fields:` +
+    //       ` ${emailDone != true ? "<b>Email</b>" : ""}` +
+    //       ` ${phoneDone != true ? "<b>Phone</b>" : ""}` +
+    //       ` ${dobDone != true ? "<b>Birthday</b>" : ""}` +
+    //       ` ${firstNameDone != true ? "<b>First Name</b>" : ""}`,
+    //   });
+    // }
   };
 
   //VALIDATE EMAIL
