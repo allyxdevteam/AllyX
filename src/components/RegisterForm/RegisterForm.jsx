@@ -179,15 +179,7 @@ function RegisterForm() {
       setDobDone(false);
     }
   };
-  //
-
-  //   <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-  //   {Array.from(Array(6)).map((_, index) => (
-  //     <Grid item xs={2} sm={4} md={4} key={index}>
-  //       <Item>xs=2</Item>
-  //     </Grid>
-  //   ))}
-  // </Grid>
+  
   return (
     <Container className="boxDefault">
       <Typography variant="h1" align="center" sx={{p:2}}>
@@ -207,7 +199,7 @@ function RegisterForm() {
             {errors.registrationMessage}
           </h3>
         )}
-        <Box display="grid" justifyContent="center">
+        <Box display="grid" justifyContent="center" alignItems='center' sx={{m:1}}>
           <Typography align="center" variant="h5">Name</Typography>
           <FormControl>
             <TextField
@@ -246,7 +238,7 @@ function RegisterForm() {
           </FormControl>
           
         </Box>
-        <Box display="grid" justifyContent="center">
+        <Box display="grid" justifyContent="center" alignItems='center' sx={{m:1}}>
           <Typography align="center" variant="h5">About You</Typography>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
@@ -360,7 +352,7 @@ function RegisterForm() {
           </FormControl> */}
         {/* </Grid> */}
 
-        <Box display="grid" justifyContent="center">
+        <Box display="grid" justifyContent="center" alignItems='center' sx={{m:1}}>
           <Typography align="center" variant="h5">Login Info</Typography>
 
           <FormControl>
@@ -391,9 +383,11 @@ function RegisterForm() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </FormControl>
-          <Button variant='contained' onClick={registerUser}>register</Button>
-        </Box>
-      </Grid>
+          </Box>
+          </Grid>
+          <Button variant='contained' onClick={registerUser} sx={{m:'auto', display:'flex'}}>register</Button>
+        
+      
     </Container>
   );
 }
