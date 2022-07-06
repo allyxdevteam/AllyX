@@ -66,7 +66,7 @@ function AdminDashboard() {
           <Tab label="Comments" {...a11yProps(1)} />
           <Tab label="Calls" {...a11yProps(2)} />
           <Tab label="Ratings" {...a11yProps(3)} />
-          <Tab label="Reports" {...a11yProps(4)} />
+          <Tab label="Problems" {...a11yProps(4)} />
           <Tab label="Ally Applications" {...a11yProps(5)} />
         </Tabs>
       </Box>
