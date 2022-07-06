@@ -3,165 +3,122 @@ import React from "react";
 import {
   Box,
   Card,
-  CardContent,
   CardHeader,
   CardMedia,
   Grid,
   Typography,
+  CardActionArea,
 } from "@mui/material";
 
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
 
 function AboutPage() {
   return (
     <Box className="boxDefault">
-      <Typography variant="h2" gutterBottom sx={{ textAlign: "center" }}>
-        Team Allyx:
+      <Typography variant="h2" gutterBottom align='center'>
+        Development Team:
       </Typography>
-      <Box  display='flex' justifyContent = 'space-around'>
-      <Card
-        sx={{
-          display: "inline-block",
-          width: "12%",
-          maxHeight: "37vh",
-          margin: 2,
-          backgroundColor: "#ff897a",
-        }}
-      >
-        <CardHeader
-          title="Chris"
-          className="card-header"
+      <Box display="flex" justifyContent="space-around">
+        <Card
           sx={{
-            textAlign: "center",
-            backgroundColor: "#ff897a",
-            padding: 1
-          }}
-        />
-        <CardMedia sx={{ display: "flex", justifyContent: "center" }}>
-          <img src="/images/Chris.jpg" alt="Chris Boyd" width="100%" />
-        </CardMedia>
-        <CardContent
-          sx={{
-            textAlign: "center",
+            display: "inline-block",
+            width: "12%",
+            maxHeight: "37vh",
+            margin: 2,
             backgroundColor: "#ff897a",
           }}
         >
-          <Typography sx={{wordWrap: 'break-word'}}
-            variant='h6'
-            href="http://www.linkedin.com/in/chris-t-boyd"
-          >
-            linkedin.com/in/chris-t-boyd
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card
-        sx={{
-          display: "inline-block",
-          width: "12%",
-          maxHeight: "37vh",
-          margin: 2,
-          backgroundColor: "#ff897a",
-        }}
-      >
-        <CardHeader
-          title="Ian"
-          className="card-header"
+          <CardActionArea href="http://www.linkedin.com/in/chris-t-boyd">
+            <CardHeader
+              title="Chris"
+              className="card-header"
+              sx={{
+                textAlign: "center",
+                backgroundColor: "#ff897a",
+                padding: 1,
+              }}
+            />
+            <CardMedia sx={{ display: "flex", justifyContent: "center" }}>
+              <img src="/images/Chris.jpg" alt="Chris Boyd" width="100%" />
+            </CardMedia>
+          </CardActionArea>
+        </Card>
+
+        <Card
           sx={{
-            textAlign: "center",
-            backgroundColor: "#ff897a",
-            padding: 1
-          }}
-        />
-        <CardMedia sx={{ display: "flex", justifyContent: "center" }}>
-          <img src="/images/Ian.jpg" alt="Ian Larsen" width="100%" />
-        </CardMedia>
-        <CardContent
-          sx={{
-            textAlign: "center",
+            display: "inline-block",
+            width: "12%",
+            maxHeight: "37vh",
+            margin: 2,
             backgroundColor: "#ff897a",
           }}
         >
-          <Typography sx={{wordWrap: 'break-word'}}
-            variant='h6'
-            href="https://www.linkedin.com/in/ian-larsen1337/"
-          >
-            linkedin.com/in/ian-larsen1337/
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card
-        sx={{
-          display: "inline-block",
-          width: "12%",
-          maxHeight: "37vh",
-          margin: 2,
-          backgroundColor: "#ff897a",
-        }}
-      >
-        <CardHeader
-          title="Meir"
-          className="card-header"
+          <CardActionArea href="https://www.linkedin.com/in/ian-larsen1337/">
+            <CardHeader
+              title="Ian"
+              className="card-header"
+              sx={{
+                textAlign: "center",
+                backgroundColor: "#ff897a",
+                padding: 1,
+              }}
+            />
+            <CardMedia sx={{ display: "flex", justifyContent: "center" }}>
+              <img src="/images/Ian.jpg" alt="Ian Larsen" width="100%" />
+            </CardMedia>
+          </CardActionArea>
+        </Card>
+        <Card
           sx={{
-            textAlign: "center",
-            backgroundColor: "#ff897a",
-            padding: 1
-          }}
-        />
-        <CardMedia sx={{ display: "flex", justifyContent: "center" }}>
-          <img src="/images/Meir.jpg" alt="Meir Sedlis" width="100%" />
-        </CardMedia>
-        <CardContent
-          sx={{
-            textAlign: "center",
+            display: "inline-block",
+            width: "12%",
+            maxHeight: "37vh",
+            margin: 2,
             backgroundColor: "#ff897a",
           }}
         >
-          <Typography sx={{wordWrap: 'break-word'}}
-            variant='h6'
-            href="https://www.linkedin.com/in/meirsedlis/"
-          >
-            linkedin.com/in/meirsedlis/
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card
-        sx={{
-          display: "inline-block",
-          width: "12%",
-          maxHeight: "37vh",
-          margin: 2,
-          backgroundColor: "#ff897a",
-        }}
-      >
-        <CardHeader
-          title="Joe"
-          className="card-header"
+          <CardActionArea href="https://www.linkedin.com/in/meirsedlis/">
+            <CardHeader
+              title="Meir"
+              className="card-header"
+              sx={{
+                textAlign: "center",
+                backgroundColor: "#ff897a",
+                padding: 1,
+              }}
+            />
+            <CardMedia sx={{ display: "flex", justifyContent: "center" }}>
+              <img src="/images/Meir.jpg" alt="Meir Sedlis" width="100%" />
+            </CardMedia>
+          </CardActionArea>
+        </Card>
+        <Card
           sx={{
-            textAlign: "center",
-            backgroundColor: "#ff897a",
-            padding: 1
-          }}
-        />
-        <CardMedia sx={{ display: "flex", justifyContent: "center" }}>
-          <img src="/images/Joe.jpeg" alt="Joe Anthony-Brown" width="100%" />
-        </CardMedia>
-        <CardContent
-          sx={{
-            textAlign: "center",
+            display: "inline-block",
+            width: "12%",
+            maxHeight: "37vh",
+            margin: 2,
             backgroundColor: "#ff897a",
           }}
         >
-          <Typography sx={{wordWrap: 'break-word'}}
-            variant='h6'
-            href="https://www.linkedin.com/in/joe-anthony-brown/"
-          >
-            linkedin.com/in/joe-anthony-brown/
-          </Typography>
-        </CardContent>
-      </Card>
+          <CardActionArea href="https://www.linkedin.com/in/joe-anthony-brown/">
+            <CardHeader
+              title="Joe"
+              className="card-header"
+              sx={{
+                textAlign: "center",
+                backgroundColor: "#ff897a",
+                padding: 1,
+              }}
+            />
+            <CardMedia sx={{ display: "flex", justifyContent: "center" }}>
+              <img
+                src="/images/Joe.jpeg"
+                alt="Joe Anthony-Brown"
+                width="100%"
+              />
+            </CardMedia>
+          </CardActionArea>
+        </Card>
       </Box>
       <Grid
         container
@@ -174,7 +131,7 @@ function AboutPage() {
         <Grid item spacing={3}>
           <Box textAlign="center">
             <Typography variant="h3" gutterBottom>
-              Technologies used:
+              Technologies:
             </Typography>
             <Typography variant="h6" gutterBottom>
               React
@@ -202,7 +159,7 @@ function AboutPage() {
         <Grid item spacing={6}>
           <Box textAlign="center">
             <Typography variant="h3" gutterBottom>
-              Thank you to:
+              Thank you:
             </Typography>
             <Typography variant="h6" gutterBottom>
               Alexandra Edmonson
