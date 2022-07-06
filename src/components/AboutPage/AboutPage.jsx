@@ -28,6 +28,7 @@ function AboutPage() {
           width: "12%",
           maxHeight: "37vh",
           margin: 2,
+          backgroundColor: "#ff897a",
         }}
       >
         <CardHeader
@@ -62,6 +63,7 @@ function AboutPage() {
           width: "12%",
           maxHeight: "37vh",
           margin: 2,
+          backgroundColor: "#ff897a",
         }}
       >
         <CardHeader
@@ -96,6 +98,7 @@ function AboutPage() {
           width: "12%",
           maxHeight: "37vh",
           margin: 2,
+          backgroundColor: "#ff897a",
         }}
       >
         <CardHeader
@@ -130,6 +133,7 @@ function AboutPage() {
           width: "12%",
           maxHeight: "37vh",
           margin: 2,
+          backgroundColor: "#ff897a",
         }}
       >
         <CardHeader
