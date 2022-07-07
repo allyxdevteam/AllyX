@@ -34,8 +34,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
   try{
   await client.query('BEGIN')
-  const sqlQuery = `INSERT INTO "requested-call" ("member_id", "time") VALUES ($1, $2) RETURNING id;`;
-  const sqlValues = [memberId, dateTime];
+  const sqlQuery = `INSERT INTO "requested-call" ("member_id", "time") VALUES ($1, current_timestamp) RETURNING id;`;
+  const sqlValues = [memberId];
   const insertRequestedCallResuts = await client.query(sqlQuery, sqlValues);
   const requestedCallId = insertRequestedCallResuts.rows[0].id
 
