@@ -19,10 +19,10 @@ router.get('/', (req, res) => {
  router.post('/', rejectUnauthenticated, (req, res) => {
     const callTime = req.body.callTime;
     const memberId = req.body.user.id;
-
+    const time = new Date(callTime).toISOString();
     
     const sqlQuery = `INSERT INTO "requested-call" ("member_id", "time") VALUES ($1, $2);`;
-    const sqlValues = [memberId, callTime];
+    const sqlValues = [memberId, time];
     pool.query (sqlQuery, sqlValues)
     .then((result) => { console.log(result); res.sendStatus(200) })
     .catch((err) => {
