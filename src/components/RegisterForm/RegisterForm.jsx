@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -41,6 +42,7 @@ function RegisterForm() {
   const errors = useSelector((store) => store.errors);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   //Run on update of email, phone, and DOB
   const doneCheck = () => {
@@ -392,6 +394,15 @@ function RegisterForm() {
             />
           </FormControl>
           <Button variant='contained' onClick={registerUser}>register</Button>
+            <Button
+              variant="outlined"
+              sx={{ my: 2 }}
+              onClick={() => {
+                history.push('/login');
+              }}
+            >
+                Login
+            </Button>
         </Box>
       </Grid>
     </Container>
