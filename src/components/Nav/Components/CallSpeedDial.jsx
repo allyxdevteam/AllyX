@@ -40,8 +40,11 @@ function CallSpeedDial() {
   
   const date = new Date();
   const dateTime = date.toLocaleString();
+  
+
   console.log("this is the time", dateTime);
   console.log(date.toLocaleDateString());
+
 
   const [callTime, setCallTime] = useState(dateTime);
 
@@ -59,8 +62,6 @@ function CallSpeedDial() {
   function handleScheduleCall() {
     console.log("in handleScheduleCall");
     console.log("this is the set date and time:", callTime);
-
-
 
     const newDate = new Date(callTime);
     const chosenTime = newDate.getTime();

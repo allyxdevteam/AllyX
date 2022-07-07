@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link, useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
+const utc = require('dayjs/plugin/utc');
+dayjs.extend(utc);
 
 import {
   ListItem,
@@ -46,7 +48,7 @@ function RequestedCallItem({ call }) {
     }
   }
 
-  const formattedTime = dayjs(call.time).format('hh:mm A on dddd, MMMM D');
+  const formattedTime = dayjs.utc(call.time).local().format('hh:mm A on dddd, MMMM D');
 
   console.log("picture", picture);
 

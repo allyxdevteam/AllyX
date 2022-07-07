@@ -19,7 +19,9 @@ router.get('/', (req, res) => {
  router.post('/', rejectUnauthenticated, (req, res) => {
     const callTime = req.body.callTime;
     const memberId = req.body.user.id;
-    const time = new Date(callTime).toISOString();
+    const time = new Date(callTime);
+    console.log('this is the time:', time);
+    console.log('this is the time to iso string:', time.toISOString());
     
     const sqlQuery = `INSERT INTO "requested-call" ("member_id", "time") VALUES ($1, $2);`;
     const sqlValues = [memberId, time];
