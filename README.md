@@ -14,21 +14,6 @@ An app connecting independent women with vetted volunteers for virtual companion
 
 The app should open in a local browser window.
 
-
-### Logging in:
-
-#### As a member
-  - login: member 
-  - password: callme
-
-#### As an ally
-  - login: ally
-  - password: acceptcall
-
-#### As admin
-  - login: admin
-  - password: iamalex
-
 ### Uploading profile pics:
 
 This application uses Cloudinary api service for uploading pictures.
