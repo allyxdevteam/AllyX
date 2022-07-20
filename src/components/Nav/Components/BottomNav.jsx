@@ -86,12 +86,14 @@ function bottomNav() {
           transformOrigin={{ horizontal: "left", vertical: "bottom" }}
           anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
         >
-          <MenuItem onClick={handleLogout}>
-            <ListItemIcon>
-              <Logout />
-            </ListItemIcon>
-            Log Out
-          </MenuItem>
+          {user.id && (
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>
+                <Logout />
+              </ListItemIcon>
+              Log Out
+            </MenuItem>
+          )}
 
           <MenuItem onClick={() => history.push("/about")}>
             <ListItemIcon>
