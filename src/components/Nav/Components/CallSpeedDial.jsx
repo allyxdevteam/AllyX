@@ -37,16 +37,10 @@ function CallSpeedDial() {
   // dialog config
   const [open, setOpen] = useState(false);
   const handleCloseDialog = () => setOpen(false);
-  
-  const date = new Date();
-  const dateTime = date.toLocaleString();
-  
 
-  console.log("this is the time", dateTime);
-  console.log(date.toLocaleDateString());
-
-
-  const [callTime, setCallTime] = useState(dateTime);
+  // Local state that will store a user's "schedule ahead"
+  // time string:
+  const [callTime, setCallTime] = useState('');
 
 
   function handleRequestCall() {
@@ -54,31 +48,46 @@ function CallSpeedDial() {
     user.id
       ? dispatch({
           type: "POST_REQUESTED_CALL",
-          payload: { dateTime, user },
+          payload: { user },
         }, history.push("/memberRequestedCall"))
       : history.push("/login");
   }
 
   function handleScheduleCall() {
-    console.log("in handleScheduleCall");
-    console.log("this is the set date and time:", callTime);
-
+    // Create a Date object from the user's chosen call time.
+    // This Date object is timezone-aware, based on the timezone
+    // of the user's device.
     const newDate = new Date(callTime);
-    const chosenTime = newDate.getTime();
+      // console.log(newDate) spits out something like:
+      // Mon Aug 15 2022 06: 40: 00 GMT - 0500(Central Daylight Time)
+      // Note that this 👆 is timezone-aware.
 
-    console.log("chosen time", chosenTime);
-    console.log("current time", new Date().getTime());
+    // Convert the timezone-aware Date object into a string
+    // representation of the UTC datetime:
+    const newDateInUTC = newDate.toISOString();
+      // console.log(newDateInUTC) spits out something like:
+      // 2022-08-15T11:40:00.000Z
+      // Note that the "Z" at the end of this string is a shorthand for
+      // noting that this is a UTC timestamp.
 
-    if (chosenTime >= new Date().getTime()) {
+    if (newDate >= new Date()) {
       Swal.fire('Your call has been scheduled');
       dispatch({
         type: "POST_SCHEDULED_CALL",
-        payload: { callTime, user },
+        payload: { newDateInUTC, user },
       });
     } else {
       Swal.fire('You cannot schedule calls for the past');
     }
     setOpen(false);
+  }
+
+  // checks if a user is logged in
+  // if not, redirects to log in, if so opens schedule dialog
+  function openScheduleDialog() {
+    if (user.id === undefined) {
+      history.push("/login");
+    } else setOpen(true);
   }
 
   // checks if a user is logged in
@@ -121,8 +130,8 @@ function CallSpeedDial() {
             aria-label="Date time selection for scheduled call"
             type="datetime-local"
             onChange={(e) => {
+              console.log('callTime will become:', e.target.value)
               setCallTime(e.target.value);
-              console.log(callTime);
             }}
           ></input>
           </Box>

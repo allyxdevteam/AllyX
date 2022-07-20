@@ -1,13 +1,10 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
-import { useDispatch, useSelector } from 'react-redux';
+import { takeLatest } from 'redux-saga/effects';
 
 
 function* postScheduledCall(action){
-    const callTime = action.payload.callTime;
+    const callTime = action.payload.newDateInUTC;
     const user = action.payload.user;
-    console.log('this is the scheduled date and time!!!!!!!!!!',callTime);
-    console.log('this is the user data!!!!!!!!!!!', user);
     try{
         yield axios({
             method: 'POST',
@@ -18,8 +15,6 @@ function* postScheduledCall(action){
         console.log('problem in post scheduled call');
     }
 }
-
-
 
 function* scheduledCallSaga() {
     yield takeLatest('POST_SCHEDULED_CALL', postScheduledCall);
